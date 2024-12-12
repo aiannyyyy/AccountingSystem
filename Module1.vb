@@ -1,0 +1,18 @@
+﻿Imports System.Data.Odbc
+Module Module1
+    Public da As OdbcDataAdapter
+    Public ds As DataSet
+    Public str As String
+    Public conn As New OdbcConnection("DSN=dashboard")
+    Public dr As OdbcDataReader
+    Public table As New DataTable
+    Public cmd As New OdbcCommand
+    Public builder As New OdbcCommandBuilder
+
+    Public Sub connection()
+        If conn.State = ConnectionState.Closed Then
+            conn.Open()
+        End If
+    End Sub
+
+End Module
