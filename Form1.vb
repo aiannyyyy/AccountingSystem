@@ -55,4 +55,9 @@ Public Class Form1
         da.Fill(ds)
         dgv1.DataSource = ds.Tables(0).DefaultView
     End Sub
+
+    Private Sub posBtn_Click(sender As Object, e As EventArgs) Handles posBtn.Click
+        Pos.Show()
+
+    End Sub
 End Class
