@@ -13,7 +13,7 @@ Public Class Pos
         loaddgv()
         ordertext()
 
-        'lblshow.Text = "POINT OF SALE | USER: " + Login.userTxtBox.Text + ""
+        lblshow.Text = "POINT OF SALE | USER: " + Login.userTxt.Text + ""
 
     End Sub
 
@@ -620,5 +620,14 @@ Public Class Pos
 
     Private Sub soaButton_Click(sender As Object, e As EventArgs) Handles soaButton.Click
         ReprintSoa.Show()
+    End Sub
+
+    Private Sub lopezCheck_CheckedChanged(sender As Object, e As EventArgs) Handles lopezCheck.CheckedChanged
+        If lopezCheck.Checked Then
+            UncheckOtherCheckBoxes(lopezCheck)
+            CalculateTotalAmount(1800)
+        Else
+            ClearTextBoxesIfNoChecks()
+        End If
     End Sub
 End Class
