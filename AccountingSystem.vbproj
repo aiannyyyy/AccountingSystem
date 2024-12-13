@@ -154,6 +154,12 @@
     <Compile Include="Pos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ReprintSoa.Designer.vb">
+      <DependentUpon>ReprintSoa.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReprintSoa.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="StatementOfAccount.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -185,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pos.resx">
       <DependentUpon>Pos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReprintSoa.resx">
+      <DependentUpon>ReprintSoa.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StatementOfAccount.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

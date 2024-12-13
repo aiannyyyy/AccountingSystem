@@ -58,6 +58,9 @@ Public Class Form1
 
     Private Sub posBtn_Click(sender As Object, e As EventArgs) Handles posBtn.Click
         Pos.Show()
+    End Sub
 
+    Private Sub paymentBtn_Click(sender As Object, e As EventArgs) Handles paymentBtn.Click
+        Payments.Show
     End Sub
 End Class

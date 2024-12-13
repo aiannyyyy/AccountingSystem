@@ -1,0 +1,50 @@
+﻿Public Class ReprintSoa
+    Private Sub soaButton_Click(sender As Object, e As EventArgs) Handles soaButton.Click
+        ' Assuming you are checking the value of the first row and the fourth column
+        Dim rowIndex As Integer = 0 ' Change this to the row you want to check
+        Dim cellValue As String = Pos.dgv1.Rows(rowIndex).Cells(3).Value.ToString()
+
+        If cellValue = "ENBS" Then
+            Dim report As New StatementOfAccountWithServiceFee()
+            Dim selformula As String = "{acccounting1.soa_txt} = '" & soaTxt.Text & "'"
+            report.RecordSelectionFormula = selformula
+
+            ' Refresh the report to load data
+            report.Refresh()
+
+            Dim reportForm As New Form
+            Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+            crystalReportViewer.ReportSource = report
+            crystalReportViewer.Dock = DockStyle.Fill
+            reportForm.Controls.Add(crystalReportViewer)
+            reportForm.WindowState = FormWindowState.Maximized
+            reportForm.Show()
+        Else
+            ' Generate the Crystal Report
+            Dim report1 As New StatementOfAccount()
+            Dim selformula1 As String = "{acccounting1.soa_txt} = '" & soaTxt.Text & "'"
+            report1.RecordSelectionFormula = selformula1
+
+            ' Refresh the report to load data
+            report1.Refresh()
+
+            Dim reportForm1 As New Form
+            Dim crystalReportViewer1 As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+            crystalReportViewer1.ReportSource = report1 ' Corrected this line
+            crystalReportViewer1.Dock = DockStyle.Fill
+            reportForm1.Controls.Add(crystalReportViewer1) ' Corrected this line
+            reportForm1.WindowState = FormWindowState.Maximized
+            reportForm1.Show()
+        End If
+
+        soaTxt.Clear()
+    End Sub
+
+    Private Sub ReprintSoa_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Call connection()
+
+        Me.AcceptButton = soaButton
+
+        soaTxt.SetOnGotFocus()
+    End Sub
+End Class

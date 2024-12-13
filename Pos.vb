@@ -613,4 +613,12 @@ Public Class Pos
 
     Private Sub GunaControlBox3_Click(sender As Object, e As EventArgs) Handles GunaControlBox3.Click
     End Sub
+
+    Private Sub payButton_Click(sender As Object, e As EventArgs) Handles payButton.Click
+        Payments.Show()
+    End Sub
+
+    Private Sub soaButton_Click(sender As Object, e As EventArgs) Handles soaButton.Click
+        ReprintSoa.Show()
+    End Sub
 End Class

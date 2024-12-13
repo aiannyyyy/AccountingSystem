@@ -32,7 +32,7 @@ Public Class Login
             End If
         Else
             MsgBox("Login Failed. Username or password is incorrect.")
-            'pwTxt.Clear() ' Clear the password textbox
+            pwTxt.Clear() ' Clear the password textbox
         End If
 
         dr.Close() ' Close the data dr

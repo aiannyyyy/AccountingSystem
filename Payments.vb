@@ -19,7 +19,7 @@ Public Class Payments
 
     Public Sub loaddgv()
         Call connection()
-        da = New OdbcDataAdapter("Select * from acccounting", conn)
+        da = New OdbcDataAdapter("Select * from acccounting order by purchase_date desc", conn)
         ds = New DataSet
         ds.Clear()
         da.Fill(ds, "acccounting")
@@ -78,7 +78,7 @@ Public Class Payments
             End Using
 
             ' Fetch the accounting records and display in DataGridView
-            da = New OdbcDataAdapter("SELECT * FROM acccounting WHERE fac_code LIKE ?", conn)
+            da = New OdbcDataAdapter("SELECT * FROM acccounting WHERE fac_code LIKE ? order by purchase_date desc", conn)
             da.SelectCommand.Parameters.AddWithValue("fac_code", "%" & codeTxt.Text & "%")
 
             ds = New DataSet
@@ -122,7 +122,7 @@ Public Class Payments
 
 
         ' Fetch the accounting records and display in DataGridView
-        da = New OdbcDataAdapter("SELECT * FROM payments WHERE fac_code LIKE ?", conn)
+        da = New OdbcDataAdapter("SELECT * FROM payments WHERE fac_code LIKE ? order by or_date desc", conn)
         da.SelectCommand.Parameters.AddWithValue("fac_code", "%" & codeTxt.Text & "%")
 
         ds = New DataSet
@@ -234,9 +234,19 @@ Public Class Payments
     End Sub
     Public Sub payments()
         Call connection()
-        da = New OdbcDataAdapter("Select * from payments order by date_payment desc", conn)
+        da = New OdbcDataAdapter("Select * from payments order by or_date desc", conn)
         ds = New DataSet
         ds.Clear()
+        da.Fill(ds, "payments")
+        dgv2.DataSource = ds.Tables("payments").DefaultView
+    End Sub
+
+    Public Sub afterPay()
+        ' Fetch the accounting records and display in DataGridView
+        da = New OdbcDataAdapter("SELECT * FROM payments WHERE fac_code LIKE ? order by or_date desc", conn)
+        da.SelectCommand.Parameters.AddWithValue("fac_code", "%" & codeTxt.Text & "%")
+
+        ds = New DataSet
         da.Fill(ds, "payments")
         dgv2.DataSource = ds.Tables("payments").DefaultView
     End Sub
@@ -290,7 +300,8 @@ Public Class Payments
 
         ' Notify user of successful insertion
         MessageBox.Show("Record Inserted Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        'payments()
+
+        afterPay()
     End Sub
 
     Private Sub orderButton_Click(sender As Object, e As EventArgs) Handles orderButton.Click
@@ -305,4 +316,6 @@ Public Class Payments
     Private Sub btaxText_TextChanged(sender As Object, e As EventArgs) Handles btaxText.TextChanged
         CalculateAndUpdateInterest()
     End Sub
+
+
 End Class
