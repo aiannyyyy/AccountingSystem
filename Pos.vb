@@ -610,4 +610,7 @@ Public Class Pos
             e.Handled = True
         End If
     End Sub
+
+    Private Sub GunaControlBox3_Click(sender As Object, e As EventArgs) Handles GunaControlBox3.Click
+    End Sub
 End Class
