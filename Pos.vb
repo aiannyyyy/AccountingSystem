@@ -447,7 +447,7 @@ Public Class Pos
             Dim dueDate As Date = dtpicker1.Value
             Dim totalAmount As Double = Double.Parse(totalTxt.Text)
             Dim balance As Double = Double.Parse(totalTxt.Text) ' Assuming balanceTxt should be used here
-            Dim user As String = Login.userTxtBox.Text
+            Dim user As String = Login.userTxt.Text
             Dim subamount As Integer = amountTxt.Text
 
             ' Insert the record

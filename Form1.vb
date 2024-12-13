@@ -2,7 +2,7 @@
 Imports System.Data.Odbc
 Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'userLbl.Text = "Welcome, " + Login.userTxtBox.Text
+        userLbl.Text = "Welcome, " + Login.userTxt.Text
 
 
         UpdateTime()
