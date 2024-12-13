@@ -141,6 +141,12 @@
     <Compile Include="Pos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="StatementOfAccount.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StatementOfAccount.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="StatementOfAccountWithServiceFee.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -160,6 +166,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pos.resx">
       <DependentUpon>Pos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatementOfAccount.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StatementOfAccount.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="StatementOfAccountWithServiceFee.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
