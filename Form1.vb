@@ -63,4 +63,8 @@ Public Class Form1
     Private Sub paymentBtn_Click(sender As Object, e As EventArgs) Handles paymentBtn.Click
         Payments.Show
     End Sub
+
+    Private Sub GunaControlBox1_Click(sender As Object, e As EventArgs) Handles GunaControlBox1.Click
+        Application.Exit()
+    End Sub
 End Class

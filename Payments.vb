@@ -317,5 +317,7 @@ Public Class Payments
         CalculateAndUpdateInterest()
     End Sub
 
-
+    Private Sub GunaControlBox1_Click(sender As Object, e As EventArgs) Handles GunaControlBox1.Click
+        Application.Exit()
+    End Sub
 End Class

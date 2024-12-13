@@ -236,9 +236,9 @@ Partial Class Pos
         Me.Panel3.Controls.Add(Me.payButton)
         Me.Panel3.Controls.Add(Me.soaButton)
         Me.Panel3.Controls.Add(Me.addButton)
-        Me.Panel3.Location = New System.Drawing.Point(27, 203)
+        Me.Panel3.Location = New System.Drawing.Point(27, 209)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(465, 45)
+        Me.Panel3.Size = New System.Drawing.Size(469, 47)
         Me.Panel3.TabIndex = 25
         '
         'noticeButton
