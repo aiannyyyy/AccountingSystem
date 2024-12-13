@@ -148,6 +148,12 @@
       <DependentUpon>Notice.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="NoticeForm.Designer.vb">
+      <DependentUpon>NoticeForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="NoticeForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Payments.Designer.vb">
       <DependentUpon>Payments.vb</DependentUpon>
     </Compile>
@@ -195,6 +201,9 @@
     <EmbeddedResource Include="Notice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Notice.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NoticeForm.resx">
+      <DependentUpon>NoticeForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Payments.resx">
       <DependentUpon>Payments.vb</DependentUpon>

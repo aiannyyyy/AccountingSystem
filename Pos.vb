@@ -630,4 +630,8 @@ Public Class Pos
             ClearTextBoxesIfNoChecks()
         End If
     End Sub
+
+    Private Sub noticeButton_Click(sender As Object, e As EventArgs) Handles noticeButton.Click
+        NoticeForm.Show()
+    End Sub
 End Class
