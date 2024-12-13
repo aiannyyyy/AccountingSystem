@@ -161,7 +161,7 @@ Partial Class Login
         'loginBtn
         '
         Me.loginBtn.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.loginBtn.Location = New System.Drawing.Point(69, 124)
+        Me.loginBtn.Location = New System.Drawing.Point(81, 123)
         Me.loginBtn.Name = "loginBtn"
         Me.loginBtn.Size = New System.Drawing.Size(97, 28)
         Me.loginBtn.TabIndex = 43
