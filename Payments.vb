@@ -214,6 +214,7 @@ Public Class Payments
         balanceBox.Clear()
         soaTxt.Clear()
         enbsTxt.Clear()
+        adsTxt.Clear()
         soamountTxt.Clear()
         dtpicker1.Value = Date.Now
         interestTxt.Clear()
@@ -319,5 +320,9 @@ Public Class Payments
 
     Private Sub GunaControlBox1_Click(sender As Object, e As EventArgs) Handles GunaControlBox1.Click
         Application.Exit()
+    End Sub
+
+    Private Sub adsTxt_TextChanged(sender As Object, e As EventArgs) Handles adsTxt.TextChanged
+
     End Sub
 End Class

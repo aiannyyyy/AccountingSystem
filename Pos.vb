@@ -90,8 +90,6 @@ Public Class Pos
                                   End Sub)
                     End If
                 End Using
-
-
             End Using
         Catch ex As Exception
             MessageBox.Show("An error occurred: " & ex.Message)
