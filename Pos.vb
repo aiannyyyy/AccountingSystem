@@ -897,6 +897,7 @@ Public Class Pos
 
     Private Sub payButton_Click(sender As Object, e As EventArgs) Handles payButton.Click
         Payments.Show()
+        Me.Hide()
     End Sub
 
     Private Sub soaButton_Click(sender As Object, e As EventArgs) Handles soaButton.Click
