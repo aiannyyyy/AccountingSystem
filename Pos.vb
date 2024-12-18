@@ -321,7 +321,7 @@ Public Class Pos
                     CalculateTotalAmount(1800)
                 Else
                     ' Default calculation: multiply by 1750 if no checkbox is selected
-                    amountTxt.Text = (quantity * 1750).ToString("F2") ' Format with 2 decimal places
+                    amountTxt.Text = (quantity * 1750).ToString ' Format with 2 decimal places
                 End If
 
                 ' Update totalTxt.Text by adding the value from adsTxt.Text
@@ -332,6 +332,11 @@ Public Class Pos
             End If
 
             ' Prevent the beep sound on Enter key press
+            e.Handled = True
+        End If
+
+        ' Allow only digits and control keys (e.g., Backspace)
+        If Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
@@ -685,7 +690,7 @@ Public Class Pos
             ElseIf monitoringCheck.Checked Then
                 ordertype = "Monitoring"
             ElseIf replacementCheck.Checked Then
-                ordertype = "ENBS-Replacement of "
+                ordertype = "ENBS-Replacement of Expired Filter Card"
             ElseIf lopezCheck.Checked Then
                 ordertype = "ENBS"
             Else
@@ -706,7 +711,7 @@ Public Class Pos
             Dim ads As Double = Double.Parse(adsTxt.Text)
             Dim dueDate As Date = dtpicker1.Value
             Dim totalAmount As Double = Double.Parse(totalTxt.Text)
-            Dim balance As Double = Double.Parse(totalTxt.Text)
+            Dim balance As Double = Double.Parse(totalTxt.Text) ' Assuming balanceTxt should be used here
             Dim user As String = Login.userTxt.Text
             Dim subamount As Integer = amountTxt.Text
 
@@ -721,16 +726,88 @@ Public Class Pos
 
             MessageBox.Show("Insert Successfully!")
 
-            ' Report Generation
             If walkCheck.Checked Then
-                GenerateReport(soatxt, New StatementOfAccount())
+                ' Generate the Crystal Report
+                Dim report As New StatementOfAccount()
+                Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+                report.RecordSelectionFormula = selformula
+
+                ' Refresh the report to load data
+                report.Refresh()
+
+                Dim reportForm As New Form
+                Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+                crystalReportViewer.ReportSource = report
+                crystalReportViewer.Dock = DockStyle.Fill
+                reportForm.Controls.Add(crystalReportViewer)
+                reportForm.WindowState = FormWindowState.Maximized
+                reportForm.Show()
             ElseIf monitoringCheck.Checked Then
-                GenerateReport(soatxt, New StatementOfAccount())
+                ' Generate the Crystal Report
+                Dim report As New StatementOfAccount()
+                Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+                report.RecordSelectionFormula = selformula
+
+                ' Refresh the report to load data
+                report.Refresh()
+
+                Dim reportForm As New Form
+                Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+                crystalReportViewer.ReportSource = report
+                crystalReportViewer.Dock = DockStyle.Fill
+                reportForm.Controls.Add(crystalReportViewer)
+                reportForm.WindowState = FormWindowState.Maximized
+                reportForm.Show()
             ElseIf replacementCheck.Checked Then
-                GenerateReport(soatxt, New StatementOfAccount())
+                ' Generate the Crystal Report
+                Dim report As New StatementOfAccount()
+                Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+                report.RecordSelectionFormula = selformula
+
+                ' Refresh the report to load data
+                report.Refresh()
+
+                Dim reportForm As New Form
+                Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+                crystalReportViewer.ReportSource = report
+                crystalReportViewer.Dock = DockStyle.Fill
+                reportForm.Controls.Add(crystalReportViewer)
+                reportForm.WindowState = FormWindowState.Maximized
+                reportForm.Show()
             ElseIf lopezCheck.Checked Then
-                GenerateReport(soatxt, New StatementOfAccountWithServiceFee())
+                ' Generate the Crystal Report
+                Dim report As New StatementOfAccountWithServiceFee()
+                Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+                report.RecordSelectionFormula = selformula
+
+                ' Refresh the report to load data
+                report.Refresh()
+
+                Dim reportForm As New Form
+                Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+                crystalReportViewer.ReportSource = report
+                crystalReportViewer.Dock = DockStyle.Fill
+                reportForm.Controls.Add(crystalReportViewer)
+                reportForm.WindowState = FormWindowState.Maximized
+                reportForm.Show()
+            Else
+                ' Generate the Crystal Report
+                Dim report As New StatementOfAccount()
+                Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+                report.RecordSelectionFormula = selformula
+
+                ' Refresh the report to load data
+                report.Refresh()
+
+                Dim reportForm As New Form
+                Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+                crystalReportViewer.ReportSource = report
+                crystalReportViewer.Dock = DockStyle.Fill
+                reportForm.Controls.Add(crystalReportViewer)
+                reportForm.WindowState = FormWindowState.Maximized
+                reportForm.Show()
             End If
+
 
             ' Clear input fields and refresh data grid view
             cleartxt()
@@ -739,23 +816,6 @@ Public Class Pos
             MessageBox.Show("An error occurred: " & ex.Message)
         End Try
     End Sub
-
-    Private Sub GenerateReport(soatxt As String, report As ReportDocument)
-        Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
-        report.RecordSelectionFormula = selformula
-
-        ' Refresh the report to load data
-        report.Refresh()
-
-        Dim reportForm As New Form
-        Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
-        crystalReportViewer.ReportSource = report
-        crystalReportViewer.Dock = DockStyle.Fill
-        reportForm.Controls.Add(crystalReportViewer)
-        reportForm.WindowState = FormWindowState.Maximized
-        reportForm.Show()
-    End Sub
-
 
     Private Function ValidateFields() As Boolean
         Dim errorMessage As String = "Please input required fields first."
@@ -855,5 +915,13 @@ Public Class Pos
     Private Sub noticeButton_Click(sender As Object, e As EventArgs) Handles noticeButton.Click
         NoticeForm.Show()
     End Sub
+
+    Private Sub codeTxt_KeyPress(sender As Object, e As KeyPressEventArgs) Handles codeTxt.KeyPress
+        ' Allow only digits and control keys (e.g., Backspace)
+        If Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
 
 End Class
