@@ -2,7 +2,7 @@
 Imports System.Data.Odbc
 Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        userLbl.Text = "Welcome, " + Login.userTxt.Text
+        userLbl.Text = "POINT OF SALE | USER: " & Login.userTxt.Text
 
 
         UpdateTime()
@@ -58,6 +58,7 @@ Public Class Form1
 
     Private Sub posBtn_Click(sender As Object, e As EventArgs) Handles posBtn.Click
         Pos.Show()
+        Me.Hide()
     End Sub
 
     Private Sub paymentBtn_Click(sender As Object, e As EventArgs) Handles paymentBtn.Click

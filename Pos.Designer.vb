@@ -23,13 +23,14 @@ Partial Class Pos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Pos))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Pos))
         Me.GunaElipse1 = New Guna.UI.WinForms.GunaElipse(Me.components)
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblshow = New Guna.UI.WinForms.GunaLabel()
         Me.GunaControlBox3 = New Guna.UI.WinForms.GunaControlBox()
         Me.GunaControlBox2 = New Guna.UI.WinForms.GunaControlBox()
@@ -38,18 +39,12 @@ Partial Class Pos
         Me.grpBox = New Guna.UI.WinForms.GunaGroupBox()
         Me.GunaLabel10 = New Guna.UI.WinForms.GunaLabel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.addButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.noticeButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.reportButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.payButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.soaButton = New Guna.UI.WinForms.GunaAdvenceButton()
-        Me.addButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.dtpicker1 = New Guna.UI.WinForms.GunaDateTimePicker()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.lopezCheck = New System.Windows.Forms.CheckBox()
-        Me.cancelCheck = New System.Windows.Forms.CheckBox()
-        Me.replacementCheck = New System.Windows.Forms.CheckBox()
-        Me.walkCheck = New System.Windows.Forms.CheckBox()
-        Me.monitoringCheck = New System.Windows.Forms.CheckBox()
         Me.amountTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel9 = New Guna.UI.WinForms.GunaLabel()
         Me.qtyTxt = New Guna.UI.WinForms.GunaTextBox()
@@ -79,6 +74,11 @@ Partial Class Pos
         Me.nameBox = New Guna.UI.WinForms.GunaTextBox()
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
+        Me.lopezCheck = New System.Windows.Forms.CheckBox()
+        Me.cancelCheck = New System.Windows.Forms.CheckBox()
+        Me.replacementCheck = New System.Windows.Forms.CheckBox()
+        Me.walkCheck = New System.Windows.Forms.CheckBox()
+        Me.monitoringCheck = New System.Windows.Forms.CheckBox()
         Me.dgv1 = New Guna.UI.WinForms.GunaDataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -99,12 +99,18 @@ Partial Class Pos
         Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column18 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.replaceCombo = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.grpOrders.SuspendLayout()
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'GunaElipse1
@@ -113,7 +119,8 @@ Partial Class Pos
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.PictureBox1)
         Me.Panel1.Controls.Add(Me.lblshow)
         Me.Panel1.Controls.Add(Me.GunaControlBox3)
         Me.Panel1.Controls.Add(Me.GunaControlBox2)
@@ -121,15 +128,25 @@ Partial Class Pos
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1031, 34)
+        Me.Panel1.Size = New System.Drawing.Size(1047, 34)
         Me.Panel1.TabIndex = 1
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(8, 4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(31, 26)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 5
+        Me.PictureBox1.TabStop = False
         '
         'lblshow
         '
         Me.lblshow.AutoSize = True
         Me.lblshow.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblshow.ForeColor = System.Drawing.Color.White
-        Me.lblshow.Location = New System.Drawing.Point(12, 9)
+        Me.lblshow.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.lblshow.Location = New System.Drawing.Point(44, 8)
         Me.lblshow.Name = "lblshow"
         Me.lblshow.Size = New System.Drawing.Size(83, 17)
         Me.lblshow.TabIndex = 4
@@ -142,7 +159,7 @@ Partial Class Pos
         Me.GunaControlBox3.AnimationSpeed = 0.03!
         Me.GunaControlBox3.IconColor = System.Drawing.Color.White
         Me.GunaControlBox3.IconSize = 15.0!
-        Me.GunaControlBox3.Location = New System.Drawing.Point(997, 1)
+        Me.GunaControlBox3.Location = New System.Drawing.Point(1013, 1)
         Me.GunaControlBox3.Name = "GunaControlBox3"
         Me.GunaControlBox3.OnHoverBackColor = System.Drawing.Color.FromArgb(CType(CType(164, Byte), Integer), CType(CType(176, Byte), Integer), CType(CType(190, Byte), Integer))
         Me.GunaControlBox3.OnHoverIconColor = System.Drawing.Color.White
@@ -158,7 +175,7 @@ Partial Class Pos
         Me.GunaControlBox2.ControlBoxType = Guna.UI.WinForms.FormControlBoxType.MinimizeBox
         Me.GunaControlBox2.IconColor = System.Drawing.Color.White
         Me.GunaControlBox2.IconSize = 15.0!
-        Me.GunaControlBox2.Location = New System.Drawing.Point(925, 1)
+        Me.GunaControlBox2.Location = New System.Drawing.Point(941, 1)
         Me.GunaControlBox2.Name = "GunaControlBox2"
         Me.GunaControlBox2.OnHoverBackColor = System.Drawing.Color.FromArgb(CType(CType(164, Byte), Integer), CType(CType(176, Byte), Integer), CType(CType(190, Byte), Integer))
         Me.GunaControlBox2.OnHoverIconColor = System.Drawing.Color.White
@@ -175,7 +192,7 @@ Partial Class Pos
         Me.GunaControlBox1.Enabled = False
         Me.GunaControlBox1.IconColor = System.Drawing.Color.White
         Me.GunaControlBox1.IconSize = 15.0!
-        Me.GunaControlBox1.Location = New System.Drawing.Point(961, 1)
+        Me.GunaControlBox1.Location = New System.Drawing.Point(977, 1)
         Me.GunaControlBox1.Name = "GunaControlBox1"
         Me.GunaControlBox1.OnHoverBackColor = System.Drawing.Color.FromArgb(CType(CType(164, Byte), Integer), CType(CType(176, Byte), Integer), CType(CType(190, Byte), Integer))
         Me.GunaControlBox1.OnHoverIconColor = System.Drawing.Color.White
@@ -195,7 +212,6 @@ Partial Class Pos
         Me.grpBox.Controls.Add(Me.GunaLabel10)
         Me.grpBox.Controls.Add(Me.Panel3)
         Me.grpBox.Controls.Add(Me.dtpicker1)
-        Me.grpBox.Controls.Add(Me.Panel2)
         Me.grpBox.Controls.Add(Me.amountTxt)
         Me.grpBox.Controls.Add(Me.GunaLabel9)
         Me.grpBox.Controls.Add(Me.qtyTxt)
@@ -211,10 +227,10 @@ Partial Class Pos
         Me.grpBox.Controls.Add(Me.codeTxt)
         Me.grpBox.Controls.Add(Me.GunaLabel1)
         Me.grpBox.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpBox.LineColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.grpBox.Location = New System.Drawing.Point(12, 40)
+        Me.grpBox.LineColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.grpBox.Location = New System.Drawing.Point(20, 43)
         Me.grpBox.Name = "grpBox"
-        Me.grpBox.Size = New System.Drawing.Size(1007, 259)
+        Me.grpBox.Size = New System.Drawing.Size(1007, 256)
         Me.grpBox.TabIndex = 3
         Me.grpBox.TextLocation = New System.Drawing.Point(10, 8)
         '
@@ -231,22 +247,56 @@ Partial Class Pos
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.addButton)
         Me.Panel3.Controls.Add(Me.noticeButton)
         Me.Panel3.Controls.Add(Me.reportButton)
         Me.Panel3.Controls.Add(Me.payButton)
         Me.Panel3.Controls.Add(Me.soaButton)
-        Me.Panel3.Controls.Add(Me.addButton)
-        Me.Panel3.Location = New System.Drawing.Point(27, 209)
+        Me.Panel3.Location = New System.Drawing.Point(31, 189)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(469, 47)
         Me.Panel3.TabIndex = 25
+        '
+        'addButton
+        '
+        Me.addButton.AnimationHoverSpeed = 0.07!
+        Me.addButton.AnimationSpeed = 0.03!
+        Me.addButton.BackColor = System.Drawing.Color.Transparent
+        Me.addButton.BaseColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.addButton.BorderColor = System.Drawing.Color.FromArgb(CType(CType(119, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(163, Byte), Integer))
+        Me.addButton.CheckedBaseColor = System.Drawing.Color.Gray
+        Me.addButton.CheckedBorderColor = System.Drawing.Color.Black
+        Me.addButton.CheckedForeColor = System.Drawing.Color.White
+        Me.addButton.CheckedImage = Nothing
+        Me.addButton.CheckedLineColor = System.Drawing.Color.DimGray
+        Me.addButton.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.addButton.FocusedColor = System.Drawing.Color.Empty
+        Me.addButton.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.addButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.addButton.Image = Nothing
+        Me.addButton.ImageSize = New System.Drawing.Size(20, 20)
+        Me.addButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.addButton.Location = New System.Drawing.Point(9, 7)
+        Me.addButton.Name = "addButton"
+        Me.addButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.addButton.OnHoverBorderColor = System.Drawing.Color.Black
+        Me.addButton.OnHoverForeColor = System.Drawing.Color.Black
+        Me.addButton.OnHoverImage = Nothing
+        Me.addButton.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.addButton.OnPressedColor = System.Drawing.Color.Black
+        Me.addButton.Radius = 2
+        Me.addButton.Size = New System.Drawing.Size(72, 30)
+        Me.addButton.TabIndex = 20
+        Me.addButton.Text = "ADD"
+        Me.addButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.addButton.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
         'noticeButton
         '
         Me.noticeButton.AnimationHoverSpeed = 0.07!
         Me.noticeButton.AnimationSpeed = 0.03!
         Me.noticeButton.BackColor = System.Drawing.Color.Transparent
-        Me.noticeButton.BaseColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.noticeButton.BaseColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.noticeButton.BorderColor = System.Drawing.Color.FromArgb(CType(CType(119, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(163, Byte), Integer))
         Me.noticeButton.CheckedBaseColor = System.Drawing.Color.Gray
         Me.noticeButton.CheckedBorderColor = System.Drawing.Color.Black
@@ -256,7 +306,7 @@ Partial Class Pos
         Me.noticeButton.DialogResult = System.Windows.Forms.DialogResult.None
         Me.noticeButton.FocusedColor = System.Drawing.Color.Empty
         Me.noticeButton.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.noticeButton.ForeColor = System.Drawing.Color.White
+        Me.noticeButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.noticeButton.Image = Nothing
         Me.noticeButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.noticeButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
@@ -280,7 +330,7 @@ Partial Class Pos
         Me.reportButton.AnimationHoverSpeed = 0.07!
         Me.reportButton.AnimationSpeed = 0.03!
         Me.reportButton.BackColor = System.Drawing.Color.Transparent
-        Me.reportButton.BaseColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.reportButton.BaseColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.reportButton.BorderColor = System.Drawing.Color.Black
         Me.reportButton.CheckedBaseColor = System.Drawing.Color.Gray
         Me.reportButton.CheckedBorderColor = System.Drawing.Color.Black
@@ -290,7 +340,7 @@ Partial Class Pos
         Me.reportButton.DialogResult = System.Windows.Forms.DialogResult.None
         Me.reportButton.FocusedColor = System.Drawing.Color.Empty
         Me.reportButton.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.reportButton.ForeColor = System.Drawing.Color.White
+        Me.reportButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.reportButton.Image = Nothing
         Me.reportButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.reportButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
@@ -314,7 +364,7 @@ Partial Class Pos
         Me.payButton.AnimationHoverSpeed = 0.07!
         Me.payButton.AnimationSpeed = 0.03!
         Me.payButton.BackColor = System.Drawing.Color.Transparent
-        Me.payButton.BaseColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.payButton.BaseColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.payButton.BorderColor = System.Drawing.Color.FromArgb(CType(CType(119, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(163, Byte), Integer))
         Me.payButton.CheckedBaseColor = System.Drawing.Color.Gray
         Me.payButton.CheckedBorderColor = System.Drawing.Color.Black
@@ -324,7 +374,7 @@ Partial Class Pos
         Me.payButton.DialogResult = System.Windows.Forms.DialogResult.None
         Me.payButton.FocusedColor = System.Drawing.Color.Empty
         Me.payButton.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.payButton.ForeColor = System.Drawing.Color.White
+        Me.payButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.payButton.Image = Nothing
         Me.payButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.payButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
@@ -348,7 +398,7 @@ Partial Class Pos
         Me.soaButton.AnimationHoverSpeed = 0.07!
         Me.soaButton.AnimationSpeed = 0.03!
         Me.soaButton.BackColor = System.Drawing.Color.Transparent
-        Me.soaButton.BaseColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.soaButton.BaseColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.soaButton.BorderColor = System.Drawing.Color.FromArgb(CType(CType(119, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(163, Byte), Integer))
         Me.soaButton.CheckedBaseColor = System.Drawing.Color.Gray
         Me.soaButton.CheckedBorderColor = System.Drawing.Color.Black
@@ -358,11 +408,11 @@ Partial Class Pos
         Me.soaButton.DialogResult = System.Windows.Forms.DialogResult.None
         Me.soaButton.FocusedColor = System.Drawing.Color.Empty
         Me.soaButton.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.soaButton.ForeColor = System.Drawing.Color.White
+        Me.soaButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.soaButton.Image = Nothing
         Me.soaButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.soaButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.soaButton.Location = New System.Drawing.Point(86, 7)
+        Me.soaButton.Location = New System.Drawing.Point(87, 7)
         Me.soaButton.Name = "soaButton"
         Me.soaButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.soaButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -377,40 +427,6 @@ Partial Class Pos
         Me.soaButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.soaButton.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
-        'addButton
-        '
-        Me.addButton.AnimationHoverSpeed = 0.07!
-        Me.addButton.AnimationSpeed = 0.03!
-        Me.addButton.BackColor = System.Drawing.Color.Transparent
-        Me.addButton.BaseColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.addButton.BorderColor = System.Drawing.Color.FromArgb(CType(CType(119, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(163, Byte), Integer))
-        Me.addButton.CheckedBaseColor = System.Drawing.Color.Gray
-        Me.addButton.CheckedBorderColor = System.Drawing.Color.Black
-        Me.addButton.CheckedForeColor = System.Drawing.Color.White
-        Me.addButton.CheckedImage = Nothing
-        Me.addButton.CheckedLineColor = System.Drawing.Color.DimGray
-        Me.addButton.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.addButton.FocusedColor = System.Drawing.Color.Empty
-        Me.addButton.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.addButton.ForeColor = System.Drawing.Color.White
-        Me.addButton.Image = Nothing
-        Me.addButton.ImageSize = New System.Drawing.Size(20, 20)
-        Me.addButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.addButton.Location = New System.Drawing.Point(8, 7)
-        Me.addButton.Name = "addButton"
-        Me.addButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.addButton.OnHoverBorderColor = System.Drawing.Color.Black
-        Me.addButton.OnHoverForeColor = System.Drawing.Color.Black
-        Me.addButton.OnHoverImage = Nothing
-        Me.addButton.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.addButton.OnPressedColor = System.Drawing.Color.Black
-        Me.addButton.Radius = 2
-        Me.addButton.Size = New System.Drawing.Size(72, 30)
-        Me.addButton.TabIndex = 20
-        Me.addButton.Text = "ADD"
-        Me.addButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.addButton.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
-        '
         'dtpicker1
         '
         Me.dtpicker1.BackColor = System.Drawing.Color.Transparent
@@ -423,7 +439,7 @@ Partial Class Pos
         Me.dtpicker1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dtpicker1.ForeColor = System.Drawing.Color.Black
         Me.dtpicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpicker1.Location = New System.Drawing.Point(158, 122)
+        Me.dtpicker1.Location = New System.Drawing.Point(382, 140)
         Me.dtpicker1.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpicker1.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpicker1.Name = "dtpicker1"
@@ -437,73 +453,6 @@ Partial Class Pos
         Me.dtpicker1.Text = "5/30/2024"
         Me.dtpicker1.Value = New Date(2024, 5, 30, 16, 46, 27, 716)
         '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.lopezCheck)
-        Me.Panel2.Controls.Add(Me.cancelCheck)
-        Me.Panel2.Controls.Add(Me.replacementCheck)
-        Me.Panel2.Controls.Add(Me.walkCheck)
-        Me.Panel2.Controls.Add(Me.monitoringCheck)
-        Me.Panel2.Location = New System.Drawing.Point(286, 130)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(210, 74)
-        Me.Panel2.TabIndex = 23
-        '
-        'lopezCheck
-        '
-        Me.lopezCheck.AutoSize = True
-        Me.lopezCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lopezCheck.Location = New System.Drawing.Point(55, 52)
-        Me.lopezCheck.Name = "lopezCheck"
-        Me.lopezCheck.Size = New System.Drawing.Size(106, 17)
-        Me.lopezCheck.TabIndex = 24
-        Me.lopezCheck.Text = "LOPEZ QUEZON"
-        Me.lopezCheck.UseVisualStyleBackColor = True
-        '
-        'cancelCheck
-        '
-        Me.cancelCheck.AutoSize = True
-        Me.cancelCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cancelCheck.Location = New System.Drawing.Point(100, 9)
-        Me.cancelCheck.Name = "cancelCheck"
-        Me.cancelCheck.Size = New System.Drawing.Size(109, 17)
-        Me.cancelCheck.TabIndex = 23
-        Me.cancelCheck.Text = "CANCELLED P.O."
-        Me.cancelCheck.UseVisualStyleBackColor = True
-        '
-        'replacementCheck
-        '
-        Me.replacementCheck.AutoSize = True
-        Me.replacementCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.replacementCheck.Location = New System.Drawing.Point(100, 30)
-        Me.replacementCheck.Name = "replacementCheck"
-        Me.replacementCheck.Size = New System.Drawing.Size(103, 17)
-        Me.replacementCheck.TabIndex = 20
-        Me.replacementCheck.Text = "REPLACEMENT "
-        Me.replacementCheck.UseVisualStyleBackColor = True
-        '
-        'walkCheck
-        '
-        Me.walkCheck.AutoSize = True
-        Me.walkCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.walkCheck.Location = New System.Drawing.Point(5, 9)
-        Me.walkCheck.Name = "walkCheck"
-        Me.walkCheck.Size = New System.Drawing.Size(76, 17)
-        Me.walkCheck.TabIndex = 21
-        Me.walkCheck.Text = "WALK - IN"
-        Me.walkCheck.UseVisualStyleBackColor = True
-        '
-        'monitoringCheck
-        '
-        Me.monitoringCheck.AutoSize = True
-        Me.monitoringCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.monitoringCheck.Location = New System.Drawing.Point(5, 30)
-        Me.monitoringCheck.Name = "monitoringCheck"
-        Me.monitoringCheck.Size = New System.Drawing.Size(96, 17)
-        Me.monitoringCheck.TabIndex = 22
-        Me.monitoringCheck.Text = "MONITORING"
-        Me.monitoringCheck.UseVisualStyleBackColor = True
-        '
         'amountTxt
         '
         Me.amountTxt.BackColor = System.Drawing.Color.Black
@@ -516,7 +465,7 @@ Partial Class Pos
         Me.amountTxt.FocusedBorderColor = System.Drawing.Color.Black
         Me.amountTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.amountTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.amountTxt.Location = New System.Drawing.Point(373, 97)
+        Me.amountTxt.Location = New System.Drawing.Point(373, 107)
         Me.amountTxt.Name = "amountTxt"
         Me.amountTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.amountTxt.SelectedText = ""
@@ -528,7 +477,7 @@ Partial Class Pos
         '
         Me.GunaLabel9.AutoSize = True
         Me.GunaLabel9.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel9.Location = New System.Drawing.Point(405, 77)
+        Me.GunaLabel9.Location = New System.Drawing.Point(405, 82)
         Me.GunaLabel9.Name = "GunaLabel9"
         Me.GunaLabel9.Size = New System.Drawing.Size(58, 15)
         Me.GunaLabel9.TabIndex = 21
@@ -545,7 +494,7 @@ Partial Class Pos
         Me.qtyTxt.FocusedBorderColor = System.Drawing.Color.Black
         Me.qtyTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.qtyTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.qtyTxt.Location = New System.Drawing.Point(293, 97)
+        Me.qtyTxt.Location = New System.Drawing.Point(293, 107)
         Me.qtyTxt.Name = "qtyTxt"
         Me.qtyTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.qtyTxt.SelectedText = ""
@@ -557,7 +506,7 @@ Partial Class Pos
         '
         Me.GunaLabel8.AutoSize = True
         Me.GunaLabel8.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel8.Location = New System.Drawing.Point(297, 77)
+        Me.GunaLabel8.Location = New System.Drawing.Point(297, 82)
         Me.GunaLabel8.Name = "GunaLabel8"
         Me.GunaLabel8.Size = New System.Drawing.Size(63, 15)
         Me.GunaLabel8.TabIndex = 20
@@ -584,10 +533,10 @@ Partial Class Pos
         Me.grpOrders.Controls.Add(Me.posterCheck)
         Me.grpOrders.Controls.Add(Me.brochureCheck)
         Me.grpOrders.ForeColor = System.Drawing.Color.Black
-        Me.grpOrders.LineColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.grpOrders.LineColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.grpOrders.Location = New System.Drawing.Point(515, 74)
         Me.grpOrders.Name = "grpOrders"
-        Me.grpOrders.Size = New System.Drawing.Size(476, 194)
+        Me.grpOrders.Size = New System.Drawing.Size(489, 182)
         Me.grpOrders.TabIndex = 10
         Me.grpOrders.TextLocation = New System.Drawing.Point(10, 8)
         '
@@ -607,7 +556,7 @@ Partial Class Pos
         Me.computeButton.AnimationHoverSpeed = 0.07!
         Me.computeButton.AnimationSpeed = 0.03!
         Me.computeButton.BackColor = System.Drawing.Color.Transparent
-        Me.computeButton.BaseColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.computeButton.BaseColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.computeButton.BorderColor = System.Drawing.Color.Black
         Me.computeButton.CheckedBaseColor = System.Drawing.Color.Gray
         Me.computeButton.CheckedBorderColor = System.Drawing.Color.Black
@@ -617,11 +566,11 @@ Partial Class Pos
         Me.computeButton.DialogResult = System.Windows.Forms.DialogResult.None
         Me.computeButton.FocusedColor = System.Drawing.Color.Empty
         Me.computeButton.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.computeButton.ForeColor = System.Drawing.Color.White
+        Me.computeButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.computeButton.Image = Nothing
         Me.computeButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.computeButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeButton.Location = New System.Drawing.Point(321, 121)
+        Me.computeButton.Location = New System.Drawing.Point(329, 121)
         Me.computeButton.Name = "computeButton"
         Me.computeButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.computeButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -647,7 +596,7 @@ Partial Class Pos
         Me.replaceTxt.FocusedBorderColor = System.Drawing.Color.Black
         Me.replaceTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.replaceTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.replaceTxt.Location = New System.Drawing.Point(376, 68)
+        Me.replaceTxt.Location = New System.Drawing.Point(384, 68)
         Me.replaceTxt.Name = "replaceTxt"
         Me.replaceTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.replaceTxt.SelectedText = ""
@@ -666,7 +615,7 @@ Partial Class Pos
         Me.dryingTxt.FocusedBorderColor = System.Drawing.Color.Black
         Me.dryingTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.dryingTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.dryingTxt.Location = New System.Drawing.Point(280, 68)
+        Me.dryingTxt.Location = New System.Drawing.Point(288, 68)
         Me.dryingTxt.Name = "dryingTxt"
         Me.dryingTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.dryingTxt.SelectedText = ""
@@ -685,7 +634,7 @@ Partial Class Pos
         Me.posterTxt.FocusedBorderColor = System.Drawing.Color.Black
         Me.posterTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.posterTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.posterTxt.Location = New System.Drawing.Point(190, 68)
+        Me.posterTxt.Location = New System.Drawing.Point(198, 68)
         Me.posterTxt.Name = "posterTxt"
         Me.posterTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.posterTxt.SelectedText = ""
@@ -704,7 +653,7 @@ Partial Class Pos
         Me.totalTxt.FocusedBorderColor = System.Drawing.Color.Black
         Me.totalTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.totalTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.totalTxt.Location = New System.Drawing.Point(96, 145)
+        Me.totalTxt.Location = New System.Drawing.Point(104, 145)
         Me.totalTxt.Name = "totalTxt"
         Me.totalTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.totalTxt.SelectedText = ""
@@ -723,7 +672,7 @@ Partial Class Pos
         Me.adsTxt.FocusedBorderColor = System.Drawing.Color.Black
         Me.adsTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.adsTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.adsTxt.Location = New System.Drawing.Point(96, 106)
+        Me.adsTxt.Location = New System.Drawing.Point(104, 106)
         Me.adsTxt.Name = "adsTxt"
         Me.adsTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.adsTxt.SelectedText = ""
@@ -742,7 +691,7 @@ Partial Class Pos
         Me.brochureTxt.FocusedBorderColor = System.Drawing.Color.Black
         Me.brochureTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.brochureTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.brochureTxt.Location = New System.Drawing.Point(96, 68)
+        Me.brochureTxt.Location = New System.Drawing.Point(104, 68)
         Me.brochureTxt.Name = "brochureTxt"
         Me.brochureTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.brochureTxt.SelectedText = ""
@@ -754,7 +703,7 @@ Partial Class Pos
         '
         Me.GunaLabel7.AutoSize = True
         Me.GunaLabel7.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel7.Location = New System.Drawing.Point(0, 150)
+        Me.GunaLabel7.Location = New System.Drawing.Point(8, 150)
         Me.GunaLabel7.Name = "GunaLabel7"
         Me.GunaLabel7.Size = New System.Drawing.Size(85, 15)
         Me.GunaLabel7.TabIndex = 13
@@ -764,7 +713,7 @@ Partial Class Pos
         '
         Me.GunaLabel6.AutoSize = True
         Me.GunaLabel6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel6.Location = New System.Drawing.Point(0, 115)
+        Me.GunaLabel6.Location = New System.Drawing.Point(8, 115)
         Me.GunaLabel6.Name = "GunaLabel6"
         Me.GunaLabel6.Size = New System.Drawing.Size(86, 15)
         Me.GunaLabel6.TabIndex = 12
@@ -774,7 +723,7 @@ Partial Class Pos
         '
         Me.GunaLabel5.AutoSize = True
         Me.GunaLabel5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel5.Location = New System.Drawing.Point(0, 76)
+        Me.GunaLabel5.Location = New System.Drawing.Point(8, 76)
         Me.GunaLabel5.Name = "GunaLabel5"
         Me.GunaLabel5.Size = New System.Drawing.Size(88, 15)
         Me.GunaLabel5.TabIndex = 11
@@ -784,7 +733,7 @@ Partial Class Pos
         '
         Me.replaceCheck.AutoSize = True
         Me.replaceCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.replaceCheck.Location = New System.Drawing.Point(376, 39)
+        Me.replaceCheck.Location = New System.Drawing.Point(384, 39)
         Me.replaceCheck.Name = "replaceCheck"
         Me.replaceCheck.Size = New System.Drawing.Size(100, 17)
         Me.replaceCheck.TabIndex = 3
@@ -795,7 +744,7 @@ Partial Class Pos
         '
         Me.dryingCheck.AutoSize = True
         Me.dryingCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dryingCheck.Location = New System.Drawing.Point(275, 39)
+        Me.dryingCheck.Location = New System.Drawing.Point(283, 39)
         Me.dryingCheck.Name = "dryingCheck"
         Me.dryingCheck.Size = New System.Drawing.Size(95, 17)
         Me.dryingCheck.TabIndex = 2
@@ -806,7 +755,7 @@ Partial Class Pos
         '
         Me.posterCheck.AutoSize = True
         Me.posterCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.posterCheck.Location = New System.Drawing.Point(199, 39)
+        Me.posterCheck.Location = New System.Drawing.Point(207, 39)
         Me.posterCheck.Name = "posterCheck"
         Me.posterCheck.Size = New System.Drawing.Size(66, 17)
         Me.posterCheck.TabIndex = 1
@@ -817,7 +766,7 @@ Partial Class Pos
         '
         Me.brochureCheck.AutoSize = True
         Me.brochureCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.brochureCheck.Location = New System.Drawing.Point(96, 39)
+        Me.brochureCheck.Location = New System.Drawing.Point(104, 39)
         Me.brochureCheck.Name = "brochureCheck"
         Me.brochureCheck.Size = New System.Drawing.Size(84, 17)
         Me.brochureCheck.TabIndex = 0
@@ -835,7 +784,7 @@ Partial Class Pos
         Me.dtpicker2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dtpicker2.ForeColor = System.Drawing.Color.Black
         Me.dtpicker2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpicker2.Location = New System.Drawing.Point(158, 164)
+        Me.dtpicker2.Location = New System.Drawing.Point(158, 140)
         Me.dtpicker2.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpicker2.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpicker2.Name = "dtpicker2"
@@ -853,7 +802,7 @@ Partial Class Pos
         '
         Me.GunaLabel4.AutoSize = True
         Me.GunaLabel4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel4.Location = New System.Drawing.Point(24, 174)
+        Me.GunaLabel4.Location = New System.Drawing.Point(24, 145)
         Me.GunaLabel4.Name = "GunaLabel4"
         Me.GunaLabel4.Size = New System.Drawing.Size(108, 17)
         Me.GunaLabel4.TabIndex = 7
@@ -863,7 +812,7 @@ Partial Class Pos
         '
         Me.GunaLabel3.AutoSize = True
         Me.GunaLabel3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel3.Location = New System.Drawing.Point(24, 135)
+        Me.GunaLabel3.Location = New System.Drawing.Point(295, 146)
         Me.GunaLabel3.Name = "GunaLabel3"
         Me.GunaLabel3.Size = New System.Drawing.Size(70, 17)
         Me.GunaLabel3.TabIndex = 6
@@ -876,7 +825,7 @@ Partial Class Pos
         Me.purchaseBox.FocusedLineColor = System.Drawing.Color.Black
         Me.purchaseBox.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.purchaseBox.LineColor = System.Drawing.Color.Black
-        Me.purchaseBox.Location = New System.Drawing.Point(162, 86)
+        Me.purchaseBox.Location = New System.Drawing.Point(162, 89)
         Me.purchaseBox.Name = "purchaseBox"
         Me.purchaseBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.purchaseBox.SelectedText = ""
@@ -888,7 +837,7 @@ Partial Class Pos
         '
         Me.GunaLabel2.AutoSize = True
         Me.GunaLabel2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel2.Location = New System.Drawing.Point(24, 95)
+        Me.GunaLabel2.Location = New System.Drawing.Point(24, 98)
         Me.GunaLabel2.Name = "GunaLabel2"
         Me.GunaLabel2.Size = New System.Drawing.Size(131, 17)
         Me.GunaLabel2.TabIndex = 4
@@ -957,6 +906,61 @@ Partial Class Pos
         Me.GunaLabel1.TabIndex = 0
         Me.GunaLabel1.Text = "FACILITY CODE:"
         '
+        'lopezCheck
+        '
+        Me.lopezCheck.AutoSize = True
+        Me.lopezCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lopezCheck.Location = New System.Drawing.Point(251, 10)
+        Me.lopezCheck.Name = "lopezCheck"
+        Me.lopezCheck.Size = New System.Drawing.Size(106, 17)
+        Me.lopezCheck.TabIndex = 24
+        Me.lopezCheck.Text = "LOPEZ QUEZON"
+        Me.lopezCheck.UseVisualStyleBackColor = True
+        '
+        'cancelCheck
+        '
+        Me.cancelCheck.AutoSize = True
+        Me.cancelCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cancelCheck.Location = New System.Drawing.Point(643, 10)
+        Me.cancelCheck.Name = "cancelCheck"
+        Me.cancelCheck.Size = New System.Drawing.Size(109, 17)
+        Me.cancelCheck.TabIndex = 23
+        Me.cancelCheck.Text = "CANCELLED P.O."
+        Me.cancelCheck.UseVisualStyleBackColor = True
+        '
+        'replacementCheck
+        '
+        Me.replacementCheck.AutoSize = True
+        Me.replacementCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.replacementCheck.Location = New System.Drawing.Point(379, 10)
+        Me.replacementCheck.Name = "replacementCheck"
+        Me.replacementCheck.Size = New System.Drawing.Size(103, 17)
+        Me.replacementCheck.TabIndex = 20
+        Me.replacementCheck.Text = "REPLACEMENT "
+        Me.replacementCheck.UseVisualStyleBackColor = True
+        '
+        'walkCheck
+        '
+        Me.walkCheck.AutoSize = True
+        Me.walkCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.walkCheck.Location = New System.Drawing.Point(25, 10)
+        Me.walkCheck.Name = "walkCheck"
+        Me.walkCheck.Size = New System.Drawing.Size(76, 17)
+        Me.walkCheck.TabIndex = 21
+        Me.walkCheck.Text = "WALK - IN"
+        Me.walkCheck.UseVisualStyleBackColor = True
+        '
+        'monitoringCheck
+        '
+        Me.monitoringCheck.AutoSize = True
+        Me.monitoringCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.monitoringCheck.Location = New System.Drawing.Point(129, 10)
+        Me.monitoringCheck.Name = "monitoringCheck"
+        Me.monitoringCheck.Size = New System.Drawing.Size(96, 17)
+        Me.monitoringCheck.TabIndex = 22
+        Me.monitoringCheck.Text = "MONITORING"
+        Me.monitoringCheck.UseVisualStyleBackColor = True
+        '
         'dgv1
         '
         Me.dgv1.AllowUserToAddRows = False
@@ -988,14 +992,14 @@ Partial Class Pos
         Me.dgv1.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgv1.EnableHeadersVisualStyles = False
         Me.dgv1.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        Me.dgv1.Location = New System.Drawing.Point(16, 307)
+        Me.dgv1.Location = New System.Drawing.Point(23, 336)
         Me.dgv1.Name = "dgv1"
         Me.dgv1.ReadOnly = True
         Me.dgv1.RowHeadersVisible = False
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle4
         Me.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgv1.Size = New System.Drawing.Size(1004, 296)
+        Me.dgv1.Size = New System.Drawing.Size(1004, 295)
         Me.dgv1.TabIndex = 16
         Me.dgv1.Theme = Guna.UI.WinForms.GunaDataGridViewPresetThemes.WhiteGrid
         Me.dgv1.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
@@ -1191,12 +1195,62 @@ Partial Class Pos
         Me.Column18.ReadOnly = True
         Me.Column18.Width = 94
         '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.replaceCombo)
+        Me.Panel4.Controls.Add(Me.replacementCheck)
+        Me.Panel4.Controls.Add(Me.lopezCheck)
+        Me.Panel4.Controls.Add(Me.walkCheck)
+        Me.Panel4.Controls.Add(Me.cancelCheck)
+        Me.Panel4.Controls.Add(Me.monitoringCheck)
+        Me.Panel4.Location = New System.Drawing.Point(23, 294)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(1001, 36)
+        Me.Panel4.TabIndex = 17
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Panel2.Location = New System.Drawing.Point(1042, 34)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(71, 619)
+        Me.Panel2.TabIndex = 27
+        '
+        'Panel5
+        '
+        Me.Panel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Panel5.Location = New System.Drawing.Point(-67, 34)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(71, 619)
+        Me.Panel5.TabIndex = 28
+        '
+        'Panel6
+        '
+        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Panel6.Location = New System.Drawing.Point(0, 649)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(1047, 39)
+        Me.Panel6.TabIndex = 29
+        '
+        'replaceCombo
+        '
+        Me.replaceCombo.FormattingEnabled = True
+        Me.replaceCombo.Location = New System.Drawing.Point(496, 8)
+        Me.replaceCombo.Name = "replaceCombo"
+        Me.replaceCombo.Size = New System.Drawing.Size(121, 21)
+        Me.replaceCombo.TabIndex = 25
+        '
         'Pos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1031, 613)
+        Me.ClientSize = New System.Drawing.Size(1047, 654)
+        Me.Controls.Add(Me.Panel6)
+        Me.Controls.Add(Me.Panel5)
+        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.dgv1)
         Me.Controls.Add(Me.grpBox)
         Me.Controls.Add(Me.Panel1)
@@ -1207,14 +1261,15 @@ Partial Class Pos
         Me.Text = "Pos"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpBox.ResumeLayout(False)
         Me.grpBox.PerformLayout()
         Me.Panel3.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.grpOrders.ResumeLayout(False)
         Me.grpOrders.PerformLayout()
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1255,7 +1310,6 @@ Partial Class Pos
     Friend WithEvents soaButton As Guna.UI.WinForms.GunaAdvenceButton
     Friend WithEvents addButton As Guna.UI.WinForms.GunaAdvenceButton
     Friend WithEvents dtpicker1 As Guna.UI.WinForms.GunaDateTimePicker
-    Friend WithEvents Panel2 As Panel
     Friend WithEvents lopezCheck As CheckBox
     Friend WithEvents cancelCheck As CheckBox
     Friend WithEvents replacementCheck As CheckBox
@@ -1290,4 +1344,10 @@ Partial Class Pos
     Friend WithEvents nameBox As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents codeTxt As Guna.UI.WinForms.GunaLineTextBox
     Friend WithEvents GunaLabel1 As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents replaceCombo As ComboBox
 End Class
