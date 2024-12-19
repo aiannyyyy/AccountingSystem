@@ -10,7 +10,7 @@ Public Class Pos
     Public Property FullName As String
 
     Private Sub Pos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        replaceCombo.Items.AddRange({"CONTAMINATED", "INSUFFICIENT"})
+        replaceCombo.Items.AddRange({"Contaminated", "Insufficient"})
 
         conn.ConnectionString = "DSN=dashboard" ' Adjust the connection string to your DSN
 
@@ -366,9 +366,9 @@ Public Class Pos
             Dim totalAmount = quantity * unitPrice
 
             ' Display the total amount in amountTxt
-            amountTxt.Text = totalAmount.ToString("F2") ' Format with 2 decimal places
+            amountTxt.Text = totalAmount.ToString() ' Format with 2 decimal places
         Else
-            amountTxt.Text = "0.00"
+            amountTxt.Text = "0"
         End If
     End Sub
 
@@ -690,7 +690,7 @@ Public Class Pos
             ElseIf monitoringCheck.Checked Then
                 ordertype = "Monitoring"
             ElseIf replacementCheck.Checked Then
-                ordertype = "ENBS-Replacement of Expired Filter Card"
+                ordertype = "ENBS-Replacement " + replaceCombo.SelectedItem.ToString()
             ElseIf lopezCheck.Checked Then
                 ordertype = "ENBS"
             Else
