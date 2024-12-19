@@ -936,8 +936,6 @@ Public Class Pos
         If String.IsNullOrEmpty(replaceCombo.Text) OrElse replaceCombo.SelectedIndex = -1 Then
             MessageBox.Show("Please select an item from the ComboBox before proceeding.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
-            ' Perform the necessary action here
-            MessageBox.Show("You selected: " & replaceCombo.SelectedItem.ToString())
         End If
     End Sub
 
