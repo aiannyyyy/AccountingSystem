@@ -431,6 +431,7 @@ Public Class Pos
         replaceTxt.Text = ""
         adsTxt.Text = ""
         totalTxt.Text = ""
+        replaceCombo.SelectedIndex = -1
     End Sub
 
     Private Function ExecuteQuery(query As String) As Integer
@@ -681,6 +682,13 @@ Public Class Pos
                 Exit Sub
             End If
 
+            If replacementCheck.Checked Then
+                If String.IsNullOrEmpty(replaceCombo.Text) OrElse replaceCombo.SelectedIndex = -1 Then
+                    MessageBox.Show("Please select a replacement option before proceeding.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
+            End If
+
             Dim soatxt As String ' Declare soatxt here
             Dim soaDate As Date = Date.Now
             Dim ordertype As String = ""
@@ -924,5 +932,16 @@ Public Class Pos
         End If
     End Sub
 
+    Private Sub ConfirmSelection()
+        If String.IsNullOrEmpty(replaceCombo.Text) OrElse replaceCombo.SelectedIndex = -1 Then
+            MessageBox.Show("Please select an item from the ComboBox before proceeding.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Else
+            ' Perform the necessary action here
+            MessageBox.Show("You selected: " & replaceCombo.SelectedItem.ToString())
+        End If
+    End Sub
 
+    Private Sub replaceCombo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles replaceCombo.SelectedIndexChanged
+
+    End Sub
 End Class
