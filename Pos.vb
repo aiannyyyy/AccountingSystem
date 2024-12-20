@@ -27,6 +27,8 @@ Public Class Pos
 
         codeTxt.SetOnGotFocus()
     End Sub
+
+
     Public Sub ordertext()
         brochureTxt.Enabled = False
         posterTxt.Enabled = False
@@ -104,6 +106,8 @@ Public Class Pos
         Catch ex As Exception
             MessageBox.Show("An error occurred: " & ex.Message)
         End Try
+
+        UpdateDateTimePicker2()
     End Sub
 
     Private Sub brochureCheck_CheckedChanged(sender As Object, e As EventArgs) Handles brochureCheck.CheckedChanged
@@ -950,5 +954,26 @@ Public Class Pos
     Private Sub homeBtn_Click(sender As Object, e As EventArgs) Handles homeBtn.Click
         Form1.Show()
         Me.Hide()
+    End Sub
+
+    Private Sub UpdateDateTimePicker2()
+        Try
+            ' Get the base date from DateTimePicker1
+            Dim baseDate As DateTime = dtpicker2.Value
+
+            ' Get the number of days from TextBox1
+            Dim daysToAdd As Integer
+            If Integer.TryParse(termBox.Text, daysToAdd) Then
+                ' Add the days to the base date and set it to DateTimePicker2
+                dtpicker1.Value = baseDate.AddDays(daysToAdd)
+            Else
+            End If
+        Catch ex As Exception
+            MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub dtpicker2_ValueChanged(sender As Object, e As EventArgs) Handles dtpicker2.ValueChanged
+        UpdateDateTimePicker2()
     End Sub
 End Class

@@ -23,11 +23,11 @@ Partial Class Pos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Pos))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GunaElipse1 = New Guna.UI.WinForms.GunaElipse(Me.components)
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -39,6 +39,7 @@ Partial Class Pos
         Me.grpBox = New Guna.UI.WinForms.GunaGroupBox()
         Me.GunaLabel10 = New Guna.UI.WinForms.GunaLabel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.homeBtn = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.addButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.noticeButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.reportButton = New Guna.UI.WinForms.GunaAdvenceButton()
@@ -104,7 +105,6 @@ Partial Class Pos
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.homeBtn = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -258,6 +258,40 @@ Partial Class Pos
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(472, 48)
         Me.Panel3.TabIndex = 25
+        '
+        'homeBtn
+        '
+        Me.homeBtn.AnimationHoverSpeed = 0.07!
+        Me.homeBtn.AnimationSpeed = 0.03!
+        Me.homeBtn.BackColor = System.Drawing.Color.Transparent
+        Me.homeBtn.BaseColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.homeBtn.BorderColor = System.Drawing.Color.FromArgb(CType(CType(119, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(163, Byte), Integer))
+        Me.homeBtn.CheckedBaseColor = System.Drawing.Color.Gray
+        Me.homeBtn.CheckedBorderColor = System.Drawing.Color.Black
+        Me.homeBtn.CheckedForeColor = System.Drawing.Color.White
+        Me.homeBtn.CheckedImage = Nothing
+        Me.homeBtn.CheckedLineColor = System.Drawing.Color.DimGray
+        Me.homeBtn.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.homeBtn.FocusedColor = System.Drawing.Color.Empty
+        Me.homeBtn.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.homeBtn.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.homeBtn.Image = Nothing
+        Me.homeBtn.ImageSize = New System.Drawing.Size(20, 20)
+        Me.homeBtn.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.homeBtn.Location = New System.Drawing.Point(393, 9)
+        Me.homeBtn.Name = "homeBtn"
+        Me.homeBtn.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.homeBtn.OnHoverBorderColor = System.Drawing.Color.Black
+        Me.homeBtn.OnHoverForeColor = System.Drawing.Color.Black
+        Me.homeBtn.OnHoverImage = Nothing
+        Me.homeBtn.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.homeBtn.OnPressedColor = System.Drawing.Color.Black
+        Me.homeBtn.Radius = 2
+        Me.homeBtn.Size = New System.Drawing.Size(65, 30)
+        Me.homeBtn.TabIndex = 25
+        Me.homeBtn.Text = "HOME"
+        Me.homeBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.homeBtn.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
         'addButton
         '
@@ -967,39 +1001,39 @@ Partial Class Pos
         '
         Me.dgv1.AllowUserToAddRows = False
         Me.dgv1.AllowUserToDeleteRows = False
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        Me.dgv1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        Me.dgv1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgv1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv1.BackgroundColor = System.Drawing.Color.White
         Me.dgv1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgv1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv1.ColumnHeadersHeight = 21
         Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column14, Me.adsdsad, Me.Column15, Me.Column16, Me.Column17, Me.Column18})
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv1.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv1.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgv1.EnableHeadersVisualStyles = False
         Me.dgv1.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
         Me.dgv1.Location = New System.Drawing.Point(23, 336)
         Me.dgv1.Name = "dgv1"
         Me.dgv1.ReadOnly = True
         Me.dgv1.RowHeadersVisible = False
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle4
         Me.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv1.Size = New System.Drawing.Size(1004, 295)
         Me.dgv1.TabIndex = 16
@@ -1242,40 +1276,6 @@ Partial Class Pos
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(1047, 39)
         Me.Panel6.TabIndex = 29
-        '
-        'homeBtn
-        '
-        Me.homeBtn.AnimationHoverSpeed = 0.07!
-        Me.homeBtn.AnimationSpeed = 0.03!
-        Me.homeBtn.BackColor = System.Drawing.Color.Transparent
-        Me.homeBtn.BaseColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.homeBtn.BorderColor = System.Drawing.Color.FromArgb(CType(CType(119, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(163, Byte), Integer))
-        Me.homeBtn.CheckedBaseColor = System.Drawing.Color.Gray
-        Me.homeBtn.CheckedBorderColor = System.Drawing.Color.Black
-        Me.homeBtn.CheckedForeColor = System.Drawing.Color.White
-        Me.homeBtn.CheckedImage = Nothing
-        Me.homeBtn.CheckedLineColor = System.Drawing.Color.DimGray
-        Me.homeBtn.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.homeBtn.FocusedColor = System.Drawing.Color.Empty
-        Me.homeBtn.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.homeBtn.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.homeBtn.Image = Nothing
-        Me.homeBtn.ImageSize = New System.Drawing.Size(20, 20)
-        Me.homeBtn.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.homeBtn.Location = New System.Drawing.Point(393, 9)
-        Me.homeBtn.Name = "homeBtn"
-        Me.homeBtn.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.homeBtn.OnHoverBorderColor = System.Drawing.Color.Black
-        Me.homeBtn.OnHoverForeColor = System.Drawing.Color.Black
-        Me.homeBtn.OnHoverImage = Nothing
-        Me.homeBtn.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.homeBtn.OnPressedColor = System.Drawing.Color.Black
-        Me.homeBtn.Radius = 2
-        Me.homeBtn.Size = New System.Drawing.Size(65, 30)
-        Me.homeBtn.TabIndex = 25
-        Me.homeBtn.Text = "HOME"
-        Me.homeBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.homeBtn.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
         'Pos
         '
