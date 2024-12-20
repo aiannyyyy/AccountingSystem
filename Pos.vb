@@ -946,4 +946,9 @@ Public Class Pos
     Private Sub dgv1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellContentClick
 
     End Sub
+
+    Private Sub homeBtn_Click(sender As Object, e As EventArgs) Handles homeBtn.Click
+        Form1.Show()
+        Me.Hide()
+    End Sub
 End Class

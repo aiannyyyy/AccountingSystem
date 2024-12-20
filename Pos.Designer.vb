@@ -104,6 +104,7 @@ Partial Class Pos
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.homeBtn = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -247,14 +248,15 @@ Partial Class Pos
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.homeBtn)
         Me.Panel3.Controls.Add(Me.addButton)
         Me.Panel3.Controls.Add(Me.noticeButton)
         Me.Panel3.Controls.Add(Me.reportButton)
         Me.Panel3.Controls.Add(Me.payButton)
         Me.Panel3.Controls.Add(Me.soaButton)
-        Me.Panel3.Location = New System.Drawing.Point(31, 189)
+        Me.Panel3.Location = New System.Drawing.Point(28, 189)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(469, 47)
+        Me.Panel3.Size = New System.Drawing.Size(472, 48)
         Me.Panel3.TabIndex = 25
         '
         'addButton
@@ -276,7 +278,7 @@ Partial Class Pos
         Me.addButton.Image = Nothing
         Me.addButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.addButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.addButton.Location = New System.Drawing.Point(9, 7)
+        Me.addButton.Location = New System.Drawing.Point(10, 8)
         Me.addButton.Name = "addButton"
         Me.addButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.addButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -285,7 +287,7 @@ Partial Class Pos
         Me.addButton.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.addButton.OnPressedColor = System.Drawing.Color.Black
         Me.addButton.Radius = 2
-        Me.addButton.Size = New System.Drawing.Size(72, 30)
+        Me.addButton.Size = New System.Drawing.Size(60, 30)
         Me.addButton.TabIndex = 20
         Me.addButton.Text = "ADD"
         Me.addButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -310,7 +312,7 @@ Partial Class Pos
         Me.noticeButton.Image = Nothing
         Me.noticeButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.noticeButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.noticeButton.Location = New System.Drawing.Point(375, 7)
+        Me.noticeButton.Location = New System.Drawing.Point(322, 8)
         Me.noticeButton.Name = "noticeButton"
         Me.noticeButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.noticeButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -319,7 +321,7 @@ Partial Class Pos
         Me.noticeButton.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.noticeButton.OnPressedColor = System.Drawing.Color.Black
         Me.noticeButton.Radius = 2
-        Me.noticeButton.Size = New System.Drawing.Size(83, 30)
+        Me.noticeButton.Size = New System.Drawing.Size(65, 30)
         Me.noticeButton.TabIndex = 24
         Me.noticeButton.Text = "NOTICE"
         Me.noticeButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -344,7 +346,7 @@ Partial Class Pos
         Me.reportButton.Image = Nothing
         Me.reportButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.reportButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.reportButton.Location = New System.Drawing.Point(273, 7)
+        Me.reportButton.Location = New System.Drawing.Point(248, 8)
         Me.reportButton.Name = "reportButton"
         Me.reportButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.reportButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -353,7 +355,7 @@ Partial Class Pos
         Me.reportButton.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.reportButton.OnPressedColor = System.Drawing.Color.Black
         Me.reportButton.Radius = 2
-        Me.reportButton.Size = New System.Drawing.Size(96, 30)
+        Me.reportButton.Size = New System.Drawing.Size(68, 30)
         Me.reportButton.TabIndex = 23
         Me.reportButton.Text = "REPORT"
         Me.reportButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -378,7 +380,7 @@ Partial Class Pos
         Me.payButton.Image = Nothing
         Me.payButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.payButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.payButton.Location = New System.Drawing.Point(186, 7)
+        Me.payButton.Location = New System.Drawing.Point(167, 8)
         Me.payButton.Name = "payButton"
         Me.payButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.payButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -387,7 +389,7 @@ Partial Class Pos
         Me.payButton.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.payButton.OnPressedColor = System.Drawing.Color.Black
         Me.payButton.Radius = 2
-        Me.payButton.Size = New System.Drawing.Size(81, 30)
+        Me.payButton.Size = New System.Drawing.Size(75, 30)
         Me.payButton.TabIndex = 22
         Me.payButton.Text = "PAYMENTS"
         Me.payButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -412,7 +414,7 @@ Partial Class Pos
         Me.soaButton.Image = Nothing
         Me.soaButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.soaButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.soaButton.Location = New System.Drawing.Point(87, 7)
+        Me.soaButton.Location = New System.Drawing.Point(76, 8)
         Me.soaButton.Name = "soaButton"
         Me.soaButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.soaButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -421,7 +423,7 @@ Partial Class Pos
         Me.soaButton.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.soaButton.OnPressedColor = System.Drawing.Color.Black
         Me.soaButton.Radius = 2
-        Me.soaButton.Size = New System.Drawing.Size(93, 30)
+        Me.soaButton.Size = New System.Drawing.Size(85, 30)
         Me.soaButton.TabIndex = 21
         Me.soaButton.Text = "REPRINT SOA"
         Me.soaButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1241,6 +1243,40 @@ Partial Class Pos
         Me.Panel6.Size = New System.Drawing.Size(1047, 39)
         Me.Panel6.TabIndex = 29
         '
+        'homeBtn
+        '
+        Me.homeBtn.AnimationHoverSpeed = 0.07!
+        Me.homeBtn.AnimationSpeed = 0.03!
+        Me.homeBtn.BackColor = System.Drawing.Color.Transparent
+        Me.homeBtn.BaseColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.homeBtn.BorderColor = System.Drawing.Color.FromArgb(CType(CType(119, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(163, Byte), Integer))
+        Me.homeBtn.CheckedBaseColor = System.Drawing.Color.Gray
+        Me.homeBtn.CheckedBorderColor = System.Drawing.Color.Black
+        Me.homeBtn.CheckedForeColor = System.Drawing.Color.White
+        Me.homeBtn.CheckedImage = Nothing
+        Me.homeBtn.CheckedLineColor = System.Drawing.Color.DimGray
+        Me.homeBtn.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.homeBtn.FocusedColor = System.Drawing.Color.Empty
+        Me.homeBtn.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.homeBtn.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.homeBtn.Image = Nothing
+        Me.homeBtn.ImageSize = New System.Drawing.Size(20, 20)
+        Me.homeBtn.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.homeBtn.Location = New System.Drawing.Point(393, 8)
+        Me.homeBtn.Name = "homeBtn"
+        Me.homeBtn.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.homeBtn.OnHoverBorderColor = System.Drawing.Color.Black
+        Me.homeBtn.OnHoverForeColor = System.Drawing.Color.Black
+        Me.homeBtn.OnHoverImage = Nothing
+        Me.homeBtn.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.homeBtn.OnPressedColor = System.Drawing.Color.Black
+        Me.homeBtn.Radius = 2
+        Me.homeBtn.Size = New System.Drawing.Size(65, 30)
+        Me.homeBtn.TabIndex = 25
+        Me.homeBtn.Text = "HOME"
+        Me.homeBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.homeBtn.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
+        '
         'Pos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1350,4 +1386,5 @@ Partial Class Pos
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents replaceCombo As ComboBox
+    Friend WithEvents homeBtn As Guna.UI.WinForms.GunaAdvenceButton
 End Class
