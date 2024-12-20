@@ -698,7 +698,7 @@ Public Class Pos
             ElseIf monitoringCheck.Checked Then
                 ordertype = "Monitoring"
             ElseIf replacementCheck.Checked Then
-                ordertype = "ENBS-Replacement " + replaceCombo.SelectedItem.ToString()
+                ordertype = "ENBS-Replacement -" + replaceCombo.SelectedItem.ToString()
             ElseIf lopezCheck.Checked Then
                 ordertype = "ENBS"
             Else
