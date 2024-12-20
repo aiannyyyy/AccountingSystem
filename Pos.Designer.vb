@@ -1031,7 +1031,7 @@ Partial Class Pos
         Me.Column1.HeaderText = "SOA NUMBER"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
-        Me.Column1.Width = 110
+        Me.Column1.Width = 108
         '
         'Column2
         '
@@ -1040,7 +1040,7 @@ Partial Class Pos
         Me.Column2.HeaderText = "SOA DATE"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
-        Me.Column2.Width = 88
+        Me.Column2.Width = 86
         '
         'Column3
         '
@@ -1049,7 +1049,7 @@ Partial Class Pos
         Me.Column3.HeaderText = "TYPE"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
-        Me.Column3.Width = 59
+        Me.Column3.Width = 57
         '
         'Column4
         '
@@ -1058,7 +1058,7 @@ Partial Class Pos
         Me.Column4.HeaderText = "FACILITY CODE"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
-        Me.Column4.Width = 114
+        Me.Column4.Width = 112
         '
         'Column5
         '
@@ -1067,7 +1067,7 @@ Partial Class Pos
         Me.Column5.HeaderText = "FACILITY NAME"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
-        Me.Column5.Width = 117
+        Me.Column5.Width = 115
         '
         'Column6
         '
@@ -1076,7 +1076,7 @@ Partial Class Pos
         Me.Column6.HeaderText = "TERM"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
-        Me.Column6.Width = 64
+        Me.Column6.Width = 62
         '
         'Column7
         '
@@ -1085,7 +1085,7 @@ Partial Class Pos
         Me.Column7.HeaderText = "PURCHASE NUMBER"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
-        Me.Column7.Width = 147
+        Me.Column7.Width = 145
         '
         'Column8
         '
@@ -1094,7 +1094,7 @@ Partial Class Pos
         Me.Column8.HeaderText = "PURCHASE DATE"
         Me.Column8.Name = "Column8"
         Me.Column8.ReadOnly = True
-        Me.Column8.Width = 125
+        Me.Column8.Width = 123
         '
         'Column9
         '
@@ -1103,7 +1103,7 @@ Partial Class Pos
         Me.Column9.HeaderText = "QUANTITY"
         Me.Column9.Name = "Column9"
         Me.Column9.ReadOnly = True
-        Me.Column9.Width = 92
+        Me.Column9.Width = 90
         '
         'Column10
         '
@@ -1112,7 +1112,7 @@ Partial Class Pos
         Me.Column10.HeaderText = "SUB TOTAL"
         Me.Column10.Name = "Column10"
         Me.Column10.ReadOnly = True
-        Me.Column10.Width = 95
+        Me.Column10.Width = 93
         '
         'Column11
         '
@@ -1121,7 +1121,7 @@ Partial Class Pos
         Me.Column11.HeaderText = "BROCHURE"
         Me.Column11.Name = "Column11"
         Me.Column11.ReadOnly = True
-        Me.Column11.Width = 96
+        Me.Column11.Width = 94
         '
         'Column12
         '
@@ -1130,7 +1130,7 @@ Partial Class Pos
         Me.Column12.HeaderText = "POSTER"
         Me.Column12.Name = "Column12"
         Me.Column12.ReadOnly = True
-        Me.Column12.Width = 76
+        Me.Column12.Width = 74
         '
         'Column13
         '
@@ -1139,7 +1139,7 @@ Partial Class Pos
         Me.Column13.HeaderText = "DRYING RACK"
         Me.Column13.Name = "Column13"
         Me.Column13.ReadOnly = True
-        Me.Column13.Width = 112
+        Me.Column13.Width = 110
         '
         'Column14
         '
@@ -1148,7 +1148,7 @@ Partial Class Pos
         Me.Column14.HeaderText = "REPLACEMENT"
         Me.Column14.Name = "Column14"
         Me.Column14.ReadOnly = True
-        Me.Column14.Width = 113
+        Me.Column14.Width = 111
         '
         'adsdsad
         '
@@ -1157,7 +1157,7 @@ Partial Class Pos
         Me.adsdsad.HeaderText = "ADS AMOUNT"
         Me.adsdsad.Name = "adsdsad"
         Me.adsdsad.ReadOnly = True
-        Me.adsdsad.Width = 112
+        Me.adsdsad.Width = 110
         '
         'Column15
         '
@@ -1166,7 +1166,7 @@ Partial Class Pos
         Me.Column15.HeaderText = "DUE DATE"
         Me.Column15.Name = "Column15"
         Me.Column15.ReadOnly = True
-        Me.Column15.Width = 88
+        Me.Column15.Width = 86
         '
         'Column16
         '
@@ -1175,7 +1175,7 @@ Partial Class Pos
         Me.Column16.HeaderText = "TOTAL AMOUNT"
         Me.Column16.Name = "Column16"
         Me.Column16.ReadOnly = True
-        Me.Column16.Width = 124
+        Me.Column16.Width = 122
         '
         'Column17
         '
@@ -1184,7 +1184,7 @@ Partial Class Pos
         Me.Column17.HeaderText = "BALANCE"
         Me.Column17.Name = "Column17"
         Me.Column17.ReadOnly = True
-        Me.Column17.Width = 84
+        Me.Column17.Width = 82
         '
         'Column18
         '
@@ -1193,7 +1193,7 @@ Partial Class Pos
         Me.Column18.HeaderText = "USERNAME"
         Me.Column18.Name = "Column18"
         Me.Column18.ReadOnly = True
-        Me.Column18.Width = 96
+        Me.Column18.Width = 94
         '
         'Panel4
         '

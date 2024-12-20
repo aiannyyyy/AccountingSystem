@@ -48,7 +48,7 @@ Public Class Pos
             Return
         End If
 
-        da = New OdbcDataAdapter("select * from acccounting where fac_code like '%" & codeTxt.Text & "%'", conn)
+        da = New OdbcDataAdapter("select * from acccounting where fac_code like '%" & codeTxt.Text & "%' order by purchase_date desc", conn)
 
         ds = New DataSet
         da.Fill(ds, "acccounting")
@@ -940,6 +940,10 @@ Public Class Pos
     End Sub
 
     Private Sub replaceCombo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles replaceCombo.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub dgv1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellContentClick
 
     End Sub
 End Class
