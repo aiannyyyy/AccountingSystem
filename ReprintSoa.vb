@@ -5,7 +5,7 @@
         Dim cellValue As String = Pos.dgv1.Rows(rowIndex).Cells(3).Value.ToString()
 
         If cellValue = "ENBS" Then
-            Dim report As New StatementOfAccountWithServiceFee()
+            Dim report As New StatementOfAccount()
             Dim selformula As String = "{acccounting1.soa_txt} = '" & soaTxt.Text & "'"
             report.RecordSelectionFormula = selformula
 
@@ -21,7 +21,7 @@
             reportForm.Show()
         Else
             ' Generate the Crystal Report
-            Dim report1 As New StatementOfAccount()
+            Dim report1 As New StatementOfAccountWithServiceFee()
             Dim selformula1 As String = "{acccounting1.soa_txt} = '" & soaTxt.Text & "'"
             report1.RecordSelectionFormula = selformula1
 
