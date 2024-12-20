@@ -325,4 +325,9 @@ Public Class Payments
     Private Sub adsTxt_TextChanged(sender As Object, e As EventArgs) Handles adsTxt.TextChanged
 
     End Sub
+
+    Private Sub homeBtn_Click(sender As Object, e As EventArgs) Handles homeBtn.Click
+        Form1.Show()
+        Me.Hide()
+    End Sub
 End Class

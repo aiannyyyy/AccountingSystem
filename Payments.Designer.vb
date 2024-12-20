@@ -149,6 +149,7 @@ Partial Class Payments
         Me.nameBox = New Guna.UI.WinForms.GunaTextBox()
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
+        Me.homeBtn = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.GunaPanel1.SuspendLayout()
         Me.mainPanel.SuspendLayout()
         CType(Me.dgv2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -907,12 +908,13 @@ Partial Class Payments
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.homeBtn)
         Me.Panel1.Controls.Add(Me.orderButton)
         Me.Panel1.Controls.Add(Me.printButton)
         Me.Panel1.Controls.Add(Me.addButton)
-        Me.Panel1.Location = New System.Drawing.Point(693, 187)
+        Me.Panel1.Location = New System.Drawing.Point(612, 187)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(305, 43)
+        Me.Panel1.Size = New System.Drawing.Size(386, 50)
         Me.Panel1.TabIndex = 58
         '
         'orderButton
@@ -934,7 +936,7 @@ Partial Class Payments
         Me.orderButton.Image = Nothing
         Me.orderButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.orderButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.orderButton.Location = New System.Drawing.Point(208, 6)
+        Me.orderButton.Location = New System.Drawing.Point(208, 7)
         Me.orderButton.Name = "orderButton"
         Me.orderButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.orderButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -943,7 +945,7 @@ Partial Class Payments
         Me.orderButton.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.orderButton.OnPressedColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.orderButton.Radius = 2
-        Me.orderButton.Size = New System.Drawing.Size(87, 30)
+        Me.orderButton.Size = New System.Drawing.Size(80, 30)
         Me.orderButton.TabIndex = 25
         Me.orderButton.Text = "ORDER KITS"
         Me.orderButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -968,7 +970,7 @@ Partial Class Payments
         Me.printButton.Image = Nothing
         Me.printButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.printButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.printButton.Location = New System.Drawing.Point(108, 6)
+        Me.printButton.Location = New System.Drawing.Point(108, 7)
         Me.printButton.Name = "printButton"
         Me.printButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.printButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -1002,7 +1004,7 @@ Partial Class Payments
         Me.addButton.Image = Nothing
         Me.addButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.addButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.addButton.Location = New System.Drawing.Point(8, 6)
+        Me.addButton.Location = New System.Drawing.Point(8, 7)
         Me.addButton.Name = "addButton"
         Me.addButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.addButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -1804,6 +1806,40 @@ Partial Class Payments
         Me.GunaLabel1.TabIndex = 1
         Me.GunaLabel1.Text = "FACILITY CODE:"
         '
+        'homeBtn
+        '
+        Me.homeBtn.AnimationHoverSpeed = 0.07!
+        Me.homeBtn.AnimationSpeed = 0.03!
+        Me.homeBtn.BackColor = System.Drawing.Color.Transparent
+        Me.homeBtn.BaseColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.homeBtn.BorderColor = System.Drawing.Color.Black
+        Me.homeBtn.CheckedBaseColor = System.Drawing.Color.Gray
+        Me.homeBtn.CheckedBorderColor = System.Drawing.Color.Black
+        Me.homeBtn.CheckedForeColor = System.Drawing.Color.White
+        Me.homeBtn.CheckedImage = Nothing
+        Me.homeBtn.CheckedLineColor = System.Drawing.Color.DimGray
+        Me.homeBtn.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.homeBtn.FocusedColor = System.Drawing.Color.Empty
+        Me.homeBtn.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.homeBtn.ForeColor = System.Drawing.Color.Black
+        Me.homeBtn.Image = Nothing
+        Me.homeBtn.ImageSize = New System.Drawing.Size(20, 20)
+        Me.homeBtn.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.homeBtn.Location = New System.Drawing.Point(293, 7)
+        Me.homeBtn.Name = "homeBtn"
+        Me.homeBtn.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.homeBtn.OnHoverBorderColor = System.Drawing.Color.Black
+        Me.homeBtn.OnHoverForeColor = System.Drawing.Color.Black
+        Me.homeBtn.OnHoverImage = Nothing
+        Me.homeBtn.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.homeBtn.OnPressedColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.homeBtn.Radius = 2
+        Me.homeBtn.Size = New System.Drawing.Size(87, 30)
+        Me.homeBtn.TabIndex = 26
+        Me.homeBtn.Text = "HOME"
+        Me.homeBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.homeBtn.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
+        '
         'Payments
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1953,4 +1989,5 @@ Partial Class Payments
     Friend WithEvents GunaControlBox2 As Guna.UI.WinForms.GunaControlBox
     Friend WithEvents GunaControlBox1 As Guna.UI.WinForms.GunaControlBox
     Friend WithEvents GunaDragControl1 As Guna.UI.WinForms.GunaDragControl
+    Friend WithEvents homeBtn As Guna.UI.WinForms.GunaAdvenceButton
 End Class
