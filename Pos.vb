@@ -435,6 +435,7 @@ Public Class Pos
         adsTxt.Text = ""
         totalTxt.Text = ""
         replaceCombo.SelectedIndex = -1
+        lopezCheck.Checked = False
     End Sub
 
     Private Function ExecuteQuery(query As String) As Integer
@@ -699,58 +700,237 @@ Public Class Pos
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
 
-        For Each row As DataGridViewRow In dgv1.Rows
-            If row.IsNewRow Then Continue For
+        'For Each row As DataGridViewRow In dgv1.Rows
+        '    If row.IsNewRow Then Continue For
 
-            Dim isCancelChecked As Boolean = Convert.ToBoolean(row.Cells("cancelPo").Value)
-            Try
-                ' Check if the button is in CANCEL mode
-                If addButton.Text = "CANCEL" Then
-                    ' Mark as 'NOT REPLACED' if 'not_replace' is checked
-                    If isCancelChecked Then
+        '    Dim isCancelChecked As Boolean = Convert.ToBoolean(row.Cells("cancelPo").Value)
+
+        '    Try
+        '        If isCancelChecked Then
+        '            row.Cells("total_amount").Value = 0
+        '            row.Cells("balance").Value = 0
+        '            Dim remarks As String = remBox.Text
+        '            row.Cells("remarks").Value = remarks
+        '            row.Cells("order_type").Value &= " (Cancelled P.O)"
+
+        '            ' Update database
+        '            Dim facCode As String = row.Cells("fac_code").Value.ToString()
+        '            SaveCancellationToDatabase(remarks, facCode)
+        '        Else
+        '            ' Validate the fields before proceeding
+        '            If Not ValidateFields() Then
+        '                Exit Sub
+        '            End If
+        '            ' Confirm all entries are correct
+        '            Dim confirmResult As DialogResult = MessageBox.Show("Are all entries correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        '            If confirmResult = DialogResult.No Then
+        '                MessageBox.Show("Operation canceled. Please check your input and try again.", "Operation Canceled", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        '                Exit Sub
+        '            End If
+
+        '            ' Handle additional checks for replacement
+        '            If replacementCheck.Checked Then
+        '                If String.IsNullOrEmpty(replaceCombo.Text) OrElse replaceCombo.SelectedIndex = -1 Then
+        '                    MessageBox.Show("Please select a replacement option before proceeding.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '                    Exit Sub
+        '                End If
+        '            End If
+
+        '            ' Prepare data for insertion
+        '            Dim soatxt As String
+        '            Dim soaDate As Date = Date.Now
+        '            Dim ordertype As String = ""
+
+        '            ' Determine order type
+        '            If walkCheck.Checked Then
+        '                ordertype = "ENBS"
+        '            ElseIf monitoringCheck.Checked Then
+        '                ordertype = "Monitoring"
+        '            ElseIf replacementCheck.Checked Then
+        '                ordertype = "ENBS-Replacement -" + replaceCombo.SelectedItem.ToString()
+        '            ElseIf lopezCheck.Checked Then
+        '                ordertype = "ENBS"
+        '            Else
+        '                ordertype = "ENBS"
+        '            End If
+
+        '            ' Gather input data
+        '            Dim code As String = codeTxt.Text
+        '            Dim name As String = nameBox.Text
+        '            Dim term As String = termBox.Text
+        '            Dim purchaseNumber As String = purchaseBox.Text
+        '            Dim purchaseDate As Date = dtpicker2.Value
+        '            Dim quantity As Integer = Integer.Parse(qtyTxt.Text)
+        '            Dim subtotal As Integer = Integer.Parse(amountTxt.Text)
+        '            Dim brochure As Integer = If(String.IsNullOrEmpty(brochureTxt.Text), 0, Integer.Parse(brochureTxt.Text))
+        '            Dim poster As Integer = If(String.IsNullOrEmpty(posterTxt.Text), 0, Integer.Parse(posterTxt.Text))
+        '            Dim drying As Integer = If(String.IsNullOrEmpty(dryingTxt.Text), 0, Integer.Parse(dryingTxt.Text))
+        '            Dim replace As Integer = If(String.IsNullOrEmpty(replaceTxt.Text), 0, Integer.Parse(replaceTxt.Text))
+        '            Dim ads As Double = Double.Parse(adsTxt.Text)
+        '            Dim dueDate As Date = dtpicker1.Value
+        '            Dim totalAmount As Double = Double.Parse(totalTxt.Text)
+        '            Dim balance As Double = Double.Parse(totalTxt.Text)
+        '            Dim user As String = Login.userTxt.Text
+        '            Dim subamount As Integer = amountTxt.Text
+
+        '            ' Insert record into the database
+        '            Dim soaNumber As Integer = InsertRecord("", soaDate, ordertype, code, name, term, purchaseNumber, purchaseDate, quantity, subtotal, brochure, poster, drying, replace, ads, dueDate, totalAmount, balance, user, subamount)
+
+        '            ' Assign the generated soa_number to soatxt
+        '            soatxt = soaNumber.ToString()
+
+        '            ' Update the soa_txt field in the database
+        '            UpdateSoaTxt(soatxt, soaNumber)
+
+        '            MessageBox.Show("Insert Successfully!")
+
+        '            If walkCheck.Checked Then
+        '                ' Generate the Crystal Report
+        '                Dim report As New StatementOfAccount()
+        '                Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+        '                report.RecordSelectionFormula = selformula
+
+        '                ' Refresh the report to load data
+        '                report.Refresh()
+
+        '                Dim reportForm As New Form
+        '                Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+        '                crystalReportViewer.ReportSource = report
+        '                crystalReportViewer.Dock = DockStyle.Fill
+        '                reportForm.Controls.Add(crystalReportViewer)
+        '                reportForm.WindowState = FormWindowState.Maximized
+        '                reportForm.Show()
+        '            ElseIf monitoringCheck.Checked Then
+        '                ' Generate the Crystal Report
+        '                Dim report As New StatementOfAccount()
+        '                Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+        '                report.RecordSelectionFormula = selformula
+
+        '                ' Refresh the report to load data
+        '                report.Refresh()
+
+        '                Dim reportForm As New Form
+        '                Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+        '                crystalReportViewer.ReportSource = report
+        '                crystalReportViewer.Dock = DockStyle.Fill
+        '                reportForm.Controls.Add(crystalReportViewer)
+        '                reportForm.WindowState = FormWindowState.Maximized
+        '                reportForm.Show()
+        '            ElseIf replacementCheck.Checked Then
+        '                ' Generate the Crystal Report
+        '                Dim report As New StatementOfAccount()
+        '                Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+        '                report.RecordSelectionFormula = selformula
+
+        '                ' Refresh the report to load data
+        '                report.Refresh()
+
+        '                Dim reportForm As New Form
+        '                Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+        '                crystalReportViewer.ReportSource = report
+        '                crystalReportViewer.Dock = DockStyle.Fill
+        '                reportForm.Controls.Add(crystalReportViewer)
+        '                reportForm.WindowState = FormWindowState.Maximized
+        '                reportForm.Show()
+        '            ElseIf lopezCheck.Checked Then
+        '                ' Generate the Crystal Report
+        '                Dim report As New StatementOfAccountWithServiceFee()
+        '                Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+        '                report.RecordSelectionFormula = selformula
+
+        '                ' Refresh the report to load data
+        '                report.Refresh()
+
+        '                Dim reportForm As New Form
+        '                Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+        '                crystalReportViewer.ReportSource = report
+        '                crystalReportViewer.Dock = DockStyle.Fill
+        '                reportForm.Controls.Add(crystalReportViewer)
+        '                reportForm.WindowState = FormWindowState.Maximized
+        '                reportForm.Show()
+        '            Else
+        '                ' Generate the Crystal Report
+        '                Dim report As New StatementOfAccount()
+        '                Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+        '                report.RecordSelectionFormula = selformula
+
+        '                ' Refresh the report to load data
+        '                report.Refresh()
+
+        '                Dim reportForm As New Form
+        '                Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+        '                crystalReportViewer.ReportSource = report
+        '                crystalReportViewer.Dock = DockStyle.Fill
+        '                reportForm.Controls.Add(crystalReportViewer)
+        '                reportForm.WindowState = FormWindowState.Maximized
+        '                reportForm.Show()
+        '            End If
+
+        '            '' Clear input fields and refresh data grid view
+        '            'cleartxt()
+        '            'loaddgv()
+        '        End If
+
+        '        ' Reset the button text and hide relevant elements
+        '        addButton.Text = "ADD"
+        '        remLbl.Visible = False
+        '        remBox.Visible = False
+
+        '        MessageBox.Show("Cancelled P.O.")
+
+        '        ' Clear input fields and refresh DataGridView
+        '        cleartxt()
+        '        loaddgv()
+        '        Exit Sub
+        '    Catch ex As Exception
+        '        MessageBox.Show("An error occurred: " & ex.Message)
+        '    End Try
+        'Next
+
+        ' Check if any row has the cancelPo checkbox checked
+        Dim isAnyChecked As Boolean = dgv1.Rows.Cast(Of DataGridViewRow)().
+                                      Any(Function(row) Not row.IsNewRow AndAlso Convert.ToBoolean(row.Cells("cancelPo").Value))
+
+        If isAnyChecked Then
+            ' Perform P.O cancellation operation
+            For Each row As DataGridViewRow In dgv1.Rows
+                If row.IsNewRow Then Continue For
+
+                Dim isCancelChecked As Boolean = Convert.ToBoolean(row.Cells("cancelPo").Value)
+
+                If isCancelChecked Then
+                    Try
+                        ' Cancel the P.O by setting amount and balance to 0
                         row.Cells("total_amount").Value = 0
                         row.Cells("balance").Value = 0
                         Dim remarks As String = remBox.Text
                         row.Cells("remarks").Value = remarks
                         row.Cells("order_type").Value &= " (Cancelled P.O)"
 
-                        ' Update database
+                        ' Update database to reflect cancellation
                         Dim facCode As String = row.Cells("fac_code").Value.ToString()
                         SaveCancellationToDatabase(remarks, facCode)
-                    End If
 
-                    ' Reset the button text and hide relevant elements
-                    addButton.Text = "ADD"
-                    remLbl.Visible = False
-                    remBox.Visible = False
+                        MessageBox.Show("Cancelled P.O.")
 
-                    MessageBox.Show("Cancelled P.O.")
+                        ' Clear input fields and refresh DataGridView
+                        cleartxt()
+                        loaddgv()
 
-                    ' Clear input fields and refresh DataGridView
-                    cleartxt()
-                    loaddgv()
-                    Exit Sub
+                    Catch ex As Exception
+                        MessageBox.Show("An error occurred during cancellation: " & ex.Message)
+                    End Try
                 End If
+            Next
+        Else
+            ' Run Add method if no cancellation checkbox is checked
+            Try
+                ' Validate input fields before proceeding
+                If Not ValidateFields() Then Exit Sub
 
-                ' Validate the fields before proceeding
-                If Not ValidateFields() Then
-                    Exit Sub
-                End If
-
-                ' Confirm all entries are correct
+                ' Confirm all data entries
                 Dim confirmResult As DialogResult = MessageBox.Show("Are all entries correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                If confirmResult = DialogResult.No Then
-                    MessageBox.Show("Operation canceled. Please check your input and try again.", "Operation Canceled", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                    Exit Sub
-                End If
-
-                ' Handle additional checks for replacement
-                If replacementCheck.Checked Then
-                    If String.IsNullOrEmpty(replaceCombo.Text) OrElse replaceCombo.SelectedIndex = -1 Then
-                        MessageBox.Show("Please select a replacement option before proceeding.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        Exit Sub
-                    End If
-                End If
+                If confirmResult = DialogResult.No Then Exit Sub
 
                 ' Prepare data for insertion
                 Dim soatxt As String
@@ -885,196 +1065,16 @@ Public Class Pos
                 ' Clear input fields and refresh data grid view
                 cleartxt()
                 loaddgv()
+
             Catch ex As Exception
-                MessageBox.Show("An error occurred: " & ex.Message)
+                MessageBox.Show("An error occurred during adding: " & ex.Message)
             End Try
-        Next
+        End If
 
-        'Try
-        '    Check If the button Is in CANCEL mode
-        '    If addButton.Text = "CANCEL" Then
-        '        Handle cancellation And save to the database
-        '        If SaveCancellationToDatabase(remBox.Text, codeTxt.Text) Then
-        '            MessageBox.Show("Cancelled P.O Succeed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        '        Else
-        '            MessageBox.Show("Failed to cancel PO. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '            Exit Sub
-        '        End If
-
-        '        Reset the button text And hide relevant elements
-        '        addButton.Text = "ADD"
-        '        remLbl.Visible = False
-        '        remBox.Visible = False
-
-        '        Clear Input fields And refresh DataGridView
-        '        cleartxt()
-        '        loaddgv()
-        '        Exit Sub
-        '    End If
-
-        '    Validate the fields before proceeding
-        '    If Not ValidateFields() Then
-        '        Exit Sub
-        '    End If
-
-        '    Confirm all entries are correct
-        '    Dim confirmResult As DialogResult = MessageBox.Show("Are all entries correct?",
-        '                                                   "Confirmation",
-        '                                                   MessageBoxButtons.YesNo,
-        '                                                   MessageBoxIcon.Question)
-
-        '    If confirmResult = DialogResult.No Then
-        '        MessageBox.Show("Operation canceled. Please check your input and try again.",
-        '                    "Operation Canceled",
-        '                    MessageBoxButtons.OK,
-        '                    MessageBoxIcon.Exclamation)
-        '        Exit Sub
-        '    End If
-
-        '    Handle additional checks for replacement
-        '    If replacementCheck.Checked Then
-        '        If String.IsNullOrEmpty(replaceCombo.Text) OrElse replaceCombo.SelectedIndex = -1 Then
-        '            MessageBox.Show("Please select a replacement option before proceeding.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '            Exit Sub
-        '        End If
-        '    End If
-
-        '    Prepare Data for insertion
-        '    Dim soatxt As String ' Declare soatxt here
-        '    Dim soaDate As Date = Date.Now
-        '    Dim ordertype As String = ""
-
-        '    Determine order type
-        '    If walkCheck.Checked Then
-        '        ordertype = "ENBS"
-        '    ElseIf monitoringCheck.Checked Then
-        '        ordertype = "Monitoring"
-        '    ElseIf replacementCheck.Checked Then
-        '        ordertype = "ENBS-Replacement -" + replaceCombo.SelectedItem.ToString()
-        '    ElseIf lopezCheck.Checked Then
-        '        ordertype = "ENBS"
-        '    Else
-        '        ordertype = "ENBS"
-        '    End If
-
-        '    Gather Input data
-        '    Dim code As String = codeTxt.Text
-        '    Dim name As String = nameBox.Text
-        '    Dim term As String = termBox.Text
-        '    Dim purchaseNumber As String = purchaseBox.Text
-        '    Dim purchaseDate As Date = dtpicker2.Value
-        '    Dim quantity As Integer = Integer.Parse(qtyTxt.Text)
-        '    Dim subtotal As Integer = Integer.Parse(amountTxt.Text)
-        '    Dim brochure As Integer = If(String.IsNullOrEmpty(brochureTxt.Text), 0, Integer.Parse(brochureTxt.Text))
-        '    Dim poster As Integer = If(String.IsNullOrEmpty(posterTxt.Text), 0, Integer.Parse(posterTxt.Text))
-        '    Dim drying As Integer = If(String.IsNullOrEmpty(dryingTxt.Text), 0, Integer.Parse(dryingTxt.Text))
-        '    Dim replace As Integer = If(String.IsNullOrEmpty(replaceTxt.Text), 0, Integer.Parse(replaceTxt.Text))
-        '    Dim ads As Double = Double.Parse(adsTxt.Text)
-        '    Dim dueDate As Date = dtpicker1.Value
-        '    Dim totalAmount As Double = Double.Parse(totalTxt.Text)
-        '    Dim balance As Double = Double.Parse(totalTxt.Text)
-        '    Dim user As String = Login.userTxt.Text
-        '    Dim subamount As Integer = amountTxt.Text
-
-        '    Insert record into the database
-        '    Dim soaNumber As Integer = InsertRecord("", soaDate, ordertype, code, name, term, purchaseNumber, purchaseDate, quantity, subtotal, brochure, poster, drying, replace, ads, dueDate, totalAmount, balance, user, subamount)
-
-        '    Assign the generated soa_number to soatxt
-        '    soatxt = soaNumber.ToString()
-
-        '    Update the soa_txt field in the database
-        '    UpdateSoaTxt(soatxt, soaNumber)
-
-        '    MessageBox.Show("Insert Successfully!")
-
-        '    If walkCheck.Checked Then
-        '        Generate the Crystal Report
-        '        Dim report As New StatementOfAccount()
-        '        Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
-        '        report.RecordSelectionFormula = selformula
-
-        '        Refresh the report to load data
-        '        report.Refresh()
-
-        '        Dim reportForm As New Form
-        '        Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
-        '        crystalReportViewer.ReportSource = report
-        '        crystalReportViewer.Dock = DockStyle.Fill
-        '        reportForm.Controls.Add(crystalReportViewer)
-        '        reportForm.WindowState = FormWindowState.Maximized
-        '        reportForm.Show()
-        '    ElseIf monitoringCheck.Checked Then
-        '        Generate the Crystal Report
-        '        Dim report As New StatementOfAccount()
-        '        Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
-        '        report.RecordSelectionFormula = selformula
-
-        '        Refresh the report to load data
-        '        report.Refresh()
-
-        '        Dim reportForm As New Form
-        '        Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
-        '        crystalReportViewer.ReportSource = report
-        '        crystalReportViewer.Dock = DockStyle.Fill
-        '        reportForm.Controls.Add(crystalReportViewer)
-        '        reportForm.WindowState = FormWindowState.Maximized
-        '        reportForm.Show()
-        '    ElseIf replacementCheck.Checked Then
-        '        Generate the Crystal Report
-        '        Dim report As New StatementOfAccount()
-        '        Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
-        '        report.RecordSelectionFormula = selformula
-
-        '        Refresh the report to load data
-        '        report.Refresh()
-
-        '        Dim reportForm As New Form
-        '        Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
-        '        crystalReportViewer.ReportSource = report
-        '        crystalReportViewer.Dock = DockStyle.Fill
-        '        reportForm.Controls.Add(crystalReportViewer)
-        '        reportForm.WindowState = FormWindowState.Maximized
-        '        reportForm.Show()
-        '    ElseIf lopezCheck.Checked Then
-        '        Generate the Crystal Report
-        '        Dim report As New StatementOfAccountWithServiceFee()
-        '        Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
-        '        report.RecordSelectionFormula = selformula
-
-        '        Refresh the report to load data
-        '        report.Refresh()
-
-        '        Dim reportForm As New Form
-        '        Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
-        '        crystalReportViewer.ReportSource = report
-        '        crystalReportViewer.Dock = DockStyle.Fill
-        '        reportForm.Controls.Add(crystalReportViewer)
-        '        reportForm.WindowState = FormWindowState.Maximized
-        '        reportForm.Show()
-        '    Else
-        '        Generate the Crystal Report
-        '        Dim report As New StatementOfAccount()
-        '        Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
-        '        report.RecordSelectionFormula = selformula
-
-        '        Refresh the report to load data
-        '        report.Refresh()
-
-        '        Dim reportForm As New Form
-        '        Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
-        '        crystalReportViewer.ReportSource = report
-        '        crystalReportViewer.Dock = DockStyle.Fill
-        '        reportForm.Controls.Add(crystalReportViewer)
-        '        reportForm.WindowState = FormWindowState.Maximized
-        '        reportForm.Show()
-        '    End If
-
-        '    Clear Input fields And refresh data grid view
-        '    cleartxt()
-        '    loaddgv()
-        'Catch ex As Exception
-        '    MessageBox.Show("An error occurred: " & ex.Message)
-        'End Try
+        ' Reset button state
+        addButton.Text = "ADD"
+        remLbl.Visible = False
+        remBox.Visible = False
     End Sub
 
     Private Sub SaveCancellationToDatabase(remarks As String, facCode As String)
@@ -1428,3 +1428,189 @@ End Class
 '        MessageBox.Show("An error occurred: " & ex.Message)
 '    End Try
 'End Sub
+
+'Try
+'    Check If the button Is in CANCEL mode
+'    If addButton.Text = "CANCEL" Then
+'        Handle cancellation And save to the database
+'        If SaveCancellationToDatabase(remBox.Text, codeTxt.Text) Then
+'            MessageBox.Show("Cancelled P.O Succeed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+'        Else
+'            MessageBox.Show("Failed to cancel PO. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+'            Exit Sub
+'        End If
+
+'        Reset the button text And hide relevant elements
+'        addButton.Text = "ADD"
+'        remLbl.Visible = False
+'        remBox.Visible = False
+
+'        Clear Input fields And refresh DataGridView
+'        cleartxt()
+'        loaddgv()
+'        Exit Sub
+'    End If
+
+'    Validate the fields before proceeding
+'    If Not ValidateFields() Then
+'        Exit Sub
+'    End If
+
+'    Confirm all entries are correct
+'    Dim confirmResult As DialogResult = MessageBox.Show("Are all entries correct?",
+'                                                   "Confirmation",
+'                                                   MessageBoxButtons.YesNo,
+'                                                   MessageBoxIcon.Question)
+
+'    If confirmResult = DialogResult.No Then
+'        MessageBox.Show("Operation canceled. Please check your input and try again.",
+'                    "Operation Canceled",
+'                    MessageBoxButtons.OK,
+'                    MessageBoxIcon.Exclamation)
+'        Exit Sub
+'    End If
+
+'    Handle additional checks for replacement
+'    If replacementCheck.Checked Then
+'        If String.IsNullOrEmpty(replaceCombo.Text) OrElse replaceCombo.SelectedIndex = -1 Then
+'            MessageBox.Show("Please select a replacement option before proceeding.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+'            Exit Sub
+'        End If
+'    End If
+
+'    Prepare Data for insertion
+'    Dim soatxt As String ' Declare soatxt here
+'    Dim soaDate As Date = Date.Now
+'    Dim ordertype As String = ""
+
+'    Determine order type
+'    If walkCheck.Checked Then
+'        ordertype = "ENBS"
+'    ElseIf monitoringCheck.Checked Then
+'        ordertype = "Monitoring"
+'    ElseIf replacementCheck.Checked Then
+'        ordertype = "ENBS-Replacement -" + replaceCombo.SelectedItem.ToString()
+'    ElseIf lopezCheck.Checked Then
+'        ordertype = "ENBS"
+'    Else
+'        ordertype = "ENBS"
+'    End If
+
+'    Gather Input data
+'    Dim code As String = codeTxt.Text
+'    Dim name As String = nameBox.Text
+'    Dim term As String = termBox.Text
+'    Dim purchaseNumber As String = purchaseBox.Text
+'    Dim purchaseDate As Date = dtpicker2.Value
+'    Dim quantity As Integer = Integer.Parse(qtyTxt.Text)
+'    Dim subtotal As Integer = Integer.Parse(amountTxt.Text)
+'    Dim brochure As Integer = If(String.IsNullOrEmpty(brochureTxt.Text), 0, Integer.Parse(brochureTxt.Text))
+'    Dim poster As Integer = If(String.IsNullOrEmpty(posterTxt.Text), 0, Integer.Parse(posterTxt.Text))
+'    Dim drying As Integer = If(String.IsNullOrEmpty(dryingTxt.Text), 0, Integer.Parse(dryingTxt.Text))
+'    Dim replace As Integer = If(String.IsNullOrEmpty(replaceTxt.Text), 0, Integer.Parse(replaceTxt.Text))
+'    Dim ads As Double = Double.Parse(adsTxt.Text)
+'    Dim dueDate As Date = dtpicker1.Value
+'    Dim totalAmount As Double = Double.Parse(totalTxt.Text)
+'    Dim balance As Double = Double.Parse(totalTxt.Text)
+'    Dim user As String = Login.userTxt.Text
+'    Dim subamount As Integer = amountTxt.Text
+
+'    Insert record into the database
+'    Dim soaNumber As Integer = InsertRecord("", soaDate, ordertype, code, name, term, purchaseNumber, purchaseDate, quantity, subtotal, brochure, poster, drying, replace, ads, dueDate, totalAmount, balance, user, subamount)
+
+'    Assign the generated soa_number to soatxt
+'    soatxt = soaNumber.ToString()
+
+'    Update the soa_txt field in the database
+'    UpdateSoaTxt(soatxt, soaNumber)
+
+'    MessageBox.Show("Insert Successfully!")
+
+'    If walkCheck.Checked Then
+'        Generate the Crystal Report
+'        Dim report As New StatementOfAccount()
+'        Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+'        report.RecordSelectionFormula = selformula
+
+'        Refresh the report to load data
+'        report.Refresh()
+
+'        Dim reportForm As New Form
+'        Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+'        crystalReportViewer.ReportSource = report
+'        crystalReportViewer.Dock = DockStyle.Fill
+'        reportForm.Controls.Add(crystalReportViewer)
+'        reportForm.WindowState = FormWindowState.Maximized
+'        reportForm.Show()
+'    ElseIf monitoringCheck.Checked Then
+'        Generate the Crystal Report
+'        Dim report As New StatementOfAccount()
+'        Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+'        report.RecordSelectionFormula = selformula
+
+'        Refresh the report to load data
+'        report.Refresh()
+
+'        Dim reportForm As New Form
+'        Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+'        crystalReportViewer.ReportSource = report
+'        crystalReportViewer.Dock = DockStyle.Fill
+'        reportForm.Controls.Add(crystalReportViewer)
+'        reportForm.WindowState = FormWindowState.Maximized
+'        reportForm.Show()
+'    ElseIf replacementCheck.Checked Then
+'        Generate the Crystal Report
+'        Dim report As New StatementOfAccount()
+'        Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+'        report.RecordSelectionFormula = selformula
+
+'        Refresh the report to load data
+'        report.Refresh()
+
+'        Dim reportForm As New Form
+'        Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+'        crystalReportViewer.ReportSource = report
+'        crystalReportViewer.Dock = DockStyle.Fill
+'        reportForm.Controls.Add(crystalReportViewer)
+'        reportForm.WindowState = FormWindowState.Maximized
+'        reportForm.Show()
+'    ElseIf lopezCheck.Checked Then
+'        Generate the Crystal Report
+'        Dim report As New StatementOfAccountWithServiceFee()
+'        Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+'        report.RecordSelectionFormula = selformula
+
+'        Refresh the report to load data
+'        report.Refresh()
+
+'        Dim reportForm As New Form
+'        Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+'        crystalReportViewer.ReportSource = report
+'        crystalReportViewer.Dock = DockStyle.Fill
+'        reportForm.Controls.Add(crystalReportViewer)
+'        reportForm.WindowState = FormWindowState.Maximized
+'        reportForm.Show()
+'    Else
+'        Generate the Crystal Report
+'        Dim report As New StatementOfAccount()
+'        Dim selformula As String = "{acccounting1.soa_txt} = '" & soatxt & "'"
+'        report.RecordSelectionFormula = selformula
+
+'        Refresh the report to load data
+'        report.Refresh()
+
+'        Dim reportForm As New Form
+'        Dim crystalReportViewer As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+'        crystalReportViewer.ReportSource = report
+'        crystalReportViewer.Dock = DockStyle.Fill
+'        reportForm.Controls.Add(crystalReportViewer)
+'        reportForm.WindowState = FormWindowState.Maximized
+'        reportForm.Show()
+'    End If
+
+'    Clear Input fields And refresh data grid view
+'    cleartxt()
+'    loaddgv()
+'Catch ex As Exception
+'    MessageBox.Show("An error occurred: " & ex.Message)
+'End Try
