@@ -76,35 +76,38 @@ Partial Class Pos
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
         Me.lopezCheck = New System.Windows.Forms.CheckBox()
-        Me.cancelCheck = New System.Windows.Forms.CheckBox()
         Me.replacementCheck = New System.Windows.Forms.CheckBox()
         Me.walkCheck = New System.Windows.Forms.CheckBox()
         Me.monitoringCheck = New System.Windows.Forms.CheckBox()
         Me.dgv1 = New Guna.UI.WinForms.GunaDataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.adsdsad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column18 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.remBox = New Guna.UI.WinForms.GunaTextBox()
+        Me.remLbl = New Guna.UI.WinForms.GunaLabel()
         Me.replaceCombo = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.cancelPo = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.soa_number = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.order_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fac_code = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.facility_name = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.term = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.purchase_number = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.purchase_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sub_total = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.brochure = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.poster = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.drying_rack = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.replacement = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ads_amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.due_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.total_amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.balance = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.username = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -953,17 +956,6 @@ Partial Class Pos
         Me.lopezCheck.Text = "LOPEZ QUEZON"
         Me.lopezCheck.UseVisualStyleBackColor = True
         '
-        'cancelCheck
-        '
-        Me.cancelCheck.AutoSize = True
-        Me.cancelCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cancelCheck.Location = New System.Drawing.Point(643, 10)
-        Me.cancelCheck.Name = "cancelCheck"
-        Me.cancelCheck.Size = New System.Drawing.Size(109, 17)
-        Me.cancelCheck.TabIndex = 23
-        Me.cancelCheck.Text = "CANCELLED P.O."
-        Me.cancelCheck.UseVisualStyleBackColor = True
-        '
         'replacementCheck
         '
         Me.replacementCheck.AutoSize = True
@@ -1017,7 +1009,7 @@ Partial Class Pos
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv1.ColumnHeadersHeight = 21
-        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column14, Me.adsdsad, Me.Column15, Me.Column16, Me.Column17, Me.Column18})
+        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cancelPo, Me.soa_number, Me.Column2, Me.order_type, Me.fac_code, Me.facility_name, Me.term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replacement, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.username, Me.remarks})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1030,7 +1022,6 @@ Partial Class Pos
         Me.dgv1.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
         Me.dgv1.Location = New System.Drawing.Point(23, 336)
         Me.dgv1.Name = "dgv1"
-        Me.dgv1.ReadOnly = True
         Me.dgv1.RowHeadersVisible = False
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle4
@@ -1051,7 +1042,7 @@ Partial Class Pos
         Me.dgv1.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.Black
         Me.dgv1.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
         Me.dgv1.ThemeStyle.HeaderStyle.Height = 21
-        Me.dgv1.ThemeStyle.ReadOnly = True
+        Me.dgv1.ThemeStyle.ReadOnly = False
         Me.dgv1.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
         Me.dgv1.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
         Me.dgv1.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1060,190 +1051,49 @@ Partial Class Pos
         Me.dgv1.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
         Me.dgv1.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black
         '
-        'Column1
-        '
-        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column1.DataPropertyName = "soa_number"
-        Me.Column1.HeaderText = "SOA NUMBER"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        Me.Column1.Width = 108
-        '
-        'Column2
-        '
-        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column2.DataPropertyName = "soa_date"
-        Me.Column2.HeaderText = "SOA DATE"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        Me.Column2.Width = 86
-        '
-        'Column3
-        '
-        Me.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column3.DataPropertyName = "order_type"
-        Me.Column3.HeaderText = "TYPE"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        Me.Column3.Width = 57
-        '
-        'Column4
-        '
-        Me.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column4.DataPropertyName = "fac_code"
-        Me.Column4.HeaderText = "FACILITY CODE"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        Me.Column4.Width = 112
-        '
-        'Column5
-        '
-        Me.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column5.DataPropertyName = "facility_name"
-        Me.Column5.HeaderText = "FACILITY NAME"
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        Me.Column5.Width = 115
-        '
-        'Column6
-        '
-        Me.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column6.DataPropertyName = "term"
-        Me.Column6.HeaderText = "TERM"
-        Me.Column6.Name = "Column6"
-        Me.Column6.ReadOnly = True
-        Me.Column6.Width = 62
-        '
-        'Column7
-        '
-        Me.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column7.DataPropertyName = "purchase_number"
-        Me.Column7.HeaderText = "PURCHASE NUMBER"
-        Me.Column7.Name = "Column7"
-        Me.Column7.ReadOnly = True
-        Me.Column7.Width = 145
-        '
-        'Column8
-        '
-        Me.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column8.DataPropertyName = "purchase_date"
-        Me.Column8.HeaderText = "PURCHASE DATE"
-        Me.Column8.Name = "Column8"
-        Me.Column8.ReadOnly = True
-        Me.Column8.Width = 123
-        '
-        'Column9
-        '
-        Me.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column9.DataPropertyName = "quantity"
-        Me.Column9.HeaderText = "QUANTITY"
-        Me.Column9.Name = "Column9"
-        Me.Column9.ReadOnly = True
-        Me.Column9.Width = 90
-        '
-        'Column10
-        '
-        Me.Column10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column10.DataPropertyName = "sub_total"
-        Me.Column10.HeaderText = "SUB TOTAL"
-        Me.Column10.Name = "Column10"
-        Me.Column10.ReadOnly = True
-        Me.Column10.Width = 93
-        '
-        'Column11
-        '
-        Me.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column11.DataPropertyName = "brochure"
-        Me.Column11.HeaderText = "BROCHURE"
-        Me.Column11.Name = "Column11"
-        Me.Column11.ReadOnly = True
-        Me.Column11.Width = 94
-        '
-        'Column12
-        '
-        Me.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column12.DataPropertyName = "poster"
-        Me.Column12.HeaderText = "POSTER"
-        Me.Column12.Name = "Column12"
-        Me.Column12.ReadOnly = True
-        Me.Column12.Width = 74
-        '
-        'Column13
-        '
-        Me.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column13.DataPropertyName = "drying_rack"
-        Me.Column13.HeaderText = "DRYING RACK"
-        Me.Column13.Name = "Column13"
-        Me.Column13.ReadOnly = True
-        Me.Column13.Width = 110
-        '
-        'Column14
-        '
-        Me.Column14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column14.DataPropertyName = "replacement"
-        Me.Column14.HeaderText = "REPLACEMENT"
-        Me.Column14.Name = "Column14"
-        Me.Column14.ReadOnly = True
-        Me.Column14.Width = 111
-        '
-        'adsdsad
-        '
-        Me.adsdsad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.adsdsad.DataPropertyName = "ads_amount"
-        Me.adsdsad.HeaderText = "ADS AMOUNT"
-        Me.adsdsad.Name = "adsdsad"
-        Me.adsdsad.ReadOnly = True
-        Me.adsdsad.Width = 110
-        '
-        'Column15
-        '
-        Me.Column15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column15.DataPropertyName = "due_date"
-        Me.Column15.HeaderText = "DUE DATE"
-        Me.Column15.Name = "Column15"
-        Me.Column15.ReadOnly = True
-        Me.Column15.Width = 86
-        '
-        'Column16
-        '
-        Me.Column16.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column16.DataPropertyName = "total_amount"
-        Me.Column16.HeaderText = "TOTAL AMOUNT"
-        Me.Column16.Name = "Column16"
-        Me.Column16.ReadOnly = True
-        Me.Column16.Width = 122
-        '
-        'Column17
-        '
-        Me.Column17.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column17.DataPropertyName = "balance"
-        Me.Column17.HeaderText = "BALANCE"
-        Me.Column17.Name = "Column17"
-        Me.Column17.ReadOnly = True
-        Me.Column17.Width = 82
-        '
-        'Column18
-        '
-        Me.Column18.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column18.DataPropertyName = "username"
-        Me.Column18.HeaderText = "USERNAME"
-        Me.Column18.Name = "Column18"
-        Me.Column18.ReadOnly = True
-        Me.Column18.Width = 94
-        '
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.remBox)
+        Me.Panel4.Controls.Add(Me.remLbl)
         Me.Panel4.Controls.Add(Me.replaceCombo)
         Me.Panel4.Controls.Add(Me.replacementCheck)
         Me.Panel4.Controls.Add(Me.lopezCheck)
         Me.Panel4.Controls.Add(Me.walkCheck)
-        Me.Panel4.Controls.Add(Me.cancelCheck)
         Me.Panel4.Controls.Add(Me.monitoringCheck)
         Me.Panel4.Location = New System.Drawing.Point(23, 294)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1001, 36)
         Me.Panel4.TabIndex = 17
+        '
+        'remBox
+        '
+        Me.remBox.BackColor = System.Drawing.Color.Black
+        Me.remBox.BaseColor = System.Drawing.Color.White
+        Me.remBox.BorderColor = System.Drawing.Color.Black
+        Me.remBox.BorderSize = 1
+        Me.remBox.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.remBox.FocusedBaseColor = System.Drawing.Color.White
+        Me.remBox.FocusedBorderColor = System.Drawing.Color.Black
+        Me.remBox.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.remBox.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.remBox.Location = New System.Drawing.Point(703, 4)
+        Me.remBox.Multiline = True
+        Me.remBox.Name = "remBox"
+        Me.remBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.remBox.SelectedText = ""
+        Me.remBox.Size = New System.Drawing.Size(293, 30)
+        Me.remBox.TabIndex = 26
+        '
+        'remLbl
+        '
+        Me.remLbl.AutoSize = True
+        Me.remLbl.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.remLbl.Location = New System.Drawing.Point(628, 9)
+        Me.remLbl.Name = "remLbl"
+        Me.remLbl.Size = New System.Drawing.Size(69, 17)
+        Me.remLbl.TabIndex = 26
+        Me.remLbl.Text = "REMARKS:"
         '
         'replaceCombo
         '
@@ -1276,6 +1126,175 @@ Partial Class Pos
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(1047, 39)
         Me.Panel6.TabIndex = 29
+        '
+        'cancelPo
+        '
+        Me.cancelPo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.cancelPo.HeaderText = "CANCEL P.O"
+        Me.cancelPo.Name = "cancelPo"
+        Me.cancelPo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.cancelPo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.cancelPo.Width = 95
+        '
+        'soa_number
+        '
+        Me.soa_number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.soa_number.DataPropertyName = "soa_number"
+        Me.soa_number.HeaderText = "SOA NUMBER"
+        Me.soa_number.Name = "soa_number"
+        Me.soa_number.Width = 110
+        '
+        'Column2
+        '
+        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Column2.DataPropertyName = "soa_date"
+        Me.Column2.HeaderText = "SOA DATE"
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 88
+        '
+        'order_type
+        '
+        Me.order_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.order_type.DataPropertyName = "order_type"
+        Me.order_type.HeaderText = "TYPE"
+        Me.order_type.Name = "order_type"
+        Me.order_type.Width = 59
+        '
+        'fac_code
+        '
+        Me.fac_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.fac_code.DataPropertyName = "fac_code"
+        Me.fac_code.HeaderText = "FACILITY CODE"
+        Me.fac_code.Name = "fac_code"
+        Me.fac_code.Width = 114
+        '
+        'facility_name
+        '
+        Me.facility_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.facility_name.DataPropertyName = "facility_name"
+        Me.facility_name.HeaderText = "FACILITY NAME"
+        Me.facility_name.Name = "facility_name"
+        Me.facility_name.Width = 117
+        '
+        'term
+        '
+        Me.term.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.term.DataPropertyName = "term"
+        Me.term.HeaderText = "TERM"
+        Me.term.Name = "term"
+        Me.term.Width = 64
+        '
+        'purchase_number
+        '
+        Me.purchase_number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.purchase_number.DataPropertyName = "purchase_number"
+        Me.purchase_number.HeaderText = "PURCHASE NUMBER"
+        Me.purchase_number.Name = "purchase_number"
+        Me.purchase_number.Width = 147
+        '
+        'purchase_date
+        '
+        Me.purchase_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.purchase_date.DataPropertyName = "purchase_date"
+        Me.purchase_date.HeaderText = "PURCHASE DATE"
+        Me.purchase_date.Name = "purchase_date"
+        Me.purchase_date.Width = 125
+        '
+        'quantity
+        '
+        Me.quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.quantity.DataPropertyName = "quantity"
+        Me.quantity.HeaderText = "QUANTITY"
+        Me.quantity.Name = "quantity"
+        Me.quantity.Width = 92
+        '
+        'sub_total
+        '
+        Me.sub_total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.sub_total.DataPropertyName = "sub_total"
+        Me.sub_total.HeaderText = "SUB TOTAL"
+        Me.sub_total.Name = "sub_total"
+        Me.sub_total.Width = 95
+        '
+        'brochure
+        '
+        Me.brochure.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.brochure.DataPropertyName = "brochure"
+        Me.brochure.HeaderText = "BROCHURE"
+        Me.brochure.Name = "brochure"
+        Me.brochure.Width = 96
+        '
+        'poster
+        '
+        Me.poster.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.poster.DataPropertyName = "poster"
+        Me.poster.HeaderText = "POSTER"
+        Me.poster.Name = "poster"
+        Me.poster.Width = 76
+        '
+        'drying_rack
+        '
+        Me.drying_rack.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.drying_rack.DataPropertyName = "drying_rack"
+        Me.drying_rack.HeaderText = "DRYING RACK"
+        Me.drying_rack.Name = "drying_rack"
+        Me.drying_rack.Width = 112
+        '
+        'replacement
+        '
+        Me.replacement.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.replacement.DataPropertyName = "replacement"
+        Me.replacement.HeaderText = "REPLACEMENT"
+        Me.replacement.Name = "replacement"
+        Me.replacement.Width = 113
+        '
+        'ads_amount
+        '
+        Me.ads_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.ads_amount.DataPropertyName = "ads_amount"
+        Me.ads_amount.HeaderText = "ADS AMOUNT"
+        Me.ads_amount.Name = "ads_amount"
+        Me.ads_amount.Width = 112
+        '
+        'due_date
+        '
+        Me.due_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.due_date.DataPropertyName = "due_date"
+        Me.due_date.HeaderText = "DUE DATE"
+        Me.due_date.Name = "due_date"
+        Me.due_date.Width = 88
+        '
+        'total_amount
+        '
+        Me.total_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.total_amount.DataPropertyName = "total_amount"
+        Me.total_amount.HeaderText = "TOTAL AMOUNT"
+        Me.total_amount.Name = "total_amount"
+        Me.total_amount.Width = 124
+        '
+        'balance
+        '
+        Me.balance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.balance.DataPropertyName = "balance"
+        Me.balance.HeaderText = "BALANCE"
+        Me.balance.Name = "balance"
+        Me.balance.Width = 84
+        '
+        'username
+        '
+        Me.username.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.username.DataPropertyName = "username"
+        Me.username.HeaderText = "USERNAME"
+        Me.username.Name = "username"
+        Me.username.Width = 96
+        '
+        'remarks
+        '
+        Me.remarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.remarks.DataPropertyName = "remarks"
+        Me.remarks.HeaderText = "REMARKS"
+        Me.remarks.Name = "remarks"
+        Me.remarks.Width = 88
         '
         'Pos
         '
@@ -1318,25 +1337,6 @@ Partial Class Pos
     Friend WithEvents GunaControlBox1 As Guna.UI.WinForms.GunaControlBox
     Friend WithEvents GunaDragControl1 As Guna.UI.WinForms.GunaDragControl
     Friend WithEvents dgv1 As Guna.UI.WinForms.GunaDataGridView
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As DataGridViewTextBoxColumn
-    Friend WithEvents Column8 As DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As DataGridViewTextBoxColumn
-    Friend WithEvents Column10 As DataGridViewTextBoxColumn
-    Friend WithEvents Column11 As DataGridViewTextBoxColumn
-    Friend WithEvents Column12 As DataGridViewTextBoxColumn
-    Friend WithEvents Column13 As DataGridViewTextBoxColumn
-    Friend WithEvents Column14 As DataGridViewTextBoxColumn
-    Friend WithEvents adsdsad As DataGridViewTextBoxColumn
-    Friend WithEvents Column15 As DataGridViewTextBoxColumn
-    Friend WithEvents Column16 As DataGridViewTextBoxColumn
-    Friend WithEvents Column17 As DataGridViewTextBoxColumn
-    Friend WithEvents Column18 As DataGridViewTextBoxColumn
     Friend WithEvents grpBox As Guna.UI.WinForms.GunaGroupBox
     Friend WithEvents GunaLabel10 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents Panel3 As Panel
@@ -1347,7 +1347,6 @@ Partial Class Pos
     Friend WithEvents addButton As Guna.UI.WinForms.GunaAdvenceButton
     Friend WithEvents dtpicker1 As Guna.UI.WinForms.GunaDateTimePicker
     Friend WithEvents lopezCheck As CheckBox
-    Friend WithEvents cancelCheck As CheckBox
     Friend WithEvents replacementCheck As CheckBox
     Friend WithEvents walkCheck As CheckBox
     Friend WithEvents monitoringCheck As CheckBox
@@ -1387,4 +1386,27 @@ Partial Class Pos
     Friend WithEvents Panel2 As Panel
     Friend WithEvents replaceCombo As ComboBox
     Friend WithEvents homeBtn As Guna.UI.WinForms.GunaAdvenceButton
+    Friend WithEvents remBox As Guna.UI.WinForms.GunaTextBox
+    Friend WithEvents remLbl As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents cancelPo As DataGridViewCheckBoxColumn
+    Friend WithEvents soa_number As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents order_type As DataGridViewTextBoxColumn
+    Friend WithEvents fac_code As DataGridViewTextBoxColumn
+    Friend WithEvents facility_name As DataGridViewTextBoxColumn
+    Friend WithEvents term As DataGridViewTextBoxColumn
+    Friend WithEvents purchase_number As DataGridViewTextBoxColumn
+    Friend WithEvents purchase_date As DataGridViewTextBoxColumn
+    Friend WithEvents quantity As DataGridViewTextBoxColumn
+    Friend WithEvents sub_total As DataGridViewTextBoxColumn
+    Friend WithEvents brochure As DataGridViewTextBoxColumn
+    Friend WithEvents poster As DataGridViewTextBoxColumn
+    Friend WithEvents drying_rack As DataGridViewTextBoxColumn
+    Friend WithEvents replacement As DataGridViewTextBoxColumn
+    Friend WithEvents ads_amount As DataGridViewTextBoxColumn
+    Friend WithEvents due_date As DataGridViewTextBoxColumn
+    Friend WithEvents total_amount As DataGridViewTextBoxColumn
+    Friend WithEvents balance As DataGridViewTextBoxColumn
+    Friend WithEvents username As DataGridViewTextBoxColumn
+    Friend WithEvents remarks As DataGridViewTextBoxColumn
 End Class
