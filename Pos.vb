@@ -380,24 +380,95 @@ Public Class Pos
         End Using
     End Function
 
-    Private Function InsertRecord(ByRef soatxt As String, soaDate As Date, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As Date, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Integer) As Integer
-        Dim insertQuery As String = "INSERT INTO acccounting (soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    'Private Function InsertRecord(ByRef soatxt As String, soaDate As Date, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As Date, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Integer) As Integer
+    '    Dim insertQuery As String = "INSERT INTO acccounting (soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    '    Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
+
+    '    Using conn As New OdbcConnection("DSN=dashboard")
+    '        conn.Open()
+    '        Dim transaction As OdbcTransaction = conn.BeginTransaction()
+
+    '        Try
+    '            Using cmd As New OdbcCommand(insertQuery, conn, transaction)
+    '                cmd.Parameters.AddWithValue("soa_txt", soatxt)
+    '                cmd.Parameters.AddWithValue("soa_date", soaDate)
+    '                cmd.Parameters.AddWithValue("order_type", ordertype)
+    '                cmd.Parameters.AddWithValue("fac_code", code)
+    '                cmd.Parameters.AddWithValue("facility_name", name)
+    '                cmd.Parameters.AddWithValue("term", term)
+    '                cmd.Parameters.AddWithValue("purchase_number", purchaseNumber)
+    '                cmd.Parameters.AddWithValue("purchase_date", purchaseDate)
+    '                cmd.Parameters.AddWithValue("quantity", quantity)
+    '                cmd.Parameters.AddWithValue("sub_total", subtotal)
+    '                cmd.Parameters.AddWithValue("brochure", brochure)
+    '                cmd.Parameters.AddWithValue("poster", poster)
+    '                cmd.Parameters.AddWithValue("drying_rack", drying)
+    '                cmd.Parameters.AddWithValue("replacement", replace)
+    '                cmd.Parameters.AddWithValue("ads_amount", Math.Round(ads, 2))
+    '                cmd.Parameters.AddWithValue("due_date", dueDate)
+    '                cmd.Parameters.AddWithValue("total_amount", totalAmount)
+    '                cmd.Parameters.AddWithValue("balance", balance)
+    '                cmd.Parameters.AddWithValue("username", user)
+    '                cmd.Parameters.AddWithValue("sub_amount", subamount)
+
+    '                cmd.ExecuteNonQuery()
+
+    '                ' Retrieve last inserted ID
+    '                cmd.CommandText = lastInsertedIdQuery
+    '                Dim lastInsertedId As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+    '                transaction.Commit()
+    '                Return lastInsertedId
+    '            End Using
+    '        Catch ex As Exception
+    '            transaction.Rollback()
+    '            Throw New Exception("Error during record insertion: " & ex.Message)
+    '        End Try
+    '    End Using
+    'End Function
+
+    Private Function InsertRecord(ByVal soatxt As String, soaDate As Date, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As Date, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Integer) As Integer
+        Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        Dim lastSoaQuery As String = "SELECT soa_number FROM acccounting WHERE LEFT(soa_number, 4) = ? ORDER BY soa_number DESC LIMIT 1"
         Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
+
+        Dim year As String = purchaseDate.Year.ToString()
+        Dim newSoaNumber As String = ""
 
         Using conn As New OdbcConnection("DSN=dashboard")
             conn.Open()
             Dim transaction As OdbcTransaction = conn.BeginTransaction()
 
             Try
+                ' Get the latest SOA number for the year
+                Using cmd As New OdbcCommand(lastSoaQuery, conn, transaction)
+                    cmd.Parameters.AddWithValue("year", year)
+                    Dim lastSoa As Object = cmd.ExecuteScalar()
+
+                    If lastSoa IsNot Nothing Then
+                        ' Increment the existing SOA number
+                        Dim lastIncrement As Integer = Convert.ToInt32(lastSoa.ToString().Substring(4)) + 1
+                        newSoaNumber = year & lastIncrement.ToString("D5")
+                    Else
+                        ' Start from 1 if no SOA exists for the year
+                        newSoaNumber = year & "00001"
+                    End If
+                End Using
+
+                ' Assign the new SOA number to soatxt
+                soatxt = newSoaNumber
+
+                ' Insert the record
                 Using cmd As New OdbcCommand(insertQuery, conn, transaction)
+                    cmd.Parameters.AddWithValue("soa_number", newSoaNumber)
                     cmd.Parameters.AddWithValue("soa_txt", soatxt)
-                    cmd.Parameters.AddWithValue("soa_date", soaDate)
+                    cmd.Parameters.AddWithValue("soa_date", soaDate.Date)  ' Ensure soa_date is date only (no time)
                     cmd.Parameters.AddWithValue("order_type", ordertype)
                     cmd.Parameters.AddWithValue("fac_code", code)
                     cmd.Parameters.AddWithValue("facility_name", name)
                     cmd.Parameters.AddWithValue("term", term)
                     cmd.Parameters.AddWithValue("purchase_number", purchaseNumber)
-                    cmd.Parameters.AddWithValue("purchase_date", purchaseDate)
+                    cmd.Parameters.AddWithValue("purchase_date", purchaseDate.Date)  ' Ensure purchase_date is date only (no time)
                     cmd.Parameters.AddWithValue("quantity", quantity)
                     cmd.Parameters.AddWithValue("sub_total", subtotal)
                     cmd.Parameters.AddWithValue("brochure", brochure)
@@ -405,7 +476,7 @@ Public Class Pos
                     cmd.Parameters.AddWithValue("drying_rack", drying)
                     cmd.Parameters.AddWithValue("replacement", replace)
                     cmd.Parameters.AddWithValue("ads_amount", Math.Round(ads, 2))
-                    cmd.Parameters.AddWithValue("due_date", dueDate)
+                    cmd.Parameters.AddWithValue("due_date", dueDate.Date)  ' Ensure due_date is date only (no time)
                     cmd.Parameters.AddWithValue("total_amount", totalAmount)
                     cmd.Parameters.AddWithValue("balance", balance)
                     cmd.Parameters.AddWithValue("username", user)
@@ -475,7 +546,7 @@ Public Class Pos
 
                 ' Prepare data for insertion
                 Dim soatxt As String
-                Dim soaDate As Date = Date.Now
+                Dim soaDate As Date = Date.Now.Date ' Use .Date to strip time
                 Dim ordertype As String = ""
 
                 ' Determine order type
@@ -496,7 +567,7 @@ Public Class Pos
                 Dim name As String = nameBox.Text
                 Dim term As String = termBox.Text
                 Dim purchaseNumber As String = purchaseBox.Text
-                Dim purchaseDate As Date = dtpicker2.Value
+                Dim purchaseDate As Date = dtpicker2.Value.Date ' Use .Date to strip time
                 Dim quantity As Integer = Integer.Parse(qtyTxt.Text)
                 Dim subtotal As Integer = Integer.Parse(amountTxt.Text)
                 Dim brochure As Integer = If(String.IsNullOrEmpty(brochureTxt.Text), 0, Integer.Parse(brochureTxt.Text))
@@ -504,11 +575,11 @@ Public Class Pos
                 Dim drying As Integer = If(String.IsNullOrEmpty(dryingTxt.Text), 0, Integer.Parse(dryingTxt.Text))
                 Dim replace As Integer = If(String.IsNullOrEmpty(replaceTxt.Text), 0, Integer.Parse(replaceTxt.Text))
                 Dim ads As Double = Double.Parse(adsTxt.Text)
-                Dim dueDate As Date = dtpicker1.Value
+                Dim dueDate As Date = dtpicker1.Value.Date ' Use .Date to strip time
                 Dim totalAmount As Double = Double.Parse(totalTxt.Text)
                 Dim balance As Double = Double.Parse(totalTxt.Text)
                 Dim user As String = Login.userTxt.Text
-                Dim subamount As Integer = amountTxt.Text
+                Dim subamount As Integer = Integer.Parse(amountTxt.Text)
 
                 ' Insert record into the database
                 Dim soaNumber As Integer = InsertRecord("", soaDate, ordertype, code, name, term, purchaseNumber, purchaseDate, quantity, subtotal, brochure, poster, drying, replace, ads, dueDate, totalAmount, balance, user, subamount)
@@ -521,6 +592,7 @@ Public Class Pos
 
                 MessageBox.Show("Insert Successfully!")
 
+
                 If walkCheck.Checked Then
                     ' Generate the Crystal Report
                     Dim report As New StatementOfAccount()
@@ -528,6 +600,7 @@ Public Class Pos
                     report.RecordSelectionFormula = selformula
 
                     ' Refresh the report to load data
+
                     report.Refresh()
 
                     Dim reportForm As New Form
@@ -544,6 +617,7 @@ Public Class Pos
                     report.RecordSelectionFormula = selformula
 
                     ' Refresh the report to load data
+
                     report.Refresh()
 
                     Dim reportForm As New Form
