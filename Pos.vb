@@ -385,45 +385,48 @@ Public Class Pos
         Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
 
         Using conn As New OdbcConnection("DSN=dashboard")
-            Using cmd As New OdbcCommand(insertQuery, conn)
-                ' Convert soa_number to string and assign it to soa_txt
-                Dim soaNumberParameter As New OdbcParameter("soa_txt", OdbcType.VarChar)
-                soaNumberParameter.Value = soatxt
-                cmd.Parameters.Add(soaNumberParameter)
+            conn.Open()
+            Dim transaction As OdbcTransaction = conn.BeginTransaction()
 
-                cmd.Parameters.Add(New OdbcParameter("soa_date", OdbcType.Date)).Value = soaDate
-                cmd.Parameters.Add(New OdbcParameter("order_type", OdbcType.VarChar)).Value = ordertype
-                cmd.Parameters.Add(New OdbcParameter("fac_code", OdbcType.VarChar)).Value = code
-                cmd.Parameters.Add(New OdbcParameter("facility_name", OdbcType.VarChar)).Value = name
-                cmd.Parameters.Add(New OdbcParameter("term", OdbcType.VarChar)).Value = term
-                cmd.Parameters.Add(New OdbcParameter("purchase_number", OdbcType.VarChar)).Value = purchaseNumber
-                cmd.Parameters.Add(New OdbcParameter("purchase_date", OdbcType.Date)).Value = purchaseDate
-                cmd.Parameters.Add(New OdbcParameter("quantity", OdbcType.Int)).Value = quantity
-                cmd.Parameters.Add(New OdbcParameter("sub_total", OdbcType.Int)).Value = subtotal
-                cmd.Parameters.Add(New OdbcParameter("brochure", OdbcType.Int)).Value = brochure
-                cmd.Parameters.Add(New OdbcParameter("poster", OdbcType.Int)).Value = poster
-                cmd.Parameters.Add(New OdbcParameter("drying_rack", OdbcType.Int)).Value = drying
-                cmd.Parameters.Add(New OdbcParameter("replacement", OdbcType.Int)).Value = replace
+            Try
+                Using cmd As New OdbcCommand(insertQuery, conn, transaction)
+                    cmd.Parameters.AddWithValue("soa_txt", soatxt)
+                    cmd.Parameters.AddWithValue("soa_date", soaDate)
+                    cmd.Parameters.AddWithValue("order_type", ordertype)
+                    cmd.Parameters.AddWithValue("fac_code", code)
+                    cmd.Parameters.AddWithValue("facility_name", name)
+                    cmd.Parameters.AddWithValue("term", term)
+                    cmd.Parameters.AddWithValue("purchase_number", purchaseNumber)
+                    cmd.Parameters.AddWithValue("purchase_date", purchaseDate)
+                    cmd.Parameters.AddWithValue("quantity", quantity)
+                    cmd.Parameters.AddWithValue("sub_total", subtotal)
+                    cmd.Parameters.AddWithValue("brochure", brochure)
+                    cmd.Parameters.AddWithValue("poster", poster)
+                    cmd.Parameters.AddWithValue("drying_rack", drying)
+                    cmd.Parameters.AddWithValue("replacement", replace)
+                    cmd.Parameters.AddWithValue("ads_amount", Math.Round(ads, 2))
+                    cmd.Parameters.AddWithValue("due_date", dueDate)
+                    cmd.Parameters.AddWithValue("total_amount", totalAmount)
+                    cmd.Parameters.AddWithValue("balance", balance)
+                    cmd.Parameters.AddWithValue("username", user)
+                    cmd.Parameters.AddWithValue("sub_amount", subamount)
 
-                ' Round the ads amount to 2 decimal places before insertion
-                cmd.Parameters.Add(New OdbcParameter("ads_amount", OdbcType.Double)).Value = Math.Round(ads, 2)
+                    cmd.ExecuteNonQuery()
 
-                cmd.Parameters.Add(New OdbcParameter("due_date", OdbcType.Date)).Value = dueDate
-                cmd.Parameters.Add(New OdbcParameter("total_amount", OdbcType.Double)).Value = totalAmount
-                cmd.Parameters.Add(New OdbcParameter("balance", OdbcType.Double)).Value = balance
-                cmd.Parameters.Add(New OdbcParameter("username", OdbcType.VarChar)).Value = user
-                cmd.Parameters.Add(New OdbcParameter("sub_amount", OdbcType.Double)).Value = subamount
+                    ' Retrieve last inserted ID
+                    cmd.CommandText = lastInsertedIdQuery
+                    Dim lastInsertedId As Integer = Convert.ToInt32(cmd.ExecuteScalar())
 
-                conn.Open()
-                cmd.ExecuteNonQuery()
-
-                cmd.CommandText = lastInsertedIdQuery
-                Dim lastInsertedId As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-
-                Return lastInsertedId
-            End Using
+                    transaction.Commit()
+                    Return lastInsertedId
+                End Using
+            Catch ex As Exception
+                transaction.Rollback()
+                Throw New Exception("Error during record insertion: " & ex.Message)
+            End Try
         End Using
     End Function
+
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         ' Check if any row has the cancelPo checkbox checked
         Dim isAnyChecked As Boolean = dgv1.Rows.Cast(Of DataGridViewRow)().
@@ -614,6 +617,19 @@ Public Class Pos
         remLbl.Visible = False
         remBox.Visible = False
     End Sub
+    Private Sub UpdateSoaTxt(ByVal soatxt As String, ByVal soaNumber As Integer)
+        Dim updateQuery As String = "UPDATE acccounting SET soa_txt = ? WHERE soa_number = ?"
+
+        Using conn As New OdbcConnection("DSN=dashboard")
+            Using cmd As New OdbcCommand(updateQuery, conn)
+                cmd.Parameters.Add(New OdbcParameter("soa_txt", OdbcType.VarChar)).Value = soatxt
+                cmd.Parameters.Add(New OdbcParameter("soa_number", OdbcType.Int)).Value = soaNumber
+
+                conn.Open()
+                cmd.ExecuteNonQuery()
+            End Using
+        End Using
+    End Sub
 
     Private Sub SaveCancellationToDatabase(remarks As String, facCode As String)
         Try
@@ -655,19 +671,7 @@ Public Class Pos
         Return True
     End Function
 
-    Private Sub UpdateSoaTxt(ByVal soatxt As String, ByVal soaNumber As Integer)
-        Dim updateQuery As String = "UPDATE acccounting SET soa_txt = ? WHERE soa_number = ?"
 
-        Using conn As New OdbcConnection("DSN=dashboard")
-            Using cmd As New OdbcCommand(updateQuery, conn)
-                cmd.Parameters.Add(New OdbcParameter("soa_txt", OdbcType.VarChar)).Value = soatxt
-                cmd.Parameters.Add(New OdbcParameter("soa_number", OdbcType.Int)).Value = soaNumber
-
-                conn.Open()
-                cmd.ExecuteNonQuery()
-            End Using
-        End Using
-    End Sub
     Private Sub brochureTxt_KeyPress(sender As Object, e As KeyPressEventArgs) Handles brochureTxt.KeyPress
         If Char.IsControl(e.KeyChar) Then
             Return
