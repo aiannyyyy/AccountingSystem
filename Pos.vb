@@ -654,7 +654,6 @@ Public Class Pos
     Private Sub GenerateReport(soaTxt As String, orderType As String)
         Dim report As Object
 
-
         If lopezCheck.Checked Then
             report = New StatementOfAccountWithServiceFee()
         Else
