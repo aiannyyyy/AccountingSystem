@@ -563,7 +563,6 @@ Public Class Pos
         End Using
     End Function
 
-
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         Dim isAnyChecked As Boolean = dgv1.Rows.Cast(Of DataGridViewRow)().
                                   Any(Function(row) Not row.IsNewRow AndAlso Convert.ToBoolean(row.Cells("cancelPo").Value))
@@ -648,7 +647,7 @@ Public Class Pos
                                         Login.userTxt.Text, Integer.Parse(amountTxt.Text))
 
         UpdateSoaTxt(soatxt, soaNumber)
-        MessageBox.Show("Insert Successfully!")
+        MessageBox.Show("Saved Successfully!")
         Return soatxt  ' Return the updated SOA text
     End Function
 
