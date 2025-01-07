@@ -40,6 +40,9 @@ Partial Class Payments
         Me.GunaControlBox1 = New Guna.UI.WinForms.GunaControlBox()
         Me.GunaDragControl1 = New Guna.UI.WinForms.GunaDragControl(Me.components)
         Me.mainPanel = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.dgv2 = New Guna.UI.WinForms.GunaDataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -150,9 +153,6 @@ Partial Class Payments
         Me.nameBox = New Guna.UI.WinForms.GunaTextBox()
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
         Me.GunaPanel1.SuspendLayout()
         Me.mainPanel.SuspendLayout()
         CType(Me.dgv2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -267,6 +267,30 @@ Partial Class Payments
         Me.mainPanel.Size = New System.Drawing.Size(1045, 802)
         Me.mainPanel.TabIndex = 2
         '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.Panel4.Location = New System.Drawing.Point(5, 794)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(1040, 43)
+        Me.Panel4.TabIndex = 62
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.Panel3.Location = New System.Drawing.Point(-31, 0)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(38, 830)
+        Me.Panel3.TabIndex = 62
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.Panel2.Location = New System.Drawing.Point(1037, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(38, 830)
+        Me.Panel2.TabIndex = 61
+        '
         'dgv2
         '
         Me.dgv2.AllowUserToAddRows = False
@@ -298,7 +322,7 @@ Partial Class Payments
         Me.dgv2.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgv2.EnableHeadersVisualStyles = False
         Me.dgv2.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        Me.dgv2.Location = New System.Drawing.Point(16, 535)
+        Me.dgv2.Location = New System.Drawing.Point(14, 532)
         Me.dgv2.Name = "dgv2"
         Me.dgv2.ReadOnly = True
         Me.dgv2.RowHeadersVisible = False
@@ -595,7 +619,7 @@ Partial Class Payments
         Me.dgv1.DefaultCellStyle = DataGridViewCellStyle7
         Me.dgv1.EnableHeadersVisualStyles = False
         Me.dgv1.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        Me.dgv1.Location = New System.Drawing.Point(15, 60)
+        Me.dgv1.Location = New System.Drawing.Point(15, 61)
         Me.dgv1.Name = "dgv1"
         Me.dgv1.ReadOnly = True
         Me.dgv1.RowHeadersVisible = False
@@ -1096,7 +1120,7 @@ Partial Class Payments
         '
         Me.GunaPictureBox3.BaseColor = System.Drawing.Color.White
         Me.GunaPictureBox3.Image = CType(resources.GetObject("GunaPictureBox3.Image"), System.Drawing.Image)
-        Me.GunaPictureBox3.Location = New System.Drawing.Point(744, 32)
+        Me.GunaPictureBox3.Location = New System.Drawing.Point(745, 32)
         Me.GunaPictureBox3.Name = "GunaPictureBox3"
         Me.GunaPictureBox3.Size = New System.Drawing.Size(15, 15)
         Me.GunaPictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -1133,7 +1157,7 @@ Partial Class Payments
         Me.checkBox1.ForeColor = System.Drawing.Color.DarkRed
         Me.checkBox1.Location = New System.Drawing.Point(892, 125)
         Me.checkBox1.Name = "checkBox1"
-        Me.checkBox1.Size = New System.Drawing.Size(120, 20)
+        Me.checkBox1.Size = New System.Drawing.Size(117, 20)
         Me.checkBox1.TabIndex = 52
         Me.checkBox1.Text = "STOP INTEREST"
         '
@@ -1382,7 +1406,7 @@ Partial Class Payments
         Me.subtotalTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.subtotalTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.subtotalTxt.ForeColor = System.Drawing.Color.Black
-        Me.subtotalTxt.Location = New System.Drawing.Point(342, 223)
+        Me.subtotalTxt.Location = New System.Drawing.Point(342, 220)
         Me.subtotalTxt.Name = "subtotalTxt"
         Me.subtotalTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.subtotalTxt.SelectedText = ""
@@ -1394,7 +1418,7 @@ Partial Class Payments
         '
         Me.GunaLabel16.AutoSize = True
         Me.GunaLabel16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel16.Location = New System.Drawing.Point(281, 227)
+        Me.GunaLabel16.Location = New System.Drawing.Point(281, 224)
         Me.GunaLabel16.Name = "GunaLabel16"
         Me.GunaLabel16.Size = New System.Drawing.Size(46, 17)
         Me.GunaLabel16.TabIndex = 34
@@ -1765,7 +1789,7 @@ Partial Class Payments
         Me.balanceBox.FocusedBorderColor = System.Drawing.Color.Black
         Me.balanceBox.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.balanceBox.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.balanceBox.Location = New System.Drawing.Point(923, 15)
+        Me.balanceBox.Location = New System.Drawing.Point(922, 14)
         Me.balanceBox.Name = "balanceBox"
         Me.balanceBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.balanceBox.SelectedText = ""
@@ -1777,7 +1801,7 @@ Partial Class Payments
         '
         Me.GunaLabel2.AutoSize = True
         Me.GunaLabel2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel2.Location = New System.Drawing.Point(850, 22)
+        Me.GunaLabel2.Location = New System.Drawing.Point(849, 21)
         Me.GunaLabel2.Name = "GunaLabel2"
         Me.GunaLabel2.Size = New System.Drawing.Size(65, 17)
         Me.GunaLabel2.TabIndex = 5
@@ -1794,7 +1818,7 @@ Partial Class Payments
         Me.termBox.FocusedBorderColor = System.Drawing.Color.Black
         Me.termBox.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.termBox.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.termBox.Location = New System.Drawing.Point(789, 15)
+        Me.termBox.Location = New System.Drawing.Point(788, 14)
         Me.termBox.Name = "termBox"
         Me.termBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.termBox.SelectedText = ""
@@ -1814,7 +1838,7 @@ Partial Class Payments
         Me.nameBox.FocusedBorderColor = System.Drawing.Color.Black
         Me.nameBox.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.nameBox.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.nameBox.Location = New System.Drawing.Point(232, 15)
+        Me.nameBox.Location = New System.Drawing.Point(231, 14)
         Me.nameBox.Name = "nameBox"
         Me.nameBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.nameBox.SelectedText = ""
@@ -1828,7 +1852,7 @@ Partial Class Payments
         Me.codeTxt.FocusedLineColor = System.Drawing.Color.Black
         Me.codeTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.codeTxt.LineColor = System.Drawing.Color.Black
-        Me.codeTxt.Location = New System.Drawing.Point(123, 20)
+        Me.codeTxt.Location = New System.Drawing.Point(122, 19)
         Me.codeTxt.Name = "codeTxt"
         Me.codeTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.codeTxt.SelectedText = ""
@@ -1840,35 +1864,11 @@ Partial Class Payments
         '
         Me.GunaLabel1.AutoSize = True
         Me.GunaLabel1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel1.Location = New System.Drawing.Point(17, 22)
+        Me.GunaLabel1.Location = New System.Drawing.Point(16, 21)
         Me.GunaLabel1.Name = "GunaLabel1"
         Me.GunaLabel1.Size = New System.Drawing.Size(96, 17)
         Me.GunaLabel1.TabIndex = 1
         Me.GunaLabel1.Text = "FACILITY CODE:"
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.Panel2.Location = New System.Drawing.Point(1037, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(38, 830)
-        Me.Panel2.TabIndex = 61
-        '
-        'Panel3
-        '
-        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.Panel3.Location = New System.Drawing.Point(-31, 2)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(38, 830)
-        Me.Panel3.TabIndex = 62
-        '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.Panel4.Location = New System.Drawing.Point(5, 794)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1040, 43)
-        Me.Panel4.TabIndex = 62
         '
         'Payments
         '

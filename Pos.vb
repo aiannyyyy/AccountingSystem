@@ -49,6 +49,7 @@ Public Class Pos
 
     Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
         If String.IsNullOrEmpty(codeTxt.Text) Then
+            cleartxt()
             Return
         End If
 
@@ -115,6 +116,7 @@ Public Class Pos
     Private Sub brochureCheck_CheckedChanged(sender As Object, e As EventArgs) Handles brochureCheck.CheckedChanged
         If brochureCheck.Checked Then
             brochureTxt.Enabled = True
+            brochureTxt.SetOnGotFocus()
         Else
             brochureTxt.Enabled = False
             brochureTxt.Clear()
@@ -126,6 +128,7 @@ Public Class Pos
     Private Sub posterCheck_CheckedChanged(sender As Object, e As EventArgs) Handles posterCheck.CheckedChanged
         If posterCheck.Checked Then
             posterTxt.Enabled = True
+            posterTxt.SetOnGotFocus()
         Else
             posterTxt.Enabled = False
             posterTxt.Clear()
@@ -137,6 +140,7 @@ Public Class Pos
     Private Sub dryingCheck_CheckedChanged(sender As Object, e As EventArgs) Handles dryingCheck.CheckedChanged
         If dryingCheck.Checked Then
             dryingTxt.Enabled = True
+            dryingTxt.SetOnGotFocus()
         Else
             dryingTxt.Enabled = False
             dryingTxt.Clear()
@@ -148,6 +152,7 @@ Public Class Pos
     Private Sub replaceCheck_CheckedChanged(sender As Object, e As EventArgs) Handles replaceCheck.CheckedChanged
         If replaceCheck.Checked Then
             replaceTxt.Enabled = True
+            replaceTxt.SetOnGotFocus()
         Else
             replaceTxt.Enabled = False
             replaceTxt.Clear()
@@ -197,6 +202,9 @@ Public Class Pos
             replaceCombo.Enabled = True
             UncheckOtherCheckBoxes(replacementCheck)
             CalculateTotalAmount(15)
+            ' Update the total after calculation
+            UpdateTotalAmount()
+
         Else
             ClearTextBoxesIfNoChecks()
             replaceCombo.Enabled = False
@@ -207,7 +215,9 @@ Public Class Pos
     Private Sub walkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles walkCheck.CheckedChanged
         If walkCheck.Checked Then
             UncheckOtherCheckBoxes(walkCheck)
-            CalculateTotalAmount(1750)
+            CalculateTotalAmount(1800)
+            ' Update the total after calculation
+            UpdateTotalAmount()
         Else
             ClearTextBoxesIfNoChecks()
         End If
@@ -217,6 +227,8 @@ Public Class Pos
         If monitoringCheck.Checked Then
             UncheckOtherCheckBoxes(monitoringCheck)
             CalculateTotalAmount(400)
+            ' Update the total after calculation
+            UpdateTotalAmount()
         Else
             ClearTextBoxesIfNoChecks()
         End If
@@ -569,8 +581,12 @@ Public Class Pos
 
         If isAnyChecked Then
             CancelPurchaseOrders()
+            cleartxt()
+            loaddgv()
         Else
             AddNewOrder()
+            cleartxt()
+            loaddgv()
         End If
 
         addButton.Text = "ADD"
@@ -593,8 +609,8 @@ Public Class Pos
             End Try
         Next
 
-        cleartxt()
-        loaddgv()
+        'cleartxt()
+
     End Sub
 
     Private Sub AddNewOrder()
@@ -607,8 +623,8 @@ Public Class Pos
 
             GenerateReport(soatxt, orderType)
 
-            cleartxt()
-            loaddgv()
+            'cleartxt()
+
         Catch ex As Exception
             MessageBox.Show("An error occurred during adding: " & ex.Message)
         End Try
@@ -654,7 +670,7 @@ Public Class Pos
     Private Sub GenerateReport(soaTxt As String, orderType As String)
         Dim report As Object
 
-        If lopezCheck.Checked Then
+        If lopezCheck.Checked OrElse walkCheck.Checked Then
             report = New StatementOfAccountWithServiceFee()
         Else
             report = New StatementOfAccount()
@@ -795,6 +811,8 @@ Public Class Pos
         If lopezCheck.Checked Then
             UncheckOtherCheckBoxes(lopezCheck)
             CalculateTotalAmount(1800)
+            ' Update the total after calculation
+            UpdateTotalAmount()
         Else
             ClearTextBoxesIfNoChecks()
         End If
@@ -895,8 +913,34 @@ Public Class Pos
         adsTxt.Text = dgv1.Rows(e.RowIndex).Cells("ads_amount").Value.ToString()
         totalTxt.Text = dgv1.Rows(e.RowIndex).Cells("total_amount").Value.ToString()
         totalTxt.Text = dgv1.Rows(e.RowIndex).Cells("balance").Value.ToString()
+
+        disableColumns()
     End Sub
 
+    ' Method to Disable Specific Columns
+    Private Sub disableColumns()
+        ' Example: Disabling specific columns by name
+        dgv1.Columns("fac_code").ReadOnly = True
+        dgv1.Columns("facility_name").ReadOnly = True
+        dgv1.Columns("order_type").ReadOnly = True
+        dgv1.Columns("term").ReadOnly = True
+        dgv1.Columns("purchase_number").ReadOnly = True
+        dgv1.Columns("quantity").ReadOnly = True
+        dgv1.Columns("sub_total").ReadOnly = True
+        dgv1.Columns("purchase_date").ReadOnly = True
+        dgv1.Columns("due_date").ReadOnly = True
+        dgv1.Columns("brochure").ReadOnly = True
+        dgv1.Columns("poster").ReadOnly = True
+        dgv1.Columns("drying_rack").ReadOnly = True
+        dgv1.Columns("replacement").ReadOnly = True
+        dgv1.Columns("ads_amount").ReadOnly = True
+        dgv1.Columns("total_amount").ReadOnly = True
+        dgv1.Columns("balance").ReadOnly = True
+    End Sub
+
+    Private Sub amountTxt_TextChanged(sender As Object, e As EventArgs) Handles amountTxt.TextChanged
+
+    End Sub
 End Class
 
 

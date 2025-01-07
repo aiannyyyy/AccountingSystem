@@ -1,6 +1,7 @@
 ﻿Imports System.Data.Odbc
 Public Class Payments
     Private connString As String = "DSN=dashboard"
+    Private originalBalance As Double = 0
     Private Sub Payments_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         codeTxt.SetOnGotFocus()
         mopCombo.Items.AddRange({"BANK TO BANK", "WALK IN"})
@@ -91,8 +92,8 @@ Public Class Payments
             Dim grandTotal As Decimal = 0
 
             For Each row As DataRow In ds.Tables("acccounting").Rows
-                If Not IsDBNull(row("total_amount")) Then
-                    grandTotal += Convert.ToDecimal(row("total_amount"))
+                If Not IsDBNull(row("balance")) Then
+                    grandTotal += Convert.ToDecimal(row("balance"))
                 End If
             Next
 
@@ -209,16 +210,26 @@ Public Class Payments
     End Sub
 
     Private Sub ClearFields()
+        codeTxt.Clear()
         nameBox.Clear()
         termBox.Clear()
         balanceBox.Clear()
+        orderTxt.Clear()
         soaTxt.Clear()
         enbsTxt.Clear()
         adsTxt.Clear()
+        othersTxt.Clear()
         soamountTxt.Clear()
         dtpicker1.Value = Date.Now
         interestTxt.Clear()
         subtotalTxt.Clear()
+        mopCombo.SelectedIndex = -1
+        formCombo.SelectedIndex = -1
+        chequeTxt.Clear()
+        bankCombo.SelectedIndex = -1
+        remTxt.Clear()
+        amountpaidTxt.Clear()
+        checkBox1.Checked = False
     End Sub
 
     Private Sub dgv1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellContentClick
@@ -261,12 +272,24 @@ Public Class Payments
         End Using
     End Function
 
-    Private Sub InsertRecord(soaNumber As String, enbs As String, facCode As String, balance As Double, adsAmount As Double, dueDate As Date, soaAmount As Double, interestDate As Date, interest As Double, orDate As Date, orNumber As String, badDebts As Double, businessTax As Double, wtax As Double, others As String, grandTotal As Double, mop As String, fop As String, chequeDetails As String, bank As String, datePayment As Date, datePosted As Date, amountPaid As Integer, remarks As String, stopInterest As String, username As String)
-        Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, balance, ads_amount, due_date, soa_amount, interest_date, interest, or_date, or_number, bad_debts, business_tax, wtax, others, grand_total, mop, fop, cheque_details, bank, date_payment, date_posted, amount_paid, remarks, stop_interest, username) " &
-                              $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {balance}, {adsAmount}, '{dueDate.ToString("yyyy-MM-dd")}', {soaAmount}, '{interestDate.ToString("yyyy-MM-dd")}', {interest}, '{orDate.ToString("yyyy-MM-dd")}', '{orNumber}', {badDebts}, '{businessTax}', {wtax}, '{others}', {grandTotal}, '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd")}', '{datePosted.ToString("yyyy-MM-dd")}', {amountPaid}, '{remarks}', '{stopInterest}', '{username}')"
-        ExecuteQuery(query)
-    End Sub
+    'Private Sub InsertRecord(soaNumber As String, enbs As String, facCode As String, balance As Double, adsAmount As Double, dueDate As Date, soaAmount As Double, interestDate As Date, interest As Double, orDate As Date, orNumber As String, badDebts As Double, businessTax As Double, wtax As Double, others As String, grandTotal As Double, mop As String, fop As String, chequeDetails As String, bank As String, datePayment As Date, datePosted As Date, amountPaid As Integer, remarks As String, stopInterest As String, username As String)
+    '    Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, balance, ads_amount, due_date, soa_amount, interest_date, interest, or_date, or_number, bad_debts, business_tax, wtax, others, grand_total, mop, fop, cheque_details, bank, date_payment, date_posted, amount_paid, remarks, stop_interest, username) " &
+    '                          $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {balance}, {adsAmount}, '{dueDate.ToString("yyyy-MM-dd")}', {soaAmount}, '{interestDate.ToString("yyyy-MM-dd")}', {interest}, '{orDate.ToString("yyyy-MM-dd")}', '{orNumber}', {badDebts}, '{businessTax}', {wtax}, '{others}', {grandTotal}, '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd")}', '{datePosted.ToString("yyyy-MM-dd")}', {amountPaid}, '{remarks}', '{stopInterest}', '{username}')"
+    '    ExecuteQuery(query)
+    'End Sub
 
+    Private Sub InsertRecord(soaNumber As String, enbs As String, facCode As String, balance As Double, adsAmount As Double, dueDate As Date, soaAmount As Double, interestDate As Date, interest As Double, orDate As Date, orNumber As String, badDebts As Double, businessTax As Double, wtax As Double, others As String, grandTotal As Double, mop As String, fop As String, chequeDetails As String, bank As String, datePayment As Date, datePosted As Date, amountPaid As Integer, remarks As String, stopInterest As String, username As String)
+        ' Prepare the SQL query for inserting the payment record
+        Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, balance, ads_amount, due_date, soa_amount, interest_date, interest, or_date, or_number, bad_debts, business_tax, wtax, others, grand_total, mop, fop, cheque_details, bank, date_payment, date_posted, amount_paid, remarks, stop_interest, username) " &
+                          $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {balance}, {adsAmount}, '{dueDate.ToString("yyyy-MM-dd")}', {soaAmount}, '{interestDate.ToString("yyyy-MM-dd")}', {interest}, '{orDate.ToString("yyyy-MM-dd")}', '{orNumber}', {badDebts}, '{businessTax}', {wtax}, '{others}', {grandTotal}, '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd")}', '{datePosted.ToString("yyyy-MM-dd")}', {amountPaid}, '{remarks}', '{stopInterest}', '{username}')"
+
+        ' Execute the insert query using ExecuteQuery function
+        ExecuteQuery(query)
+
+        ' After inserting, update the accounting balance based on the soa_number
+        Dim updateBalanceQuery As String = $"UPDATE acccounting SET balance = balance - {amountPaid} WHERE soa_number = '{soaNumber}'"
+        ExecuteQuery(updateBalanceQuery)
+    End Sub
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         ' Retrieve input values
         Dim soaNumber As String = soaTxt.Text
@@ -291,7 +314,7 @@ Public Class Payments
         Dim bank As String = bankCombo.Text
         Dim datePayment As Date = dtpicker4.Value
         Dim datePosted As Date = Date.Now ' Assuming current date for datePosted
-        Dim amountPaid As Integer = Convert.ToInt32(amountpaidTxt.Text)
+        Dim amountPaid As Integer = Convert.ToDouble(amountpaidTxt.Text)
         Dim remarks As String = remTxt.Text
         Dim stopInterest As String = If(checkBox1.Checked, "STOP INTEREST", String.Empty)
         Dim username As String = Login.userTxt.Text
@@ -300,9 +323,11 @@ Public Class Payments
         InsertRecord(soaNumber, enbs, facCode, balance, adsAmount, dueDate, soaAmount, interestDate, interest, orDate, orNumber, badDebts, businessTax, wtax, others, grandTotal, mop, fop, chequeDetails, bank, datePayment, datePosted, amountPaid, remarks, stopInterest, username)
 
         ' Notify user of successful insertion
-        MessageBox.Show("Record Inserted Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        MessageBox.Show("Payment successfully processed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
+        loaddgv()
         afterPay()
+        ClearFields()
     End Sub
 
     Private Sub orderButton_Click(sender As Object, e As EventArgs) Handles orderButton.Click
@@ -329,5 +354,40 @@ Public Class Payments
     Private Sub homeBtn_Click(sender As Object, e As EventArgs) Handles homeBtn.Click
         Form1.Show()
         Me.Hide()
+    End Sub
+
+    Private Sub formCombo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles formCombo.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub balanceBox_TextChanged(sender As Object, e As EventArgs) Handles balanceBox.TextChanged
+
+    End Sub
+
+    Private Sub amountpaidTxt_TextChanged(sender As Object, e As EventArgs) Handles amountpaidTxt.TextChanged
+        ' Store the initial balance once, when the balanceBox is first populated
+        If originalBalance = 0 AndAlso Not String.IsNullOrEmpty(balanceBox.Text) Then
+            Double.TryParse(balanceBox.Text, originalBalance)
+        End If
+
+        ' Check if the entered amount is a valid number
+        Dim amountPaid As Double
+        If Double.TryParse(amountpaidTxt.Text, amountPaid) Then
+            ' Calculate the remaining balance
+            Dim remainingBalance As Double = originalBalance - amountPaid
+
+            ' Prevent negative balance
+            If remainingBalance < 0 Then
+                remainingBalance = 0
+            End If
+
+            ' Update the balanceBox with the new balance
+            balanceBox.Text = remainingBalance.ToString("F2")
+        Else
+            ' If the amount paid box is empty, reset the balance to the original value
+            If String.IsNullOrEmpty(amountpaidTxt.Text) Then
+                balanceBox.Text = originalBalance.ToString("F2")
+            End If
+        End If
     End Sub
 End Class
