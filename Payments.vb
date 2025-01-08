@@ -15,7 +15,10 @@ Public Class Payments
         lblshow.Text = "PAYMENTS | USER: " + Login.userTxt.Text + ""
 
         loaddgv()
-        Payments()
+        payments()
+
+        adsLbl.Visible = False
+        adsTxt.Visible = False
     End Sub
 
     Public Sub loaddgv()
@@ -186,19 +189,21 @@ Public Class Payments
                                           End If
 
                                           interestTxt.Text = interest.ToString("F2")
-
                                           ' Update balance and subtotal
-                                          Dim soAmount As Double
-                                          Dim adsAmount As Double
-                                          Dim badDebts As Double
-                                          Dim businessTax As Double
+                                          Dim soAmount As Double = 0
+                                          Dim adsAmount As Double = 0
+                                          Dim badDebts As Double = 0
+                                          Dim businessTax As Double = 0
 
-                                          If Double.TryParse(soamountTxt.Text, soAmount) AndAlso Double.TryParse(adsTxt.Text, adsAmount) AndAlso Double.TryParse(baddebtsTxt.Text, badDebts) AndAlso Double.TryParse(btaxText.Text, businessTax) Then
-                                              Dim balance As Double = (soAmount + interest + adsAmount) - (badDebts + businessTax)
-                                              subtotalTxt.Text = balance.ToString("F2")
-                                          Else
-                                              'MessageBox.Show("Invalid amount in one or more fields")
-                                          End If
+                                          ' Parse or set default if empty
+                                          Double.TryParse(If(String.IsNullOrWhiteSpace(soamountTxt.Text), "0", soamountTxt.Text), soAmount)
+                                          Double.TryParse(If(String.IsNullOrWhiteSpace(adsTxt.Text), "0", adsTxt.Text), adsAmount)
+                                          Double.TryParse(If(String.IsNullOrWhiteSpace(baddebtsTxt.Text), "0", baddebtsTxt.Text), badDebts)
+                                          Double.TryParse(If(String.IsNullOrWhiteSpace(btaxText.Text), "0", btaxText.Text), businessTax)
+
+                                          Dim balance As Double = (soAmount + interest + adsAmount) - (badDebts + businessTax)
+                                          subtotalTxt.Text = balance.ToString("F2")
+
                                       End Sub)
                         End If
                     End If
@@ -237,13 +242,30 @@ Public Class Payments
             soaTxt.Text = dgv1.Rows(e.RowIndex).Cells(0).Value.ToString()
             enbsTxt.Text = dgv1.Rows(e.RowIndex).Cells(9).Value.ToString()
             adsTxt.Text = dgv1.Rows(e.RowIndex).Cells(15).Value.ToString()
-            dtpicker1.Value = Convert.ToDateTime(dgv1.Rows(e.RowIndex).Cells(16).Value)
+
+            ' Safely parse the date
+            Dim dateValue As DateTime
+            If DateTime.TryParse(dgv1.Rows(e.RowIndex).Cells(16).Value.ToString(), dateValue) Then
+                dtpicker1.Value = dateValue
+            Else
+                dtpicker1.Value = DateTime.Now ' Default to current date if parsing fails
+            End If
+
+            ' Parse and format the balance
+            Dim cellValue As Double
+            If Double.TryParse(dgv1.Rows(e.RowIndex).Cells(18).Value.ToString(), cellValue) Then
+                balanceTxt.Text = cellValue.ToString("F2")
+            Else
+                balanceTxt.Text = "0.00"
+            End If
+
             soamountTxt.Text = dgv1.Rows(e.RowIndex).Cells(10).Value.ToString()
 
             ' Recalculate interest and update related fields
             CalculateAndUpdateInterest()
         End If
     End Sub
+
     Public Sub payments()
         Call connection()
         da = New OdbcDataAdapter("Select * from payments order by or_date desc", conn)
@@ -291,12 +313,15 @@ Public Class Payments
         ExecuteQuery(updateBalanceQuery)
     End Sub
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
+        Dim selectedRow As DataGridViewRow = dgv1.CurrentRow
+
         ' Retrieve input values
         Dim soaNumber As String = soaTxt.Text
         Dim enbs As String = enbsTxt.Text
         Dim facCode As String = codeTxt.Text
-        Dim balance As Double = Convert.ToDouble(balanceBox.Text)
-        Dim adsAmount As Double = Convert.ToDouble(adsTxt.Text)
+        Dim balance As Double = Convert.ToDouble(balanceTxt.Text)
+        'Dim adsAmount As Double = Convert.ToDouble(adsTxt.Text)
+        Dim adsAmount As Double = If(selectedRow IsNot Nothing AndAlso Not IsDBNull(selectedRow.Cells("ads_amount").Value), Convert.ToDouble(selectedRow.Cells("ads_amount").Value), 0)
         Dim dueDate As Date = dtpicker1.Value
         Dim soaAmount As Double = Convert.ToDouble(soamountTxt.Text)
         Dim interestDate As Date = dtpicker2.Value
@@ -357,7 +382,12 @@ Public Class Payments
     End Sub
 
     Private Sub formCombo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles formCombo.SelectedIndexChanged
-
+        ' Disable the TextBox if the selected item is "Disable"
+        If formCombo.SelectedItem IsNot Nothing AndAlso formCombo.SelectedItem.ToString() = "CASH" Then
+            chequeTxt.Enabled = False
+        Else
+            chequeTxt.Enabled = True
+        End If
     End Sub
 
     Private Sub balanceBox_TextChanged(sender As Object, e As EventArgs) Handles balanceBox.TextChanged
@@ -383,11 +413,14 @@ Public Class Payments
 
             ' Update the balanceBox with the new balance
             balanceBox.Text = remainingBalance.ToString("F2")
+            balanceTxt.Text = remainingBalance.ToString("F2") ' Update balanceTxt as well
         Else
             ' If the amount paid box is empty, reset the balance to the original value
             If String.IsNullOrEmpty(amountpaidTxt.Text) Then
                 balanceBox.Text = originalBalance.ToString("F2")
+                balanceTxt.Text = originalBalance.ToString("F2") ' Reset balanceTxt to original value
             End If
         End If
     End Sub
+
 End Class

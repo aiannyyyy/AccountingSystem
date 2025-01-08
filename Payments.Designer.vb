@@ -91,6 +91,8 @@ Partial Class Payments
         Me.balance = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.user = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.groupDetails = New Guna.UI.WinForms.GunaGroupBox()
+        Me.balanceTxt = New Guna.UI.WinForms.GunaTextBox()
+        Me.GunaLabel5 = New Guna.UI.WinForms.GunaLabel()
         Me.btaxText = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel15 = New Guna.UI.WinForms.GunaLabel()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -141,7 +143,7 @@ Partial Class Payments
         Me.soamountTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel6 = New Guna.UI.WinForms.GunaLabel()
         Me.dtpicker1 = New Guna.UI.WinForms.GunaDateTimePicker()
-        Me.GunaLabel5 = New Guna.UI.WinForms.GunaLabel()
+        Me.adsLbl = New Guna.UI.WinForms.GunaLabel()
         Me.adsTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel4 = New Guna.UI.WinForms.GunaLabel()
         Me.enbsTxt = New Guna.UI.WinForms.GunaTextBox()
@@ -846,6 +848,8 @@ Partial Class Payments
         Me.groupDetails.BackColor = System.Drawing.Color.Transparent
         Me.groupDetails.BaseColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.groupDetails.BorderColor = System.Drawing.Color.White
+        Me.groupDetails.Controls.Add(Me.balanceTxt)
+        Me.groupDetails.Controls.Add(Me.GunaLabel5)
         Me.groupDetails.Controls.Add(Me.btaxText)
         Me.groupDetails.Controls.Add(Me.GunaLabel15)
         Me.groupDetails.Controls.Add(Me.Panel1)
@@ -892,7 +896,7 @@ Partial Class Payments
         Me.groupDetails.Controls.Add(Me.soamountTxt)
         Me.groupDetails.Controls.Add(Me.GunaLabel6)
         Me.groupDetails.Controls.Add(Me.dtpicker1)
-        Me.groupDetails.Controls.Add(Me.GunaLabel5)
+        Me.groupDetails.Controls.Add(Me.adsLbl)
         Me.groupDetails.Controls.Add(Me.adsTxt)
         Me.groupDetails.Controls.Add(Me.GunaLabel4)
         Me.groupDetails.Controls.Add(Me.enbsTxt)
@@ -908,6 +912,35 @@ Partial Class Payments
         Me.groupDetails.Text = "DETAILS"
         Me.groupDetails.TextLocation = New System.Drawing.Point(10, 8)
         '
+        'balanceTxt
+        '
+        Me.balanceTxt.BaseColor = System.Drawing.Color.White
+        Me.balanceTxt.BorderColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.balanceTxt.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.balanceTxt.Enabled = False
+        Me.balanceTxt.FocusedBaseColor = System.Drawing.Color.White
+        Me.balanceTxt.FocusedBorderColor = System.Drawing.Color.Black
+        Me.balanceTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.balanceTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.balanceTxt.ForeColor = System.Drawing.Color.Black
+        Me.balanceTxt.Location = New System.Drawing.Point(342, 193)
+        Me.balanceTxt.Name = "balanceTxt"
+        Me.balanceTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.balanceTxt.SelectedText = ""
+        Me.balanceTxt.Size = New System.Drawing.Size(112, 26)
+        Me.balanceTxt.TabIndex = 62
+        Me.balanceTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'GunaLabel5
+        '
+        Me.GunaLabel5.AutoSize = True
+        Me.GunaLabel5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GunaLabel5.Location = New System.Drawing.Point(261, 196)
+        Me.GunaLabel5.Name = "GunaLabel5"
+        Me.GunaLabel5.Size = New System.Drawing.Size(65, 17)
+        Me.GunaLabel5.TabIndex = 61
+        Me.GunaLabel5.Text = "BALANCE:"
+        '
         'btaxText
         '
         Me.btaxText.BaseColor = System.Drawing.Color.White
@@ -918,7 +951,7 @@ Partial Class Payments
         Me.btaxText.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.btaxText.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btaxText.ForeColor = System.Drawing.Color.Black
-        Me.btaxText.Location = New System.Drawing.Point(341, 124)
+        Me.btaxText.Location = New System.Drawing.Point(341, 98)
         Me.btaxText.Name = "btaxText"
         Me.btaxText.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.btaxText.SelectedText = ""
@@ -930,7 +963,7 @@ Partial Class Payments
         '
         Me.GunaLabel15.AutoSize = True
         Me.GunaLabel15.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel15.Location = New System.Drawing.Point(232, 128)
+        Me.GunaLabel15.Location = New System.Drawing.Point(232, 102)
         Me.GunaLabel15.Name = "GunaLabel15"
         Me.GunaLabel15.Size = New System.Drawing.Size(94, 17)
         Me.GunaLabel15.TabIndex = 59
@@ -942,7 +975,7 @@ Partial Class Payments
         Me.Panel1.Controls.Add(Me.orderButton)
         Me.Panel1.Controls.Add(Me.printButton)
         Me.Panel1.Controls.Add(Me.addButton)
-        Me.Panel1.Location = New System.Drawing.Point(612, 187)
+        Me.Panel1.Location = New System.Drawing.Point(611, 194)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(386, 50)
         Me.Panel1.TabIndex = 58
@@ -1131,7 +1164,7 @@ Partial Class Payments
         '
         Me.GunaPictureBox2.BaseColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.GunaPictureBox2.Image = CType(resources.GetObject("GunaPictureBox2.Image"), System.Drawing.Image)
-        Me.GunaPictureBox2.Location = New System.Drawing.Point(459, 66)
+        Me.GunaPictureBox2.Location = New System.Drawing.Point(459, 40)
         Me.GunaPictureBox2.Name = "GunaPictureBox2"
         Me.GunaPictureBox2.Size = New System.Drawing.Size(15, 15)
         Me.GunaPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -1155,7 +1188,7 @@ Partial Class Payments
         Me.checkBox1.CheckedOnColor = System.Drawing.Color.Black
         Me.checkBox1.FillColor = System.Drawing.Color.White
         Me.checkBox1.ForeColor = System.Drawing.Color.DarkRed
-        Me.checkBox1.Location = New System.Drawing.Point(892, 125)
+        Me.checkBox1.Location = New System.Drawing.Point(895, 121)
         Me.checkBox1.Name = "checkBox1"
         Me.checkBox1.Size = New System.Drawing.Size(117, 20)
         Me.checkBox1.TabIndex = 52
@@ -1171,7 +1204,7 @@ Partial Class Payments
         Me.remTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.remTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.remTxt.ForeColor = System.Drawing.Color.Black
-        Me.remTxt.Location = New System.Drawing.Point(629, 155)
+        Me.remTxt.Location = New System.Drawing.Point(628, 162)
         Me.remTxt.Name = "remTxt"
         Me.remTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.remTxt.SelectedText = ""
@@ -1183,7 +1216,7 @@ Partial Class Payments
         '
         Me.GunaLabel24.AutoSize = True
         Me.GunaLabel24.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel24.Location = New System.Drawing.Point(544, 158)
+        Me.GunaLabel24.Location = New System.Drawing.Point(543, 165)
         Me.GunaLabel24.Name = "GunaLabel24"
         Me.GunaLabel24.Size = New System.Drawing.Size(69, 17)
         Me.GunaLabel24.TabIndex = 50
@@ -1406,7 +1439,7 @@ Partial Class Payments
         Me.subtotalTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.subtotalTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.subtotalTxt.ForeColor = System.Drawing.Color.Black
-        Me.subtotalTxt.Location = New System.Drawing.Point(342, 220)
+        Me.subtotalTxt.Location = New System.Drawing.Point(342, 224)
         Me.subtotalTxt.Name = "subtotalTxt"
         Me.subtotalTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.subtotalTxt.SelectedText = ""
@@ -1418,7 +1451,7 @@ Partial Class Payments
         '
         Me.GunaLabel16.AutoSize = True
         Me.GunaLabel16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel16.Location = New System.Drawing.Point(281, 224)
+        Me.GunaLabel16.Location = New System.Drawing.Point(281, 228)
         Me.GunaLabel16.Name = "GunaLabel16"
         Me.GunaLabel16.Size = New System.Drawing.Size(46, 17)
         Me.GunaLabel16.TabIndex = 34
@@ -1428,7 +1461,7 @@ Partial Class Payments
         '
         Me.GunaLabel14.AutoSize = True
         Me.GunaLabel14.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel14.Location = New System.Drawing.Point(267, 192)
+        Me.GunaLabel14.Location = New System.Drawing.Point(267, 166)
         Me.GunaLabel14.Name = "GunaLabel14"
         Me.GunaLabel14.Size = New System.Drawing.Size(58, 17)
         Me.GunaLabel14.TabIndex = 31
@@ -1444,7 +1477,7 @@ Partial Class Payments
         Me.othersTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.othersTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.othersTxt.ForeColor = System.Drawing.Color.Black
-        Me.othersTxt.Location = New System.Drawing.Point(342, 188)
+        Me.othersTxt.Location = New System.Drawing.Point(342, 162)
         Me.othersTxt.Name = "othersTxt"
         Me.othersTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.othersTxt.SelectedText = ""
@@ -1456,7 +1489,7 @@ Partial Class Payments
         '
         Me.GunaLabel13.AutoSize = True
         Me.GunaLabel13.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel13.Location = New System.Drawing.Point(280, 159)
+        Me.GunaLabel13.Location = New System.Drawing.Point(280, 133)
         Me.GunaLabel13.Name = "GunaLabel13"
         Me.GunaLabel13.Size = New System.Drawing.Size(45, 17)
         Me.GunaLabel13.TabIndex = 29
@@ -1472,7 +1505,7 @@ Partial Class Payments
         Me.wtaxTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.wtaxTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.wtaxTxt.ForeColor = System.Drawing.Color.Black
-        Me.wtaxTxt.Location = New System.Drawing.Point(342, 156)
+        Me.wtaxTxt.Location = New System.Drawing.Point(342, 130)
         Me.wtaxTxt.Name = "wtaxTxt"
         Me.wtaxTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.wtaxTxt.SelectedText = ""
@@ -1490,7 +1523,7 @@ Partial Class Payments
         Me.baddebtsTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.baddebtsTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.baddebtsTxt.ForeColor = System.Drawing.Color.Black
-        Me.baddebtsTxt.Location = New System.Drawing.Point(341, 91)
+        Me.baddebtsTxt.Location = New System.Drawing.Point(341, 65)
         Me.baddebtsTxt.Name = "baddebtsTxt"
         Me.baddebtsTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.baddebtsTxt.SelectedText = ""
@@ -1502,7 +1535,7 @@ Partial Class Payments
         '
         Me.GunaLabel12.AutoSize = True
         Me.GunaLabel12.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel12.Location = New System.Drawing.Point(250, 94)
+        Me.GunaLabel12.Location = New System.Drawing.Point(250, 68)
         Me.GunaLabel12.Name = "GunaLabel12"
         Me.GunaLabel12.Size = New System.Drawing.Size(75, 17)
         Me.GunaLabel12.TabIndex = 26
@@ -1518,7 +1551,7 @@ Partial Class Payments
         Me.orderTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.orderTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.orderTxt.ForeColor = System.Drawing.Color.Black
-        Me.orderTxt.Location = New System.Drawing.Point(341, 59)
+        Me.orderTxt.Location = New System.Drawing.Point(341, 33)
         Me.orderTxt.Name = "orderTxt"
         Me.orderTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.orderTxt.SelectedText = ""
@@ -1530,7 +1563,7 @@ Partial Class Payments
         '
         Me.GunaLabel11.AutoSize = True
         Me.GunaLabel11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel11.Location = New System.Drawing.Point(240, 62)
+        Me.GunaLabel11.Location = New System.Drawing.Point(240, 36)
         Me.GunaLabel11.Name = "GunaLabel11"
         Me.GunaLabel11.Size = New System.Drawing.Size(86, 17)
         Me.GunaLabel11.TabIndex = 24
@@ -1540,7 +1573,7 @@ Partial Class Payments
         '
         Me.GunaLabel10.AutoSize = True
         Me.GunaLabel10.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel10.Location = New System.Drawing.Point(262, 32)
+        Me.GunaLabel10.Location = New System.Drawing.Point(46, 224)
         Me.GunaLabel10.Name = "GunaLabel10"
         Me.GunaLabel10.Size = New System.Drawing.Size(63, 17)
         Me.GunaLabel10.TabIndex = 23
@@ -1556,7 +1589,7 @@ Partial Class Payments
         Me.dtpicker3.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dtpicker3.ForeColor = System.Drawing.Color.Black
         Me.dtpicker3.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpicker3.Location = New System.Drawing.Point(341, 29)
+        Me.dtpicker3.Location = New System.Drawing.Point(112, 221)
         Me.dtpicker3.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpicker3.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpicker3.Name = "dtpicker3"
@@ -1579,7 +1612,7 @@ Partial Class Payments
         Me.interestTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.interestTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.interestTxt.ForeColor = System.Drawing.Color.Black
-        Me.interestTxt.Location = New System.Drawing.Point(111, 217)
+        Me.interestTxt.Location = New System.Drawing.Point(111, 186)
         Me.interestTxt.Name = "interestTxt"
         Me.interestTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.interestTxt.SelectedText = ""
@@ -1591,7 +1624,7 @@ Partial Class Payments
         '
         Me.GunaLabel9.AutoSize = True
         Me.GunaLabel9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel9.Location = New System.Drawing.Point(42, 220)
+        Me.GunaLabel9.Location = New System.Drawing.Point(42, 189)
         Me.GunaLabel9.Name = "GunaLabel9"
         Me.GunaLabel9.Size = New System.Drawing.Size(67, 17)
         Me.GunaLabel9.TabIndex = 20
@@ -1601,7 +1634,7 @@ Partial Class Payments
         '
         Me.GunaLabel8.AutoSize = True
         Me.GunaLabel8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel8.Location = New System.Drawing.Point(9, 189)
+        Me.GunaLabel8.Location = New System.Drawing.Point(9, 158)
         Me.GunaLabel8.Name = "GunaLabel8"
         Me.GunaLabel8.Size = New System.Drawing.Size(101, 17)
         Me.GunaLabel8.TabIndex = 19
@@ -1617,7 +1650,7 @@ Partial Class Payments
         Me.dtpicker2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dtpicker2.ForeColor = System.Drawing.Color.Black
         Me.dtpicker2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpicker2.Location = New System.Drawing.Point(111, 187)
+        Me.dtpicker2.Location = New System.Drawing.Point(111, 156)
         Me.dtpicker2.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpicker2.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpicker2.Name = "dtpicker2"
@@ -1634,7 +1667,7 @@ Partial Class Payments
         '
         Me.GunaLabel7.AutoSize = True
         Me.GunaLabel7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel7.Location = New System.Drawing.Point(12, 158)
+        Me.GunaLabel7.Location = New System.Drawing.Point(12, 127)
         Me.GunaLabel7.Name = "GunaLabel7"
         Me.GunaLabel7.Size = New System.Drawing.Size(96, 17)
         Me.GunaLabel7.TabIndex = 17
@@ -1650,7 +1683,7 @@ Partial Class Payments
         Me.soamountTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.soamountTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.soamountTxt.ForeColor = System.Drawing.Color.Black
-        Me.soamountTxt.Location = New System.Drawing.Point(111, 155)
+        Me.soamountTxt.Location = New System.Drawing.Point(111, 124)
         Me.soamountTxt.Name = "soamountTxt"
         Me.soamountTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.soamountTxt.SelectedText = ""
@@ -1662,7 +1695,7 @@ Partial Class Payments
         '
         Me.GunaLabel6.AutoSize = True
         Me.GunaLabel6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel6.Location = New System.Drawing.Point(35, 126)
+        Me.GunaLabel6.Location = New System.Drawing.Point(35, 95)
         Me.GunaLabel6.Name = "GunaLabel6"
         Me.GunaLabel6.Size = New System.Drawing.Size(70, 17)
         Me.GunaLabel6.TabIndex = 15
@@ -1678,7 +1711,7 @@ Partial Class Payments
         Me.dtpicker1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dtpicker1.ForeColor = System.Drawing.Color.Black
         Me.dtpicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpicker1.Location = New System.Drawing.Point(111, 125)
+        Me.dtpicker1.Location = New System.Drawing.Point(111, 94)
         Me.dtpicker1.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpicker1.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpicker1.Name = "dtpicker1"
@@ -1691,15 +1724,15 @@ Partial Class Payments
         Me.dtpicker1.Text = "6/27/2024"
         Me.dtpicker1.Value = New Date(2024, 6, 27, 12, 12, 26, 572)
         '
-        'GunaLabel5
+        'adsLbl
         '
-        Me.GunaLabel5.AutoSize = True
-        Me.GunaLabel5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel5.Location = New System.Drawing.Point(13, 96)
-        Me.GunaLabel5.Name = "GunaLabel5"
-        Me.GunaLabel5.Size = New System.Drawing.Size(95, 17)
-        Me.GunaLabel5.TabIndex = 13
-        Me.GunaLabel5.Text = "ADS AMOUNT:"
+        Me.adsLbl.AutoSize = True
+        Me.adsLbl.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.adsLbl.Location = New System.Drawing.Point(232, 5)
+        Me.adsLbl.Name = "adsLbl"
+        Me.adsLbl.Size = New System.Drawing.Size(95, 17)
+        Me.adsLbl.TabIndex = 13
+        Me.adsLbl.Text = "ADS AMOUNT:"
         '
         'adsTxt
         '
@@ -1712,7 +1745,7 @@ Partial Class Payments
         Me.adsTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.adsTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.adsTxt.ForeColor = System.Drawing.Color.Black
-        Me.adsTxt.Location = New System.Drawing.Point(111, 93)
+        Me.adsTxt.Location = New System.Drawing.Point(341, 0)
         Me.adsTxt.Name = "adsTxt"
         Me.adsTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.adsTxt.SelectedText = ""
@@ -1801,11 +1834,12 @@ Partial Class Payments
         '
         Me.GunaLabel2.AutoSize = True
         Me.GunaLabel2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel2.Location = New System.Drawing.Point(849, 21)
+        Me.GunaLabel2.Location = New System.Drawing.Point(850, 13)
         Me.GunaLabel2.Name = "GunaLabel2"
-        Me.GunaLabel2.Size = New System.Drawing.Size(65, 17)
+        Me.GunaLabel2.Size = New System.Drawing.Size(65, 34)
         Me.GunaLabel2.TabIndex = 5
-        Me.GunaLabel2.Text = "BALANCE:"
+        Me.GunaLabel2.Text = "TOTAL" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "BALANCE:"
+        Me.GunaLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'termBox
         '
@@ -2001,8 +2035,6 @@ Partial Class Payments
     Friend WithEvents soamountTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel6 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents dtpicker1 As Guna.UI.WinForms.GunaDateTimePicker
-    Friend WithEvents GunaLabel5 As Guna.UI.WinForms.GunaLabel
-    Friend WithEvents adsTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel4 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents enbsTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel3 As Guna.UI.WinForms.GunaLabel
@@ -2023,4 +2055,8 @@ Partial Class Payments
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Panel2 As Panel
+    Friend WithEvents adsLbl As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents adsTxt As Guna.UI.WinForms.GunaTextBox
+    Friend WithEvents balanceTxt As Guna.UI.WinForms.GunaTextBox
+    Friend WithEvents GunaLabel5 As Guna.UI.WinForms.GunaLabel
 End Class
