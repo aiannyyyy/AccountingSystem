@@ -191,7 +191,7 @@ Public Class Pos
         Dim totalamount As Double = brochureamount + posteramount + dryingamount + replaceamount
 
         ' Display the amounts in the appropriate text boxes
-        adsTxt.Text = totalamount.ToString() ' Format as fixed-point number with 1 decimal place
+        adsTxt.Text = totalamount.ToString("F2") ' Format as fixed-point number with 1 decimal place
 
         ' Update totalTxt.Text by adding the value from amountTxt.Text
         UpdateTotalAmount()
@@ -638,20 +638,6 @@ Public Class Pos
         Return "ENBS"
     End Function
 
-    'Private Function InsertOrder(orderType As String) As String
-    '    Dim soaNumber As Integer = InsertRecord("", Date.Now.Date, orderType, codeTxt.Text, nameBox.Text, termBox.Text,
-    '                                        purchaseBox.Text, dtpicker2.Value.Date, Integer.Parse(qtyTxt.Text),
-    '                                        Integer.Parse(amountTxt.Text), ParseOrZero(brochureTxt.Text), ParseOrZero(posterTxt.Text),
-    '                                        ParseOrZero(dryingTxt.Text), ParseOrZero(replaceTxt.Text),
-    '                                        Double.Parse(adsTxt.Text), dtpicker1.Value.Date,
-    '                                        Double.Parse(totalTxt.Text), Double.Parse(totalTxt.Text),
-    '                                        Login.userTxt.Text, Integer.Parse(amountTxt.Text))
-
-    '    UpdateSoaTxt(soaNumber.ToString(), soaNumber)
-    '    MessageBox.Show("Insert Successfully!")
-    '    Return soaNumber.ToString()
-    'End Function
-
     Private Function InsertOrder(orderType As String) As String
         Dim soatxt As String = ""
         Dim soaNumber As Integer = InsertRecord(soatxt, Date.Now.Date, orderType, codeTxt.Text, nameBox.Text, termBox.Text,
@@ -936,10 +922,6 @@ Public Class Pos
         dgv1.Columns("ads_amount").ReadOnly = True
         dgv1.Columns("total_amount").ReadOnly = True
         dgv1.Columns("balance").ReadOnly = True
-    End Sub
-
-    Private Sub amountTxt_TextChanged(sender As Object, e As EventArgs) Handles amountTxt.TextChanged
-
     End Sub
 End Class
 
@@ -1898,4 +1880,20 @@ End Class
 '    remLbl.Visible = False
 '    remBox.Visible = False
 'End Sub
+
+
+'Private Function InsertOrder(orderType As String) As String
+'    Dim soaNumber As Integer = InsertRecord("", Date.Now.Date, orderType, codeTxt.Text, nameBox.Text, termBox.Text,
+'                                        purchaseBox.Text, dtpicker2.Value.Date, Integer.Parse(qtyTxt.Text),
+'                                        Integer.Parse(amountTxt.Text), ParseOrZero(brochureTxt.Text), ParseOrZero(posterTxt.Text),
+'                                        ParseOrZero(dryingTxt.Text), ParseOrZero(replaceTxt.Text),
+'                                        Double.Parse(adsTxt.Text), dtpicker1.Value.Date,
+'                                        Double.Parse(totalTxt.Text), Double.Parse(totalTxt.Text),
+'                                        Login.userTxt.Text, Integer.Parse(amountTxt.Text))
+
+'    UpdateSoaTxt(soaNumber.ToString(), soaNumber)
+'    MessageBox.Show("Insert Successfully!")
+'    Return soaNumber.ToString()
+'End Function
+
 

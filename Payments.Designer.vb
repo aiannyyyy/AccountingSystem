@@ -23,14 +23,14 @@ Partial Class Payments
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Payments))
         Me.GunaElipse1 = New Guna.UI.WinForms.GunaElipse(Me.components)
         Me.GunaPanel1 = New Guna.UI.WinForms.GunaPanel()
@@ -123,8 +123,6 @@ Partial Class Payments
         Me.GunaLabel18 = New Guna.UI.WinForms.GunaLabel()
         Me.mopCombo = New Guna.UI.WinForms.GunaComboBox()
         Me.GunaLabel17 = New Guna.UI.WinForms.GunaLabel()
-        Me.subtotalTxt = New Guna.UI.WinForms.GunaTextBox()
-        Me.GunaLabel16 = New Guna.UI.WinForms.GunaLabel()
         Me.GunaLabel14 = New Guna.UI.WinForms.GunaLabel()
         Me.othersTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel13 = New Guna.UI.WinForms.GunaLabel()
@@ -297,39 +295,39 @@ Partial Class Payments
         '
         Me.dgv2.AllowUserToAddRows = False
         Me.dgv2.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        Me.dgv2.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
+        Me.dgv2.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle17
         Me.dgv2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv2.BackgroundColor = System.Drawing.Color.White
         Me.dgv2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgv2.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle18
         Me.dgv2.ColumnHeadersHeight = 21
         Me.dgv2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column26, Me.Column13, Me.Column14, Me.Column15, Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20, Me.Column21, Me.Column22, Me.Column23, Me.Column24, Me.Column25})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv2.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle19.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
+        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv2.DefaultCellStyle = DataGridViewCellStyle19
         Me.dgv2.EnableHeadersVisualStyles = False
         Me.dgv2.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
         Me.dgv2.Location = New System.Drawing.Point(14, 532)
         Me.dgv2.Name = "dgv2"
         Me.dgv2.ReadOnly = True
         Me.dgv2.RowHeadersVisible = False
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.dgv2.RowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.dgv2.RowsDefaultCellStyle = DataGridViewCellStyle20
         Me.dgv2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv2.Size = New System.Drawing.Size(1016, 252)
         Me.dgv2.TabIndex = 60
@@ -594,39 +592,39 @@ Partial Class Payments
         '
         Me.dgv1.AllowUserToAddRows = False
         Me.dgv1.AllowUserToDeleteRows = False
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        Me.dgv1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle21.BackColor = System.Drawing.Color.White
+        Me.dgv1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle21
         Me.dgv1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv1.BackgroundColor = System.Drawing.Color.White
         Me.dgv1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgv1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle22.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle22.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle22
         Me.dgv1.ColumnHeadersHeight = 21
         Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.soa_number, Me.soa_date, Me.ordertype, Me.facility_code, Me.facility_name, Me.type_term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replace, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.user})
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv1.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle23.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
+        DataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv1.DefaultCellStyle = DataGridViewCellStyle23
         Me.dgv1.EnableHeadersVisualStyles = False
         Me.dgv1.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
         Me.dgv1.Location = New System.Drawing.Point(15, 61)
         Me.dgv1.Name = "dgv1"
         Me.dgv1.ReadOnly = True
         Me.dgv1.RowHeadersVisible = False
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle24
         Me.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv1.Size = New System.Drawing.Size(1016, 182)
         Me.dgv1.TabIndex = 59
@@ -876,8 +874,6 @@ Partial Class Payments
         Me.groupDetails.Controls.Add(Me.GunaLabel18)
         Me.groupDetails.Controls.Add(Me.mopCombo)
         Me.groupDetails.Controls.Add(Me.GunaLabel17)
-        Me.groupDetails.Controls.Add(Me.subtotalTxt)
-        Me.groupDetails.Controls.Add(Me.GunaLabel16)
         Me.groupDetails.Controls.Add(Me.GunaLabel14)
         Me.groupDetails.Controls.Add(Me.othersTxt)
         Me.groupDetails.Controls.Add(Me.GunaLabel13)
@@ -923,7 +919,7 @@ Partial Class Payments
         Me.balanceTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.balanceTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.balanceTxt.ForeColor = System.Drawing.Color.Black
-        Me.balanceTxt.Location = New System.Drawing.Point(342, 193)
+        Me.balanceTxt.Location = New System.Drawing.Point(342, 208)
         Me.balanceTxt.Name = "balanceTxt"
         Me.balanceTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.balanceTxt.SelectedText = ""
@@ -935,7 +931,7 @@ Partial Class Payments
         '
         Me.GunaLabel5.AutoSize = True
         Me.GunaLabel5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel5.Location = New System.Drawing.Point(261, 196)
+        Me.GunaLabel5.Location = New System.Drawing.Point(261, 211)
         Me.GunaLabel5.Name = "GunaLabel5"
         Me.GunaLabel5.Size = New System.Drawing.Size(65, 17)
         Me.GunaLabel5.TabIndex = 61
@@ -951,7 +947,7 @@ Partial Class Payments
         Me.btaxText.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.btaxText.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btaxText.ForeColor = System.Drawing.Color.Black
-        Me.btaxText.Location = New System.Drawing.Point(341, 98)
+        Me.btaxText.Location = New System.Drawing.Point(341, 113)
         Me.btaxText.Name = "btaxText"
         Me.btaxText.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.btaxText.SelectedText = ""
@@ -963,7 +959,7 @@ Partial Class Payments
         '
         Me.GunaLabel15.AutoSize = True
         Me.GunaLabel15.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel15.Location = New System.Drawing.Point(232, 102)
+        Me.GunaLabel15.Location = New System.Drawing.Point(232, 117)
         Me.GunaLabel15.Name = "GunaLabel15"
         Me.GunaLabel15.Size = New System.Drawing.Size(94, 17)
         Me.GunaLabel15.TabIndex = 59
@@ -975,7 +971,7 @@ Partial Class Payments
         Me.Panel1.Controls.Add(Me.orderButton)
         Me.Panel1.Controls.Add(Me.printButton)
         Me.Panel1.Controls.Add(Me.addButton)
-        Me.Panel1.Location = New System.Drawing.Point(611, 194)
+        Me.Panel1.Location = New System.Drawing.Point(618, 194)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(386, 50)
         Me.Panel1.TabIndex = 58
@@ -1164,7 +1160,7 @@ Partial Class Payments
         '
         Me.GunaPictureBox2.BaseColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.GunaPictureBox2.Image = CType(resources.GetObject("GunaPictureBox2.Image"), System.Drawing.Image)
-        Me.GunaPictureBox2.Location = New System.Drawing.Point(459, 40)
+        Me.GunaPictureBox2.Location = New System.Drawing.Point(459, 53)
         Me.GunaPictureBox2.Name = "GunaPictureBox2"
         Me.GunaPictureBox2.Size = New System.Drawing.Size(15, 15)
         Me.GunaPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -1190,7 +1186,7 @@ Partial Class Payments
         Me.checkBox1.ForeColor = System.Drawing.Color.DarkRed
         Me.checkBox1.Location = New System.Drawing.Point(895, 121)
         Me.checkBox1.Name = "checkBox1"
-        Me.checkBox1.Size = New System.Drawing.Size(117, 20)
+        Me.checkBox1.Size = New System.Drawing.Size(120, 20)
         Me.checkBox1.TabIndex = 52
         Me.checkBox1.Text = "STOP INTEREST"
         '
@@ -1428,40 +1424,11 @@ Partial Class Payments
         Me.GunaLabel17.TabIndex = 36
         Me.GunaLabel17.Text = "MODE OF PAYMENT:"
         '
-        'subtotalTxt
-        '
-        Me.subtotalTxt.BaseColor = System.Drawing.Color.White
-        Me.subtotalTxt.BorderColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.subtotalTxt.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.subtotalTxt.Enabled = False
-        Me.subtotalTxt.FocusedBaseColor = System.Drawing.Color.White
-        Me.subtotalTxt.FocusedBorderColor = System.Drawing.Color.Black
-        Me.subtotalTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
-        Me.subtotalTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.subtotalTxt.ForeColor = System.Drawing.Color.Black
-        Me.subtotalTxt.Location = New System.Drawing.Point(342, 224)
-        Me.subtotalTxt.Name = "subtotalTxt"
-        Me.subtotalTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.subtotalTxt.SelectedText = ""
-        Me.subtotalTxt.Size = New System.Drawing.Size(112, 26)
-        Me.subtotalTxt.TabIndex = 35
-        Me.subtotalTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'GunaLabel16
-        '
-        Me.GunaLabel16.AutoSize = True
-        Me.GunaLabel16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel16.Location = New System.Drawing.Point(281, 228)
-        Me.GunaLabel16.Name = "GunaLabel16"
-        Me.GunaLabel16.Size = New System.Drawing.Size(46, 17)
-        Me.GunaLabel16.TabIndex = 34
-        Me.GunaLabel16.Text = "TOTAL:"
-        '
         'GunaLabel14
         '
         Me.GunaLabel14.AutoSize = True
         Me.GunaLabel14.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel14.Location = New System.Drawing.Point(267, 166)
+        Me.GunaLabel14.Location = New System.Drawing.Point(267, 180)
         Me.GunaLabel14.Name = "GunaLabel14"
         Me.GunaLabel14.Size = New System.Drawing.Size(58, 17)
         Me.GunaLabel14.TabIndex = 31
@@ -1477,7 +1444,7 @@ Partial Class Payments
         Me.othersTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.othersTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.othersTxt.ForeColor = System.Drawing.Color.Black
-        Me.othersTxt.Location = New System.Drawing.Point(342, 162)
+        Me.othersTxt.Location = New System.Drawing.Point(342, 176)
         Me.othersTxt.Name = "othersTxt"
         Me.othersTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.othersTxt.SelectedText = ""
@@ -1489,7 +1456,7 @@ Partial Class Payments
         '
         Me.GunaLabel13.AutoSize = True
         Me.GunaLabel13.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel13.Location = New System.Drawing.Point(280, 133)
+        Me.GunaLabel13.Location = New System.Drawing.Point(280, 148)
         Me.GunaLabel13.Name = "GunaLabel13"
         Me.GunaLabel13.Size = New System.Drawing.Size(45, 17)
         Me.GunaLabel13.TabIndex = 29
@@ -1505,7 +1472,7 @@ Partial Class Payments
         Me.wtaxTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.wtaxTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.wtaxTxt.ForeColor = System.Drawing.Color.Black
-        Me.wtaxTxt.Location = New System.Drawing.Point(342, 130)
+        Me.wtaxTxt.Location = New System.Drawing.Point(342, 145)
         Me.wtaxTxt.Name = "wtaxTxt"
         Me.wtaxTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.wtaxTxt.SelectedText = ""
@@ -1523,7 +1490,7 @@ Partial Class Payments
         Me.baddebtsTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.baddebtsTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.baddebtsTxt.ForeColor = System.Drawing.Color.Black
-        Me.baddebtsTxt.Location = New System.Drawing.Point(341, 65)
+        Me.baddebtsTxt.Location = New System.Drawing.Point(341, 80)
         Me.baddebtsTxt.Name = "baddebtsTxt"
         Me.baddebtsTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.baddebtsTxt.SelectedText = ""
@@ -1535,7 +1502,7 @@ Partial Class Payments
         '
         Me.GunaLabel12.AutoSize = True
         Me.GunaLabel12.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel12.Location = New System.Drawing.Point(250, 68)
+        Me.GunaLabel12.Location = New System.Drawing.Point(250, 83)
         Me.GunaLabel12.Name = "GunaLabel12"
         Me.GunaLabel12.Size = New System.Drawing.Size(75, 17)
         Me.GunaLabel12.TabIndex = 26
@@ -1551,7 +1518,7 @@ Partial Class Payments
         Me.orderTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.orderTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.orderTxt.ForeColor = System.Drawing.Color.Black
-        Me.orderTxt.Location = New System.Drawing.Point(341, 33)
+        Me.orderTxt.Location = New System.Drawing.Point(341, 48)
         Me.orderTxt.Name = "orderTxt"
         Me.orderTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.orderTxt.SelectedText = ""
@@ -1563,7 +1530,7 @@ Partial Class Payments
         '
         Me.GunaLabel11.AutoSize = True
         Me.GunaLabel11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel11.Location = New System.Drawing.Point(240, 36)
+        Me.GunaLabel11.Location = New System.Drawing.Point(240, 51)
         Me.GunaLabel11.Name = "GunaLabel11"
         Me.GunaLabel11.Size = New System.Drawing.Size(86, 17)
         Me.GunaLabel11.TabIndex = 24
@@ -1573,7 +1540,7 @@ Partial Class Payments
         '
         Me.GunaLabel10.AutoSize = True
         Me.GunaLabel10.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel10.Location = New System.Drawing.Point(46, 224)
+        Me.GunaLabel10.Location = New System.Drawing.Point(46, 226)
         Me.GunaLabel10.Name = "GunaLabel10"
         Me.GunaLabel10.Size = New System.Drawing.Size(63, 17)
         Me.GunaLabel10.TabIndex = 23
@@ -1589,7 +1556,7 @@ Partial Class Payments
         Me.dtpicker3.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dtpicker3.ForeColor = System.Drawing.Color.Black
         Me.dtpicker3.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpicker3.Location = New System.Drawing.Point(112, 221)
+        Me.dtpicker3.Location = New System.Drawing.Point(112, 223)
         Me.dtpicker3.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpicker3.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpicker3.Name = "dtpicker3"
@@ -1597,7 +1564,7 @@ Partial Class Payments
         Me.dtpicker3.OnHoverBorderColor = System.Drawing.Color.Black
         Me.dtpicker3.OnHoverForeColor = System.Drawing.Color.Black
         Me.dtpicker3.OnPressedColor = System.Drawing.Color.Black
-        Me.dtpicker3.Size = New System.Drawing.Size(112, 24)
+        Me.dtpicker3.Size = New System.Drawing.Size(112, 31)
         Me.dtpicker3.TabIndex = 22
         Me.dtpicker3.Text = "6/27/2024"
         Me.dtpicker3.Value = New Date(2024, 6, 27, 11, 13, 18, 226)
@@ -1612,7 +1579,7 @@ Partial Class Payments
         Me.interestTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.interestTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.interestTxt.ForeColor = System.Drawing.Color.Black
-        Me.interestTxt.Location = New System.Drawing.Point(111, 186)
+        Me.interestTxt.Location = New System.Drawing.Point(111, 191)
         Me.interestTxt.Name = "interestTxt"
         Me.interestTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.interestTxt.SelectedText = ""
@@ -1624,7 +1591,7 @@ Partial Class Payments
         '
         Me.GunaLabel9.AutoSize = True
         Me.GunaLabel9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel9.Location = New System.Drawing.Point(42, 189)
+        Me.GunaLabel9.Location = New System.Drawing.Point(42, 194)
         Me.GunaLabel9.Name = "GunaLabel9"
         Me.GunaLabel9.Size = New System.Drawing.Size(67, 17)
         Me.GunaLabel9.TabIndex = 20
@@ -1634,7 +1601,7 @@ Partial Class Payments
         '
         Me.GunaLabel8.AutoSize = True
         Me.GunaLabel8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel8.Location = New System.Drawing.Point(9, 158)
+        Me.GunaLabel8.Location = New System.Drawing.Point(9, 163)
         Me.GunaLabel8.Name = "GunaLabel8"
         Me.GunaLabel8.Size = New System.Drawing.Size(101, 17)
         Me.GunaLabel8.TabIndex = 19
@@ -1650,7 +1617,7 @@ Partial Class Payments
         Me.dtpicker2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dtpicker2.ForeColor = System.Drawing.Color.Black
         Me.dtpicker2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpicker2.Location = New System.Drawing.Point(111, 156)
+        Me.dtpicker2.Location = New System.Drawing.Point(111, 159)
         Me.dtpicker2.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpicker2.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpicker2.Name = "dtpicker2"
@@ -1658,7 +1625,7 @@ Partial Class Payments
         Me.dtpicker2.OnHoverBorderColor = System.Drawing.Color.Black
         Me.dtpicker2.OnHoverForeColor = System.Drawing.Color.Black
         Me.dtpicker2.OnPressedColor = System.Drawing.Color.Black
-        Me.dtpicker2.Size = New System.Drawing.Size(113, 24)
+        Me.dtpicker2.Size = New System.Drawing.Size(113, 27)
         Me.dtpicker2.TabIndex = 18
         Me.dtpicker2.Text = "6/27/2024"
         Me.dtpicker2.Value = New Date(2024, 6, 27, 11, 13, 18, 226)
@@ -1667,7 +1634,7 @@ Partial Class Payments
         '
         Me.GunaLabel7.AutoSize = True
         Me.GunaLabel7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel7.Location = New System.Drawing.Point(12, 127)
+        Me.GunaLabel7.Location = New System.Drawing.Point(12, 130)
         Me.GunaLabel7.Name = "GunaLabel7"
         Me.GunaLabel7.Size = New System.Drawing.Size(96, 17)
         Me.GunaLabel7.TabIndex = 17
@@ -1683,7 +1650,7 @@ Partial Class Payments
         Me.soamountTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.soamountTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.soamountTxt.ForeColor = System.Drawing.Color.Black
-        Me.soamountTxt.Location = New System.Drawing.Point(111, 124)
+        Me.soamountTxt.Location = New System.Drawing.Point(111, 127)
         Me.soamountTxt.Name = "soamountTxt"
         Me.soamountTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.soamountTxt.SelectedText = ""
@@ -1695,7 +1662,7 @@ Partial Class Payments
         '
         Me.GunaLabel6.AutoSize = True
         Me.GunaLabel6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel6.Location = New System.Drawing.Point(35, 95)
+        Me.GunaLabel6.Location = New System.Drawing.Point(35, 98)
         Me.GunaLabel6.Name = "GunaLabel6"
         Me.GunaLabel6.Size = New System.Drawing.Size(70, 17)
         Me.GunaLabel6.TabIndex = 15
@@ -1711,7 +1678,7 @@ Partial Class Payments
         Me.dtpicker1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dtpicker1.ForeColor = System.Drawing.Color.Black
         Me.dtpicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpicker1.Location = New System.Drawing.Point(111, 94)
+        Me.dtpicker1.Location = New System.Drawing.Point(111, 92)
         Me.dtpicker1.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpicker1.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpicker1.Name = "dtpicker1"
@@ -1719,7 +1686,7 @@ Partial Class Payments
         Me.dtpicker1.OnHoverBorderColor = System.Drawing.Color.Black
         Me.dtpicker1.OnHoverForeColor = System.Drawing.Color.Black
         Me.dtpicker1.OnPressedColor = System.Drawing.Color.Black
-        Me.dtpicker1.Size = New System.Drawing.Size(113, 24)
+        Me.dtpicker1.Size = New System.Drawing.Size(113, 30)
         Me.dtpicker1.TabIndex = 14
         Me.dtpicker1.Text = "6/27/2024"
         Me.dtpicker1.Value = New Date(2024, 6, 27, 12, 12, 26, 572)
@@ -1757,7 +1724,7 @@ Partial Class Payments
         '
         Me.GunaLabel4.AutoSize = True
         Me.GunaLabel4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel4.Location = New System.Drawing.Point(63, 64)
+        Me.GunaLabel4.Location = New System.Drawing.Point(63, 62)
         Me.GunaLabel4.Name = "GunaLabel4"
         Me.GunaLabel4.Size = New System.Drawing.Size(42, 17)
         Me.GunaLabel4.TabIndex = 11
@@ -1774,7 +1741,7 @@ Partial Class Payments
         Me.enbsTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.enbsTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.enbsTxt.ForeColor = System.Drawing.Color.Black
-        Me.enbsTxt.Location = New System.Drawing.Point(111, 61)
+        Me.enbsTxt.Location = New System.Drawing.Point(111, 59)
         Me.enbsTxt.Name = "enbsTxt"
         Me.enbsTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.enbsTxt.SelectedText = ""
@@ -1786,7 +1753,7 @@ Partial Class Payments
         '
         Me.GunaLabel3.AutoSize = True
         Me.GunaLabel3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel3.Location = New System.Drawing.Point(13, 32)
+        Me.GunaLabel3.Location = New System.Drawing.Point(13, 30)
         Me.GunaLabel3.Name = "GunaLabel3"
         Me.GunaLabel3.Size = New System.Drawing.Size(93, 17)
         Me.GunaLabel3.TabIndex = 9
@@ -1803,7 +1770,7 @@ Partial Class Payments
         Me.soaTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.soaTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.soaTxt.ForeColor = System.Drawing.Color.Black
-        Me.soaTxt.Location = New System.Drawing.Point(111, 29)
+        Me.soaTxt.Location = New System.Drawing.Point(111, 27)
         Me.soaTxt.Name = "soaTxt"
         Me.soaTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.soaTxt.SelectedText = ""
@@ -2015,8 +1982,6 @@ Partial Class Payments
     Friend WithEvents GunaLabel18 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents mopCombo As Guna.UI.WinForms.GunaComboBox
     Friend WithEvents GunaLabel17 As Guna.UI.WinForms.GunaLabel
-    Friend WithEvents subtotalTxt As Guna.UI.WinForms.GunaTextBox
-    Friend WithEvents GunaLabel16 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents GunaLabel14 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents othersTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel13 As Guna.UI.WinForms.GunaLabel
