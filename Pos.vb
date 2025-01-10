@@ -263,7 +263,7 @@ Public Class Pos
         ' Reset isFirstInput and set defaults if the textbox is cleared
         If String.IsNullOrEmpty(qtyTxt.Text) Then
             isFirstInput = True
-            amountTxt.Text = "0"   ' Default value for amountTxt
+            amountTxt.Text = "0.00"   ' Default value for amountTxt
             totalTxt.Text = "0.00" ' Default value for totalTxt
         End If
 
@@ -304,7 +304,7 @@ Public Class Pos
                     CalculateTotalAmount(1800)
                 Else
                     ' Default calculation: multiply by 1750 if no checkbox is selected
-                    amountTxt.Text = (quantity * 1750).ToString ' Format with 2 decimal places
+                    amountTxt.Text = (quantity * 1750).ToString("F2") ' Format with 2 decimal places
                 End If
 
                 ' Update totalTxt.Text by adding the value from adsTxt.Text
@@ -333,9 +333,9 @@ Public Class Pos
             Dim totalAmount = quantity * unitPrice
 
             ' Display the total amount in amountTxt
-            amountTxt.Text = totalAmount.ToString() ' Format with 2 decimal places
+            amountTxt.Text = totalAmount.ToString("F2") ' Format with 2 decimal places
         Else
-            amountTxt.Text = "0"
+            amountTxt.Text = "0.00"
         End If
     End Sub
 
@@ -510,7 +510,7 @@ Public Class Pos
     '    End Using
     'End Function
 
-    Private Function InsertRecord(ByRef soatxt As String, soaDate As Date, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As Date, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Integer) As Integer
+    Private Function InsertRecord(ByRef soatxt As String, soaDate As Date, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As Date, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Double) As Double
         Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         Dim lastSoaQuery As String = "SELECT soa_number FROM acccounting WHERE LEFT(soa_number, 4) = ? ORDER BY soa_number DESC LIMIT 1"
         Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
@@ -640,13 +640,20 @@ Public Class Pos
 
     Private Function InsertOrder(orderType As String) As String
         Dim soatxt As String = ""
+
+        ' Format the Double values to two decimal places for ads, total, and balance
+        Dim formattedAds As String = Double.Parse(adsTxt.Text).ToString("F2")
+        Dim formattedTotal As String = Double.Parse(totalTxt.Text).ToString("F2")
+        Dim formattedBalance As String = Double.Parse(totalTxt.Text).ToString("F2") ' Assuming you have a balance field
+
+        ' Insert the formatted values into the database
         Dim soaNumber As Integer = InsertRecord(soatxt, Date.Now.Date, orderType, codeTxt.Text, nameBox.Text, termBox.Text,
-                                        purchaseBox.Text, dtpicker2.Value.Date, Integer.Parse(qtyTxt.Text),
-                                        Integer.Parse(amountTxt.Text), ParseOrZero(brochureTxt.Text), ParseOrZero(posterTxt.Text),
-                                        ParseOrZero(dryingTxt.Text), ParseOrZero(replaceTxt.Text),
-                                        Double.Parse(adsTxt.Text), dtpicker1.Value.Date,
-                                        Double.Parse(totalTxt.Text), Double.Parse(totalTxt.Text),
-                                        Login.userTxt.Text, Integer.Parse(amountTxt.Text))
+                                            purchaseBox.Text, dtpicker2.Value.Date, Integer.Parse(qtyTxt.Text),
+                                            Double.Parse(amountTxt.Text), ParseOrZero(brochureTxt.Text), ParseOrZero(posterTxt.Text),
+                                            ParseOrZero(dryingTxt.Text), ParseOrZero(replaceTxt.Text),
+                                            formattedAds, dtpicker1.Value.Date,
+                                            formattedTotal, formattedBalance,
+                                            Login.userTxt.Text, Double.Parse(amountTxt.Text))
 
         UpdateSoaTxt(soatxt, soaNumber)
         MessageBox.Show("Saved Successfully!")
@@ -922,6 +929,13 @@ Public Class Pos
         dgv1.Columns("ads_amount").ReadOnly = True
         dgv1.Columns("total_amount").ReadOnly = True
         dgv1.Columns("balance").ReadOnly = True
+    End Sub
+
+    Private Sub dgv1_BindingContextChanged(sender As Object, e As EventArgs) Handles dgv1.BindingContextChanged
+        ' Set the format for the columns to display two decimal places
+        dgv1.Columns("ads_amount").DefaultCellStyle.Format = "F2" ' Replace "adsColumn" with your actual column name for ads
+        dgv1.Columns("total_amount").DefaultCellStyle.Format = "F2" ' Replace "totalColumn" with your actual column name for total amount
+        dgv1.Columns("balance").DefaultCellStyle.Format = "F2" ' Replace "balanceColumn" with your actual column name for balance
     End Sub
 End Class
 
