@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Payments
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Payments
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -96,7 +96,6 @@ Partial Class Payments
         Me.btaxText = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel15 = New Guna.UI.WinForms.GunaLabel()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.computeBtn = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.orderButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.printButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.addButton = New Guna.UI.WinForms.GunaAdvenceButton()
@@ -967,48 +966,13 @@ Partial Class Payments
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.computeBtn)
         Me.Panel1.Controls.Add(Me.orderButton)
         Me.Panel1.Controls.Add(Me.printButton)
         Me.Panel1.Controls.Add(Me.addButton)
-        Me.Panel1.Location = New System.Drawing.Point(618, 194)
+        Me.Panel1.Location = New System.Drawing.Point(713, 193)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(386, 50)
+        Me.Panel1.Size = New System.Drawing.Size(299, 50)
         Me.Panel1.TabIndex = 58
-        '
-        'computeBtn
-        '
-        Me.computeBtn.AnimationHoverSpeed = 0.07!
-        Me.computeBtn.AnimationSpeed = 0.03!
-        Me.computeBtn.BackColor = System.Drawing.Color.Transparent
-        Me.computeBtn.BaseColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.computeBtn.BorderColor = System.Drawing.Color.Black
-        Me.computeBtn.CheckedBaseColor = System.Drawing.Color.Gray
-        Me.computeBtn.CheckedBorderColor = System.Drawing.Color.Black
-        Me.computeBtn.CheckedForeColor = System.Drawing.Color.White
-        Me.computeBtn.CheckedImage = Nothing
-        Me.computeBtn.CheckedLineColor = System.Drawing.Color.DimGray
-        Me.computeBtn.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.computeBtn.FocusedColor = System.Drawing.Color.Empty
-        Me.computeBtn.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.computeBtn.ForeColor = System.Drawing.Color.Black
-        Me.computeBtn.Image = Nothing
-        Me.computeBtn.ImageSize = New System.Drawing.Size(20, 20)
-        Me.computeBtn.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeBtn.Location = New System.Drawing.Point(294, 7)
-        Me.computeBtn.Name = "computeBtn"
-        Me.computeBtn.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeBtn.OnHoverBorderColor = System.Drawing.Color.Black
-        Me.computeBtn.OnHoverForeColor = System.Drawing.Color.Black
-        Me.computeBtn.OnHoverImage = Nothing
-        Me.computeBtn.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeBtn.OnPressedColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeBtn.Radius = 2
-        Me.computeBtn.Size = New System.Drawing.Size(85, 30)
-        Me.computeBtn.TabIndex = 26
-        Me.computeBtn.Text = "COMPUTE"
-        Me.computeBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.computeBtn.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
         'orderButton
         '
@@ -2023,5 +1987,4 @@ Partial Class Payments
     Friend WithEvents adsTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents balanceperSoa As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel5 As Guna.UI.WinForms.GunaLabel
-    Friend WithEvents computeBtn As Guna.UI.WinForms.GunaAdvenceButton
 End Class

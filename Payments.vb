@@ -323,6 +323,38 @@ Public Class Payments
     '    End If
     'End Sub
 
+    'Private Sub dgv1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellContentClick
+    '    If e.RowIndex >= 0 AndAlso e.RowIndex < dgv1.Rows.Count Then
+    '        ' Populate other text fields from the clicked row
+    '        soaTxt.Text = dgv1.Rows(e.RowIndex).Cells(0).Value.ToString()
+    '        enbsTxt.Text = dgv1.Rows(e.RowIndex).Cells(9).Value.ToString()
+    '        adsTxt.Text = dgv1.Rows(e.RowIndex).Cells(15).Value.ToString()
+
+    '        ' Safely parse the date
+    '        Dim dateValue As DateTime
+    '        If DateTime.TryParse(dgv1.Rows(e.RowIndex).Cells(16).Value.ToString(), dateValue) Then
+    '            dtpicker1.Value = dateValue
+    '        Else
+    '            dtpicker1.Value = DateTime.Now ' Default to current date if parsing fails
+    '        End If
+
+    '        ' Parse and format the balance (balanceTxt)
+    '        Dim cellValue As Double
+    '        If Double.TryParse(dgv1.Rows(e.RowIndex).Cells("balance").Value.ToString(), cellValue) Then
+    '            balanceperSoa.Text = cellValue.ToString("F2")
+    '        Else
+    '            balanceperSoa.Text = "0.00"
+    '        End If
+
+    '        soamountTxt.Text = dgv1.Rows(e.RowIndex).Cells(10).Value.ToString()
+
+    '        ' Recalculate interest and update related fields
+    '        CalculateAndUpdateInterest()
+
+    '        ' Refresh the balance whenever the row is clicked
+    '        RefreshBalance(e.RowIndex)
+    '    End If
+    'End Sub
     Private Sub dgv1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellContentClick
         If e.RowIndex >= 0 AndAlso e.RowIndex < dgv1.Rows.Count Then
             ' Populate other text fields from the clicked row
@@ -353,8 +385,25 @@ Public Class Payments
 
             ' Refresh the balance whenever the row is clicked
             RefreshBalance(e.RowIndex)
+
+            ' Update balanceperSoa to include interest
+            UpdateBalanceWithInterest(cellValue) ' Call the function to add the interest
         End If
     End Sub
+
+    Private Sub UpdateBalanceWithInterest(balance As Double)
+        Dim interest As Double
+        ' Attempt to parse the interest value from the interestTxt text box
+        If Double.TryParse(interestTxt.Text, interest) Then
+            ' Add interest to the balance and update the display
+            balanceperSoa.Text = (balance + interest).ToString("F2")
+        Else
+            ' If interest is not a valid number, just display the balance
+            balanceperSoa.Text = balance.ToString("F2")
+        End If
+    End Sub
+
+
 
     ' Add this helper method to refresh the balance
     Private Sub RefreshBalance(rowIndex As Integer)
@@ -797,7 +846,7 @@ Public Class Payments
         ' Do not modify the balanceBox since it represents the original balance
     End Sub
 
-    Private Sub computeBtn_Click(sender As Object, e As EventArgs) Handles computeBtn.Click
+    Private Sub computeBtn_Click(sender As Object, e As EventArgs)
         ' Validate and parse the original balance from balancePerSoa
         If Not Double.TryParse(balanceperSoa.Text, originalBalance) Then
             MessageBox.Show("Please enter a valid original balance.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
