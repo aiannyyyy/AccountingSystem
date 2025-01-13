@@ -91,11 +91,12 @@ Partial Class Payments
         Me.balance = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.user = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.groupDetails = New Guna.UI.WinForms.GunaGroupBox()
-        Me.balanceTxt = New Guna.UI.WinForms.GunaTextBox()
+        Me.balanceperSoa = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel5 = New Guna.UI.WinForms.GunaLabel()
         Me.btaxText = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel15 = New Guna.UI.WinForms.GunaLabel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.computeBtn = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.orderButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.printButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.addButton = New Guna.UI.WinForms.GunaAdvenceButton()
@@ -146,13 +147,12 @@ Partial Class Payments
         Me.enbsTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel3 = New Guna.UI.WinForms.GunaLabel()
         Me.soaTxt = New Guna.UI.WinForms.GunaTextBox()
-        Me.balanceBox = New Guna.UI.WinForms.GunaTextBox()
+        Me.totalBalance = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel2 = New Guna.UI.WinForms.GunaLabel()
         Me.termBox = New Guna.UI.WinForms.GunaTextBox()
         Me.nameBox = New Guna.UI.WinForms.GunaTextBox()
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
-        Me.computeBtn = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.GunaPanel1.SuspendLayout()
         Me.mainPanel.SuspendLayout()
         CType(Me.dgv2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -255,7 +255,7 @@ Partial Class Payments
         Me.mainPanel.Controls.Add(Me.dgv2)
         Me.mainPanel.Controls.Add(Me.dgv1)
         Me.mainPanel.Controls.Add(Me.groupDetails)
-        Me.mainPanel.Controls.Add(Me.balanceBox)
+        Me.mainPanel.Controls.Add(Me.totalBalance)
         Me.mainPanel.Controls.Add(Me.GunaLabel2)
         Me.mainPanel.Controls.Add(Me.termBox)
         Me.mainPanel.Controls.Add(Me.nameBox)
@@ -846,7 +846,7 @@ Partial Class Payments
         Me.groupDetails.BackColor = System.Drawing.Color.Transparent
         Me.groupDetails.BaseColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.groupDetails.BorderColor = System.Drawing.Color.White
-        Me.groupDetails.Controls.Add(Me.balanceTxt)
+        Me.groupDetails.Controls.Add(Me.balanceperSoa)
         Me.groupDetails.Controls.Add(Me.GunaLabel5)
         Me.groupDetails.Controls.Add(Me.btaxText)
         Me.groupDetails.Controls.Add(Me.GunaLabel15)
@@ -908,24 +908,24 @@ Partial Class Payments
         Me.groupDetails.Text = "DETAILS"
         Me.groupDetails.TextLocation = New System.Drawing.Point(10, 8)
         '
-        'balanceTxt
+        'balanceperSoa
         '
-        Me.balanceTxt.BaseColor = System.Drawing.Color.White
-        Me.balanceTxt.BorderColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.balanceTxt.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.balanceTxt.Enabled = False
-        Me.balanceTxt.FocusedBaseColor = System.Drawing.Color.White
-        Me.balanceTxt.FocusedBorderColor = System.Drawing.Color.Black
-        Me.balanceTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
-        Me.balanceTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.balanceTxt.ForeColor = System.Drawing.Color.Black
-        Me.balanceTxt.Location = New System.Drawing.Point(342, 208)
-        Me.balanceTxt.Name = "balanceTxt"
-        Me.balanceTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.balanceTxt.SelectedText = ""
-        Me.balanceTxt.Size = New System.Drawing.Size(112, 26)
-        Me.balanceTxt.TabIndex = 62
-        Me.balanceTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.balanceperSoa.BaseColor = System.Drawing.Color.White
+        Me.balanceperSoa.BorderColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.balanceperSoa.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.balanceperSoa.Enabled = False
+        Me.balanceperSoa.FocusedBaseColor = System.Drawing.Color.White
+        Me.balanceperSoa.FocusedBorderColor = System.Drawing.Color.Black
+        Me.balanceperSoa.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.balanceperSoa.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.balanceperSoa.ForeColor = System.Drawing.Color.Black
+        Me.balanceperSoa.Location = New System.Drawing.Point(342, 208)
+        Me.balanceperSoa.Name = "balanceperSoa"
+        Me.balanceperSoa.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.balanceperSoa.SelectedText = ""
+        Me.balanceperSoa.Size = New System.Drawing.Size(112, 26)
+        Me.balanceperSoa.TabIndex = 62
+        Me.balanceperSoa.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'GunaLabel5
         '
@@ -975,6 +975,40 @@ Partial Class Payments
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(386, 50)
         Me.Panel1.TabIndex = 58
+        '
+        'computeBtn
+        '
+        Me.computeBtn.AnimationHoverSpeed = 0.07!
+        Me.computeBtn.AnimationSpeed = 0.03!
+        Me.computeBtn.BackColor = System.Drawing.Color.Transparent
+        Me.computeBtn.BaseColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.computeBtn.BorderColor = System.Drawing.Color.Black
+        Me.computeBtn.CheckedBaseColor = System.Drawing.Color.Gray
+        Me.computeBtn.CheckedBorderColor = System.Drawing.Color.Black
+        Me.computeBtn.CheckedForeColor = System.Drawing.Color.White
+        Me.computeBtn.CheckedImage = Nothing
+        Me.computeBtn.CheckedLineColor = System.Drawing.Color.DimGray
+        Me.computeBtn.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.computeBtn.FocusedColor = System.Drawing.Color.Empty
+        Me.computeBtn.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.computeBtn.ForeColor = System.Drawing.Color.Black
+        Me.computeBtn.Image = Nothing
+        Me.computeBtn.ImageSize = New System.Drawing.Size(20, 20)
+        Me.computeBtn.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.computeBtn.Location = New System.Drawing.Point(294, 7)
+        Me.computeBtn.Name = "computeBtn"
+        Me.computeBtn.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.computeBtn.OnHoverBorderColor = System.Drawing.Color.Black
+        Me.computeBtn.OnHoverForeColor = System.Drawing.Color.Black
+        Me.computeBtn.OnHoverImage = Nothing
+        Me.computeBtn.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.computeBtn.OnPressedColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.computeBtn.Radius = 2
+        Me.computeBtn.Size = New System.Drawing.Size(85, 30)
+        Me.computeBtn.TabIndex = 26
+        Me.computeBtn.Text = "COMPUTE"
+        Me.computeBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.computeBtn.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
         'orderButton
         '
@@ -1744,24 +1778,24 @@ Partial Class Payments
         Me.soaTxt.TabIndex = 0
         Me.soaTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'balanceBox
+        'totalBalance
         '
-        Me.balanceBox.BaseColor = System.Drawing.Color.White
-        Me.balanceBox.BorderColor = System.Drawing.Color.Black
-        Me.balanceBox.BorderSize = 1
-        Me.balanceBox.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.balanceBox.Enabled = False
-        Me.balanceBox.FocusedBaseColor = System.Drawing.Color.White
-        Me.balanceBox.FocusedBorderColor = System.Drawing.Color.Black
-        Me.balanceBox.FocusedForeColor = System.Drawing.SystemColors.ControlText
-        Me.balanceBox.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.balanceBox.Location = New System.Drawing.Point(922, 14)
-        Me.balanceBox.Name = "balanceBox"
-        Me.balanceBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.balanceBox.SelectedText = ""
-        Me.balanceBox.Size = New System.Drawing.Size(108, 33)
-        Me.balanceBox.TabIndex = 6
-        Me.balanceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.totalBalance.BaseColor = System.Drawing.Color.White
+        Me.totalBalance.BorderColor = System.Drawing.Color.Black
+        Me.totalBalance.BorderSize = 1
+        Me.totalBalance.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.totalBalance.Enabled = False
+        Me.totalBalance.FocusedBaseColor = System.Drawing.Color.White
+        Me.totalBalance.FocusedBorderColor = System.Drawing.Color.Black
+        Me.totalBalance.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.totalBalance.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.totalBalance.Location = New System.Drawing.Point(922, 14)
+        Me.totalBalance.Name = "totalBalance"
+        Me.totalBalance.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.totalBalance.SelectedText = ""
+        Me.totalBalance.Size = New System.Drawing.Size(108, 33)
+        Me.totalBalance.TabIndex = 6
+        Me.totalBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'GunaLabel2
         '
@@ -1836,40 +1870,6 @@ Partial Class Payments
         Me.GunaLabel1.Size = New System.Drawing.Size(96, 17)
         Me.GunaLabel1.TabIndex = 1
         Me.GunaLabel1.Text = "FACILITY CODE:"
-        '
-        'computeBtn
-        '
-        Me.computeBtn.AnimationHoverSpeed = 0.07!
-        Me.computeBtn.AnimationSpeed = 0.03!
-        Me.computeBtn.BackColor = System.Drawing.Color.Transparent
-        Me.computeBtn.BaseColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.computeBtn.BorderColor = System.Drawing.Color.Black
-        Me.computeBtn.CheckedBaseColor = System.Drawing.Color.Gray
-        Me.computeBtn.CheckedBorderColor = System.Drawing.Color.Black
-        Me.computeBtn.CheckedForeColor = System.Drawing.Color.White
-        Me.computeBtn.CheckedImage = Nothing
-        Me.computeBtn.CheckedLineColor = System.Drawing.Color.DimGray
-        Me.computeBtn.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.computeBtn.FocusedColor = System.Drawing.Color.Empty
-        Me.computeBtn.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.computeBtn.ForeColor = System.Drawing.Color.Black
-        Me.computeBtn.Image = Nothing
-        Me.computeBtn.ImageSize = New System.Drawing.Size(20, 20)
-        Me.computeBtn.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeBtn.Location = New System.Drawing.Point(294, 7)
-        Me.computeBtn.Name = "computeBtn"
-        Me.computeBtn.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeBtn.OnHoverBorderColor = System.Drawing.Color.Black
-        Me.computeBtn.OnHoverForeColor = System.Drawing.Color.Black
-        Me.computeBtn.OnHoverImage = Nothing
-        Me.computeBtn.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeBtn.OnPressedColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeBtn.Radius = 2
-        Me.computeBtn.Size = New System.Drawing.Size(85, 30)
-        Me.computeBtn.TabIndex = 26
-        Me.computeBtn.Text = "COMPUTE"
-        Me.computeBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.computeBtn.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
         'Payments
         '
@@ -2004,7 +2004,7 @@ Partial Class Payments
     Friend WithEvents enbsTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel3 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents soaTxt As Guna.UI.WinForms.GunaTextBox
-    Friend WithEvents balanceBox As Guna.UI.WinForms.GunaTextBox
+    Friend WithEvents totalBalance As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel2 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents termBox As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents nameBox As Guna.UI.WinForms.GunaTextBox
@@ -2021,7 +2021,7 @@ Partial Class Payments
     Friend WithEvents Panel2 As Panel
     Friend WithEvents adsLbl As Guna.UI.WinForms.GunaLabel
     Friend WithEvents adsTxt As Guna.UI.WinForms.GunaTextBox
-    Friend WithEvents balanceTxt As Guna.UI.WinForms.GunaTextBox
+    Friend WithEvents balanceperSoa As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel5 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents computeBtn As Guna.UI.WinForms.GunaAdvenceButton
 End Class

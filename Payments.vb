@@ -1,7 +1,10 @@
 ﻿Imports System.Data.Odbc
 Public Class Payments
     Private connString As String = "DSN=dashboard"
-    Private originalBalance As Double = 0
+    ' Declare class-level variables to store the initial balance
+    Private originalBalance As Double
+    Private remainingBalance As Double
+
     Private Sub Payments_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         codeTxt.SetOnGotFocus()
         mopCombo.Items.AddRange({"BANK TO BANK", "WALK IN"})
@@ -202,7 +205,7 @@ Public Class Payments
             Next
 
             ' Update balanceBox with the grandTotal value
-            balanceBox.Text = grandTotal.ToString("F2")
+            totalBalance.Text = grandTotal.ToString("F2")
 
             ' Calculate interest and update related fields
             CalculateAndUpdateInterest()
@@ -238,14 +241,13 @@ Public Class Payments
     End Sub
 
     Private Sub interestTxt_TextChanged(sender As Object, e As EventArgs) Handles interestTxt.TextChanged
-        CalculateAndUpdateInterest()
     End Sub
 
     Private Sub ClearFields()
         codeTxt.Clear()
         nameBox.Clear()
         termBox.Clear()
-        balanceBox.Clear()
+        totalBalance.Clear()
         orderTxt.Clear()
         soaTxt.Clear()
         enbsTxt.Clear()
@@ -339,9 +341,9 @@ Public Class Payments
             ' Parse and format the balance (balanceTxt)
             Dim cellValue As Double
             If Double.TryParse(dgv1.Rows(e.RowIndex).Cells("balance").Value.ToString(), cellValue) Then
-                balanceTxt.Text = cellValue.ToString("F2")
+                balanceperSoa.Text = cellValue.ToString("F2")
             Else
-                balanceTxt.Text = "0.00"
+                balanceperSoa.Text = "0.00"
             End If
 
             soamountTxt.Text = dgv1.Rows(e.RowIndex).Cells(10).Value.ToString()
@@ -359,9 +361,9 @@ Public Class Payments
         ' Parse and format the balance (balanceTxt) in case it changes dynamically
         Dim cellValue As Double
         If Double.TryParse(dgv1.Rows(rowIndex).Cells("balance").Value.ToString(), cellValue) Then
-            balanceTxt.Text = cellValue.ToString("F2")
+            balanceperSoa.Text = cellValue.ToString("F2")
         Else
-            balanceTxt.Text = "0.00"
+            balanceperSoa.Text = "0.00"
         End If
     End Sub
 
@@ -464,8 +466,11 @@ Public Class Payments
         ExecuteQuery(query)
 
         ' After inserting, update the accounting balance based on the soa_number
-        Dim updateBalanceQuery As String = $"UPDATE acccounting SET balance = balance - {amountPaid.ToString("F2")} WHERE soa_number = '{soaNumber}'"
+        Dim updateBalanceQuery As String = $"UPDATE acccounting SET balance = balance - {amountPaid.ToString("F2")} - {badDebts.ToString("F2")} - {businessTax.ToString("F2")} - {wtax.ToString("F2")} WHERE soa_number = '{soaNumber}'"
         ExecuteQuery(updateBalanceQuery)
+
+        Dim updateGrandTotalQuery As String = $"UPDATE payments SET grand_total = grand_total - {amountPaid.ToString("F2")} - {badDebts.ToString("F2")} - {businessTax.ToString("F2")} - {wtax.ToString("F2")} WHERE soa_number = '{soaNumber}'"
+        ExecuteQuery(updateGrandTotalQuery)
     End Sub
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
@@ -475,7 +480,7 @@ Public Class Payments
         Dim soaNumber As String = soaTxt.Text
         Dim enbs As String = enbsTxt.Text
         Dim facCode As String = codeTxt.Text
-        Dim balance As Double = Convert.ToDouble(balanceTxt.Text)
+        Dim balance As Double = Convert.ToDouble(balanceperSoa.Text)
         Dim adsAmount As Double = If(selectedRow IsNot Nothing AndAlso Not IsDBNull(selectedRow.Cells("ads_amount").Value), Convert.ToDouble(selectedRow.Cells("ads_amount").Value), 0)
         Dim dueDate As Date = dtpicker1.Value
         Dim soaAmount As Double = Convert.ToDouble(soamountTxt.Text)
@@ -487,7 +492,7 @@ Public Class Payments
         Dim businessTax As Double = Convert.ToDouble(btaxText.Text)
         Dim wtax As Double = Convert.ToDouble(wtaxTxt.Text)
         Dim others As String = othersTxt.Text
-        Dim grandTotal As Double = Convert.ToDouble(balanceBox.Text)
+        Dim grandTotal As Double = Convert.ToDouble(totalBalance.Text)
         Dim mop As String = mopCombo.Text
         Dim fop As String = formCombo.Text
         Dim chequeDetails As String = chequeTxt.Text
@@ -517,11 +522,17 @@ Public Class Payments
     End Sub
 
     Private Sub baddebtsTxt_TextChanged(sender As Object, e As EventArgs) Handles baddebtsTxt.TextChanged
-        CalculateAndUpdateInterest()
+        ''CalculateAndUpdateInterest()
+        'balanceperSoa.Text = amountpaidTxt.Text - baddebtsTxt.Text - wtaxTxt.Text - btaxText.Text
+
+        'totalBalance.Text = amountpaidTxt.Text - baddebtsTxt.Text - wtaxTxt.Text - btaxText.Text
     End Sub
 
     Private Sub btaxText_TextChanged(sender As Object, e As EventArgs) Handles btaxText.TextChanged
-        CalculateAndUpdateInterest()
+        ''CalculateAndUpdateInterest()
+        'balanceperSoa.Text = amountpaidTxt.Text - baddebtsTxt.Text - wtaxTxt.Text - btaxText.Text
+
+        'totalBalance.Text = amountpaidTxt.Text - baddebtsTxt.Text - wtaxTxt.Text - btaxText.Text
     End Sub
 
     Private Sub GunaControlBox1_Click(sender As Object, e As EventArgs) Handles GunaControlBox1.Click
@@ -541,14 +552,118 @@ Public Class Payments
         End If
     End Sub
 
-    Private Sub balanceBox_TextChanged(sender As Object, e As EventArgs) Handles balanceBox.TextChanged
+    Private Sub balanceBox_TextChanged(sender As Object, e As EventArgs) Handles totalBalance.TextChanged
 
     End Sub
 
     Private Sub amountpaidTxt_TextChanged(sender As Object, e As EventArgs) Handles amountpaidTxt.TextChanged
+        'balanceperSoa.Text = amountpaidTxt.Text - baddebtsTxt.Text - wtaxTxt.Text - btaxText.Text
 
+        'totalBalance.Text = amountpaidTxt.Text - baddebtsTxt.Text - wtaxTxt.Text - btaxText.Text
     End Sub
 
+    Private Sub TextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles totalBalance.KeyDown, balanceperSoa.KeyDown, baddebtsTxt.KeyDown, btaxText.KeyDown, wtaxTxt.KeyDown, amountpaidTxt.KeyDown
+        ' Check if the Enter key was pressed
+        If e.KeyCode = Keys.Enter Then
+            ' Declare variables for the values in the textboxes
+            Dim totalBalanceValue As Decimal
+            Dim balancePerSoaValue As Decimal
+            Dim badDebtsValue As Decimal
+            Dim btaxValue As Decimal
+            Dim wtaxValue As Decimal
+            Dim amountPaidValue As Decimal
+
+            ' Try to parse the values from the textboxes
+            If Decimal.TryParse(totalBalance.Text, totalBalanceValue) AndAlso Decimal.TryParse(balanceperSoa.Text, balancePerSoaValue) _
+           AndAlso Decimal.TryParse(baddebtsTxt.Text, badDebtsValue) AndAlso Decimal.TryParse(btaxText.Text, btaxValue) _
+           AndAlso Decimal.TryParse(wtaxTxt.Text, wtaxValue) AndAlso Decimal.TryParse(amountpaidTxt.Text, amountPaidValue) Then
+
+                ' Subtract the values from totalBalance and balanceperSoa
+                Dim result1 As Decimal = totalBalanceValue - badDebtsValue - btaxValue - wtaxValue - amountPaidValue
+                Dim result2 As Decimal = balancePerSoaValue - badDebtsValue - btaxValue - wtaxValue - amountPaidValue
+
+                ' Update totalBalance and balanceperSoa with the new calculated values
+                totalBalance.Text = result1.ToString()
+                balanceperSoa.Text = result2.ToString()
+
+            Else
+                ' If any value is invalid, clear the result textboxes (but don't clear totalBalance and balanceperSoa)
+                ' Optionally, you can handle invalid values differently (e.g., show a message to the user)
+            End If
+        End If
+    End Sub
+
+    ' Optionally, handle when the user clears the textboxes (but do not clear totalBalance or balanceperSoa)
+    Private Sub TextBox_Leave(sender As Object, e As EventArgs) Handles totalBalance.Leave, balanceperSoa.Leave, baddebtsTxt.Leave, btaxText.Leave, wtaxTxt.Leave, amountpaidTxt.Leave
+        ' If any of the input fields are cleared (except totalBalance and balanceperSoa), revert totalBalance and balanceperSoa to original values
+        If String.IsNullOrEmpty(baddebtsTxt.Text) OrElse String.IsNullOrEmpty(btaxText.Text) _
+       OrElse String.IsNullOrEmpty(wtaxTxt.Text) OrElse String.IsNullOrEmpty(amountpaidTxt.Text) Then
+            ' Optionally, you can revert totalBalance and balanceperSoa to some default or original values
+            ' For example, setting the values back to what they were initially, or keeping them as is
+        End If
+    End Sub
+
+    'Private Sub CalculateAndUpdateInterest()
+    '    Try
+    '        ' Open the connection if it's not already open
+    '        If conn.State <> ConnectionState.Open Then
+    '            conn.Open()
+    '        End If
+
+    '        ' Updated query to join acccounting and facility_data tables
+    '        Dim query As String = "SELECT a.sub_total, a.due_date, f.type2 FROM acccounting a INNER JOIN facility_data f ON a.fac_code = f.fac_code WHERE a.fac_code = ?"
+
+    '        Using cmd As New OdbcCommand(query, conn)
+    '            cmd.Parameters.AddWithValue("fac_code", codeTxt.Text)
+
+    '            Using rd As OdbcDataReader = cmd.ExecuteReader()
+    '                If rd.Read() Then
+    '                    ' Ensure the UI update is done on the main thread
+    '                    If Me.IsHandleCreated Then
+    '                        Me.Invoke(Sub()
+    '                                      Dim principal As Double = Convert.ToDouble(rd("sub_total"))
+    '                                      Dim dueDate As Date = Convert.ToDateTime(rd("due_date"))
+    '                                      Dim dateOfPayment As Date = dtpicker4.Value
+    '                                      Dim type2 As String = rd("type2").ToString()
+
+    '                                      ' Check if due date is within the specified range
+    '                                      Dim startDate As Date = New Date(2020, 8, 11)
+    '                                      Dim endDate As Date = New Date(2023, 11, 1)
+    '                                      Dim totalDays As Integer = (dateOfPayment - dueDate).Days
+    '                                      Dim percentage As Double = 0.02
+    '                                      Dim days As Integer = 30
+    '                                      Dim interest As Double = 0
+
+    '                                      If dueDate >= startDate And dueDate <= endDate Then
+    '                                          Dim term As Integer
+    '                                          Select Case type2
+    '                                              Case "GOVERNMENT", "LGU"
+    '                                                  term = 30
+    '                                              Case "PRIVATE"
+    '                                                  term = 15
+    '                                              Case Else
+    '                                                  term = 0 ' default term value if type2 is not matched
+    '                                          End Select
+
+    '                                          interest = (principal * percentage) * (totalDays / days)
+    '                                      End If
+
+    '                                      ' Ensure interest is non-negative
+    '                                      If interest < 0 Then
+    '                                          interest = 0
+    '                                      End If
+
+    '                                      interestTxt.Text = interest.ToString("F2")
+
+    '                                  End Sub)
+    '                    End If
+    '                End If
+    '            End Using
+    '        End Using
+    '    Catch ex As Exception
+    '        MessageBox.Show("An error occurred: " & ex.Message)
+    '    End Try
+    'End Sub
     Private Sub CalculateAndUpdateInterest()
         Try
             ' Open the connection if it's not already open
@@ -556,8 +671,10 @@ Public Class Payments
                 conn.Open()
             End If
 
-            ' Updated query to join acccounting and facility_data tables
-            Dim query As String = "SELECT a.sub_total, a.due_date, f.type2 FROM acccounting a INNER JOIN facility_data f ON a.fac_code = f.fac_code WHERE a.fac_code = ?"
+            ' Updated query to join accounting and facility_data tables
+            Dim query As String = "SELECT a.sub_total, a.due_date, f.type2 FROM acccounting a " &
+                              "INNER JOIN facility_data f ON a.fac_code = f.fac_code " &
+                              "WHERE a.fac_code = ?"
 
             Using cmd As New OdbcCommand(query, conn)
                 cmd.Parameters.AddWithValue("fac_code", codeTxt.Text)
@@ -572,26 +689,37 @@ Public Class Payments
                                           Dim dateOfPayment As Date = dtpicker4.Value
                                           Dim type2 As String = rd("type2").ToString()
 
-                                          ' Check if due date is within the specified range
+                                          ' Debugging information
+                                          Debug.WriteLine($"Principal: {principal}, Due Date: {dueDate}, " &
+                                                      $"Date of Payment: {dateOfPayment}, Type: {type2}")
+
+                                          ' Check if the due date is valid for interest calculation
                                           Dim startDate As Date = New Date(2020, 8, 11)
                                           Dim endDate As Date = New Date(2023, 11, 1)
                                           Dim totalDays As Integer = (dateOfPayment - dueDate).Days
-                                          Dim percentage As Double = 0.02
-                                          Dim days As Integer = 30
                                           Dim interest As Double = 0
 
-                                          If dueDate >= startDate And dueDate <= endDate Then
+                                          If totalDays > 0 Then
+                                              ' Determine the term based on type2
                                               Dim term As Integer
-                                              Select Case type2
+                                              Select Case type2.ToUpper()
                                                   Case "GOVERNMENT", "LGU"
                                                       term = 30
                                                   Case "PRIVATE"
                                                       term = 15
                                                   Case Else
-                                                      term = 0 ' default term value if type2 is not matched
+                                                      term = 0 ' Default term for unexpected types
                                               End Select
 
-                                              interest = (principal * percentage) * (totalDays / days)
+                                              ' Debugging: Output term and days late
+                                              Debug.WriteLine($"Term: {term}, Total Days Late: {totalDays}")
+
+                                              ' Calculate interest if overdue beyond the term
+                                              If totalDays > term Then
+                                                  Dim percentage As Double = 0.02
+                                                  Dim days As Integer = 30
+                                                  interest = (principal * percentage) * (totalDays / CDbl(days))
+                                              End If
                                           End If
 
                                           ' Ensure interest is non-negative
@@ -599,80 +727,41 @@ Public Class Payments
                                               interest = 0
                                           End If
 
-                                          interestTxt.Text = interest.ToString("F2")
+                                          ' Debugging: Output calculated interest
+                                          Debug.WriteLine($"Calculated Interest: {interest}")
 
+                                          ' Update the interest text box
+                                          interestTxt.Text = interest.ToString("F2")
                                       End Sub)
                         End If
+                    Else
+                        'MessageBox.Show("No record found for the provided facility code.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     End If
                 End Using
             End Using
         Catch ex As Exception
-            MessageBox.Show("An error occurred: " & ex.Message)
+            MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+
 
     Private Sub dtpicker4_ValueChanged(sender As Object, e As EventArgs) Handles dtpicker4.ValueChanged
         CalculateAndUpdateInterest()
     End Sub
 
-    Private Sub computeBtn_Click(sender As Object, e As EventArgs) Handles computeBtn.Click
-        '' Declare the original balance and amount paid as Double
-        'Dim amountPaid As Double
-        'Dim originalBalance As Double
-
-        '' Validate and parse the amountPaid input
-        'If Not Double.TryParse(amountpaidTxt.Text, amountPaid) Then
-        '    ' Handle invalid or empty input for amountPaid
-        '    If String.IsNullOrWhiteSpace(amountpaidTxt.Text) Then
-        '        ' Reset balances to their original values if input is cleared
-        '        If Double.TryParse(balanceBox.Text, originalBalance) Then
-        '            balanceBox.Text = originalBalance.ToString("F2")
-        '        End If
-
-        '        If Double.TryParse(balanceTxt.Text, originalBalance) Then
-        '            balanceTxt.Text = originalBalance.ToString("F2")
-        '        End If
-        '    Else
-        '        ' Show an error for invalid input
-        '        MessageBox.Show("Please enter a valid numeric value.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        '    End If
-        '    Return
-        'End If
-
-        '' Parse the current balanceBox value
-        'If Double.TryParse(balanceBox.Text, originalBalance) Then
-        '    ' Calculate and update balanceBox
-        '    Dim remainingBalanceBox = Math.Max(0, originalBalance - amountPaid)
-        '    balanceBox.Text = remainingBalanceBox.ToString("F2")
-        'End If
-
-        '' Parse the current balanceTxt value
-        'If Double.TryParse(balanceTxt.Text, originalBalance) Then
-        '    ' Calculate and update balanceTxt
-        '    Dim remainingBalanceTxt = Math.Max(0, originalBalance - amountPaid)
-        '    balanceTxt.Text = remainingBalanceTxt.ToString("F2")
-        'Else
-        '    ' Show an error if balanceTxt is not valid
-        '    MessageBox.Show("Invalid value in Balance Text field.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        'End If
-
-        ' Declare the original balances and amount paid as Double
-        ' Declare the original balances and amounts as Double
-        ' Declare variables for calculation
-        ' Declare variables for calculation
-        ' Declare variables to store the remaining balance and original balance
-        ' Declare variables to store the remaining balance and original balance
+    Private Sub total()
         Dim originalBalance As Double
         Dim remainingBalance As Double
 
         ' Validate and parse the original balance from balanceBox
-        If Not Double.TryParse(balanceBox.Text, originalBalance) Then
+        If Not Double.TryParse(totalBalance.Text, originalBalance) Then
             MessageBox.Show("Please enter a valid original balance.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         ' Initialize the remaining balance to the original balance only at the start
-        If remainingBalance = 0 OrElse String.IsNullOrEmpty(balanceTxt.Text) Then
+        If remainingBalance = 0 OrElse String.IsNullOrEmpty(totalBalance.Text) Then
             remainingBalance = originalBalance
         End If
 
@@ -704,11 +793,55 @@ Public Class Payments
         remainingBalance = Math.Max(0, remainingBalance)
 
         ' Update only the balanceTxt to reflect the current remaining balance
-        balanceTxt.Text = remainingBalance.ToString("F2")
-
+        totalBalance.Text = remainingBalance.ToString("F2")
         ' Do not modify the balanceBox since it represents the original balance
+    End Sub
 
+    Private Sub computeBtn_Click(sender As Object, e As EventArgs) Handles computeBtn.Click
+        ' Validate and parse the original balance from balancePerSoa
+        If Not Double.TryParse(balanceperSoa.Text, originalBalance) Then
+            MessageBox.Show("Please enter a valid original balance.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
 
+        ' Reset the remaining balance to the original balance each time the button is clicked
+        remainingBalance = originalBalance
+
+        ' Validate and parse the amountPaid input, if provided
+        Dim amountPaid As Double
+        If Double.TryParse(amountpaidTxt.Text, amountPaid) Then
+            remainingBalance -= amountPaid
+        End If
+
+        ' Validate and parse the badDebts input, if provided
+        Dim badDebts As Double
+        If Double.TryParse(baddebtsTxt.Text, badDebts) Then
+            remainingBalance -= badDebts
+        End If
+
+        ' Validate and parse the btax input, if provided
+        Dim btax As Double
+        If Double.TryParse(btaxText.Text, btax) Then
+            remainingBalance -= btax
+        End If
+
+        ' Validate and parse the wtax input, if provided
+        Dim wtax As Double
+        If Double.TryParse(wtaxTxt.Text, wtax) Then
+            remainingBalance -= wtax
+        End If
+
+        ' Ensure the remaining balance doesn't go negative
+        remainingBalance = Math.Max(0, remainingBalance)
+
+        ' Update the balanceperSoa to reflect the current remaining balance
+        balanceperSoa.Text = remainingBalance.ToString("F2")
+    End Sub
+
+    Private Sub wtaxTxt_TextChanged(sender As Object, e As EventArgs) Handles wtaxTxt.TextChanged
+        'balanceperSoa.Text = amountpaidTxt.Text - baddebtsTxt.Text - wtaxTxt.Text - btaxText.Text
+
+        'totalBalance.Text = amountpaidTxt.Text - baddebtsTxt.Text - wtaxTxt.Text - btaxText.Text
     End Sub
 End Class
 
