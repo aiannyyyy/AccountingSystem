@@ -517,7 +517,7 @@ Public Class Payments
     End Sub
 
     Private Sub baddebtsTxt_TextChanged(sender As Object, e As EventArgs) Handles baddebtsTxt.TextChanged
-        'CalculateAndUpdateInterest()
+        CalculateAndUpdateInterest()
     End Sub
 
     Private Sub btaxText_TextChanged(sender As Object, e As EventArgs) Handles btaxText.TextChanged
@@ -600,6 +600,7 @@ Public Class Payments
                                           End If
 
                                           interestTxt.Text = interest.ToString("F2")
+
                                       End Sub)
                         End If
                     End If
@@ -659,48 +660,55 @@ Public Class Payments
         ' Declare the original balances and amounts as Double
         ' Declare variables for calculation
         ' Declare variables for calculation
-        Dim amountPaid As Double
+        ' Declare variables to store the remaining balance and original balance
+        ' Declare variables to store the remaining balance and original balance
         Dim originalBalance As Double
-        Dim badDebts As Double
-        Dim btax As Double
-        Dim wtax As Double
+        Dim remainingBalance As Double
 
-        ' Validate and parse the amountPaid input
-        If Not Double.TryParse(amountpaidTxt.Text, amountPaid) Then
-            MessageBox.Show("Please enter a valid amount paid.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        ' Validate and parse the badDebts input
-        If Not Double.TryParse(baddebtsTxt.Text, badDebts) Then
-            MessageBox.Show("Please enter a valid bad debts value.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        ' Validate and parse the btax input
-        If Not Double.TryParse(btaxText.Text, btax) Then
-            MessageBox.Show("Please enter a valid BTax value.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        ' Validate and parse the wtax input
-        If Not Double.TryParse(wtaxTxt.Text, wtax) Then
-            MessageBox.Show("Please enter a valid WTax value.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        ' Validate and parse the balance from balanceBox (always use balanceBox for the initial balance)
+        ' Validate and parse the original balance from balanceBox
         If Not Double.TryParse(balanceBox.Text, originalBalance) Then
-            MessageBox.Show("Please enter a valid balance.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Please enter a valid original balance.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        ' Perform the calculation: remaining balance = original balance - amount paid - bad debts - btax - wtax
-        Dim remainingBalance = Math.Max(0, originalBalance - amountPaid - badDebts - btax - wtax)
+        ' Initialize the remaining balance to the original balance only at the start
+        If remainingBalance = 0 OrElse String.IsNullOrEmpty(balanceTxt.Text) Then
+            remainingBalance = originalBalance
+        End If
 
-        ' Update the balance display (but don't update balanceBox again since it's the original balance)
-        balanceBox.Text = originalBalance.ToString("F2")  ' This is the original balance, no need to update.
-        balanceTxt.Text = remainingBalance.ToString("F2")  ' This will now show the updated remaining balance
+        ' Validate and parse the amountPaid input, if provided
+        Dim amountPaid As Double
+        If Double.TryParse(amountpaidTxt.Text, amountPaid) Then
+            remainingBalance -= amountPaid
+        End If
+
+        ' Validate and parse the badDebts input, if provided
+        Dim badDebts As Double
+        If Double.TryParse(baddebtsTxt.Text, badDebts) Then
+            remainingBalance -= badDebts
+        End If
+
+        ' Validate and parse the btax input, if provided
+        Dim btax As Double
+        If Double.TryParse(btaxText.Text, btax) Then
+            remainingBalance -= btax
+        End If
+
+        ' Validate and parse the wtax input, if provided
+        Dim wtax As Double
+        If Double.TryParse(wtaxTxt.Text, wtax) Then
+            remainingBalance -= wtax
+        End If
+
+        ' Ensure the remaining balance doesn't go negative
+        remainingBalance = Math.Max(0, remainingBalance)
+
+        ' Update only the balanceTxt to reflect the current remaining balance
+        balanceTxt.Text = remainingBalance.ToString("F2")
+
+        ' Do not modify the balanceBox since it represents the original balance
+
+
     End Sub
 End Class
 
@@ -779,21 +787,3 @@ End Class
 '        MessageBox.Show("An error occurred: " & ex.Message)
 '    End Try
 'End Sub
-
-'' Update balance and subtotal
-'Dim soAmount As Double = 0
-'Dim adsAmount As Double = 0
-'Dim badDebts As Double = 0
-'Dim businessTax As Double = 0
-
-'Dim amountPaid As Double = 0
-
-'' Parse or set default if empty
-'Double.TryParse(If(String.IsNullOrWhiteSpace(soamountTxt.Text), "0", soamountTxt.Text), soAmount)
-'Double.TryParse(If(String.IsNullOrWhiteSpace(adsTxt.Text), "0", adsTxt.Text), adsAmount)
-'Double.TryParse(If(String.IsNullOrWhiteSpace(baddebtsTxt.Text), "0", baddebtsTxt.Text), badDebts)
-'Double.TryParse(If(String.IsNullOrWhiteSpace(btaxText.Text), "0", btaxText.Text), businessTax)
-'Double.TryParse(If(String.IsNullOrWhiteSpace(amountpaidTxt.Text), "0", amountpaidTxt.Text), amountPaid)
-
-'Dim balance As Double = (soAmount + interest + adsAmount) - (badDebts + businessTax)
-'balanceTxt.Text = balance.ToString("F2")
