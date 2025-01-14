@@ -152,6 +152,7 @@ Partial Class Payments
         Me.nameBox = New Guna.UI.WinForms.GunaTextBox()
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
+        Me.computeInterest = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.GunaPanel1.SuspendLayout()
         Me.mainPanel.SuspendLayout()
         CType(Me.dgv2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -966,12 +967,13 @@ Partial Class Payments
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.computeInterest)
         Me.Panel1.Controls.Add(Me.orderButton)
         Me.Panel1.Controls.Add(Me.printButton)
         Me.Panel1.Controls.Add(Me.addButton)
-        Me.Panel1.Location = New System.Drawing.Point(713, 193)
+        Me.Panel1.Location = New System.Drawing.Point(590, 193)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(299, 50)
+        Me.Panel1.Size = New System.Drawing.Size(422, 50)
         Me.Panel1.TabIndex = 58
         '
         'orderButton
@@ -993,7 +995,7 @@ Partial Class Payments
         Me.orderButton.Image = Nothing
         Me.orderButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.orderButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.orderButton.Location = New System.Drawing.Point(208, 7)
+        Me.orderButton.Location = New System.Drawing.Point(335, 11)
         Me.orderButton.Name = "orderButton"
         Me.orderButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.orderButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -1027,7 +1029,7 @@ Partial Class Payments
         Me.printButton.Image = Nothing
         Me.printButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.printButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.printButton.Location = New System.Drawing.Point(108, 7)
+        Me.printButton.Location = New System.Drawing.Point(235, 11)
         Me.printButton.Name = "printButton"
         Me.printButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.printButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -1061,7 +1063,7 @@ Partial Class Payments
         Me.addButton.Image = Nothing
         Me.addButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.addButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.addButton.Location = New System.Drawing.Point(8, 7)
+        Me.addButton.Location = New System.Drawing.Point(135, 11)
         Me.addButton.Name = "addButton"
         Me.addButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.addButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -1835,6 +1837,40 @@ Partial Class Payments
         Me.GunaLabel1.TabIndex = 1
         Me.GunaLabel1.Text = "FACILITY CODE:"
         '
+        'computeInterest
+        '
+        Me.computeInterest.AnimationHoverSpeed = 0.07!
+        Me.computeInterest.AnimationSpeed = 0.03!
+        Me.computeInterest.BackColor = System.Drawing.Color.Transparent
+        Me.computeInterest.BaseColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.computeInterest.BorderColor = System.Drawing.Color.Black
+        Me.computeInterest.CheckedBaseColor = System.Drawing.Color.Gray
+        Me.computeInterest.CheckedBorderColor = System.Drawing.Color.Black
+        Me.computeInterest.CheckedForeColor = System.Drawing.Color.White
+        Me.computeInterest.CheckedImage = Nothing
+        Me.computeInterest.CheckedLineColor = System.Drawing.Color.DimGray
+        Me.computeInterest.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.computeInterest.FocusedColor = System.Drawing.Color.Empty
+        Me.computeInterest.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.computeInterest.ForeColor = System.Drawing.Color.Black
+        Me.computeInterest.Image = Nothing
+        Me.computeInterest.ImageSize = New System.Drawing.Size(20, 20)
+        Me.computeInterest.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.computeInterest.Location = New System.Drawing.Point(6, 11)
+        Me.computeInterest.Name = "computeInterest"
+        Me.computeInterest.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.computeInterest.OnHoverBorderColor = System.Drawing.Color.Black
+        Me.computeInterest.OnHoverForeColor = System.Drawing.Color.Black
+        Me.computeInterest.OnHoverImage = Nothing
+        Me.computeInterest.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.computeInterest.OnPressedColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.computeInterest.Radius = 2
+        Me.computeInterest.Size = New System.Drawing.Size(123, 30)
+        Me.computeInterest.TabIndex = 26
+        Me.computeInterest.Text = "COMPUTE INTEREST"
+        Me.computeInterest.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.computeInterest.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
+        '
         'Payments
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1987,4 +2023,5 @@ Partial Class Payments
     Friend WithEvents adsTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents balanceperSoa As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel5 As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents computeInterest As Guna.UI.WinForms.GunaAdvenceButton
 End Class
