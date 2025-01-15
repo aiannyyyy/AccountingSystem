@@ -39,7 +39,6 @@ Partial Class Pos
         Me.grpBox = New Guna.UI.WinForms.GunaGroupBox()
         Me.GunaLabel10 = New Guna.UI.WinForms.GunaLabel()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.homeBtn = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.addButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.noticeButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.reportButton = New Guna.UI.WinForms.GunaAdvenceButton()
@@ -251,7 +250,6 @@ Partial Class Pos
         '
         'Panel3
         '
-        Me.Panel3.Controls.Add(Me.homeBtn)
         Me.Panel3.Controls.Add(Me.addButton)
         Me.Panel3.Controls.Add(Me.noticeButton)
         Me.Panel3.Controls.Add(Me.reportButton)
@@ -259,42 +257,8 @@ Partial Class Pos
         Me.Panel3.Controls.Add(Me.soaButton)
         Me.Panel3.Location = New System.Drawing.Point(28, 189)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(472, 48)
+        Me.Panel3.Size = New System.Drawing.Size(395, 48)
         Me.Panel3.TabIndex = 25
-        '
-        'homeBtn
-        '
-        Me.homeBtn.AnimationHoverSpeed = 0.07!
-        Me.homeBtn.AnimationSpeed = 0.03!
-        Me.homeBtn.BackColor = System.Drawing.Color.Transparent
-        Me.homeBtn.BaseColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.homeBtn.BorderColor = System.Drawing.Color.FromArgb(CType(CType(119, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(163, Byte), Integer))
-        Me.homeBtn.CheckedBaseColor = System.Drawing.Color.Gray
-        Me.homeBtn.CheckedBorderColor = System.Drawing.Color.Black
-        Me.homeBtn.CheckedForeColor = System.Drawing.Color.White
-        Me.homeBtn.CheckedImage = Nothing
-        Me.homeBtn.CheckedLineColor = System.Drawing.Color.DimGray
-        Me.homeBtn.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.homeBtn.FocusedColor = System.Drawing.Color.Empty
-        Me.homeBtn.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.homeBtn.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.homeBtn.Image = Nothing
-        Me.homeBtn.ImageSize = New System.Drawing.Size(20, 20)
-        Me.homeBtn.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.homeBtn.Location = New System.Drawing.Point(393, 9)
-        Me.homeBtn.Name = "homeBtn"
-        Me.homeBtn.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.homeBtn.OnHoverBorderColor = System.Drawing.Color.Black
-        Me.homeBtn.OnHoverForeColor = System.Drawing.Color.Black
-        Me.homeBtn.OnHoverImage = Nothing
-        Me.homeBtn.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.homeBtn.OnPressedColor = System.Drawing.Color.Black
-        Me.homeBtn.Radius = 2
-        Me.homeBtn.Size = New System.Drawing.Size(65, 30)
-        Me.homeBtn.TabIndex = 25
-        Me.homeBtn.Text = "HOME"
-        Me.homeBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.homeBtn.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
         'addButton
         '
@@ -1385,7 +1349,6 @@ Partial Class Pos
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents replaceCombo As ComboBox
-    Friend WithEvents homeBtn As Guna.UI.WinForms.GunaAdvenceButton
     Friend WithEvents remBox As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents remLbl As Guna.UI.WinForms.GunaLabel
     Friend WithEvents cancelPo As DataGridViewCheckBoxColumn

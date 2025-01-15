@@ -24,10 +24,10 @@ Public Class Login
             MsgBox("Login Successful. Welcome, " & userName & "!")
 
             If userName = "Administrator" OrElse userName = "MIS OFFICER" OrElse userName = "FIRST VERIFIER" Then
-                Form1.Show()
+                Pos.Show()
                 Me.Hide()
             ElseIf userName = "ACCOUNTANT" OrElse userName = "ACCOUNTING ASSISTANT" Then
-                Form1.Show()
+                Pos.Show()
                 Me.Hide()
             End If
         Else

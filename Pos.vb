@@ -575,24 +575,53 @@ Public Class Pos
         End Using
     End Function
 
+    'Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
+    '    Dim isAnyChecked As Boolean = dgv1.Rows.Cast(Of DataGridViewRow)().
+    '                              Any(Function(row) Not row.IsNewRow AndAlso Convert.ToBoolean(row.Cells("cancelPo").Value))
+
+    '    If isAnyChecked Then
+    '        CancelPurchaseOrders()
+    '        cleartxt()
+    '        loaddgv()
+    '    Else
+    '        AddNewOrder()
+    '        cleartxt()
+    '        loaddgv()
+    '    End If
+
+    '    addButton.Text = "ADD"
+    '    remLbl.Visible = False
+    '    remBox.Visible = False
+    'End Sub
+
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
+        ' Check if any row is marked for cancellation
         Dim isAnyChecked As Boolean = dgv1.Rows.Cast(Of DataGridViewRow)().
                                   Any(Function(row) Not row.IsNewRow AndAlso Convert.ToBoolean(row.Cells("cancelPo").Value))
 
+        ' Show a confirmation prompt before proceeding with either action
         If isAnyChecked Then
-            CancelPurchaseOrders()
-            cleartxt()
-            loaddgv()
+            ' If cancellation is required, ask user for confirmation
+            If MessageBox.Show("Are you sure you want to cancel the selected purchase orders?", "Confirm Cancellation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                CancelPurchaseOrders()  ' Proceed with cancellation
+                cleartxt()  ' Clear fields after successful cancellation
+                loaddgv()  ' Reload the DataGridView to reflect the changes
+            End If
         Else
-            AddNewOrder()
-            cleartxt()
-            loaddgv()
+            ' If adding a new order, ask user for confirmation
+            If MessageBox.Show("Are all entries correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                AddNewOrder()  ' Proceed with adding the new order
+                cleartxt()  ' Clear fields after successful addition
+                loaddgv()  ' Reload the DataGridView to reflect the changes
+            End If
         End If
 
+        ' Reset button text and hide the remark section
         addButton.Text = "ADD"
         remLbl.Visible = False
         remBox.Visible = False
     End Sub
+
 
     Private Sub CancelPurchaseOrders()
         For Each row As DataGridViewRow In dgv1.Rows.Cast(Of DataGridViewRow)().Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
@@ -789,6 +818,10 @@ Public Class Pos
     End Sub
 
     Private Sub GunaControlBox3_Click(sender As Object, e As EventArgs) Handles GunaControlBox3.Click
+        conn.Close()
+        conn.Dispose()
+
+        Application.Exit()
     End Sub
 
     Private Sub payButton_Click(sender As Object, e As EventArgs) Handles payButton.Click
@@ -833,7 +866,7 @@ Public Class Pos
 
     End Sub
 
-    Private Sub homeBtn_Click(sender As Object, e As EventArgs) Handles homeBtn.Click
+    Private Sub homeBtn_Click(sender As Object, e As EventArgs) 
         Form1.Show()
         Me.Hide()
     End Sub

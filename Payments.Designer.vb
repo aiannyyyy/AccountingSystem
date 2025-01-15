@@ -53,6 +53,7 @@ Partial Class Payments
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.paid_interest = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -96,6 +97,7 @@ Partial Class Payments
         Me.btaxText = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel15 = New Guna.UI.WinForms.GunaLabel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.computeInterest = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.orderButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.printButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.addButton = New Guna.UI.WinForms.GunaAdvenceButton()
@@ -152,7 +154,6 @@ Partial Class Payments
         Me.nameBox = New Guna.UI.WinForms.GunaTextBox()
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
-        Me.computeInterest = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.GunaPanel1.SuspendLayout()
         Me.mainPanel.SuspendLayout()
         CType(Me.dgv2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -311,7 +312,7 @@ Partial Class Payments
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv2.ColumnHeadersHeight = 21
-        Me.dgv2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column26, Me.Column13, Me.Column14, Me.Column15, Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20, Me.Column21, Me.Column22, Me.Column23, Me.Column24, Me.Column25})
+        Me.dgv2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.paid_interest, Me.Column10, Me.Column11, Me.Column12, Me.Column26, Me.Column13, Me.Column14, Me.Column15, Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20, Me.Column21, Me.Column22, Me.Column23, Me.Column24, Me.Column25})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -434,6 +435,15 @@ Partial Class Payments
         Me.Column9.Name = "Column9"
         Me.Column9.ReadOnly = True
         Me.Column9.Width = 84
+        '
+        'paid_interest
+        '
+        Me.paid_interest.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.paid_interest.DataPropertyName = "paid_interest"
+        Me.paid_interest.HeaderText = "PAID INTEREST"
+        Me.paid_interest.Name = "paid_interest"
+        Me.paid_interest.ReadOnly = True
+        Me.paid_interest.Width = 112
         '
         'Column10
         '
@@ -975,6 +985,40 @@ Partial Class Payments
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(422, 50)
         Me.Panel1.TabIndex = 58
+        '
+        'computeInterest
+        '
+        Me.computeInterest.AnimationHoverSpeed = 0.07!
+        Me.computeInterest.AnimationSpeed = 0.03!
+        Me.computeInterest.BackColor = System.Drawing.Color.Transparent
+        Me.computeInterest.BaseColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.computeInterest.BorderColor = System.Drawing.Color.Black
+        Me.computeInterest.CheckedBaseColor = System.Drawing.Color.Gray
+        Me.computeInterest.CheckedBorderColor = System.Drawing.Color.Black
+        Me.computeInterest.CheckedForeColor = System.Drawing.Color.White
+        Me.computeInterest.CheckedImage = Nothing
+        Me.computeInterest.CheckedLineColor = System.Drawing.Color.DimGray
+        Me.computeInterest.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.computeInterest.FocusedColor = System.Drawing.Color.Empty
+        Me.computeInterest.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.computeInterest.ForeColor = System.Drawing.Color.Black
+        Me.computeInterest.Image = Nothing
+        Me.computeInterest.ImageSize = New System.Drawing.Size(20, 20)
+        Me.computeInterest.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.computeInterest.Location = New System.Drawing.Point(6, 11)
+        Me.computeInterest.Name = "computeInterest"
+        Me.computeInterest.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.computeInterest.OnHoverBorderColor = System.Drawing.Color.Black
+        Me.computeInterest.OnHoverForeColor = System.Drawing.Color.Black
+        Me.computeInterest.OnHoverImage = Nothing
+        Me.computeInterest.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.computeInterest.OnPressedColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.computeInterest.Radius = 2
+        Me.computeInterest.Size = New System.Drawing.Size(123, 30)
+        Me.computeInterest.TabIndex = 26
+        Me.computeInterest.Text = "COMPUTE INTEREST"
+        Me.computeInterest.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.computeInterest.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
         'orderButton
         '
@@ -1661,7 +1705,7 @@ Partial Class Payments
         '
         Me.adsLbl.AutoSize = True
         Me.adsLbl.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.adsLbl.Location = New System.Drawing.Point(232, 5)
+        Me.adsLbl.Location = New System.Drawing.Point(237, 5)
         Me.adsLbl.Name = "adsLbl"
         Me.adsLbl.Size = New System.Drawing.Size(95, 17)
         Me.adsLbl.TabIndex = 13
@@ -1837,40 +1881,6 @@ Partial Class Payments
         Me.GunaLabel1.TabIndex = 1
         Me.GunaLabel1.Text = "FACILITY CODE:"
         '
-        'computeInterest
-        '
-        Me.computeInterest.AnimationHoverSpeed = 0.07!
-        Me.computeInterest.AnimationSpeed = 0.03!
-        Me.computeInterest.BackColor = System.Drawing.Color.Transparent
-        Me.computeInterest.BaseColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.computeInterest.BorderColor = System.Drawing.Color.Black
-        Me.computeInterest.CheckedBaseColor = System.Drawing.Color.Gray
-        Me.computeInterest.CheckedBorderColor = System.Drawing.Color.Black
-        Me.computeInterest.CheckedForeColor = System.Drawing.Color.White
-        Me.computeInterest.CheckedImage = Nothing
-        Me.computeInterest.CheckedLineColor = System.Drawing.Color.DimGray
-        Me.computeInterest.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.computeInterest.FocusedColor = System.Drawing.Color.Empty
-        Me.computeInterest.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.computeInterest.ForeColor = System.Drawing.Color.Black
-        Me.computeInterest.Image = Nothing
-        Me.computeInterest.ImageSize = New System.Drawing.Size(20, 20)
-        Me.computeInterest.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeInterest.Location = New System.Drawing.Point(6, 11)
-        Me.computeInterest.Name = "computeInterest"
-        Me.computeInterest.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeInterest.OnHoverBorderColor = System.Drawing.Color.Black
-        Me.computeInterest.OnHoverForeColor = System.Drawing.Color.Black
-        Me.computeInterest.OnHoverImage = Nothing
-        Me.computeInterest.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeInterest.OnPressedColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeInterest.Radius = 2
-        Me.computeInterest.Size = New System.Drawing.Size(123, 30)
-        Me.computeInterest.TabIndex = 26
-        Me.computeInterest.Text = "COMPUTE INTEREST"
-        Me.computeInterest.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.computeInterest.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
-        '
         'Payments
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1906,32 +1916,6 @@ Partial Class Payments
     Friend WithEvents GunaElipse1 As Guna.UI.WinForms.GunaElipse
     Friend WithEvents mainPanel As Panel
     Friend WithEvents dgv2 As Guna.UI.WinForms.GunaDataGridView
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As DataGridViewTextBoxColumn
-    Friend WithEvents Column8 As DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As DataGridViewTextBoxColumn
-    Friend WithEvents Column10 As DataGridViewTextBoxColumn
-    Friend WithEvents Column11 As DataGridViewTextBoxColumn
-    Friend WithEvents Column12 As DataGridViewTextBoxColumn
-    Friend WithEvents Column26 As DataGridViewTextBoxColumn
-    Friend WithEvents Column13 As DataGridViewTextBoxColumn
-    Friend WithEvents Column14 As DataGridViewTextBoxColumn
-    Friend WithEvents Column15 As DataGridViewTextBoxColumn
-    Friend WithEvents Column16 As DataGridViewTextBoxColumn
-    Friend WithEvents Column17 As DataGridViewTextBoxColumn
-    Friend WithEvents Column18 As DataGridViewTextBoxColumn
-    Friend WithEvents Column19 As DataGridViewTextBoxColumn
-    Friend WithEvents Column20 As DataGridViewTextBoxColumn
-    Friend WithEvents Column21 As DataGridViewTextBoxColumn
-    Friend WithEvents Column22 As DataGridViewTextBoxColumn
-    Friend WithEvents Column23 As DataGridViewTextBoxColumn
-    Friend WithEvents Column24 As DataGridViewTextBoxColumn
-    Friend WithEvents Column25 As DataGridViewTextBoxColumn
     Friend WithEvents dgv1 As Guna.UI.WinForms.GunaDataGridView
     Friend WithEvents soa_number As DataGridViewTextBoxColumn
     Friend WithEvents soa_date As DataGridViewTextBoxColumn
@@ -2024,4 +2008,31 @@ Partial Class Payments
     Friend WithEvents balanceperSoa As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel5 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents computeInterest As Guna.UI.WinForms.GunaAdvenceButton
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
+    Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents Column9 As DataGridViewTextBoxColumn
+    Friend WithEvents paid_interest As DataGridViewTextBoxColumn
+    Friend WithEvents Column10 As DataGridViewTextBoxColumn
+    Friend WithEvents Column11 As DataGridViewTextBoxColumn
+    Friend WithEvents Column12 As DataGridViewTextBoxColumn
+    Friend WithEvents Column26 As DataGridViewTextBoxColumn
+    Friend WithEvents Column13 As DataGridViewTextBoxColumn
+    Friend WithEvents Column14 As DataGridViewTextBoxColumn
+    Friend WithEvents Column15 As DataGridViewTextBoxColumn
+    Friend WithEvents Column16 As DataGridViewTextBoxColumn
+    Friend WithEvents Column17 As DataGridViewTextBoxColumn
+    Friend WithEvents Column18 As DataGridViewTextBoxColumn
+    Friend WithEvents Column19 As DataGridViewTextBoxColumn
+    Friend WithEvents Column20 As DataGridViewTextBoxColumn
+    Friend WithEvents Column21 As DataGridViewTextBoxColumn
+    Friend WithEvents Column22 As DataGridViewTextBoxColumn
+    Friend WithEvents Column23 As DataGridViewTextBoxColumn
+    Friend WithEvents Column24 As DataGridViewTextBoxColumn
+    Friend WithEvents Column25 As DataGridViewTextBoxColumn
 End Class

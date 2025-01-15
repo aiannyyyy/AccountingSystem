@@ -5,6 +5,8 @@ Public Class Payments
     Private originalBalance As Double
     Private remainingBalance As Double
 
+    ' Variable to store the last value of codeTxt.Text
+    Private lastCodeTxtValue As String = String.Empty
     Private Sub Payments_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         codeTxt.SetOnGotFocus()
         mopCombo.Items.AddRange({"BANK TO BANK", "WALK IN"})
@@ -522,15 +524,43 @@ Public Class Payments
     '    ExecuteQuery(updateGrandTotalQuery)
     'End Sub
 
-    Private Sub InsertRecord(soaNumber As String, enbs As String, facCode As String, balance As Double, adsAmount As Double, dueDate As Date, soaAmount As Double, interestDate As Date, interest As Double, orDate As Date, orNumber As String, badDebts As Double, businessTax As Double, wtax As Double, others As String, grandTotal As Double, mop As String, fop As String, chequeDetails As String, bank As String, datePayment As Date, datePosted As Date, amountPaid As Double, remarks As String, stopInterest As String, username As String)
+    'Private Sub InsertRecord(soaNumber As String, enbs As String, facCode As String, balance As Double, adsAmount As Double, dueDate As Date, soaAmount As Double, interestDate As Date, interest As Double, paid_interest As Double, orDate As Date, orNumber As String, badDebts As Double, businessTax As Double, wtax As Double, others As String, grandTotal As Double, mop As String, fop As String, chequeDetails As String, bank As String, datePayment As Date, datePosted As Date, amountPaid As Double, remarks As String, stopInterest As String, username As String)
+    '    ' Prepare the SQL query for inserting the payment record
+    '    Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, balance, ads_amount, due_date, soa_amount, interest_date, interest, paid_interest, or_date, or_number, bad_debts, business_tax, wtax, others, grand_total, mop, fop, cheque_details, bank, date_payment, date_posted, amount_paid, remarks, stop_interest, username) " &
+    '                      $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {balance.ToString("F2")}, {adsAmount.ToString("F2")}, '{dueDate.ToString("yyyy-MM-dd")}', {soaAmount.ToString("F2")}, '{interestDate.ToString("yyyy-MM-dd")}', {interest.ToString("F2")}, {paid_interest.ToString("F2")}, '{orDate.ToString("yyyy-MM-dd")}', '{orNumber}', {badDebts.ToString("F2")}, {businessTax.ToString("F2")}, {wtax.ToString("F2")}, '{others}', {grandTotal.ToString("F2")}, '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd")}', '{datePosted.ToString("yyyy-MM-dd")}', {amountPaid.ToString("F2")}, '{remarks}', '{stopInterest}', '{username}')"
+
+    '    ' Execute the insert query using ExecuteQuery function
+    '    ExecuteQuery(query)
+
+    '    ' After inserting, calculate the remaining amount after paying interest for balance update
+    '    Dim remainingAmount As Double = amountPaid - interest
+
+    '    ' Update the accounting balance based on the soa_number
+    '    Dim updateBalanceQuery As String = $"UPDATE acccounting SET balance = balance - {remainingAmount.ToString("F2")} - {badDebts.ToString("F2")} - {businessTax.ToString("F2")} - {wtax.ToString("F2")} WHERE soa_number = '{soaNumber}'"
+    '    ExecuteQuery(updateBalanceQuery)
+
+    '    ' Update the grand total in the payments table after the payment
+    '    ' Only deduct amount paid and other applicable fees (not the remaining amount after interest)
+    '    Dim updateGrandTotalQuery As String = $"UPDATE payments SET grand_total = grand_total - {amountPaid.ToString("F2")} - {badDebts.ToString("F2")} - {businessTax.ToString("F2")} - {wtax.ToString("F2")} WHERE soa_number = '{soaNumber}'"
+    '    ExecuteQuery(updateGrandTotalQuery)
+
+    '    ' Update the interest to 0 after the payment
+    '    Dim updateInterestQuery As String = $"UPDATE payments SET interest = 0 WHERE soa_number = '{soaNumber}'"
+    '    ExecuteQuery(updateInterestQuery)
+    'End Sub
+    Private Sub InsertRecord(soaNumber As String, enbs As String, facCode As String, balance As Double, adsAmount As Double, dueDate As Date, soaAmount As Double, interestDate As Date, interest As Double, paid_interest As Double, orDate As Date, orNumber As String, badDebts As Double, businessTax As Double, wtax As Double, others As String, grandTotal As Double, mop As String, fop As String, chequeDetails As String, bank As String, datePayment As Date, datePosted As Date, amountPaid As Double, remarks As String, stopInterest As String, username As String)
         ' Prepare the SQL query for inserting the payment record
-        Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, balance, ads_amount, due_date, soa_amount, interest_date, interest, or_date, or_number, bad_debts, business_tax, wtax, others, grand_total, mop, fop, cheque_details, bank, date_payment, date_posted, amount_paid, remarks, stop_interest, username) " &
-                          $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {balance.ToString("F2")}, {adsAmount.ToString("F2")}, '{dueDate.ToString("yyyy-MM-dd")}', {soaAmount.ToString("F2")}, '{interestDate.ToString("yyyy-MM-dd")}', {interest.ToString("F2")}, '{orDate.ToString("yyyy-MM-dd")}', '{orNumber}', {badDebts.ToString("F2")}, {businessTax.ToString("F2")}, {wtax.ToString("F2")}, '{others}', {grandTotal.ToString("F2")}, '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd")}', '{datePosted.ToString("yyyy-MM-dd")}', {amountPaid.ToString("F2")}, '{remarks}', '{stopInterest}', '{username}')"
+        Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, balance, ads_amount, due_date, soa_amount, interest_date, interest, paid_interest, or_date, or_number, bad_debts, business_tax, wtax, others, grand_total, mop, fop, cheque_details, bank, date_payment, date_posted, amount_paid, remarks, stop_interest, username) " &
+                      $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {balance.ToString("F2")}, {adsAmount.ToString("F2")}, '{dueDate.ToString("yyyy-MM-dd")}', {soaAmount.ToString("F2")}, '{interestDate.ToString("yyyy-MM-dd")}', {interest.ToString("F2")}, 0.00, '{orDate.ToString("yyyy-MM-dd")}', '{orNumber}', {badDebts.ToString("F2")}, {businessTax.ToString("F2")}, {wtax.ToString("F2")}, '{others}', {grandTotal.ToString("F2")}, '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd")}', '{datePosted.ToString("yyyy-MM-dd")}', {amountPaid.ToString("F2")}, '{remarks}', '{stopInterest}', '{username}')"
 
         ' Execute the insert query using ExecuteQuery function
         ExecuteQuery(query)
 
-        ' After inserting, calculate the remaining amount after paying interest for balance update
+        ' Update the paid_interest with the current interest value and set interest to 0
+        Dim updateInterestPaidQuery As String = $"UPDATE payments SET paid_interest = interest, interest = 0.00 WHERE soa_number = '{soaNumber}'"
+        ExecuteQuery(updateInterestPaidQuery)
+
+        ' Calculate the remaining amount after paying interest for balance update
         Dim remainingAmount As Double = amountPaid - interest
 
         ' Update the accounting balance based on the soa_number
@@ -538,14 +568,10 @@ Public Class Payments
         ExecuteQuery(updateBalanceQuery)
 
         ' Update the grand total in the payments table after the payment
-        ' Only deduct amount paid and other applicable fees (not the remaining amount after interest)
         Dim updateGrandTotalQuery As String = $"UPDATE payments SET grand_total = grand_total - {amountPaid.ToString("F2")} - {badDebts.ToString("F2")} - {businessTax.ToString("F2")} - {wtax.ToString("F2")} WHERE soa_number = '{soaNumber}'"
         ExecuteQuery(updateGrandTotalQuery)
-
-        ' Update the interest to 0 after the payment
-        Dim updateInterestQuery As String = $"UPDATE payments SET interest = 0 WHERE soa_number = '{soaNumber}'"
-        ExecuteQuery(updateInterestQuery)
     End Sub
+
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         Dim selectedRow As DataGridViewRow = dgv1.CurrentRow
@@ -560,6 +586,7 @@ Public Class Payments
         Dim soaAmount As Double = Convert.ToDouble(soamountTxt.Text)
         Dim interestDate As Date = dtpicker2.Value
         Dim interest As Double = Convert.ToDouble(interestTxt.Text)
+        Dim paid_interest As Double
         Dim orDate As Date = dtpicker3.Value
         Dim orNumber As String = orderTxt.Text
         Dim badDebts As Double = Convert.ToDouble(baddebtsTxt.Text)
@@ -579,7 +606,7 @@ Public Class Payments
         Dim username As String = Login.userTxt.Text
 
         ' Insert the new record into the database
-        InsertRecord(soaNumber, enbs, facCode, balance, adsAmount, dueDate, soaAmount, interestDate, interest, orDate, orNumber, badDebts, businessTax, wtax, others, grandTotal, mop, fop, chequeDetails, bank, datePayment, datePosted, amountPaid, remarks, stopInterest, username)
+        InsertRecord(soaNumber, enbs, facCode, balance, adsAmount, dueDate, soaAmount, interestDate, interest, paid_interest, orDate, orNumber, badDebts, businessTax, wtax, others, grandTotal, mop, fop, chequeDetails, bank, datePayment, datePosted, amountPaid, remarks, stopInterest, username)
 
         ' Notify user of successful insertion
         MessageBox.Show("Payment successfully processed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -610,6 +637,9 @@ Public Class Payments
     End Sub
 
     Private Sub GunaControlBox1_Click(sender As Object, e As EventArgs) Handles GunaControlBox1.Click
+        conn.Close()
+        conn.Dispose()
+
         Application.Exit()
     End Sub
 
@@ -738,6 +768,92 @@ Public Class Payments
     '        MessageBox.Show("An error occurred: " & ex.Message)
     '    End Try
     'End Sub
+    'Private Sub CalculateAndUpdateInterest()
+    '    Try
+    '        ' Open the connection if it's not already open
+    '        If conn.State <> ConnectionState.Open Then
+    '            conn.Open()
+    '        End If
+
+    '        ' Updated query to join accounting and facility_data tables
+    '        Dim query As String = "SELECT a.sub_total, a.due_date, f.type2 FROM acccounting a " &
+    '                          "INNER JOIN facility_data f ON a.fac_code = f.fac_code " &
+    '                          "WHERE a.fac_code = ?"
+
+    '        Using cmd As New OdbcCommand(query, conn)
+    '            cmd.Parameters.AddWithValue("fac_code", codeTxt.Text)
+
+    '            Using rd As OdbcDataReader = cmd.ExecuteReader()
+    '                If rd.Read() Then
+    '                    ' Ensure the UI update is done on the main thread
+    '                    If Me.IsHandleCreated Then
+    '                        Me.Invoke(Sub()
+    '                                      Dim principal As Double = Convert.ToDouble(rd("sub_total"))
+    '                                      Dim dueDate As Date = Convert.ToDateTime(rd("due_date"))
+    '                                      Dim dateOfPayment As Date = dtpicker4.Value
+    '                                      Dim type2 As String = rd("type2").ToString()
+
+    '                                      ' Debugging information
+    '                                      Debug.WriteLine($"Principal: {principal}, Due Date: {dueDate}, " &
+    '                                                  $"Date of Payment: {dateOfPayment}, Type: {type2}")
+
+    '                                      ' Date range for term-based calculation
+    '                                      Dim startDate As Date = New Date(2020, 8, 11)
+    '                                      Dim endDate As Date = New Date(2023, 11, 1)
+
+    '                                      Dim totalDays As Integer = (dateOfPayment - dueDate).Days
+    '                                      Dim interest As Double = 0
+
+    '                                      If totalDays > 0 Then
+    '                                          ' Determine the term and calculation type
+    '                                          Dim term As Integer
+    '                                          Dim percentage As Double = 0.02 ' 2% monthly interest
+    '                                          Dim dailyRate As Double = percentage / 30 ' Daily rate (2% / 30 days)
+
+    '                                          If dueDate >= startDate AndAlso dueDate <= endDate Then
+    '                                              ' Term-based process
+    '                                              Select Case type2.ToUpper()
+    '                                                  Case "GOVERNMENT", "LGU"
+    '                                                      term = 30
+    '                                                  Case "PRIVATE"
+    '                                                      term = 15
+    '                                                  Case Else
+    '                                                      term = 0 ' Default term for unexpected types
+    '                                              End Select
+    '                                          Else
+    '                                              ' Flat interest with no specific term
+    '                                              term = 0
+    '                                          End If
+
+    '                                          ' Accumulate interest for each day beyond the term
+    '                                          For dayCounter As Integer = term + 1 To totalDays
+    '                                              interest += principal * dailyRate
+    '                                              principal += principal * dailyRate ' Compound the principal
+    '                                          Next
+
+    '                                      End If
+
+    '                                      ' Ensure interest is non-negative
+    '                                      If interest < 0 Then
+    '                                          interest = 0
+    '                                      End If
+
+    '                                      ' Debugging: Output calculated interest
+    '                                      Debug.WriteLine($"Calculated Interest: {interest}")
+
+    '                                      ' Update the interest text box
+    '                                      interestTxt.Text = interest.ToString("F2")
+    '                                  End Sub)
+    '                    End If
+    '                Else
+    '                    MessageBox.Show("No record found for the provided facility code.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '                End If
+    '            End Using
+    '        End Using
+    '    Catch ex As Exception
+    '        MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    End Try
+    'End Sub
     Private Sub CalculateAndUpdateInterest()
         Try
             ' Open the connection if it's not already open
@@ -745,7 +861,7 @@ Public Class Payments
                 conn.Open()
             End If
 
-            ' Updated query to join accounting and facility_data tables
+            ' Query to fetch data from accounting and facility_data tables
             Dim query As String = "SELECT a.sub_total, a.due_date, f.type2 FROM acccounting a " &
                               "INNER JOIN facility_data f ON a.fac_code = f.fac_code " &
                               "WHERE a.fac_code = ?"
@@ -755,66 +871,44 @@ Public Class Payments
 
                 Using rd As OdbcDataReader = cmd.ExecuteReader()
                     If rd.Read() Then
-                        ' Ensure the UI update is done on the main thread
-                        If Me.IsHandleCreated Then
-                            Me.Invoke(Sub()
-                                          Dim principal As Double = Convert.ToDouble(rd("sub_total"))
-                                          Dim dueDate As Date = Convert.ToDateTime(rd("due_date"))
-                                          Dim dateOfPayment As Date = dtpicker4.Value
-                                          Dim type2 As String = rd("type2").ToString()
+                        ' Fetch data from database
+                        Dim principal As Double = Convert.ToDouble(rd("sub_total"))
+                        Dim dueDate As Date = Convert.ToDateTime(rd("due_date"))
+                        Dim dateOfPayment As Date = dtpicker4.Value
+                        Dim type2 As String = rd("type2").ToString().ToUpper()
 
-                                          ' Debugging information
-                                          Debug.WriteLine($"Principal: {principal}, Due Date: {dueDate}, " &
-                                                      $"Date of Payment: {dateOfPayment}, Type: {type2}")
+                        ' Initialize variables for calculations
+                        Dim termDays As Integer
+                        Dim interest As Double = 0
 
-                                          ' Date range for term-based calculation
-                                          Dim startDate As Date = New Date(2020, 8, 11)
-                                          Dim endDate As Date = New Date(2023, 11, 1)
-
-                                          Dim totalDays As Integer = (dateOfPayment - dueDate).Days
-                                          Dim interest As Double = 0
-
-                                          If totalDays > 0 Then
-                                              ' Determine the term and calculation type
-                                              Dim term As Integer
-                                              Dim percentage As Double = 0.02 ' 2% monthly interest
-                                              Dim dailyRate As Double = percentage / 30 ' Daily rate (2% / 30 days)
-
-                                              If dueDate >= startDate AndAlso dueDate <= endDate Then
-                                                  ' Term-based process
-                                                  Select Case type2.ToUpper()
-                                                      Case "GOVERNMENT", "LGU"
-                                                          term = 30
-                                                      Case "PRIVATE"
-                                                          term = 15
-                                                      Case Else
-                                                          term = 0 ' Default term for unexpected types
-                                                  End Select
-                                              Else
-                                                  ' Flat interest with no specific term
-                                                  term = 0
-                                              End If
-
-                                              ' Accumulate interest for each day beyond the term
-                                              For dayCounter As Integer = term + 1 To totalDays
-                                                  interest += principal * dailyRate
-                                                  principal += principal * dailyRate ' Compound the principal
-                                              Next
-
-                                          End If
-
-                                          ' Ensure interest is non-negative
-                                          If interest < 0 Then
-                                              interest = 0
-                                          End If
-
-                                          ' Debugging: Output calculated interest
-                                          Debug.WriteLine($"Calculated Interest: {interest}")
-
-                                          ' Update the interest text box
-                                          interestTxt.Text = interest.ToString("F2")
-                                      End Sub)
+                        ' Set term days based on type2
+                        If type2 = "GOVERNMENT" OrElse type2 = "LGU" Then
+                            termDays = 30 ' 30 days for GOVERNMENT or LGU
+                        ElseIf type2 = "PRIVATE" Then
+                            termDays = 15 ' 15 days for PRIVATE
+                        Else
+                            termDays = 0 ' Default term for other types
                         End If
+
+                        ' Calculate total days overdue
+                        Dim totalDays As Integer = (dateOfPayment - dueDate).Days
+
+                        ' Calculate overdue days beyond term (even if it's only 1 day overdue)
+                        Dim overdueDays As Integer = If(totalDays > 0, totalDays, 0) ' At least 1 day overdue triggers interest
+
+                        ' Interest formula (based on overdue days and monthly rate)
+                        If overdueDays > 0 Then
+                            Dim interestRate As Double = 0.02 ' 2% interest rate monthly
+                            interest = (principal * interestRate) * (overdueDays / 30)
+                        End If
+
+                        ' Ensure non-negative interest
+                        If interest < 0 Then
+                            interest = 0
+                        End If
+
+                        ' Update UI fields
+                        interestTxt.Text = interest.ToString("F2")
                     Else
                         MessageBox.Show("No record found for the provided facility code.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     End If
@@ -824,8 +918,6 @@ Public Class Payments
             MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
-
 
     Private Sub dtpicker4_ValueChanged(sender As Object, e As EventArgs) Handles dtpicker4.ValueChanged
         'CalculateAndUpdateInterest()
@@ -926,17 +1018,47 @@ Public Class Payments
     End Sub
 
     Private Sub computeInterest_Click(sender As Object, e As EventArgs) Handles computeInterest.Click
-        CalculateAndUpdateInterest()
+        'Try
+        '    CalculateAndUpdateInterest()
 
-        ' Parse the current balance value
-        Dim currentBalance As Double
-        If Double.TryParse(balanceperSoa.Text, currentBalance) Then
-            ' Update the balance with the calculated interest
-            UpdateBalanceWithInterest(currentBalance)
-        Else
-            ' If parsing fails, log or handle the error
-            MessageBox.Show("Invalid balance value. Please check the input.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    ' Parse the current balance value
+        '    Dim currentBalance As Double
+        '    If Double.TryParse(balanceperSoa.Text, currentBalance) Then
+        '        ' Update the balance with the calculated interest
+        '        UpdateBalanceWithInterest(currentBalance)
+        '    Else
+        '        ' If parsing fails, log or handle the error
+        '        MessageBox.Show("Invalid balance value. Please check the input.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    End If
+        'Finally
+        '    ' Re-enable the button after the operation completes
+        '    'computeInterest.Enabled = True
+        'End Try
+
+        ' Check if the value of codeTxt has changed
+        If codeTxt.Text <> lastCodeTxtValue Then
+            Try
+                ' Perform the calculation and update interest
+                CalculateAndUpdateInterest()
+
+                ' Parse the current balance value
+                Dim currentBalance As Double
+                If Double.TryParse(balanceperSoa.Text, currentBalance) Then
+                    ' Update the balance with the calculated interest
+                    UpdateBalanceWithInterest(currentBalance)
+                Else
+                    ' If parsing fails, log or handle the error
+                    ' No MessageBox here, just silent handling
+                End If
+
+                ' Update the lastCodeTxtValue with the current value
+                lastCodeTxtValue = codeTxt.Text
+            Catch ex As Exception
+                ' Handle any potential errors during the calculation process
+                ' No MessageBox here, just silent handling
+            End Try
         End If
+        ' If no change, nothing happens, no calculation, no message
     End Sub
 End Class
 
