@@ -9,6 +9,10 @@ Module Module1
     Public cmd As New OdbcCommand
     Public builder As New OdbcCommandBuilder
 
+    Public Oracon As New OracleConnection
+    Public oraCmd As New OracleCommand
+    Public oraDa As New OracleDataAdapter
+
     Public Sub connection()
         If conn.State = ConnectionState.Closed Then
             conn.Open()

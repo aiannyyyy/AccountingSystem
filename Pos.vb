@@ -9,10 +9,12 @@ Public Class Pos
     ' Public property to store the fullname
     Public Property FullName As String
 
+
     Private Sub Pos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         replaceCombo.Items.AddRange({"Contaminated", "Insufficient"})
 
         conn.ConnectionString = "DSN=dashboard" ' Adjust the connection string to your DSN
+        Oracon.ConnectionString = "Data Source=(DESCRIPTION= (ADDRESS=(PROTOCOL=TCP)(HOST=10.1.1.191)(PORT=1521)) (CONNECT_DATA=(SERVICE_NAME=PROD)));User Id=user1;Password=newborn"
 
         dtpicker1.Value = Date.Now
         dtpicker2.Value = Date.Now
@@ -47,71 +49,217 @@ Public Class Pos
         dgv1.DataSource = ds.Tables("acccounting").DefaultView
     End Sub
 
+    'Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
+    '    If String.IsNullOrEmpty(codeTxt.Text) Then
+    '        cleartxt()
+    '        Return
+    '    End If
+
+    '    da = New OdbcDataAdapter("select * from acccounting where fac_code like '%" & codeTxt.Text & "%' order by purchase_date desc", conn)
+
+    '    ds = New DataSet
+    '    da.Fill(ds, "acccounting")
+    '    dgv1.DataSource = ds.Tables("acccounting").DefaultView
+
+
+    '    Try
+    '        If Oracon.State <> ConnectionState.Open Then
+    '            Oracon.Open()
+    '        End If
+
+    '        ' Correct the query to join the tables properly and use parameterized query
+    '        'Dim query As String = "select fac_code, fac_name, type2 from facility_data where fac_code = ?"
+
+    '        Dim query As String = "SELECT 
+    '                                REF_PROVIDER_ADDRESS.PROVIDERID, 
+    '                                REF_PROVIDER_ADDRESS.CITY, 
+    '                                REF_PROVIDER_ADDRESS.COUNTY, 
+    '                                REF_PROVIDER_ADDRESS.DESCR1, 
+    '                                REF_TYPE.DESCR
+    '                            FROM 
+    '                                PHMSDS.REF_PROVIDER_ADDRESS REF_PROVIDER_ADDRESS
+    '                                INNER JOIN PHMSDS.REF_PROVIDERTYPE REF_PROVIDERTYPE 
+    '                                    ON REF_PROVIDER_ADDRESS.PROVIDERID = REF_PROVIDERTYPE.PROVIDERID
+    '                                INNER JOIN PHMSDS.REF_TYPE REF_TYPE 
+    '                                    ON REF_PROVIDERTYPE.TYPE = REF_TYPE.TYPE
+    '                            WHERE 
+    '                                REF_PROVIDER_ADDRESS.COUNTY = 'QUEZON' AND
+    '                                REF_PROVIDER_ADDRESS.CITY IN (
+    '                                    'UNISAN', 'TAGKAWAYAN', 'SAN FRANCISCO', 'PLARIDEL', 
+    '                                    'PEREZ', 'PADRE BURGOS', 'MULANAY', 'MAUBAN', 
+    '                                    'LOPEZ', 'GUMACA', 'GUINAYANGAN', 'GENERAL NAKAR', 
+    '                                    'GENERAL LUNA', 'CATANAUAN', 'CALAUAG', 'BURDEOS', 
+    '                                    'BUENAVISTA', 'ALABAT', 'AGDANGAN', 'JOMALIG', 'PAGBILAO'
+    '                                )
+    '                            ORDER BY 
+    '                                REF_PROVIDER_ADDRESS.PROVIDERID ASC"
+
+
+    '        Using cmd As New OdbcCommand(query, conn)
+    '            cmd.Parameters.AddWithValue("PROVIDERID", codeTxt.Text)
+
+    '            Using rd As OdbcDataReader = cmd.ExecuteReader()
+    '                If rd.Read() Then
+    '                    ' Ensure the UI update is done on the main thread
+    '                    Me.Invoke(Sub()
+    '                                  codeTxt.Text = rd("PROVIDERID").ToString()
+    '                                  nameBox.Text = rd("DESCR1").ToString()
+    '                                  Dim term As Integer
+
+    '                                  Select Case rd("DESCR").ToString()
+    '                                      Case "LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT"
+    '                                          term = 60
+    '                                      Case "PRIVATE HOSPITAL", "PHYSICIAN", "NP-HOSPITAL", "LYING-IN PRIVATE", "OTHERS"
+    '                                          term = 45
+    '                                  End Select
+
+    '                                  termBox.Text = term.ToString()
+
+    '                                  ' Get the purchase date from wherever you have it stored
+    '                                  Dim purchaseDate As Date = Date.Today ' Example purchase date is today
+
+    '                                  ' Calculate the due date
+    '                                  Dim dueDate As Date = purchaseDate.AddDays(term)
+
+    '                                  ' Display the due date in dueTxt
+    '                                  dtpicker1.Value = dueDate.ToShortDateString() ' Adjust date format as needed
+    '                              End Sub)
+    '                Else
+    '                    Me.Invoke(Sub()
+    '                                  nameBox.Clear()
+    '                                  termBox.Clear()
+    '                                  dtpicker1.Value = Date.Now.ToShortDateString() ' Set current date if no record is found
+    '                              End Sub)
+    '                End If
+    '            End Using
+    '        End Using
+    '    Catch ex As Exception
+    '        MessageBox.Show("An error occurred: " & ex.Message)
+    '    End Try
+
+    '    UpdateDateTimePicker2()
+    'End Sub
+
     Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
         If String.IsNullOrEmpty(codeTxt.Text) Then
             cleartxt()
             Return
         End If
 
-        da = New OdbcDataAdapter("select * from acccounting where fac_code like '%" & codeTxt.Text & "%' order by purchase_date desc", conn)
-
-        ds = New DataSet
-        da.Fill(ds, "acccounting")
-        dgv1.DataSource = ds.Tables("acccounting").DefaultView
-
-
+        ' Fetch data from the ODBC source (conn)
         Try
             If conn.State <> ConnectionState.Open Then
                 conn.Open()
             End If
 
-            ' Correct the query to join the tables properly and use parameterized query
-            Dim query As String = "select fac_code, fac_name, type2 from facility_data where fac_code = ?"
+            Dim odbcQuery As String = "SELECT * FROM acccounting WHERE fac_code LIKE '%" & codeTxt.Text & "%' ORDER BY purchase_date DESC"
+            Using odbcCmd As New OdbcCommand(odbcQuery, conn)
+                odbcCmd.Parameters.AddWithValue("fac_code", "%" & codeTxt.Text & "%")
 
-            Using cmd As New OdbcCommand(query, conn)
-                cmd.Parameters.AddWithValue("fac_code", codeTxt.Text)
+                Dim odbcAdapter As New OdbcDataAdapter(odbcCmd)
+                Dim odbcDataSet As New DataSet
+                odbcAdapter.Fill(odbcDataSet, "acccounting")
+                dgv1.DataSource = odbcDataSet.Tables("acccounting").DefaultView
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("ODBC Error: " & ex.Message)
+        End Try
 
-                Using rd As OdbcDataReader = cmd.ExecuteReader()
-                    If rd.Read() Then
-                        ' Ensure the UI update is done on the main thread
+        Try
+            ' Open the Oracle connection if not already open
+            If Oracon.State <> ConnectionState.Open Then
+                Oracon.Open()
+            End If
+
+            ' Define the query to fetch provider information
+            Dim oracleQuery As String = "
+        SELECT 
+            REF_PROVIDER_ADDRESS.PROVIDERID, 
+            REF_PROVIDER_ADDRESS.CITY, 
+            REF_PROVIDER_ADDRESS.COUNTY, 
+            REF_PROVIDER_ADDRESS.DESCR1, 
+            REF_TYPE.DESCR
+        FROM 
+            PHMSDS.REF_PROVIDER_ADDRESS 
+        INNER JOIN 
+            PHMSDS.REF_PROVIDERTYPE 
+            ON REF_PROVIDER_ADDRESS.PROVIDERID = REF_PROVIDERTYPE.PROVIDERID
+        INNER JOIN 
+            PHMSDS.REF_TYPE 
+            ON REF_PROVIDERTYPE.TYPE = REF_TYPE.TYPE
+        WHERE 
+            REF_PROVIDER_ADDRESS.PROVIDERID = :PROVIDERID
+        ORDER BY 
+            REF_PROVIDER_ADDRESS.PROVIDERID ASC"
+
+            ' Create and configure the Oracle command
+            Using oracleCmd As New OracleCommand(oracleQuery, Oracon)
+                ' Bind the parameter securely
+                oracleCmd.Parameters.Add(New OracleParameter("PROVIDERID", codeTxt.Text.Trim()))
+
+                ' Execute the query and process the results
+                Using reader As OracleDataReader = oracleCmd.ExecuteReader()
+                    If reader.Read() Then
+                        ' Extract data from the reader
+                        Dim providerId As String = reader("PROVIDERID").ToString()
+                        Dim descr1 As String = reader("DESCR1").ToString()
+                        Dim county As String = reader("COUNTY").ToString()
+                        Dim city As String = reader("CITY").ToString()
+                        Dim descr As String = reader("DESCR").ToString()
+                        Dim term As Integer = If(
+                    {"LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT"}.Contains(descr),
+                    60,
+                    45
+                )
+
+                        ' Calculate the due date based on the term
+                        Dim purchaseDate As Date = Date.Today ' Replace with actual purchase date if available
+                        Dim dueDate As Date = purchaseDate.AddDays(term)
+
+                        ' Update the UI on the main thread
                         Me.Invoke(Sub()
-                                      codeTxt.Text = rd("fac_code").ToString()
-                                      nameBox.Text = rd("fac_name").ToString()
-                                      Dim term As Integer
-
-                                      Select Case rd("type2").ToString()
-                                          Case "GOVERNMENT", "LGU"
-                                              term = 60
-                                          Case "PRIVATE"
-                                              term = 45
-                                      End Select
-
+                                      codeTxt.Text = providerId
+                                      nameBox.Text = descr1
                                       termBox.Text = term.ToString()
+                                      dtpicker1.Value = dueDate
 
-                                      ' Get the purchase date from wherever you have it stored
-                                      Dim purchaseDate As Date = Date.Today ' Example purchase date is today
+                                      ' Check the lopezCheck if conditions are met
+                                      Dim targetCounty As String = "QUEZON"
+                                      Dim targetCities As HashSet(Of String) = New HashSet(Of String) From {
+                                  "UNISAN", "TAGKAWAYAN", "SAN FRANCISCO", "PLARIDEL",
+                                  "PEREZ", "PADRE BURGOS", "MULANAY", "MAUBAN",
+                                  "LOPEZ", "GUMACA", "GUINAYANGAN", "GENERAL NAKAR",
+                                  "GENERAL LUNA", "CATANAUAN", "CALAUAG", "BURDEOS",
+                                  "BUENAVISTA", "ALABAT", "AGDANGAN", "JOMALIG", "PAGBILAO"
+                              }
 
-                                      ' Calculate the due date
-                                      Dim dueDate As Date = purchaseDate.AddDays(term)
-
-                                      ' Display the due date in dueTxt
-                                      dtpicker1.Value = dueDate.ToShortDateString() ' Adjust date format as needed
+                                      lopezCheck.Checked = (county = targetCounty AndAlso targetCities.Contains(city.ToUpper()))
                                   End Sub)
                     Else
+                        ' No matching record found
                         Me.Invoke(Sub()
                                       nameBox.Clear()
                                       termBox.Clear()
-                                      dtpicker1.Value = Date.Now.ToShortDateString() ' Set current date if no record is found
+                                      dtpicker1.Value = Date.Now
+                                      lopezCheck.Checked = False
                                   End Sub)
                     End If
                 End Using
             End Using
+        Catch ex As OracleException
+            MessageBox.Show("Oracle Database Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            MessageBox.Show("An error occurred: " & ex.Message)
+            MessageBox.Show("An unexpected error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            ' Ensure the connection is closed
+            If Oracon.State = ConnectionState.Open Then
+                Oracon.Close()
+            End If
         End Try
 
         UpdateDateTimePicker2()
     End Sub
+
 
     Private Sub brochureCheck_CheckedChanged(sender As Object, e As EventArgs) Handles brochureCheck.CheckedChanged
         If brochureCheck.Checked Then
@@ -260,18 +408,47 @@ Public Class Pos
     End Sub
 
     Private Sub qtyTxt_TextChanged(sender As Object, e As EventArgs) Handles qtyTxt.TextChanged
-        ' Reset isFirstInput and set defaults if the textbox is cleared
+        '' Reset isFirstInput and set defaults if the textbox is cleared
+        'If String.IsNullOrEmpty(qtyTxt.Text) Then
+        '    isFirstInput = True
+        '    amountTxt.Text = "0.00"   ' Default value for amountTxt
+        '    totalTxt.Text = "0.00" ' Default value for totalTxt
+        'End If
+
+        'If String.IsNullOrEmpty(qtyTxt.Text) Then
+        '    isFirstInput = True
+        'End If
+
+        '' Determine which checkbox is checked and calculate accordingly
+        'If replacementCheck.Checked Then
+        '    CalculateTotalAmount(15)
+        'ElseIf walkCheck.Checked Then
+        '    CalculateTotalAmount(1750)
+        'ElseIf monitoringCheck.Checked Then
+        '    CalculateTotalAmount(400)
+        'ElseIf lopezCheck.Checked Then
+        '    CalculateTotalAmount(1800)
+        'End If
+
+        '' Update totalTxt.Text by adding the value from adsTxt.Text
+        'UpdateTotalAmount()
+        ' Validate and reset when the textbox is cleared or contains invalid input
         If String.IsNullOrEmpty(qtyTxt.Text) Then
             isFirstInput = True
             amountTxt.Text = "0.00"   ' Default value for amountTxt
-            totalTxt.Text = "0.00" ' Default value for totalTxt
+            totalTxt.Text = "0.00"    ' Default value for totalTxt
+            Return
         End If
 
-        If String.IsNullOrEmpty(qtyTxt.Text) Then
-            isFirstInput = True
+        Dim quantity As Double
+        If Not Double.TryParse(qtyTxt.Text, quantity) Then
+            ' Show a message if the input is invalid and reset the textbox
+            MessageBox.Show("Please enter a valid number.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            qtyTxt.Text = "" ' Clear invalid input
+            Return
         End If
 
-        ' Determine which checkbox is checked and calculate accordingly
+        ' Perform calculations based on the selected checkbox
         If replacementCheck.Checked Then
             CalculateTotalAmount(15)
         ElseIf walkCheck.Checked Then
@@ -280,49 +457,52 @@ Public Class Pos
             CalculateTotalAmount(400)
         ElseIf lopezCheck.Checked Then
             CalculateTotalAmount(1800)
+        Else
+            ' Default calculation: multiply by 1750 if no checkbox is selected
+            amountTxt.Text = (quantity * 1750).ToString("F2") ' Format with 2 decimal places
         End If
 
         ' Update totalTxt.Text by adding the value from adsTxt.Text
         UpdateTotalAmount()
     End Sub
 
-    Private Sub qtyTxt_KeyPress(sender As Object, e As KeyPressEventArgs) Handles qtyTxt.KeyPress
-        ' Check if the Enter key is pressed
-        If e.KeyChar = ChrW(Keys.Enter) Then
-            Dim quantity As Double
+    'Private Sub qtyTxt_KeyPress(sender As Object, e As KeyPressEventArgs) Handles qtyTxt.KeyPress
+    '    ' Check if the Enter key is pressed
+    '    If e.KeyChar = ChrW(Keys.Enter) Then
+    '        Dim quantity As Double
 
-            ' Validate the input as a number
-            If Double.TryParse(qtyTxt.Text, quantity) Then
-                ' Perform the appropriate calculation based on the selected checkbox
-                If replacementCheck.Checked Then
-                    CalculateTotalAmount(15)
-                ElseIf walkCheck.Checked Then
-                    CalculateTotalAmount(1800)
-                ElseIf monitoringCheck.Checked Then
-                    CalculateTotalAmount(400)
-                ElseIf lopezCheck.Checked Then
-                    CalculateTotalAmount(1800)
-                Else
-                    ' Default calculation: multiply by 1750 if no checkbox is selected
-                    amountTxt.Text = (quantity * 1750).ToString("F2") ' Format with 2 decimal places
-                End If
+    '        ' Validate the input as a number
+    '        If Double.TryParse(qtyTxt.Text, quantity) Then
+    '            ' Perform the appropriate calculation based on the selected checkbox
+    '            If replacementCheck.Checked Then
+    '                CalculateTotalAmount(15)
+    '            ElseIf walkCheck.Checked Then
+    '                CalculateTotalAmount(1800)
+    '            ElseIf monitoringCheck.Checked Then
+    '                CalculateTotalAmount(400)
+    '            ElseIf lopezCheck.Checked Then
+    '                CalculateTotalAmount(1800)
+    '            Else
+    '                ' Default calculation: multiply by 1750 if no checkbox is selected
+    '                amountTxt.Text = (quantity * 1750).ToString("F2") ' Format with 2 decimal places
+    '            End If
 
-                ' Update totalTxt.Text by adding the value from adsTxt.Text
-                UpdateTotalAmount()
-            Else
-                ' Show a message if the input is invalid
-                MessageBox.Show("Please enter a valid number.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            End If
+    '            ' Update totalTxt.Text by adding the value from adsTxt.Text
+    '            UpdateTotalAmount()
+    '        Else
+    '            ' Show a message if the input is invalid
+    '            MessageBox.Show("Please enter a valid number.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+    '        End If
 
-            ' Prevent the beep sound on Enter key press
-            e.Handled = True
-        End If
+    '        ' Prevent the beep sound on Enter key press
+    '        e.Handled = True
+    '    End If
 
-        ' Allow only digits and control keys (e.g., Backspace)
-        If Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
-            e.Handled = True
-        End If
-    End Sub
+    '    ' Allow only digits and control keys (e.g., Backspace)
+    '    If Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+    '        e.Handled = True
+    '    End If
+    'End Sub
 
     Public Sub CalculateTotalAmount(unitPrice As Double)
         Dim quantity As Double
@@ -645,7 +825,7 @@ Public Class Pos
     Private Sub AddNewOrder()
         Try
             If Not ValidateFields() Then Exit Sub
-            If MessageBox.Show("Are all entries correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then Exit Sub
+            'If MessageBox.Show("Are all entries correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then Exit Sub
 
             Dim orderType As String = DetermineOrderType()
             Dim soatxt As String = InsertOrder(orderType)
