@@ -107,6 +107,7 @@ Partial Class Pos
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.expiredCheck = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -913,7 +914,7 @@ Partial Class Pos
         '
         Me.lopezCheck.AutoSize = True
         Me.lopezCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lopezCheck.Location = New System.Drawing.Point(251, 10)
+        Me.lopezCheck.Location = New System.Drawing.Point(198, 10)
         Me.lopezCheck.Name = "lopezCheck"
         Me.lopezCheck.Size = New System.Drawing.Size(106, 17)
         Me.lopezCheck.TabIndex = 24
@@ -924,7 +925,7 @@ Partial Class Pos
         '
         Me.replacementCheck.AutoSize = True
         Me.replacementCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.replacementCheck.Location = New System.Drawing.Point(379, 10)
+        Me.replacementCheck.Location = New System.Drawing.Point(454, 10)
         Me.replacementCheck.Name = "replacementCheck"
         Me.replacementCheck.Size = New System.Drawing.Size(103, 17)
         Me.replacementCheck.TabIndex = 20
@@ -935,7 +936,7 @@ Partial Class Pos
         '
         Me.walkCheck.AutoSize = True
         Me.walkCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.walkCheck.Location = New System.Drawing.Point(25, 10)
+        Me.walkCheck.Location = New System.Drawing.Point(12, 10)
         Me.walkCheck.Name = "walkCheck"
         Me.walkCheck.Size = New System.Drawing.Size(76, 17)
         Me.walkCheck.TabIndex = 21
@@ -946,7 +947,7 @@ Partial Class Pos
         '
         Me.monitoringCheck.AutoSize = True
         Me.monitoringCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.monitoringCheck.Location = New System.Drawing.Point(129, 10)
+        Me.monitoringCheck.Location = New System.Drawing.Point(96, 10)
         Me.monitoringCheck.Name = "monitoringCheck"
         Me.monitoringCheck.Size = New System.Drawing.Size(96, 17)
         Me.monitoringCheck.TabIndex = 22
@@ -1187,12 +1188,13 @@ Partial Class Pos
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.expiredCheck)
         Me.Panel4.Controls.Add(Me.remBox)
         Me.Panel4.Controls.Add(Me.remLbl)
         Me.Panel4.Controls.Add(Me.replaceCombo)
-        Me.Panel4.Controls.Add(Me.replacementCheck)
         Me.Panel4.Controls.Add(Me.lopezCheck)
         Me.Panel4.Controls.Add(Me.walkCheck)
+        Me.Panel4.Controls.Add(Me.replacementCheck)
         Me.Panel4.Controls.Add(Me.monitoringCheck)
         Me.Panel4.Location = New System.Drawing.Point(23, 294)
         Me.Panel4.Name = "Panel4"
@@ -1210,19 +1212,19 @@ Partial Class Pos
         Me.remBox.FocusedBorderColor = System.Drawing.Color.Black
         Me.remBox.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.remBox.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.remBox.Location = New System.Drawing.Point(703, 4)
+        Me.remBox.Location = New System.Drawing.Point(795, 7)
         Me.remBox.Multiline = True
         Me.remBox.Name = "remBox"
         Me.remBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.remBox.SelectedText = ""
-        Me.remBox.Size = New System.Drawing.Size(293, 30)
+        Me.remBox.Size = New System.Drawing.Size(201, 24)
         Me.remBox.TabIndex = 26
         '
         'remLbl
         '
         Me.remLbl.AutoSize = True
         Me.remLbl.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.remLbl.Location = New System.Drawing.Point(628, 9)
+        Me.remLbl.Location = New System.Drawing.Point(720, 10)
         Me.remLbl.Name = "remLbl"
         Me.remLbl.Size = New System.Drawing.Size(69, 17)
         Me.remLbl.TabIndex = 26
@@ -1231,9 +1233,9 @@ Partial Class Pos
         'replaceCombo
         '
         Me.replaceCombo.FormattingEnabled = True
-        Me.replaceCombo.Location = New System.Drawing.Point(496, 8)
+        Me.replaceCombo.Location = New System.Drawing.Point(557, 8)
         Me.replaceCombo.Name = "replaceCombo"
-        Me.replaceCombo.Size = New System.Drawing.Size(121, 21)
+        Me.replaceCombo.Size = New System.Drawing.Size(96, 21)
         Me.replaceCombo.TabIndex = 25
         '
         'Panel2
@@ -1259,6 +1261,17 @@ Partial Class Pos
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(1047, 39)
         Me.Panel6.TabIndex = 29
+        '
+        'expiredCheck
+        '
+        Me.expiredCheck.AutoSize = True
+        Me.expiredCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.expiredCheck.Location = New System.Drawing.Point(311, 9)
+        Me.expiredCheck.Name = "expiredCheck"
+        Me.expiredCheck.Size = New System.Drawing.Size(135, 17)
+        Me.expiredCheck.TabIndex = 27
+        Me.expiredCheck.Text = "EXPIRED FILTER CARD"
+        Me.expiredCheck.UseVisualStyleBackColor = True
         '
         'Pos
         '
@@ -1372,4 +1385,5 @@ Partial Class Pos
     Friend WithEvents balance As DataGridViewTextBoxColumn
     Friend WithEvents username As DataGridViewTextBoxColumn
     Friend WithEvents remarks As DataGridViewTextBoxColumn
+    Friend WithEvents expiredCheck As CheckBox
 End Class

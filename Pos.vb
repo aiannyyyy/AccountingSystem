@@ -200,12 +200,14 @@ Public Class Pos
                 ' Execute the query and process the results
                 Using reader As OracleDataReader = oracleCmd.ExecuteReader()
                     If reader.Read() Then
-                        ' Extract data from the reader
-                        Dim providerId As String = reader("PROVIDERID").ToString()
-                        Dim descr1 As String = reader("DESCR1").ToString()
-                        Dim county As String = reader("COUNTY").ToString()
-                        Dim city As String = reader("CITY").ToString()
-                        Dim descr As String = reader("DESCR").ToString()
+                        ' Extract and validate data from the reader
+                        Dim providerId As String = If(Not reader.IsDBNull(0), reader("PROVIDERID").ToString(), String.Empty)
+                        Dim city As String = If(Not reader.IsDBNull(1), reader("CITY").ToString(), String.Empty).ToUpper()
+                        Dim county As String = If(Not reader.IsDBNull(2), reader("COUNTY").ToString(), String.Empty)
+                        Dim descr1 As String = If(Not reader.IsDBNull(3), reader("DESCR1").ToString(), String.Empty)
+                        Dim descr As String = If(Not reader.IsDBNull(4), reader("DESCR").ToString(), String.Empty)
+
+                        ' Determine the term based on descr
                         Dim term As Integer = If(
                     {"LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT"}.Contains(descr),
                     60,
@@ -233,7 +235,7 @@ Public Class Pos
                                   "BUENAVISTA", "ALABAT", "AGDANGAN", "JOMALIG", "PAGBILAO"
                               }
 
-                                      lopezCheck.Checked = (county = targetCounty AndAlso targetCities.Contains(city.ToUpper()))
+                                      lopezCheck.Checked = (county = targetCounty AndAlso targetCities.Contains(city))
                                   End Sub)
                     Else
                         ' No matching record found
@@ -256,6 +258,7 @@ Public Class Pos
                 Oracon.Close()
             End If
         End Try
+
 
         UpdateDateTimePicker2()
     End Sub
@@ -349,7 +352,7 @@ Public Class Pos
         If replacementCheck.Checked Then
             replaceCombo.Enabled = True
             UncheckOtherCheckBoxes(replacementCheck)
-            CalculateTotalAmount(15)
+            CalculateTotalAmount(0)
             ' Update the total after calculation
             UpdateTotalAmount()
 
@@ -391,35 +394,61 @@ Public Class Pos
     '    End If
     'End Sub
 
+    'Private Sub UncheckOtherCheckBoxes(checkedCheckBox As CheckBox)
+    '    For Each chk As CheckBox In {replacementCheck, walkCheck, monitoringCheck, lopezCheck}
+    '        If chk IsNot checkedCheckBox AndAlso chk.Checked Then
+    '            chk.Checked = False
+    '        End If
+    '    Next
+    'End Sub
     Private Sub UncheckOtherCheckBoxes(checkedCheckBox As CheckBox)
-        For Each chk As CheckBox In {replacementCheck, walkCheck, monitoringCheck, lopezCheck}
+        For Each chk As CheckBox In {replacementCheck, walkCheck, monitoringCheck, lopezCheck, expiredCheck}
             If chk IsNot checkedCheckBox AndAlso chk.Checked Then
                 chk.Checked = False
             End If
         Next
+
+        ' If no checkboxes are checked, reset to the default calculation
+        If Not replacementCheck.Checked AndAlso Not walkCheck.Checked AndAlso Not monitoringCheck.Checked AndAlso Not lopezCheck.Checked AndAlso Not expiredCheck.Checked Then
+            CalculateTotalAmount(1750)
+            UpdateTotalAmount()
+        End If
     End Sub
 
+    'Private Sub ClearTextBoxesIfNoChecks()
+    '    If Not replacementCheck.Checked AndAlso Not walkCheck.Checked AndAlso Not monitoringCheck.Checked AndAlso Not lopezCheck.Checked Then
+    '        'qtyTxt.Clear()
+    '        'amountTxt.Clear()
+    '        totalTxt.Clear()
+    '    End If
+    'End Sub
     Private Sub ClearTextBoxesIfNoChecks()
-        If Not replacementCheck.Checked AndAlso Not walkCheck.Checked AndAlso Not monitoringCheck.Checked AndAlso Not lopezCheck.Checked Then
-            qtyTxt.Clear()
-            amountTxt.Clear()
+        If Not replacementCheck.Checked AndAlso Not walkCheck.Checked AndAlso Not monitoringCheck.Checked AndAlso Not lopezCheck.Checked AndAlso Not expiredCheck.Checked Then
+            ' If no checkboxes are selected, calculate with default unit price
+            CalculateTotalAmount(1750)
+            UpdateTotalAmount()
+        Else
             totalTxt.Clear()
         End If
     End Sub
 
     Private Sub qtyTxt_TextChanged(sender As Object, e As EventArgs) Handles qtyTxt.TextChanged
-        '' Reset isFirstInput and set defaults if the textbox is cleared
         'If String.IsNullOrEmpty(qtyTxt.Text) Then
         '    isFirstInput = True
         '    amountTxt.Text = "0.00"   ' Default value for amountTxt
-        '    totalTxt.Text = "0.00" ' Default value for totalTxt
+        '    totalTxt.Text = "0.00"    ' Default value for totalTxt
+        '    Return
         'End If
 
-        'If String.IsNullOrEmpty(qtyTxt.Text) Then
-        '    isFirstInput = True
+        'Dim quantity As Double
+        'If Not Double.TryParse(qtyTxt.Text, quantity) Then
+        '    ' Show a message if the input is invalid and reset the textbox
+        '    MessageBox.Show("Please enter a valid number.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        '    qtyTxt.Text = "" ' Clear invalid input
+        '    Return
         'End If
 
-        '' Determine which checkbox is checked and calculate accordingly
+        '' Perform calculations based on the selected checkbox
         'If replacementCheck.Checked Then
         '    CalculateTotalAmount(15)
         'ElseIf walkCheck.Checked Then
@@ -428,11 +457,13 @@ Public Class Pos
         '    CalculateTotalAmount(400)
         'ElseIf lopezCheck.Checked Then
         '    CalculateTotalAmount(1800)
+        'Else
+        '    ' Default calculation: multiply by 1750 if no checkbox is selected
+        '    amountTxt.Text = (quantity * 1750).ToString("F2") ' Format with 2 decimal places
         'End If
 
         '' Update totalTxt.Text by adding the value from adsTxt.Text
         'UpdateTotalAmount()
-        ' Validate and reset when the textbox is cleared or contains invalid input
         If String.IsNullOrEmpty(qtyTxt.Text) Then
             isFirstInput = True
             amountTxt.Text = "0.00"   ' Default value for amountTxt
@@ -450,6 +481,8 @@ Public Class Pos
 
         ' Perform calculations based on the selected checkbox
         If replacementCheck.Checked Then
+            CalculateTotalAmount(0)
+        ElseIf expiredCheck.Checked Then
             CalculateTotalAmount(15)
         ElseIf walkCheck.Checked Then
             CalculateTotalAmount(1750)
@@ -459,7 +492,7 @@ Public Class Pos
             CalculateTotalAmount(1800)
         Else
             ' Default calculation: multiply by 1750 if no checkbox is selected
-            amountTxt.Text = (quantity * 1750).ToString("F2") ' Format with 2 decimal places
+            CalculateTotalAmount(1750)
         End If
 
         ' Update totalTxt.Text by adding the value from adsTxt.Text
@@ -519,6 +552,23 @@ Public Class Pos
         End If
     End Sub
 
+    'Private Sub UpdateTotalAmount()
+    '    Dim amountValue As Double = 0
+    '    Dim adsValue As Double = 0
+
+    '    ' Parse amountTxt.Text
+    '    Double.TryParse(amountTxt.Text, amountValue)
+
+    '    ' Parse adsTxt.Text
+    '    Double.TryParse(adsTxt.Text, adsValue)
+
+    '    ' Calculate the combined total
+    '    Dim combinedTotal = amountValue + adsValue
+
+    '    ' Display the combined total in totalTxt
+    '    totalTxt.Text = combinedTotal.ToString("F2") ' Format with 2 decimal places
+    'End Sub
+
     Private Sub UpdateTotalAmount()
         Dim amountValue As Double = 0
         Dim adsValue As Double = 0
@@ -535,6 +585,7 @@ Public Class Pos
         ' Display the combined total in totalTxt
         totalTxt.Text = combinedTotal.ToString("F2") ' Format with 2 decimal places
     End Sub
+
 
     Public Sub cleartxt()
         codeTxt.Text = ""
@@ -1149,6 +1200,18 @@ Public Class Pos
         dgv1.Columns("ads_amount").DefaultCellStyle.Format = "F2" ' Replace "adsColumn" with your actual column name for ads
         dgv1.Columns("total_amount").DefaultCellStyle.Format = "F2" ' Replace "totalColumn" with your actual column name for total amount
         dgv1.Columns("balance").DefaultCellStyle.Format = "F2" ' Replace "balanceColumn" with your actual column name for balance
+    End Sub
+
+    Private Sub expiredCheck_CheckedChanged(sender As Object, e As EventArgs) Handles expiredCheck.CheckedChanged
+        If expiredCheck.Checked Then
+            UncheckOtherCheckBoxes(expiredCheck)
+            CalculateTotalAmount(15)
+            ' Update the total after calculation
+            UpdateTotalAmount()
+
+        Else
+            ClearTextBoxesIfNoChecks()
+        End If
     End Sub
 End Class
 
