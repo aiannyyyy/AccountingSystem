@@ -11,7 +11,7 @@ Public Class Pos
 
 
     Private Sub Pos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        replaceCombo.Items.AddRange({"Contaminated", "Insufficient"})
+        replaceCombo.Items.AddRange({"CONTAMINATED", "INSUFFICIENT"})
 
         conn.ConnectionString = "DSN=dashboard" ' Adjust the connection string to your DSN
         Oracon.ConnectionString = "Data Source=(DESCRIPTION= (ADDRESS=(PROTOCOL=TCP)(HOST=10.1.1.191)(PORT=1521)) (CONNECT_DATA=(SERVICE_NAME=PROD)));User Id=user1;Password=newborn"
@@ -152,9 +152,9 @@ Public Class Pos
                 conn.Open()
             End If
 
-            Dim odbcQuery As String = "SELECT * FROM acccounting WHERE fac_code LIKE '%" & codeTxt.Text & "%' ORDER BY purchase_date DESC"
+            Dim odbcQuery As String = "SELECT * FROM acccounting WHERE fac_code = ? ORDER BY purchase_date DESC"
             Using odbcCmd As New OdbcCommand(odbcQuery, conn)
-                odbcCmd.Parameters.AddWithValue("fac_code", "%" & codeTxt.Text & "%")
+                odbcCmd.Parameters.AddWithValue("fac_code", codeTxt.Text)
 
                 Dim odbcAdapter As New OdbcDataAdapter(odbcCmd)
                 Dim odbcDataSet As New DataSet
@@ -259,7 +259,6 @@ Public Class Pos
             End If
         End Try
 
-
         UpdateDateTimePicker2()
     End Sub
 
@@ -351,6 +350,8 @@ Public Class Pos
     Private Sub replacementCheck_CheckedChanged(sender As Object, e As EventArgs) Handles replacementCheck.CheckedChanged
         If replacementCheck.Checked Then
             replaceCombo.Enabled = True
+            remLbl.Visible = True
+            remBox.Visible = True
             UncheckOtherCheckBoxes(replacementCheck)
             CalculateTotalAmount(0)
             ' Update the total after calculation
@@ -358,6 +359,8 @@ Public Class Pos
 
         Else
             ClearTextBoxesIfNoChecks()
+            remLbl.Visible = False
+            remBox.Visible = False
             replaceCombo.Enabled = False
             replaceCombo.SelectedIndex = -1
         End If
@@ -433,37 +436,6 @@ Public Class Pos
     End Sub
 
     Private Sub qtyTxt_TextChanged(sender As Object, e As EventArgs) Handles qtyTxt.TextChanged
-        'If String.IsNullOrEmpty(qtyTxt.Text) Then
-        '    isFirstInput = True
-        '    amountTxt.Text = "0.00"   ' Default value for amountTxt
-        '    totalTxt.Text = "0.00"    ' Default value for totalTxt
-        '    Return
-        'End If
-
-        'Dim quantity As Double
-        'If Not Double.TryParse(qtyTxt.Text, quantity) Then
-        '    ' Show a message if the input is invalid and reset the textbox
-        '    MessageBox.Show("Please enter a valid number.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        '    qtyTxt.Text = "" ' Clear invalid input
-        '    Return
-        'End If
-
-        '' Perform calculations based on the selected checkbox
-        'If replacementCheck.Checked Then
-        '    CalculateTotalAmount(15)
-        'ElseIf walkCheck.Checked Then
-        '    CalculateTotalAmount(1750)
-        'ElseIf monitoringCheck.Checked Then
-        '    CalculateTotalAmount(400)
-        'ElseIf lopezCheck.Checked Then
-        '    CalculateTotalAmount(1800)
-        'Else
-        '    ' Default calculation: multiply by 1750 if no checkbox is selected
-        '    amountTxt.Text = (quantity * 1750).ToString("F2") ' Format with 2 decimal places
-        'End If
-
-        '' Update totalTxt.Text by adding the value from adsTxt.Text
-        'UpdateTotalAmount()
         If String.IsNullOrEmpty(qtyTxt.Text) Then
             isFirstInput = True
             amountTxt.Text = "0.00"   ' Default value for amountTxt
@@ -741,8 +713,8 @@ Public Class Pos
     '    End Using
     'End Function
 
-    Private Function InsertRecord(ByRef soatxt As String, soaDate As Date, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As Date, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Double) As Double
-        Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    Private Function InsertRecord(ByRef soatxt As String, soaDate As Date, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As Date, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String) As Double
+        Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         Dim lastSoaQuery As String = "SELECT soa_number FROM acccounting WHERE LEFT(soa_number, 4) = ? ORDER BY soa_number DESC LIMIT 1"
         Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
 
@@ -790,6 +762,7 @@ Public Class Pos
                     cmd.Parameters.AddWithValue("balance", balance)
                     cmd.Parameters.AddWithValue("username", user)
                     cmd.Parameters.AddWithValue("sub_amount", subamount)
+                    cmd.Parameters.AddWithValue("replace_type", replace_type)
 
                     cmd.ExecuteNonQuery()
 
@@ -805,25 +778,6 @@ Public Class Pos
             End Try
         End Using
     End Function
-
-    'Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
-    '    Dim isAnyChecked As Boolean = dgv1.Rows.Cast(Of DataGridViewRow)().
-    '                              Any(Function(row) Not row.IsNewRow AndAlso Convert.ToBoolean(row.Cells("cancelPo").Value))
-
-    '    If isAnyChecked Then
-    '        CancelPurchaseOrders()
-    '        cleartxt()
-    '        loaddgv()
-    '    Else
-    '        AddNewOrder()
-    '        cleartxt()
-    '        loaddgv()
-    '    End If
-
-    '    addButton.Text = "ADD"
-    '    remLbl.Visible = False
-    '    remBox.Visible = False
-    'End Sub
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         ' Check if any row is marked for cancellation
@@ -893,6 +847,7 @@ Public Class Pos
     Private Function DetermineOrderType() As String
         If walkCheck.Checked Then Return "ENBS"
         If monitoringCheck.Checked Then Return "Monitoring"
+        If expiredCheck.Checked Then Return "ENBS Expired Filter Card"
         If replacementCheck.Checked Then Return "ENBS-Replacement -" & replaceCombo.SelectedItem.ToString()
         If lopezCheck.Checked Then Return "ENBS"
         Return "ENBS"
@@ -906,6 +861,13 @@ Public Class Pos
         Dim formattedTotal As String = Double.Parse(totalTxt.Text).ToString("F2")
         Dim formattedBalance As String = Double.Parse(totalTxt.Text).ToString("F2") ' Assuming you have a balance field
 
+        Dim replace As String
+        If replaceCombo.SelectedItem IsNot Nothing Then
+            replace = replaceCombo.SelectedItem.ToString()
+        Else
+            replace = "NULL"
+        End If
+
         ' Insert the formatted values into the database
         Dim soaNumber As Integer = InsertRecord(soatxt, Date.Now.Date, orderType, codeTxt.Text, nameBox.Text, termBox.Text,
                                             purchaseBox.Text, dtpicker2.Value.Date, Integer.Parse(qtyTxt.Text),
@@ -913,7 +875,7 @@ Public Class Pos
                                             ParseOrZero(dryingTxt.Text), ParseOrZero(replaceTxt.Text),
                                             formattedAds, dtpicker1.Value.Date,
                                             formattedTotal, formattedBalance,
-                                            Login.userTxt.Text, Double.Parse(amountTxt.Text))
+                                            Login.userTxt.Text, Double.Parse(amountTxt.Text), replace)
 
         UpdateSoaTxt(soatxt, soaNumber)
         MessageBox.Show("Saved Successfully!")
@@ -1080,8 +1042,13 @@ Public Class Pos
     End Sub
 
     Private Sub codeTxt_KeyPress(sender As Object, e As KeyPressEventArgs) Handles codeTxt.KeyPress
-        ' Allow only digits and control keys (e.g., Backspace)
+        ' Allow digits and control keys (backspace, delete, etc.)
         If Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+
+        ' Limit input to 4 characters
+        If codeTxt.Text.Length >= 4 AndAlso Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
@@ -1094,7 +1061,31 @@ Public Class Pos
     End Sub
 
     Private Sub replaceCombo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles replaceCombo.SelectedIndexChanged
+        '' Ensure the combo box has a selected item
+        'If replaceCombo.SelectedItem Is Nothing Then
+        '    MessageBox.Show("Please select a valid replacement type.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        '    CalculateTotalAmount(0)
+        '    Return
+        'End If
 
+        'Dim selectedValue As String = replaceCombo.SelectedItem.ToString()
+
+        '' Check if the DataReader is properly initialized
+        'If dr IsNot Nothing AndAlso dr.HasRows Then
+        '    dr.Read() ' Move to the first row
+        '    Dim replacementType As String = If(dr("replace_type") IsNot DBNull.Value, dr("replace_type").ToString(), String.Empty)
+
+        '    If selectedValue = replacementType Then
+        '        ' If there's a match, calculate with 15 pesos
+        '        CalculateTotalAmount(15)
+        '    Else
+        '        ' If no match, calculate with 0 pesos
+        '        CalculateTotalAmount(0)
+        '    End If
+        'Else
+        '    ' If no records in the database, set amount to 0
+        '    CalculateTotalAmount(0)
+        'End If
     End Sub
 
     Private Sub homeBtn_Click(sender As Object, e As EventArgs) 
@@ -2185,5 +2176,58 @@ End Class
 '    MessageBox.Show("Insert Successfully!")
 '    Return soaNumber.ToString()
 'End Function
+
+
+'Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
+'    Dim isAnyChecked As Boolean = dgv1.Rows.Cast(Of DataGridViewRow)().
+'                              Any(Function(row) Not row.IsNewRow AndAlso Convert.ToBoolean(row.Cells("cancelPo").Value))
+
+'    If isAnyChecked Then
+'        CancelPurchaseOrders()
+'        cleartxt()
+'        loaddgv()
+'    Else
+'        AddNewOrder()
+'        cleartxt()
+'        loaddgv()
+'    End If
+
+'    addButton.Text = "ADD"
+'    remLbl.Visible = False
+'    remBox.Visible = False
+'End Sub
+
+'If String.IsNullOrEmpty(qtyTxt.Text) Then
+'    isFirstInput = True
+'    amountTxt.Text = "0.00"   ' Default value for amountTxt
+'    totalTxt.Text = "0.00"    ' Default value for totalTxt
+'    Return
+'End If
+
+'Dim quantity As Double
+'If Not Double.TryParse(qtyTxt.Text, quantity) Then
+'    ' Show a message if the input is invalid and reset the textbox
+'    MessageBox.Show("Please enter a valid number.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+'    qtyTxt.Text = "" ' Clear invalid input
+'    Return
+'End If
+
+'' Perform calculations based on the selected checkbox
+'If replacementCheck.Checked Then
+'    CalculateTotalAmount(15)
+'ElseIf walkCheck.Checked Then
+'    CalculateTotalAmount(1750)
+'ElseIf monitoringCheck.Checked Then
+'    CalculateTotalAmount(400)
+'ElseIf lopezCheck.Checked Then
+'    CalculateTotalAmount(1800)
+'Else
+'    ' Default calculation: multiply by 1750 if no checkbox is selected
+'    amountTxt.Text = (quantity * 1750).ToString("F2") ' Format with 2 decimal places
+'End If
+
+'' Update totalTxt.Text by adding the value from adsTxt.Text
+'UpdateTotalAmount()
+
 
 
