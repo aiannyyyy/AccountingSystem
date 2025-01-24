@@ -28,7 +28,7 @@ Public Class Pos
 
             ' Test the connection (optional)
             conn.Open()
-            MessageBox.Show("Database connection established successfully!")
+            'MessageBox.Show("Database connection established successfully!")
             conn.Close()
         Catch ex As Exception
             MessageBox.Show("Failed to connect to the database: " & ex.Message)
@@ -1080,6 +1080,28 @@ Public Class Pos
                         cmd3.ExecuteNonQuery()
                     End Using
 
+                    'this is for when a replacement_type has a price and need to add to the balance
+                    ' First, calculate the total price from the replacement_type table
+                    Dim query3 As String = "SELECT COALESCE(SUM(total_price), 0) FROM replacement_type WHERE soa_number = ?"
+                    Dim totalPrice As Double
+
+                    Using cmd4 As New OdbcCommand(query3, conn, transaction)
+                        cmd4.Parameters.AddWithValue("soa_number", newSoaNumber)
+                        totalPrice = Convert.ToDouble(cmd4.ExecuteScalar())
+                    End Using
+
+                    ' Add the total price to the current balance
+                    Dim newBalance As Double = balance + totalPrice
+
+                    ' Update the balance in the acccounting table
+                    Dim updateBalanceQuery As String = "UPDATE acccounting SET balance = ? WHERE soa_number = ?"
+                    Using cmd5 As New OdbcCommand(updateBalanceQuery, conn, transaction)
+                        cmd5.Parameters.AddWithValue("balance", newBalance)
+                        cmd5.Parameters.AddWithValue("soa_number", newSoaNumber)
+                        cmd5.ExecuteNonQuery()
+                    End Using
+
+
                     transaction.Commit()
                     Return lastInsertedId
                 End Using
@@ -1091,7 +1113,6 @@ Public Class Pos
             End Try
         End Using
     End Function
-
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         ' Check if any row is marked for cancellation
@@ -1135,9 +1156,7 @@ Public Class Pos
                 MessageBox.Show("An error occurred during cancellation: " & ex.Message)
             End Try
         Next
-
         'cleartxt()
-
     End Sub
 
     Private Sub AddNewOrder()
@@ -1500,6 +1519,10 @@ Public Class Pos
     End Sub
 
     Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
+
+    End Sub
+
+    Private Sub totalTxt_TextChanged(sender As Object, e As EventArgs) Handles totalTxt.TextChanged
 
     End Sub
 

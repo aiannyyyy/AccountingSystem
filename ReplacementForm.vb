@@ -29,7 +29,7 @@ Public Class ReplacementForm
     ' Loads data from the database into the DataGridView
     Public Sub loaddgv()
         Call connection()
-        Dim query As String = "SELECT * FROM replacement_type ORDER BY purchase_date DESC"
+        Dim query As String = "SELECT * FROM replacement_type ORDER BY component_id DESC"
 
         Dim dtAdapter As New OdbcDataAdapter(query, connString)
         Dim dtDatatable As New DataTable
@@ -80,7 +80,6 @@ Public Class ReplacementForm
         ExecuteQuery(query)
     End Sub
 
-
     ' Event handler for the Add Button to insert a new record
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         Dim facCode As String = codeTxt.Text
@@ -95,6 +94,10 @@ Public Class ReplacementForm
         InsertRecord(facCode, soaNumber, replaceType, purchaseDate, quantity, unitPrice, totalPrice)
         MessageBox.Show("Insert Success!")
         loaddgv() ' Reload the DataGridView with updated data
+
+    End Sub
+
+    Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
 
     End Sub
 End Class

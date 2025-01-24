@@ -37,7 +37,6 @@ Partial Class ReplacementForm
         Me.codeTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.dtpicker2 = New Guna.UI.WinForms.GunaDateTimePicker()
         Me.GunaLabel6 = New Guna.UI.WinForms.GunaLabel()
-        Me.doneButton = New System.Windows.Forms.Button()
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -101,7 +100,7 @@ Partial Class ReplacementForm
         '
         'addButton
         '
-        Me.addButton.Location = New System.Drawing.Point(656, 52)
+        Me.addButton.Location = New System.Drawing.Point(653, 72)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(75, 32)
         Me.addButton.TabIndex = 38
@@ -230,22 +229,12 @@ Partial Class ReplacementForm
         Me.GunaLabel6.TabIndex = 45
         Me.GunaLabel6.Text = "PURCHASE DATE:"
         '
-        'doneButton
-        '
-        Me.doneButton.Location = New System.Drawing.Point(656, 90)
-        Me.doneButton.Name = "doneButton"
-        Me.doneButton.Size = New System.Drawing.Size(75, 32)
-        Me.doneButton.TabIndex = 47
-        Me.doneButton.Text = "DONE"
-        Me.doneButton.UseVisualStyleBackColor = True
-        '
         'ReplacementForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(760, 342)
-        Me.Controls.Add(Me.doneButton)
         Me.Controls.Add(Me.dtpicker2)
         Me.Controls.Add(Me.GunaLabel6)
         Me.Controls.Add(Me.codeTxt)
@@ -285,5 +274,4 @@ Partial Class ReplacementForm
     Friend WithEvents codeTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents dtpicker2 As Guna.UI.WinForms.GunaDateTimePicker
     Friend WithEvents GunaLabel6 As Guna.UI.WinForms.GunaLabel
-    Friend WithEvents doneButton As Button
 End Class
