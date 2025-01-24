@@ -405,9 +405,9 @@ Public Class Pos
             If replacementCheck.Checked Then
                 ' Get the next soaNumber from the database
                 Dim nextSOANumber As String = GetNextSOANumber()
-
+                Dim codereplace As String = codeTxt.Text
                 ' Open the ReplacementForm with a new soaNumber
-                Dim replacementForm As New ReplacementForm("", nextSOANumber) ' Pass empty currentSOANumber and the nextSOANumber
+                Dim replacementForm As New ReplacementForm("", nextSOANumber, codereplace) ' Pass empty currentSOANumber and the nextSOANumber
                 replacementForm.ShowDialog() ' Show the form modally
 
                 replaceCombo.Enabled = True
@@ -427,11 +427,11 @@ Public Class Pos
             If Not String.IsNullOrEmpty(currentSOANumber) Then
                 ' Get the next soaNumber from the database
                 Dim nextSOANumber As String = GetNextSOANumber()
-
+                Dim codereplace As String = codeTxt.Text
                 ' Check if the user ticked the replacement checkbox
                 If replacementCheck.Checked Then
                     ' Open the ReplacementForm and pass both currentSOANumber and nextSOANumber
-                    Dim replacementForm As New ReplacementForm(currentSOANumber, nextSOANumber)
+                    Dim replacementForm As New ReplacementForm(currentSOANumber, nextSOANumber, codereplace)
                     replacementForm.ShowDialog() ' Show the form modally
                     replaceCombo.Enabled = True
                     'UncheckOtherCheckBoxes(replacementCheck)

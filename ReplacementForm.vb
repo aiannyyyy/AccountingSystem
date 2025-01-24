@@ -5,22 +5,24 @@ Public Class ReplacementForm
 
     Private _currentSOANumber As String
     Private _nextSOANumber As String
+    Private _codeReplace As String
 
     ' Create an instance of Pos form (assuming it's in the same project)
     Dim Pos As New Pos()
 
     ' Constructor that accepts both the current And Next SOA numbers
-    Public Sub New(currentSOANumber As String, nextSOANumber As String)
+    Public Sub New(currentSOANumber As String, nextSOANumber As String, codereplace As String)
         InitializeComponent()
         _currentSOANumber = currentSOANumber
         _nextSOANumber = nextSOANumber
+        _codeReplace = codereplace
         Me.connString = connString
     End Sub
 
     Private Sub Replacement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Initialize the form when it's loaded
         dtpicker2.Value = Date.Now
-        codeTxt.Text = Pos.codeTxt.Text
+        codeTxt.Text = _codeReplace
         soaTxt.Text = _nextSOANumber
         replaceCombo.Items.AddRange({"CONTAMINATED", "INSUFFICIENT"})
         loaddgv() ' Load the DataGridView with existing replacement data
