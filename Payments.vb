@@ -1060,6 +1060,7 @@ Public Class Payments
         End If
         ' If no change, nothing happens, no calculation, no message
     End Sub
+
 End Class
 
 'Private Sub CalculateAndUpdateInterest()

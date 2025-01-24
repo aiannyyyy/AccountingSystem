@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Pos
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Pos
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Pos))
@@ -52,7 +52,6 @@ Partial Class Pos
         Me.grpOrders = New Guna.UI.WinForms.GunaGroupBox()
         Me.GunaLabel11 = New Guna.UI.WinForms.GunaLabel()
         Me.computeButton = New Guna.UI.WinForms.GunaAdvenceButton()
-        Me.replaceTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.dryingTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.posterTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.totalTxt = New Guna.UI.WinForms.GunaTextBox()
@@ -61,7 +60,6 @@ Partial Class Pos
         Me.GunaLabel7 = New Guna.UI.WinForms.GunaLabel()
         Me.GunaLabel6 = New Guna.UI.WinForms.GunaLabel()
         Me.GunaLabel5 = New Guna.UI.WinForms.GunaLabel()
-        Me.replaceCheck = New System.Windows.Forms.CheckBox()
         Me.dryingCheck = New System.Windows.Forms.CheckBox()
         Me.posterCheck = New System.Windows.Forms.CheckBox()
         Me.brochureCheck = New System.Windows.Forms.CheckBox()
@@ -74,6 +72,7 @@ Partial Class Pos
         Me.nameBox = New Guna.UI.WinForms.GunaTextBox()
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
+        Me.replaceTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.lopezCheck = New System.Windows.Forms.CheckBox()
         Me.replacementCheck = New System.Windows.Forms.CheckBox()
         Me.walkCheck = New System.Windows.Forms.CheckBox()
@@ -101,13 +100,15 @@ Partial Class Pos
         Me.username = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.replaceAdd = New System.Windows.Forms.Button()
+        Me.expiredCheck = New System.Windows.Forms.CheckBox()
         Me.remBox = New Guna.UI.WinForms.GunaTextBox()
         Me.remLbl = New Guna.UI.WinForms.GunaLabel()
         Me.replaceCombo = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.expiredCheck = New System.Windows.Forms.CheckBox()
+        Me.CachedStatementOfAccount1 = New AccountingSystem.CachedStatementOfAccount()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -234,7 +235,7 @@ Partial Class Pos
         Me.grpBox.LineColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.grpBox.Location = New System.Drawing.Point(20, 43)
         Me.grpBox.Name = "grpBox"
-        Me.grpBox.Size = New System.Drawing.Size(1007, 256)
+        Me.grpBox.Size = New System.Drawing.Size(1007, 250)
         Me.grpBox.TabIndex = 3
         Me.grpBox.TextLocation = New System.Drawing.Point(10, 8)
         '
@@ -523,7 +524,6 @@ Partial Class Pos
         Me.grpOrders.BorderColor = System.Drawing.Color.Gainsboro
         Me.grpOrders.Controls.Add(Me.GunaLabel11)
         Me.grpOrders.Controls.Add(Me.computeButton)
-        Me.grpOrders.Controls.Add(Me.replaceTxt)
         Me.grpOrders.Controls.Add(Me.dryingTxt)
         Me.grpOrders.Controls.Add(Me.posterTxt)
         Me.grpOrders.Controls.Add(Me.totalTxt)
@@ -532,13 +532,12 @@ Partial Class Pos
         Me.grpOrders.Controls.Add(Me.GunaLabel7)
         Me.grpOrders.Controls.Add(Me.GunaLabel6)
         Me.grpOrders.Controls.Add(Me.GunaLabel5)
-        Me.grpOrders.Controls.Add(Me.replaceCheck)
         Me.grpOrders.Controls.Add(Me.dryingCheck)
         Me.grpOrders.Controls.Add(Me.posterCheck)
         Me.grpOrders.Controls.Add(Me.brochureCheck)
         Me.grpOrders.ForeColor = System.Drawing.Color.Black
         Me.grpOrders.LineColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.grpOrders.Location = New System.Drawing.Point(515, 74)
+        Me.grpOrders.Location = New System.Drawing.Point(515, 72)
         Me.grpOrders.Name = "grpOrders"
         Me.grpOrders.Size = New System.Drawing.Size(489, 182)
         Me.grpOrders.TabIndex = 10
@@ -588,25 +587,6 @@ Partial Class Pos
         Me.computeButton.Text = "COMPUTE"
         Me.computeButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.computeButton.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
-        '
-        'replaceTxt
-        '
-        Me.replaceTxt.BackColor = System.Drawing.Color.Black
-        Me.replaceTxt.BaseColor = System.Drawing.Color.White
-        Me.replaceTxt.BorderColor = System.Drawing.Color.Black
-        Me.replaceTxt.BorderSize = 1
-        Me.replaceTxt.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.replaceTxt.FocusedBaseColor = System.Drawing.Color.White
-        Me.replaceTxt.FocusedBorderColor = System.Drawing.Color.Black
-        Me.replaceTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
-        Me.replaceTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.replaceTxt.Location = New System.Drawing.Point(384, 68)
-        Me.replaceTxt.Name = "replaceTxt"
-        Me.replaceTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.replaceTxt.SelectedText = ""
-        Me.replaceTxt.Size = New System.Drawing.Size(84, 26)
-        Me.replaceTxt.TabIndex = 18
-        Me.replaceTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dryingTxt
         '
@@ -732,17 +712,6 @@ Partial Class Pos
         Me.GunaLabel5.Size = New System.Drawing.Size(88, 15)
         Me.GunaLabel5.TabIndex = 11
         Me.GunaLabel5.Text = "TOTAL ORDERS:"
-        '
-        'replaceCheck
-        '
-        Me.replaceCheck.AutoSize = True
-        Me.replaceCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.replaceCheck.Location = New System.Drawing.Point(384, 39)
-        Me.replaceCheck.Name = "replaceCheck"
-        Me.replaceCheck.Size = New System.Drawing.Size(100, 17)
-        Me.replaceCheck.TabIndex = 3
-        Me.replaceCheck.Text = "REPLACEMENT"
-        Me.replaceCheck.UseVisualStyleBackColor = True
         '
         'dryingCheck
         '
@@ -910,6 +879,25 @@ Partial Class Pos
         Me.GunaLabel1.TabIndex = 0
         Me.GunaLabel1.Text = "FACILITY CODE:"
         '
+        'replaceTxt
+        '
+        Me.replaceTxt.BackColor = System.Drawing.Color.Black
+        Me.replaceTxt.BaseColor = System.Drawing.Color.White
+        Me.replaceTxt.BorderColor = System.Drawing.Color.Black
+        Me.replaceTxt.BorderSize = 1
+        Me.replaceTxt.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.replaceTxt.FocusedBaseColor = System.Drawing.Color.White
+        Me.replaceTxt.FocusedBorderColor = System.Drawing.Color.Black
+        Me.replaceTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.replaceTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.replaceTxt.Location = New System.Drawing.Point(740, 5)
+        Me.replaceTxt.Name = "replaceTxt"
+        Me.replaceTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.replaceTxt.SelectedText = ""
+        Me.replaceTxt.Size = New System.Drawing.Size(46, 26)
+        Me.replaceTxt.TabIndex = 18
+        Me.replaceTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'lopezCheck
         '
         Me.lopezCheck.AutoSize = True
@@ -925,7 +913,7 @@ Partial Class Pos
         '
         Me.replacementCheck.AutoSize = True
         Me.replacementCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.replacementCheck.Location = New System.Drawing.Point(454, 10)
+        Me.replacementCheck.Location = New System.Drawing.Point(453, 10)
         Me.replacementCheck.Name = "replacementCheck"
         Me.replacementCheck.Size = New System.Drawing.Size(103, 17)
         Me.replacementCheck.TabIndex = 20
@@ -1188,7 +1176,9 @@ Partial Class Pos
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.replaceAdd)
         Me.Panel4.Controls.Add(Me.expiredCheck)
+        Me.Panel4.Controls.Add(Me.replaceTxt)
         Me.Panel4.Controls.Add(Me.remBox)
         Me.Panel4.Controls.Add(Me.remLbl)
         Me.Panel4.Controls.Add(Me.replaceCombo)
@@ -1201,6 +1191,26 @@ Partial Class Pos
         Me.Panel4.Size = New System.Drawing.Size(1001, 36)
         Me.Panel4.TabIndex = 17
         '
+        'replaceAdd
+        '
+        Me.replaceAdd.Location = New System.Drawing.Point(659, 7)
+        Me.replaceAdd.Name = "replaceAdd"
+        Me.replaceAdd.Size = New System.Drawing.Size(75, 23)
+        Me.replaceAdd.TabIndex = 28
+        Me.replaceAdd.Text = "ADD"
+        Me.replaceAdd.UseVisualStyleBackColor = True
+        '
+        'expiredCheck
+        '
+        Me.expiredCheck.AutoSize = True
+        Me.expiredCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.expiredCheck.Location = New System.Drawing.Point(318, 9)
+        Me.expiredCheck.Name = "expiredCheck"
+        Me.expiredCheck.Size = New System.Drawing.Size(124, 17)
+        Me.expiredCheck.TabIndex = 27
+        Me.expiredCheck.Text = "NEARLY EXPIRED FC"
+        Me.expiredCheck.UseVisualStyleBackColor = True
+        '
         'remBox
         '
         Me.remBox.BackColor = System.Drawing.Color.Black
@@ -1212,19 +1222,19 @@ Partial Class Pos
         Me.remBox.FocusedBorderColor = System.Drawing.Color.Black
         Me.remBox.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.remBox.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.remBox.Location = New System.Drawing.Point(795, 7)
+        Me.remBox.Location = New System.Drawing.Point(867, 3)
         Me.remBox.Multiline = True
         Me.remBox.Name = "remBox"
         Me.remBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.remBox.SelectedText = ""
-        Me.remBox.Size = New System.Drawing.Size(201, 24)
+        Me.remBox.Size = New System.Drawing.Size(131, 28)
         Me.remBox.TabIndex = 26
         '
         'remLbl
         '
         Me.remLbl.AutoSize = True
         Me.remLbl.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.remLbl.Location = New System.Drawing.Point(720, 10)
+        Me.remLbl.Location = New System.Drawing.Point(792, 9)
         Me.remLbl.Name = "remLbl"
         Me.remLbl.Size = New System.Drawing.Size(69, 17)
         Me.remLbl.TabIndex = 26
@@ -1261,17 +1271,6 @@ Partial Class Pos
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(1047, 39)
         Me.Panel6.TabIndex = 29
-        '
-        'expiredCheck
-        '
-        Me.expiredCheck.AutoSize = True
-        Me.expiredCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.expiredCheck.Location = New System.Drawing.Point(311, 9)
-        Me.expiredCheck.Name = "expiredCheck"
-        Me.expiredCheck.Size = New System.Drawing.Size(135, 17)
-        Me.expiredCheck.TabIndex = 27
-        Me.expiredCheck.Text = "EXPIRED FILTER CARD"
-        Me.expiredCheck.UseVisualStyleBackColor = True
         '
         'Pos
         '
@@ -1343,7 +1342,6 @@ Partial Class Pos
     Friend WithEvents GunaLabel7 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents GunaLabel6 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents GunaLabel5 As Guna.UI.WinForms.GunaLabel
-    Friend WithEvents replaceCheck As CheckBox
     Friend WithEvents dryingCheck As CheckBox
     Friend WithEvents posterCheck As CheckBox
     Friend WithEvents brochureCheck As CheckBox
@@ -1386,4 +1384,6 @@ Partial Class Pos
     Friend WithEvents username As DataGridViewTextBoxColumn
     Friend WithEvents remarks As DataGridViewTextBoxColumn
     Friend WithEvents expiredCheck As CheckBox
+    Friend WithEvents replaceAdd As Button
+    Friend WithEvents CachedStatementOfAccount1 As CachedStatementOfAccount
 End Class

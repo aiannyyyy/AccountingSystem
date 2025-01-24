@@ -9,11 +9,31 @@ Public Class Pos
     ' Public property to store the fullname
     Public Property FullName As String
 
+    Private addCount As Integer = 0
 
+    'This is the method to simulate Button1's click from Form2
+    Public Sub TriggerButton1Click()
+        addButton.PerformClick()
+    End Sub
     Private Sub Pos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         replaceCombo.Items.AddRange({"CONTAMINATED", "INSUFFICIENT"})
 
-        conn.ConnectionString = "DSN=dashboard" ' Adjust the connection string to your DSN
+        'conn.ConnectionString = "DSN=dashboard" ' Adjust the connection string to your DSN
+        Try
+            ' Instantiate the connection object
+            conn = New OdbcConnection()
+
+            ' Set the connection string
+            conn.ConnectionString = "DSN=dashboard" ' Adjust this to match your DSN setup
+
+            ' Test the connection (optional)
+            conn.Open()
+            MessageBox.Show("Database connection established successfully!")
+            conn.Close()
+        Catch ex As Exception
+            MessageBox.Show("Failed to connect to the database: " & ex.Message)
+        End Try
+
         Oracon.ConnectionString = "Data Source=(DESCRIPTION= (ADDRESS=(PROTOCOL=TCP)(HOST=10.1.1.191)(PORT=1521)) (CONNECT_DATA=(SERVICE_NAME=PROD)));User Id=user1;Password=newborn"
 
         dtpicker1.Value = Date.Now
@@ -31,6 +51,13 @@ Public Class Pos
 
         remLbl.Visible = False
         remBox.Visible = False
+
+        'Initialize the replaceTxt to show initial count (0)
+        replaceTxt.Text = addCount.ToString()
+
+        replaceCombo.Visible = False
+        replaceAdd.Visible = False
+        replaceTxt.Visible = False
     End Sub
 
     Public Sub ordertext()
@@ -40,14 +67,29 @@ Public Class Pos
         replaceTxt.Enabled = False
     End Sub
 
+    'Public Sub loaddgv()
+    '    Call connection()
+    '    da = New OdbcDataAdapter("Select * from acccounting order by soa_date desc", conn)
+    '    ds = New DataSet
+    '    ds.Clear()
+    '    da.Fill(ds, "acccounting")
+    '    dgv1.DataSource = ds.Tables("acccounting").DefaultView
+    'End Sub
+
     Public Sub loaddgv()
-        Call connection()
-        da = New OdbcDataAdapter("Select * from acccounting order by soa_date desc", conn)
-        ds = New DataSet
-        ds.Clear()
-        da.Fill(ds, "acccounting")
-        dgv1.DataSource = ds.Tables("acccounting").DefaultView
+        Try
+            Call connection()
+            Dim query As String = "SELECT * FROM acccounting ORDER BY soa_date DESC"
+            Dim da As New OdbcDataAdapter(query, conn)
+            Dim ds As New DataSet()
+            ds.Clear()
+            da.Fill(ds, "acccounting")
+            dgv1.DataSource = ds.Tables("acccounting").DefaultView
+        Catch ex As Exception
+            MessageBox.Show("Error loading data: " & ex.Message)
+        End Try
     End Sub
+
 
     'Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
     '    If String.IsNullOrEmpty(codeTxt.Text) Then
@@ -299,17 +341,17 @@ Public Class Pos
         End If
     End Sub
 
-    Private Sub replaceCheck_CheckedChanged(sender As Object, e As EventArgs) Handles replaceCheck.CheckedChanged
-        If replaceCheck.Checked Then
-            replaceTxt.Enabled = True
-            replaceTxt.SetOnGotFocus()
-        Else
-            replaceTxt.Enabled = False
-            replaceTxt.Clear()
-            adsTxt.Clear()
-            totalTxt.Clear()
-        End If
-    End Sub
+    'Private Sub replaceCheck_CheckedChanged(sender As Object, e As EventArgs) Handles replaceCheck.CheckedChanged
+    '    If replaceCheck.Checked Then
+    '        replaceTxt.Enabled = True
+    '        replaceTxt.SetOnGotFocus()
+    '    Else
+    '        replaceTxt.Enabled = False
+    '        replaceTxt.Clear()
+    '        adsTxt.Clear()
+    '        totalTxt.Clear()
+    '    End If
+    'End Sub
 
     Private Sub computeButton_Click(sender As Object, e As EventArgs) Handles computeButton.Click
         Dim brochureamount As Double = 0
@@ -348,23 +390,104 @@ Public Class Pos
     End Sub
 
     Private Sub replacementCheck_CheckedChanged(sender As Object, e As EventArgs) Handles replacementCheck.CheckedChanged
-        If replacementCheck.Checked Then
-            replaceCombo.Enabled = True
-            remLbl.Visible = True
-            remBox.Visible = True
-            UncheckOtherCheckBoxes(replacementCheck)
-            CalculateTotalAmount(0)
-            ' Update the total after calculation
-            UpdateTotalAmount()
+        Dim foundRow As DataGridViewRow = Nothing
 
+        For Each row As DataGridViewRow In dgv1.Rows
+            If row.Cells("fac_code").Value.ToString() = codeTxt.Text Then
+                foundRow = row
+                Exit For
+            End If
+        Next
+
+        ' If no record is found, but replacementCheck is checked, open ReplacementForm
+        If foundRow Is Nothing Then
+            ' Check if the replacementCheck is ticked
+            If replacementCheck.Checked Then
+                ' Get the next soaNumber from the database
+                Dim nextSOANumber As String = GetNextSOANumber()
+
+                ' Open the ReplacementForm with a new soaNumber
+                Dim replacementForm As New ReplacementForm("", nextSOANumber) ' Pass empty currentSOANumber and the nextSOANumber
+                replacementForm.ShowDialog() ' Show the form modally
+
+                replaceCombo.Enabled = True
+                UncheckOtherCheckBoxes(replacementCheck)
+                'CalculateTotalAmount(0)
+                ' Update the total after calculation
+                UpdateTotalAmount()
+                'replacementCheck.Checked = False
+            Else
+
+            End If
         Else
-            ClearTextBoxesIfNoChecks()
-            remLbl.Visible = False
-            remBox.Visible = False
-            replaceCombo.Enabled = False
-            replaceCombo.SelectedIndex = -1
+            ' If record is found, proceed with the normal process
+            Dim currentSOANumber As String = foundRow.Cells("soa_number").Value.ToString()
+
+            ' Check if soaNumber is not empty or null
+            If Not String.IsNullOrEmpty(currentSOANumber) Then
+                ' Get the next soaNumber from the database
+                Dim nextSOANumber As String = GetNextSOANumber()
+
+                ' Check if the user ticked the replacement checkbox
+                If replacementCheck.Checked Then
+                    ' Open the ReplacementForm and pass both currentSOANumber and nextSOANumber
+                    Dim replacementForm As New ReplacementForm(currentSOANumber, nextSOANumber)
+                    replacementForm.ShowDialog() ' Show the form modally
+                    replaceCombo.Enabled = True
+                    'UncheckOtherCheckBoxes(replacementCheck)
+                    'CalculateTotalAmount(0)
+                    ' Update the total after calculation
+                    UpdateTotalAmount()
+                    'replacementCheck.Checked = False
+
+                    'replacementForm.Show()
+                Else
+                    ' If no replacement is selected, proceed with usual processing
+                    ClearTextBoxesIfNoChecks()
+                    remLbl.Visible = False
+                    replaceCombo.Enabled = False
+                    replaceCombo.SelectedIndex = -1
+                End If
+            Else
+                MessageBox.Show("Selected transaction does not have a valid SOA number.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
         End If
+
     End Sub
+    Private Function GetNextSOANumber() As String
+        Dim nextSOANumber As String = ""
+
+        ' Define your connection string (adjust DSN as necessary)
+        Dim connectionString As String = "DSN=dashboard"
+
+        ' SQL query to get the maximum soa_number from the accounting table
+        Dim query As String = "SELECT MAX(CAST(soa_number AS UNSIGNED)) FROM acccounting"  ' Corrected for MySQL
+
+        ' Establish an ODBC connection and execute the query
+        Using conn As New OdbcConnection(connectionString)
+            Using cmd As New OdbcCommand(query, conn)
+                Try
+                    conn.Open()
+                    Dim result As Object = cmd.ExecuteScalar()
+
+                    ' If result is not DBNull, convert it to an integer and increment by 1
+                    If result IsNot DBNull.Value Then
+                        nextSOANumber = (Convert.ToInt32(result) + 1).ToString()
+                    Else
+                        ' If no records are found, start from 1
+                        nextSOANumber = "1"
+                    End If
+                Catch ex As Exception
+                    ' Handle any exceptions (e.g., connection errors or SQL issues)
+                    MessageBox.Show("Error fetching the next SOA number: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End Using
+
+        Return nextSOANumber
+    End Function
+
+
 
     Private Sub walkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles walkCheck.CheckedChanged
         If walkCheck.Checked Then
@@ -405,7 +528,7 @@ Public Class Pos
     '    Next
     'End Sub
     Private Sub UncheckOtherCheckBoxes(checkedCheckBox As CheckBox)
-        For Each chk As CheckBox In {replacementCheck, walkCheck, monitoringCheck, lopezCheck, expiredCheck}
+        For Each chk As CheckBox In {walkCheck, monitoringCheck, lopezCheck, expiredCheck}
             If chk IsNot checkedCheckBox AndAlso chk.Checked Then
                 chk.Checked = False
             End If
@@ -571,11 +694,11 @@ Public Class Pos
         walkCheck.Checked = False
         monitoringCheck.Checked = False
         'cancelCheck.Checked = False
-        replaceCheck.Checked = False
+        'replaceCheck.Checked = False
         brochureCheck.Checked = False
         posterCheck.Checked = False
         dryingCheck.Checked = False
-        replaceCheck.Checked = False
+        'replaceCheck.Checked = False
         brochureTxt.Text = ""
         posterTxt.Text = ""
         dryingTxt.Text = ""
@@ -584,6 +707,7 @@ Public Class Pos
         totalTxt.Text = ""
         replaceCombo.SelectedIndex = -1
         lopezCheck.Checked = False
+        'dgv2.Visible = False
     End Sub
 
     Private Function ExecuteQuery(query As String) As Integer
@@ -713,6 +837,175 @@ Public Class Pos
     '    End Using
     'End Function
 
+    Public Function ExecuteScalar(query As String) As Integer
+        Dim result As Integer = 0
+        Try
+            Using connection As New OdbcConnection(connString)
+                connection.Open()
+                Using command As New OdbcCommand(query, connection)
+                    result = Convert.ToInt32(command.ExecuteScalar()) ' Get the first column of the first row
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error executing query: " & ex.Message)
+        End Try
+        Return result
+    End Function
+
+    'Private Function InsertRecord(ByRef soatxt As String, soaDate As Date, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As Date, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String) As Double
+    '    Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    '    Dim lastSoaQuery As String = "SELECT soa_number FROM acccounting WHERE LEFT(soa_number, 4) = ? ORDER BY soa_number DESC LIMIT 1"
+    '    Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
+
+    '    Dim year As String = purchaseDate.Year.ToString()
+    '    Dim newSoaNumber As String = ""
+
+    '    Using conn As New OdbcConnection("DSN=dashboard")
+    '        conn.Open()
+    '        Dim transaction As OdbcTransaction = conn.BeginTransaction()
+
+    '        Try
+    '            Using cmd As New OdbcCommand(lastSoaQuery, conn, transaction)
+    '                cmd.Parameters.AddWithValue("year", year)
+    '                Dim lastSoa As Object = cmd.ExecuteScalar()
+
+    '                If lastSoa IsNot Nothing Then
+    '                    Dim lastIncrement As Integer = Convert.ToInt32(lastSoa.ToString().Substring(4)) + 1
+    '                    newSoaNumber = year & lastIncrement.ToString("D5")
+    '                Else
+    '                    newSoaNumber = year & "00001"
+    '                End If
+    '            End Using
+
+    '            soatxt = newSoaNumber ' Update soatxt directly here
+
+    '            Using cmd As New OdbcCommand(insertQuery, conn, transaction)
+    '                cmd.Parameters.AddWithValue("soa_number", newSoaNumber)
+    '                cmd.Parameters.AddWithValue("soa_txt", soatxt)
+    '                cmd.Parameters.AddWithValue("soa_date", soaDate.Date)
+    '                cmd.Parameters.AddWithValue("order_type", ordertype)
+    '                cmd.Parameters.AddWithValue("fac_code", code)
+    '                cmd.Parameters.AddWithValue("facility_name", name)
+    '                cmd.Parameters.AddWithValue("term", term)
+    '                cmd.Parameters.AddWithValue("purchase_number", purchaseNumber)
+    '                cmd.Parameters.AddWithValue("purchase_date", purchaseDate.Date)
+    '                cmd.Parameters.AddWithValue("quantity", quantity)
+    '                cmd.Parameters.AddWithValue("sub_total", subtotal)
+    '                cmd.Parameters.AddWithValue("brochure", brochure)
+    '                cmd.Parameters.AddWithValue("poster", poster)
+    '                cmd.Parameters.AddWithValue("drying_rack", drying)
+    '                cmd.Parameters.AddWithValue("replacement", replace)
+    '                cmd.Parameters.AddWithValue("ads_amount", Math.Round(ads, 2))
+    '                cmd.Parameters.AddWithValue("due_date", dueDate.Date)
+    '                cmd.Parameters.AddWithValue("total_amount", totalAmount)
+    '                cmd.Parameters.AddWithValue("balance", balance)
+    '                cmd.Parameters.AddWithValue("username", user)
+    '                cmd.Parameters.AddWithValue("sub_amount", subamount)
+    '                cmd.Parameters.AddWithValue("replace_type", replace_type)
+
+    '                cmd.ExecuteNonQuery()
+
+    '                cmd.CommandText = lastInsertedIdQuery
+    '                Dim lastInsertedId As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+    '                transaction.Commit()
+    '                Return lastInsertedId
+    '            End Using
+    '        Catch ex As Exception
+    '            transaction.Rollback()
+    '            Throw New Exception("Error during record insertion: " & ex.Message)
+    '        End Try
+
+    '        ' Get the total quantity (sum of quantity) from replacement_type for a specific SOA number
+    '        Dim query1 As String = $"SELECT SUM(quantity) FROM replacement_type WHERE soa_number = '{newSoaNumber}'"
+    '        ' Execute the query to get the total quantity as an integer (use ExecuteScalar for execution)
+    '        Dim totalQuantity As Integer = ExecuteScalar(query1)
+
+    '        ' Now, update the accounting table with the total quantity
+    '        Dim query2 As String = $"UPDATE acccounting SET replacement = {totalQuantity} WHERE soa_number = '{newSoaNumber}'"
+    '        ExecuteQuery(query2)
+    '    End Using
+    'End Function
+    'Private Function InsertRecord(ByRef soatxt As String, soaDate As Date, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As Date, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String) As Double
+    '    Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    '    Dim lastSoaQuery As String = "SELECT soa_number FROM acccounting WHERE LEFT(soa_number, 4) = ? ORDER BY soa_number DESC LIMIT 1"
+    '    Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
+
+    '    Dim year As String = purchaseDate.Year.ToString()
+    '    Dim newSoaNumber As String = ""
+
+    '    Using conn As New OdbcConnection("DSN=dashboard")
+    '        conn.Open()
+    '        Dim transaction As OdbcTransaction = conn.BeginTransaction()
+
+    '        Try
+    '            ' Get the last SOA number for the current year
+    '            Using cmd As New OdbcCommand(lastSoaQuery, conn, transaction)
+    '                cmd.Parameters.AddWithValue("year", year)
+    '                Dim lastSoa As Object = cmd.ExecuteScalar()
+
+    '                If lastSoa IsNot Nothing Then
+    '                    Dim lastIncrement As Integer = Convert.ToInt32(lastSoa.ToString().Substring(4)) + 1
+    '                    newSoaNumber = year & lastIncrement.ToString("D5")
+    '                Else
+    '                    newSoaNumber = year & "00001"
+    '                End If
+    '            End Using
+
+    '            soatxt = newSoaNumber ' Update soatxt directly here
+
+    '            ' Insert the new record into the accounting table
+    '            Using cmd As New OdbcCommand(insertQuery, conn, transaction)
+    '                cmd.Parameters.AddWithValue("soa_number", newSoaNumber)
+    '                cmd.Parameters.AddWithValue("soa_txt", soatxt)
+    '                cmd.Parameters.AddWithValue("soa_date", soaDate.Date)
+    '                cmd.Parameters.AddWithValue("order_type", ordertype)
+    '                cmd.Parameters.AddWithValue("fac_code", code)
+    '                cmd.Parameters.AddWithValue("facility_name", name)
+    '                cmd.Parameters.AddWithValue("term", term)
+    '                cmd.Parameters.AddWithValue("purchase_number", purchaseNumber)
+    '                cmd.Parameters.AddWithValue("purchase_date", purchaseDate.Date)
+    '                cmd.Parameters.AddWithValue("quantity", quantity)
+    '                cmd.Parameters.AddWithValue("sub_total", subtotal)
+    '                cmd.Parameters.AddWithValue("brochure", brochure)
+    '                cmd.Parameters.AddWithValue("poster", poster)
+    '                cmd.Parameters.AddWithValue("drying_rack", drying)
+    '                cmd.Parameters.AddWithValue("replacement", If(replace = 0, 0, replace)) ' Ensure default to 0 if no replacement is made
+    '                cmd.Parameters.AddWithValue("ads_amount", Math.Round(ads, 2))
+    '                cmd.Parameters.AddWithValue("due_date", dueDate.Date)
+    '                cmd.Parameters.AddWithValue("total_amount", totalAmount)
+    '                cmd.Parameters.AddWithValue("balance", balance)
+    '                cmd.Parameters.AddWithValue("username", user)
+    '                cmd.Parameters.AddWithValue("sub_amount", subamount)
+    '                cmd.Parameters.AddWithValue("replace_type", replace_type)
+
+    '                cmd.ExecuteNonQuery()
+
+    '                cmd.CommandText = lastInsertedIdQuery
+    '                Dim lastInsertedId As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+    '                transaction.Commit()
+    '                Return lastInsertedId
+    '            End Using
+    '        Catch ex As Exception
+    '            transaction.Rollback()
+    '            Throw New Exception("Error during record insertion: " & ex.Message)
+    '        End Try
+
+    '        ' Get the total quantity (sum of quantity) from replacement_type for a specific SOA number
+    '        Dim query1 As String = $"SELECT SUM(quantity) FROM replacement_type WHERE soa_number = '{newSoaNumber}'"
+    '        ' Execute the query to get the total quantity as an integer (use ExecuteScalar for execution)
+    '        Dim totalQuantity As Integer = ExecuteScalar(query1)
+
+    '        ' Now, update the accounting table with the total quantity
+    '        ' If no quantity found, ensure that it defaults to 0
+    '        If totalQuantity = 0 Then totalQuantity = 0
+
+    '        Dim query2 As String = $"UPDATE acccounting SET replacement = {totalQuantity} WHERE soa_number = '{newSoaNumber}'"
+    '        ExecuteQuery(query2)
+    '    End Using
+    'End Function
+
     Private Function InsertRecord(ByRef soatxt As String, soaDate As Date, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As Date, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String) As Double
         Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         Dim lastSoaQuery As String = "SELECT soa_number FROM acccounting WHERE LEFT(soa_number, 4) = ? ORDER BY soa_number DESC LIMIT 1"
@@ -726,6 +1019,7 @@ Public Class Pos
             Dim transaction As OdbcTransaction = conn.BeginTransaction()
 
             Try
+                ' Generate new SOA number
                 Using cmd As New OdbcCommand(lastSoaQuery, conn, transaction)
                     cmd.Parameters.AddWithValue("year", year)
                     Dim lastSoa As Object = cmd.ExecuteScalar()
@@ -738,8 +1032,9 @@ Public Class Pos
                     End If
                 End Using
 
-                soatxt = newSoaNumber ' Update soatxt directly here
+                soatxt = newSoaNumber
 
+                ' Insert record
                 Using cmd As New OdbcCommand(insertQuery, conn, transaction)
                     cmd.Parameters.AddWithValue("soa_number", newSoaNumber)
                     cmd.Parameters.AddWithValue("soa_txt", soatxt)
@@ -769,15 +1064,34 @@ Public Class Pos
                     cmd.CommandText = lastInsertedIdQuery
                     Dim lastInsertedId As Integer = Convert.ToInt32(cmd.ExecuteScalar())
 
+                    ' Update replacement total in accounting table
+                    Dim query1 As String = "SELECT COALESCE(SUM(quantity), 0) FROM replacement_type WHERE soa_number = ?"
+                    Dim totalQuantity As Integer
+
+                    Using cmd2 As New OdbcCommand(query1, conn, transaction)
+                        cmd2.Parameters.AddWithValue("soa_number", newSoaNumber)
+                        totalQuantity = Convert.ToInt32(cmd2.ExecuteScalar())
+                    End Using
+
+                    Dim query2 As String = "UPDATE acccounting SET replacement = ? WHERE soa_number = ?"
+                    Using cmd3 As New OdbcCommand(query2, conn, transaction)
+                        cmd3.Parameters.AddWithValue("replacement", totalQuantity)
+                        cmd3.Parameters.AddWithValue("soa_number", newSoaNumber)
+                        cmd3.ExecuteNonQuery()
+                    End Using
+
                     transaction.Commit()
                     Return lastInsertedId
                 End Using
             Catch ex As Exception
                 transaction.Rollback()
                 Throw New Exception("Error during record insertion: " & ex.Message)
+            Finally
+                conn.Close()
             End Try
         End Using
     End Function
+
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         ' Check if any row is marked for cancellation
@@ -806,7 +1120,6 @@ Public Class Pos
         remLbl.Visible = False
         remBox.Visible = False
     End Sub
-
 
     Private Sub CancelPurchaseOrders()
         For Each row As DataGridViewRow In dgv1.Rows.Cast(Of DataGridViewRow)().Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
@@ -848,7 +1161,7 @@ Public Class Pos
         If walkCheck.Checked Then Return "ENBS"
         If monitoringCheck.Checked Then Return "Monitoring"
         If expiredCheck.Checked Then Return "ENBS Expired Filter Card"
-        If replacementCheck.Checked Then Return "ENBS-Replacement -" & replaceCombo.SelectedItem.ToString()
+        If replacementCheck.Checked Then Return "ENBS-Replacement"
         If lopezCheck.Checked Then Return "ENBS"
         Return "ENBS"
     End Function
@@ -878,6 +1191,7 @@ Public Class Pos
                                             Login.userTxt.Text, Double.Parse(amountTxt.Text), replace)
 
         UpdateSoaTxt(soatxt, soaNumber)
+
         MessageBox.Show("Saved Successfully!")
         Return soatxt  ' Return the updated SOA text
     End Function
@@ -1061,31 +1375,7 @@ Public Class Pos
     End Sub
 
     Private Sub replaceCombo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles replaceCombo.SelectedIndexChanged
-        '' Ensure the combo box has a selected item
-        'If replaceCombo.SelectedItem Is Nothing Then
-        '    MessageBox.Show("Please select a valid replacement type.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        '    CalculateTotalAmount(0)
-        '    Return
-        'End If
 
-        'Dim selectedValue As String = replaceCombo.SelectedItem.ToString()
-
-        '' Check if the DataReader is properly initialized
-        'If dr IsNot Nothing AndAlso dr.HasRows Then
-        '    dr.Read() ' Move to the first row
-        '    Dim replacementType As String = If(dr("replace_type") IsNot DBNull.Value, dr("replace_type").ToString(), String.Empty)
-
-        '    If selectedValue = replacementType Then
-        '        ' If there's a match, calculate with 15 pesos
-        '        CalculateTotalAmount(15)
-        '    Else
-        '        ' If no match, calculate with 0 pesos
-        '        CalculateTotalAmount(0)
-        '    End If
-        'Else
-        '    ' If no records in the database, set amount to 0
-        '    CalculateTotalAmount(0)
-        'End If
     End Sub
 
     Private Sub homeBtn_Click(sender As Object, e As EventArgs) 
@@ -1204,6 +1494,24 @@ Public Class Pos
             ClearTextBoxesIfNoChecks()
         End If
     End Sub
+
+    Private Sub replaceAdd_Click(sender As Object, e As EventArgs) Handles replaceAdd.Click
+
+    End Sub
+
+    Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
+
+    End Sub
+
+
+    'Public Sub loaddgv2()
+    '    Call connection()
+    '    da = New OdbcDataAdapter("Select replace_type from replace_type_components", conn)
+    '    ds = New DataSet
+    '    ds.Clear()
+    '    da.Fill(ds, "replace_type_components")
+    '    dgv2.DataSource = ds.Tables("replace_type_components").DefaultView
+    'End Sub
 End Class
 
 
