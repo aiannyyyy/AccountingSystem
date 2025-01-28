@@ -221,6 +221,7 @@ Partial Class Pos
         Me.grpBox.Controls.Add(Me.GunaLabel9)
         Me.grpBox.Controls.Add(Me.qtyTxt)
         Me.grpBox.Controls.Add(Me.GunaLabel8)
+        Me.grpBox.Controls.Add(Me.walkCheck)
         Me.grpBox.Controls.Add(Me.grpOrders)
         Me.grpBox.Controls.Add(Me.dtpicker2)
         Me.grpBox.Controls.Add(Me.GunaLabel4)
@@ -902,7 +903,7 @@ Partial Class Pos
         '
         Me.lopezCheck.AutoSize = True
         Me.lopezCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lopezCheck.Location = New System.Drawing.Point(198, 10)
+        Me.lopezCheck.Location = New System.Drawing.Point(115, 10)
         Me.lopezCheck.Name = "lopezCheck"
         Me.lopezCheck.Size = New System.Drawing.Size(106, 17)
         Me.lopezCheck.TabIndex = 24
@@ -913,7 +914,7 @@ Partial Class Pos
         '
         Me.replacementCheck.AutoSize = True
         Me.replacementCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.replacementCheck.Location = New System.Drawing.Point(453, 10)
+        Me.replacementCheck.Location = New System.Drawing.Point(370, 10)
         Me.replacementCheck.Name = "replacementCheck"
         Me.replacementCheck.Size = New System.Drawing.Size(103, 17)
         Me.replacementCheck.TabIndex = 20
@@ -924,18 +925,19 @@ Partial Class Pos
         '
         Me.walkCheck.AutoSize = True
         Me.walkCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.walkCheck.Location = New System.Drawing.Point(12, 10)
+        Me.walkCheck.ForeColor = System.Drawing.Color.White
+        Me.walkCheck.Location = New System.Drawing.Point(158, 6)
         Me.walkCheck.Name = "walkCheck"
-        Me.walkCheck.Size = New System.Drawing.Size(76, 17)
+        Me.walkCheck.Size = New System.Drawing.Size(119, 17)
         Me.walkCheck.TabIndex = 21
-        Me.walkCheck.Text = "WALK - IN"
+        Me.walkCheck.Text = "WALK - IN PATIENT"
         Me.walkCheck.UseVisualStyleBackColor = True
         '
         'monitoringCheck
         '
         Me.monitoringCheck.AutoSize = True
         Me.monitoringCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.monitoringCheck.Location = New System.Drawing.Point(96, 10)
+        Me.monitoringCheck.Location = New System.Drawing.Point(13, 10)
         Me.monitoringCheck.Name = "monitoringCheck"
         Me.monitoringCheck.Size = New System.Drawing.Size(96, 17)
         Me.monitoringCheck.TabIndex = 22
@@ -1011,7 +1013,7 @@ Partial Class Pos
         Me.cancelPo.Name = "cancelPo"
         Me.cancelPo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.cancelPo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.cancelPo.Width = 93
+        Me.cancelPo.Width = 95
         '
         'soa_number
         '
@@ -1019,7 +1021,7 @@ Partial Class Pos
         Me.soa_number.DataPropertyName = "soa_number"
         Me.soa_number.HeaderText = "SOA NUMBER"
         Me.soa_number.Name = "soa_number"
-        Me.soa_number.Width = 108
+        Me.soa_number.Width = 110
         '
         'Column2
         '
@@ -1027,7 +1029,7 @@ Partial Class Pos
         Me.Column2.DataPropertyName = "soa_date"
         Me.Column2.HeaderText = "SOA DATE"
         Me.Column2.Name = "Column2"
-        Me.Column2.Width = 86
+        Me.Column2.Width = 88
         '
         'order_type
         '
@@ -1035,7 +1037,7 @@ Partial Class Pos
         Me.order_type.DataPropertyName = "order_type"
         Me.order_type.HeaderText = "TYPE"
         Me.order_type.Name = "order_type"
-        Me.order_type.Width = 57
+        Me.order_type.Width = 59
         '
         'fac_code
         '
@@ -1043,7 +1045,7 @@ Partial Class Pos
         Me.fac_code.DataPropertyName = "fac_code"
         Me.fac_code.HeaderText = "FACILITY CODE"
         Me.fac_code.Name = "fac_code"
-        Me.fac_code.Width = 112
+        Me.fac_code.Width = 114
         '
         'facility_name
         '
@@ -1051,7 +1053,7 @@ Partial Class Pos
         Me.facility_name.DataPropertyName = "facility_name"
         Me.facility_name.HeaderText = "FACILITY NAME"
         Me.facility_name.Name = "facility_name"
-        Me.facility_name.Width = 115
+        Me.facility_name.Width = 117
         '
         'term
         '
@@ -1059,7 +1061,7 @@ Partial Class Pos
         Me.term.DataPropertyName = "term"
         Me.term.HeaderText = "TERM"
         Me.term.Name = "term"
-        Me.term.Width = 62
+        Me.term.Width = 64
         '
         'purchase_number
         '
@@ -1067,7 +1069,7 @@ Partial Class Pos
         Me.purchase_number.DataPropertyName = "purchase_number"
         Me.purchase_number.HeaderText = "PURCHASE NUMBER"
         Me.purchase_number.Name = "purchase_number"
-        Me.purchase_number.Width = 145
+        Me.purchase_number.Width = 147
         '
         'purchase_date
         '
@@ -1075,7 +1077,7 @@ Partial Class Pos
         Me.purchase_date.DataPropertyName = "purchase_date"
         Me.purchase_date.HeaderText = "PURCHASE DATE"
         Me.purchase_date.Name = "purchase_date"
-        Me.purchase_date.Width = 123
+        Me.purchase_date.Width = 125
         '
         'quantity
         '
@@ -1083,7 +1085,7 @@ Partial Class Pos
         Me.quantity.DataPropertyName = "quantity"
         Me.quantity.HeaderText = "QUANTITY"
         Me.quantity.Name = "quantity"
-        Me.quantity.Width = 90
+        Me.quantity.Width = 92
         '
         'sub_total
         '
@@ -1091,7 +1093,7 @@ Partial Class Pos
         Me.sub_total.DataPropertyName = "sub_total"
         Me.sub_total.HeaderText = "SUB TOTAL"
         Me.sub_total.Name = "sub_total"
-        Me.sub_total.Width = 93
+        Me.sub_total.Width = 95
         '
         'brochure
         '
@@ -1099,7 +1101,7 @@ Partial Class Pos
         Me.brochure.DataPropertyName = "brochure"
         Me.brochure.HeaderText = "BROCHURE"
         Me.brochure.Name = "brochure"
-        Me.brochure.Width = 94
+        Me.brochure.Width = 96
         '
         'poster
         '
@@ -1107,7 +1109,7 @@ Partial Class Pos
         Me.poster.DataPropertyName = "poster"
         Me.poster.HeaderText = "POSTER"
         Me.poster.Name = "poster"
-        Me.poster.Width = 74
+        Me.poster.Width = 76
         '
         'drying_rack
         '
@@ -1115,7 +1117,7 @@ Partial Class Pos
         Me.drying_rack.DataPropertyName = "drying_rack"
         Me.drying_rack.HeaderText = "DRYING RACK"
         Me.drying_rack.Name = "drying_rack"
-        Me.drying_rack.Width = 110
+        Me.drying_rack.Width = 112
         '
         'replacement
         '
@@ -1123,7 +1125,7 @@ Partial Class Pos
         Me.replacement.DataPropertyName = "replacement"
         Me.replacement.HeaderText = "REPLACEMENT"
         Me.replacement.Name = "replacement"
-        Me.replacement.Width = 111
+        Me.replacement.Width = 113
         '
         'ads_amount
         '
@@ -1131,7 +1133,7 @@ Partial Class Pos
         Me.ads_amount.DataPropertyName = "ads_amount"
         Me.ads_amount.HeaderText = "ADS AMOUNT"
         Me.ads_amount.Name = "ads_amount"
-        Me.ads_amount.Width = 110
+        Me.ads_amount.Width = 112
         '
         'due_date
         '
@@ -1139,7 +1141,7 @@ Partial Class Pos
         Me.due_date.DataPropertyName = "due_date"
         Me.due_date.HeaderText = "DUE DATE"
         Me.due_date.Name = "due_date"
-        Me.due_date.Width = 86
+        Me.due_date.Width = 88
         '
         'total_amount
         '
@@ -1147,7 +1149,7 @@ Partial Class Pos
         Me.total_amount.DataPropertyName = "total_amount"
         Me.total_amount.HeaderText = "TOTAL AMOUNT"
         Me.total_amount.Name = "total_amount"
-        Me.total_amount.Width = 122
+        Me.total_amount.Width = 124
         '
         'balance
         '
@@ -1155,7 +1157,7 @@ Partial Class Pos
         Me.balance.DataPropertyName = "balance"
         Me.balance.HeaderText = "BALANCE"
         Me.balance.Name = "balance"
-        Me.balance.Width = 82
+        Me.balance.Width = 84
         '
         'username
         '
@@ -1163,7 +1165,7 @@ Partial Class Pos
         Me.username.DataPropertyName = "username"
         Me.username.HeaderText = "USERNAME"
         Me.username.Name = "username"
-        Me.username.Width = 94
+        Me.username.Width = 96
         '
         'remarks
         '
@@ -1171,7 +1173,7 @@ Partial Class Pos
         Me.remarks.DataPropertyName = "remarks"
         Me.remarks.HeaderText = "REMARKS"
         Me.remarks.Name = "remarks"
-        Me.remarks.Width = 86
+        Me.remarks.Width = 88
         '
         'Panel4
         '
@@ -1183,7 +1185,6 @@ Partial Class Pos
         Me.Panel4.Controls.Add(Me.remLbl)
         Me.Panel4.Controls.Add(Me.replaceCombo)
         Me.Panel4.Controls.Add(Me.lopezCheck)
-        Me.Panel4.Controls.Add(Me.walkCheck)
         Me.Panel4.Controls.Add(Me.replacementCheck)
         Me.Panel4.Controls.Add(Me.monitoringCheck)
         Me.Panel4.Location = New System.Drawing.Point(23, 294)
@@ -1204,7 +1205,7 @@ Partial Class Pos
         '
         Me.expiredCheck.AutoSize = True
         Me.expiredCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.expiredCheck.Location = New System.Drawing.Point(318, 9)
+        Me.expiredCheck.Location = New System.Drawing.Point(235, 9)
         Me.expiredCheck.Name = "expiredCheck"
         Me.expiredCheck.Size = New System.Drawing.Size(124, 17)
         Me.expiredCheck.TabIndex = 27

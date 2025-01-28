@@ -251,7 +251,7 @@ Public Class Pos
 
                         ' Determine the term based on descr
                         Dim term As Integer = If(
-                    {"LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT"}.Contains(descr),
+                    {"LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT", "OTHERS"}.Contains(descr),
                     60,
                     45
                 )
@@ -487,17 +487,16 @@ Public Class Pos
         Return nextSOANumber
     End Function
 
-
-
     Private Sub walkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles walkCheck.CheckedChanged
         If walkCheck.Checked Then
-            UncheckOtherCheckBoxes(walkCheck)
-            CalculateTotalAmount(1800)
-            ' Update the total after calculation
-            UpdateTotalAmount()
+            codeTxt.Text = "7345"
+            CalculateTotalAmount(1800) ' Ensure unit price 1800 is used
+            UncheckOtherCheckBoxes(walkCheck) ' Uncheck other checkboxes
         Else
+            codeTxt.Clear()
             ClearTextBoxesIfNoChecks()
         End If
+        UpdateTotalAmount() ' Always update total after change
     End Sub
 
     Private Sub monitoringCheck_CheckedChanged(sender As Object, e As EventArgs) Handles monitoringCheck.CheckedChanged
@@ -575,12 +574,10 @@ Public Class Pos
         End If
 
         ' Perform calculations based on the selected checkbox
-        If replacementCheck.Checked Then
-            CalculateTotalAmount(0)
-        ElseIf expiredCheck.Checked Then
+        If expiredCheck.Checked Then
             CalculateTotalAmount(15)
         ElseIf walkCheck.Checked Then
-            CalculateTotalAmount(1750)
+            CalculateTotalAmount(1800)
         ElseIf monitoringCheck.Checked Then
             CalculateTotalAmount(400)
         ElseIf lopezCheck.Checked Then
@@ -1180,7 +1177,6 @@ Public Class Pos
         If walkCheck.Checked Then Return "ENBS"
         If monitoringCheck.Checked Then Return "Monitoring"
         If expiredCheck.Checked Then Return "ENBS Expired Filter Card"
-        If replacementCheck.Checked Then Return "ENBS-Replacement"
         If lopezCheck.Checked Then Return "ENBS"
         Return "ENBS"
     End Function
@@ -1450,28 +1446,48 @@ Public Class Pos
                 addButton.Text = "ADD"
                 remLbl.Visible = False
                 remBox.Visible = False
+                cleartxt()
             End If
         End If
     End Sub
 
     Private Sub dgv1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellContentClick
-        codeTxt.Text = dgv1.Rows(e.RowIndex).Cells("fac_code").Value.ToString()
-        nameBox.Text = dgv1.Rows(e.RowIndex).Cells("facility_name").Value.ToString()
-        termBox.Text = dgv1.Rows(e.RowIndex).Cells("term").Value.ToString()
-        purchaseBox.Text = dgv1.Rows(e.RowIndex).Cells("purchase_number").Value.ToString()
-        qtyTxt.Text = dgv1.Rows(e.RowIndex).Cells("quantity").Value.ToString()
-        amountTxt.Text = dgv1.Rows(e.RowIndex).Cells("sub_total").Value.ToString()
-        dtpicker2.Value = dgv1.Rows(e.RowIndex).Cells("purchase_date").Value.ToString()
-        dtpicker1.Value = dgv1.Rows(e.RowIndex).Cells("due_date").Value.ToString()
-        brochureTxt.Text = dgv1.Rows(e.RowIndex).Cells("brochure").Value.ToString()
-        posterTxt.Text = dgv1.Rows(e.RowIndex).Cells("poster").Value.ToString()
-        dryingTxt.Text = dgv1.Rows(e.RowIndex).Cells("drying_rack").Value.ToString()
-        replaceTxt.Text = dgv1.Rows(e.RowIndex).Cells("replacement").Value.ToString()
-        adsTxt.Text = dgv1.Rows(e.RowIndex).Cells("ads_amount").Value.ToString()
-        totalTxt.Text = dgv1.Rows(e.RowIndex).Cells("total_amount").Value.ToString()
-        totalTxt.Text = dgv1.Rows(e.RowIndex).Cells("balance").Value.ToString()
+        ' Check if the clicked row index is valid and the DataGridView has rows
+        If e.RowIndex >= 0 AndAlso e.ColumnIndex >= 0 AndAlso dgv1.Rows.Count > 0 Then
+            Try
+                ' Check if the clicked column is the "cancelPo" checkbox column
+                If dgv1.Columns(e.ColumnIndex).Name = "cancelPo" Then
+                    ' Get the checkbox value for the clicked row
+                    Dim isChecked As Boolean = Convert.ToBoolean(dgv1.Rows(e.RowIndex).Cells("cancelPo").Value)
 
-        disableColumns()
+                    If isChecked Then
+                        ' Proceed with the code if the checkbox is ticked
+                        codeTxt.Text = dgv1.Rows(e.RowIndex).Cells("fac_code").Value.ToString()
+                        nameBox.Text = dgv1.Rows(e.RowIndex).Cells("facility_name").Value.ToString()
+                        termBox.Text = dgv1.Rows(e.RowIndex).Cells("term").Value.ToString()
+                        purchaseBox.Text = dgv1.Rows(e.RowIndex).Cells("purchase_number").Value.ToString()
+                        qtyTxt.Text = dgv1.Rows(e.RowIndex).Cells("quantity").Value.ToString()
+                        amountTxt.Text = dgv1.Rows(e.RowIndex).Cells("sub_total").Value.ToString()
+                        dtpicker2.Value = Convert.ToDateTime(dgv1.Rows(e.RowIndex).Cells("purchase_date").Value)
+                        dtpicker1.Value = Convert.ToDateTime(dgv1.Rows(e.RowIndex).Cells("due_date").Value)
+                        brochureTxt.Text = dgv1.Rows(e.RowIndex).Cells("brochure").Value.ToString()
+                        posterTxt.Text = dgv1.Rows(e.RowIndex).Cells("poster").Value.ToString()
+                        dryingTxt.Text = dgv1.Rows(e.RowIndex).Cells("drying_rack").Value.ToString()
+                        replaceTxt.Text = dgv1.Rows(e.RowIndex).Cells("replacement").Value.ToString()
+                        adsTxt.Text = dgv1.Rows(e.RowIndex).Cells("ads_amount").Value.ToString()
+                        totalTxt.Text = dgv1.Rows(e.RowIndex).Cells("total_amount").Value.ToString()
+                        totalTxt.Text = dgv1.Rows(e.RowIndex).Cells("balance").Value.ToString()
+
+                        disableColumns()
+                    Else
+                        ' Optional: Handle cases when the checkbox is unchecked
+                        'MessageBox.Show("The checkbox is not ticked.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+                End If
+            Catch ex As Exception
+                'MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
     End Sub
 
     ' Method to Disable Specific Columns
@@ -1523,6 +1539,10 @@ Public Class Pos
     End Sub
 
     Private Sub totalTxt_TextChanged(sender As Object, e As EventArgs) Handles totalTxt.TextChanged
+
+    End Sub
+
+    Private Sub grpBox_Click(sender As Object, e As EventArgs) Handles grpBox.Click
 
     End Sub
 

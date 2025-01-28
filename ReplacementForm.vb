@@ -26,6 +26,8 @@ Public Class ReplacementForm
         soaTxt.Text = _nextSOANumber
         replaceCombo.Items.AddRange({"CONTAMINATED", "INSUFFICIENT"})
         loaddgv() ' Load the DataGridView with existing replacement data
+
+        amountTxt.Text = "0.00"
     End Sub
 
     ' Loads data from the database into the DataGridView
@@ -100,6 +102,10 @@ Public Class ReplacementForm
     End Sub
 
     Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
+
+    End Sub
+
+    Private Sub amountTxt_TextChanged(sender As Object, e As EventArgs) Handles amountTxt.TextChanged
 
     End Sub
 End Class
