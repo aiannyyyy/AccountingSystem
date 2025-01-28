@@ -109,6 +109,7 @@ Partial Class Pos
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.CachedStatementOfAccount1 = New AccountingSystem.CachedStatementOfAccount()
+        Me.typeText = New Guna.UI.WinForms.GunaTextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -523,6 +524,7 @@ Partial Class Pos
         Me.grpOrders.BackColor = System.Drawing.Color.Transparent
         Me.grpOrders.BaseColor = System.Drawing.Color.White
         Me.grpOrders.BorderColor = System.Drawing.Color.Gainsboro
+        Me.grpOrders.Controls.Add(Me.typeText)
         Me.grpOrders.Controls.Add(Me.GunaLabel11)
         Me.grpOrders.Controls.Add(Me.computeButton)
         Me.grpOrders.Controls.Add(Me.dryingTxt)
@@ -1273,6 +1275,25 @@ Partial Class Pos
         Me.Panel6.Size = New System.Drawing.Size(1047, 39)
         Me.Panel6.TabIndex = 29
         '
+        'typeText
+        '
+        Me.typeText.BackColor = System.Drawing.Color.Black
+        Me.typeText.BaseColor = System.Drawing.Color.White
+        Me.typeText.BorderColor = System.Drawing.Color.Black
+        Me.typeText.BorderSize = 1
+        Me.typeText.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.typeText.FocusedBaseColor = System.Drawing.Color.White
+        Me.typeText.FocusedBorderColor = System.Drawing.Color.Black
+        Me.typeText.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.typeText.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.typeText.Location = New System.Drawing.Point(288, 0)
+        Me.typeText.Multiline = True
+        Me.typeText.Name = "typeText"
+        Me.typeText.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.typeText.SelectedText = ""
+        Me.typeText.Size = New System.Drawing.Size(131, 28)
+        Me.typeText.TabIndex = 29
+        '
         'Pos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1387,4 +1408,5 @@ Partial Class Pos
     Friend WithEvents expiredCheck As CheckBox
     Friend WithEvents replaceAdd As Button
     Friend WithEvents CachedStatementOfAccount1 As CachedStatementOfAccount
+    Friend WithEvents typeText As Guna.UI.WinForms.GunaTextBox
 End Class
