@@ -495,12 +495,28 @@ Public Class Pos
         brochureCheck.Enabled = False
         posterCheck.Enabled = False
         dryingCheck.Enabled = False
+        payButton.Enabled = False
+        reportButton.Enabled = False
+        noticeButton.Enabled = False
+        monitoringCheck.Enabled = False
+        lopezCheck.Enabled = False
+        expiredCheck.Enabled = False
+        replacementCheck.Enabled = False
+        soaButton.Enabled = False
     End Sub
 
     Public Sub enableAds()
         brochureCheck.Enabled = True
         posterCheck.Enabled = True
         dryingCheck.Enabled = True
+        payButton.Enabled = True
+        reportButton.Enabled = True
+        noticeButton.Enabled = True
+        monitoringCheck.Enabled = True
+        lopezCheck.Enabled = True
+        expiredCheck.Enabled = True
+        replacementCheck.Enabled = True
+        soaButton.Enabled = True
     End Sub
 
     Private Sub walkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles walkCheck.CheckedChanged
@@ -1022,8 +1038,8 @@ Public Class Pos
     '    End Using
     'End Function
 
-    Private Function InsertRecord(ByRef soatxt As String, soaDate As Date, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As Date, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String, type2 As String) As Double
-        Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    Private Function InsertRecord(ByRef soatxt As String, soaDate As Date, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As Date, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String, type2 As String, cancel As String) As Double
+        Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type, type, cancel) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         Dim lastSoaQuery As String = "SELECT soa_number FROM acccounting WHERE LEFT(soa_number, 4) = ? ORDER BY soa_number DESC LIMIT 1"
         Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
 
@@ -1075,6 +1091,7 @@ Public Class Pos
                     cmd.Parameters.AddWithValue("sub_amount", subamount)
                     cmd.Parameters.AddWithValue("replace_type", replace_type)
                     cmd.Parameters.AddWithValue("type", type2)
+                    cmd.Parameters.AddWithValue("cancel", cancel)
 
                     cmd.ExecuteNonQuery()
 
@@ -1223,7 +1240,7 @@ Public Class Pos
                                             ParseOrZero(dryingTxt.Text), ParseOrZero(replaceTxt.Text),
                                             formattedAds, dtpicker1.Value.Date,
                                             formattedTotal, formattedBalance,
-                                            Login.userTxt.Text, Double.Parse(amountTxt.Text), replace, typeText.Text)
+                                            Login.userTxt.Text, Double.Parse(amountTxt.Text), replace, typeText.Text, "CANCELLED")
 
         UpdateSoaTxt(soatxt, soaNumber)
 
