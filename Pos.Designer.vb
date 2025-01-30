@@ -23,11 +23,11 @@ Partial Class Pos
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Pos))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GunaElipse1 = New Guna.UI.WinForms.GunaElipse(Me.components)
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -79,6 +79,16 @@ Partial Class Pos
         Me.replacementCheck = New System.Windows.Forms.CheckBox()
         Me.monitoringCheck = New System.Windows.Forms.CheckBox()
         Me.dgv1 = New Guna.UI.WinForms.GunaDataGridView()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.replaceAdd = New System.Windows.Forms.Button()
+        Me.expiredCheck = New System.Windows.Forms.CheckBox()
+        Me.remBox = New Guna.UI.WinForms.GunaTextBox()
+        Me.remLbl = New Guna.UI.WinForms.GunaLabel()
+        Me.replaceCombo = New System.Windows.Forms.ComboBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.CachedStatementOfAccount1 = New AccountingSystem.CachedStatementOfAccount()
         Me.cancelPo = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.soa_number = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -100,16 +110,7 @@ Partial Class Pos
         Me.balance = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.username = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.replaceAdd = New System.Windows.Forms.Button()
-        Me.expiredCheck = New System.Windows.Forms.CheckBox()
-        Me.remBox = New Guna.UI.WinForms.GunaTextBox()
-        Me.remLbl = New Guna.UI.WinForms.GunaLabel()
-        Me.replaceCombo = New System.Windows.Forms.ComboBox()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.CachedStatementOfAccount1 = New AccountingSystem.CachedStatementOfAccount()
+        Me.cancel = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -969,38 +970,38 @@ Partial Class Pos
         '
         Me.dgv1.AllowUserToAddRows = False
         Me.dgv1.AllowUserToDeleteRows = False
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        Me.dgv1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        Me.dgv1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgv1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv1.BackgroundColor = System.Drawing.Color.White
         Me.dgv1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgv1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv1.ColumnHeadersHeight = 21
-        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cancelPo, Me.soa_number, Me.Column2, Me.order_type, Me.fac_code, Me.facility_name, Me.term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replacement, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.username, Me.remarks})
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv1.DefaultCellStyle = DataGridViewCellStyle7
+        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cancelPo, Me.soa_number, Me.Column2, Me.order_type, Me.fac_code, Me.facility_name, Me.term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replacement, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.username, Me.remarks, Me.cancel})
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv1.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgv1.EnableHeadersVisualStyles = False
         Me.dgv1.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
         Me.dgv1.Location = New System.Drawing.Point(23, 336)
         Me.dgv1.Name = "dgv1"
         Me.dgv1.RowHeadersVisible = False
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle4
         Me.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv1.Size = New System.Drawing.Size(1004, 295)
         Me.dgv1.TabIndex = 16
@@ -1026,6 +1027,104 @@ Partial Class Pos
         Me.dgv1.ThemeStyle.RowsStyle.Height = 22
         Me.dgv1.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
         Me.dgv1.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.replaceAdd)
+        Me.Panel4.Controls.Add(Me.expiredCheck)
+        Me.Panel4.Controls.Add(Me.replaceTxt)
+        Me.Panel4.Controls.Add(Me.remBox)
+        Me.Panel4.Controls.Add(Me.remLbl)
+        Me.Panel4.Controls.Add(Me.replaceCombo)
+        Me.Panel4.Controls.Add(Me.lopezCheck)
+        Me.Panel4.Controls.Add(Me.replacementCheck)
+        Me.Panel4.Controls.Add(Me.monitoringCheck)
+        Me.Panel4.Location = New System.Drawing.Point(23, 294)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(1001, 36)
+        Me.Panel4.TabIndex = 17
+        '
+        'replaceAdd
+        '
+        Me.replaceAdd.Location = New System.Drawing.Point(659, 7)
+        Me.replaceAdd.Name = "replaceAdd"
+        Me.replaceAdd.Size = New System.Drawing.Size(75, 23)
+        Me.replaceAdd.TabIndex = 28
+        Me.replaceAdd.Text = "ADD"
+        Me.replaceAdd.UseVisualStyleBackColor = True
+        '
+        'expiredCheck
+        '
+        Me.expiredCheck.AutoSize = True
+        Me.expiredCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.expiredCheck.Location = New System.Drawing.Point(235, 9)
+        Me.expiredCheck.Name = "expiredCheck"
+        Me.expiredCheck.Size = New System.Drawing.Size(124, 17)
+        Me.expiredCheck.TabIndex = 27
+        Me.expiredCheck.Text = "NEARLY EXPIRED FC"
+        Me.expiredCheck.UseVisualStyleBackColor = True
+        '
+        'remBox
+        '
+        Me.remBox.BackColor = System.Drawing.Color.Black
+        Me.remBox.BaseColor = System.Drawing.Color.White
+        Me.remBox.BorderColor = System.Drawing.Color.Black
+        Me.remBox.BorderSize = 1
+        Me.remBox.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.remBox.FocusedBaseColor = System.Drawing.Color.White
+        Me.remBox.FocusedBorderColor = System.Drawing.Color.Black
+        Me.remBox.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.remBox.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.remBox.Location = New System.Drawing.Point(867, 3)
+        Me.remBox.Multiline = True
+        Me.remBox.Name = "remBox"
+        Me.remBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.remBox.SelectedText = ""
+        Me.remBox.Size = New System.Drawing.Size(131, 28)
+        Me.remBox.TabIndex = 26
+        '
+        'remLbl
+        '
+        Me.remLbl.AutoSize = True
+        Me.remLbl.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.remLbl.Location = New System.Drawing.Point(792, 9)
+        Me.remLbl.Name = "remLbl"
+        Me.remLbl.Size = New System.Drawing.Size(69, 17)
+        Me.remLbl.TabIndex = 26
+        Me.remLbl.Text = "REMARKS:"
+        '
+        'replaceCombo
+        '
+        Me.replaceCombo.FormattingEnabled = True
+        Me.replaceCombo.Location = New System.Drawing.Point(557, 8)
+        Me.replaceCombo.Name = "replaceCombo"
+        Me.replaceCombo.Size = New System.Drawing.Size(96, 21)
+        Me.replaceCombo.TabIndex = 25
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Panel2.Location = New System.Drawing.Point(1042, 34)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(71, 619)
+        Me.Panel2.TabIndex = 27
+        '
+        'Panel5
+        '
+        Me.Panel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Panel5.Location = New System.Drawing.Point(-67, 34)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(71, 619)
+        Me.Panel5.TabIndex = 28
+        '
+        'Panel6
+        '
+        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Panel6.Location = New System.Drawing.Point(0, 649)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(1047, 39)
+        Me.Panel6.TabIndex = 29
         '
         'cancelPo
         '
@@ -1196,103 +1295,11 @@ Partial Class Pos
         Me.remarks.Name = "remarks"
         Me.remarks.Width = 88
         '
-        'Panel4
+        'cancel
         '
-        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Panel4.Controls.Add(Me.replaceAdd)
-        Me.Panel4.Controls.Add(Me.expiredCheck)
-        Me.Panel4.Controls.Add(Me.replaceTxt)
-        Me.Panel4.Controls.Add(Me.remBox)
-        Me.Panel4.Controls.Add(Me.remLbl)
-        Me.Panel4.Controls.Add(Me.replaceCombo)
-        Me.Panel4.Controls.Add(Me.lopezCheck)
-        Me.Panel4.Controls.Add(Me.replacementCheck)
-        Me.Panel4.Controls.Add(Me.monitoringCheck)
-        Me.Panel4.Location = New System.Drawing.Point(23, 294)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1001, 36)
-        Me.Panel4.TabIndex = 17
-        '
-        'replaceAdd
-        '
-        Me.replaceAdd.Location = New System.Drawing.Point(659, 7)
-        Me.replaceAdd.Name = "replaceAdd"
-        Me.replaceAdd.Size = New System.Drawing.Size(75, 23)
-        Me.replaceAdd.TabIndex = 28
-        Me.replaceAdd.Text = "ADD"
-        Me.replaceAdd.UseVisualStyleBackColor = True
-        '
-        'expiredCheck
-        '
-        Me.expiredCheck.AutoSize = True
-        Me.expiredCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.expiredCheck.Location = New System.Drawing.Point(235, 9)
-        Me.expiredCheck.Name = "expiredCheck"
-        Me.expiredCheck.Size = New System.Drawing.Size(124, 17)
-        Me.expiredCheck.TabIndex = 27
-        Me.expiredCheck.Text = "NEARLY EXPIRED FC"
-        Me.expiredCheck.UseVisualStyleBackColor = True
-        '
-        'remBox
-        '
-        Me.remBox.BackColor = System.Drawing.Color.Black
-        Me.remBox.BaseColor = System.Drawing.Color.White
-        Me.remBox.BorderColor = System.Drawing.Color.Black
-        Me.remBox.BorderSize = 1
-        Me.remBox.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.remBox.FocusedBaseColor = System.Drawing.Color.White
-        Me.remBox.FocusedBorderColor = System.Drawing.Color.Black
-        Me.remBox.FocusedForeColor = System.Drawing.SystemColors.ControlText
-        Me.remBox.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.remBox.Location = New System.Drawing.Point(867, 3)
-        Me.remBox.Multiline = True
-        Me.remBox.Name = "remBox"
-        Me.remBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.remBox.SelectedText = ""
-        Me.remBox.Size = New System.Drawing.Size(131, 28)
-        Me.remBox.TabIndex = 26
-        '
-        'remLbl
-        '
-        Me.remLbl.AutoSize = True
-        Me.remLbl.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.remLbl.Location = New System.Drawing.Point(792, 9)
-        Me.remLbl.Name = "remLbl"
-        Me.remLbl.Size = New System.Drawing.Size(69, 17)
-        Me.remLbl.TabIndex = 26
-        Me.remLbl.Text = "REMARKS:"
-        '
-        'replaceCombo
-        '
-        Me.replaceCombo.FormattingEnabled = True
-        Me.replaceCombo.Location = New System.Drawing.Point(557, 8)
-        Me.replaceCombo.Name = "replaceCombo"
-        Me.replaceCombo.Size = New System.Drawing.Size(96, 21)
-        Me.replaceCombo.TabIndex = 25
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Panel2.Location = New System.Drawing.Point(1042, 34)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(71, 619)
-        Me.Panel2.TabIndex = 27
-        '
-        'Panel5
-        '
-        Me.Panel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Panel5.Location = New System.Drawing.Point(-67, 34)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(71, 619)
-        Me.Panel5.TabIndex = 28
-        '
-        'Panel6
-        '
-        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Panel6.Location = New System.Drawing.Point(0, 649)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(1047, 39)
-        Me.Panel6.TabIndex = 29
+        Me.cancel.DataPropertyName = "cancel"
+        Me.cancel.HeaderText = "CANCELLED"
+        Me.cancel.Name = "cancel"
         '
         'Pos
         '
@@ -1384,6 +1391,10 @@ Partial Class Pos
     Friend WithEvents replaceCombo As ComboBox
     Friend WithEvents remBox As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents remLbl As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents expiredCheck As CheckBox
+    Friend WithEvents replaceAdd As Button
+    Friend WithEvents CachedStatementOfAccount1 As CachedStatementOfAccount
+    Friend WithEvents typeText As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents cancelPo As DataGridViewCheckBoxColumn
     Friend WithEvents soa_number As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
@@ -1405,8 +1416,5 @@ Partial Class Pos
     Friend WithEvents balance As DataGridViewTextBoxColumn
     Friend WithEvents username As DataGridViewTextBoxColumn
     Friend WithEvents remarks As DataGridViewTextBoxColumn
-    Friend WithEvents expiredCheck As CheckBox
-    Friend WithEvents replaceAdd As Button
-    Friend WithEvents CachedStatementOfAccount1 As CachedStatementOfAccount
-    Friend WithEvents typeText As Guna.UI.WinForms.GunaTextBox
+    Friend WithEvents cancel As DataGridViewTextBoxColumn
 End Class

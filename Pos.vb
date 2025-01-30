@@ -61,6 +61,8 @@ Public Class Pos
 
 
         typeText.Visible = False
+        dgv1.Columns("cancel").Visible = False
+
     End Sub
 
     Public Sub ordertext()
@@ -79,6 +81,20 @@ Public Class Pos
     '    dgv1.DataSource = ds.Tables("acccounting").DefaultView
     'End Sub
 
+    'Public Sub loaddgv()
+    '    Try
+    '        Call connection()
+    '        Dim query As String = "SELECT * FROM acccounting ORDER BY soa_date DESC"
+    '        Dim da As New OdbcDataAdapter(query, conn)
+    '        Dim ds As New DataSet()
+    '        ds.Clear()
+    '        da.Fill(ds, "acccounting")
+    '        dgv1.DataSource = ds.Tables("acccounting").DefaultView
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error loading data: " & ex.Message)
+    '    End Try
+    'End Sub
+
     Public Sub loaddgv()
         Try
             Call connection()
@@ -88,10 +104,19 @@ Public Class Pos
             ds.Clear()
             da.Fill(ds, "acccounting")
             dgv1.DataSource = ds.Tables("acccounting").DefaultView
+
+            ' Disable rows where the "cancel" column has the value "CANCELLED"
+            For Each row As DataGridViewRow In dgv1.Rows
+                If row.Cells("cancel").Value IsNot Nothing AndAlso row.Cells("cancel").Value.ToString().ToUpper() = "CANCELLED" Then
+                    row.ReadOnly = True ' Make the row read-only
+                End If
+            Next
+
         Catch ex As Exception
             MessageBox.Show("Error loading data: " & ex.Message)
         End Try
     End Sub
+
 
 
     'Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
@@ -185,6 +210,129 @@ Public Class Pos
     '    UpdateDateTimePicker2()
     'End Sub
 
+    'Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
+    '    If String.IsNullOrEmpty(codeTxt.Text) Then
+    '        cleartxt()
+    '        Return
+    '    End If
+
+    '    ' Fetch data from the ODBC source (conn)
+    '    Try
+    '        If conn.State <> ConnectionState.Open Then
+    '            conn.Open()
+    '        End If
+
+    '        Dim odbcQuery As String = "SELECT * FROM acccounting WHERE fac_code = ? ORDER BY purchase_date DESC"
+    '        Using odbcCmd As New OdbcCommand(odbcQuery, conn)
+    '            odbcCmd.Parameters.AddWithValue("fac_code", codeTxt.Text)
+
+    '            Dim odbcAdapter As New OdbcDataAdapter(odbcCmd)
+    '            Dim odbcDataSet As New DataSet
+    '            odbcAdapter.Fill(odbcDataSet, "acccounting")
+    '            dgv1.DataSource = odbcDataSet.Tables("acccounting").DefaultView
+    '        End Using
+    '    Catch ex As Exception
+    '        MessageBox.Show("ODBC Error: " & ex.Message)
+    '    End Try
+
+    '    Try
+    '        ' Open the Oracle connection if not already open
+    '        If Oracon.State <> ConnectionState.Open Then
+    '            Oracon.Open()
+    '        End If
+
+    '        ' Define the query to fetch provider information
+    '        Dim oracleQuery As String = "
+    '    SELECT 
+    '        REF_PROVIDER_ADDRESS.PROVIDERID, 
+    '        REF_PROVIDER_ADDRESS.CITY, 
+    '        REF_PROVIDER_ADDRESS.COUNTY, 
+    '        REF_PROVIDER_ADDRESS.DESCR1, 
+    '        REF_TYPE.DESCR
+    '    FROM 
+    '        PHMSDS.REF_PROVIDER_ADDRESS 
+    '    INNER JOIN 
+    '        PHMSDS.REF_PROVIDERTYPE 
+    '        ON REF_PROVIDER_ADDRESS.PROVIDERID = REF_PROVIDERTYPE.PROVIDERID
+    '    INNER JOIN 
+    '        PHMSDS.REF_TYPE 
+    '        ON REF_PROVIDERTYPE.TYPE = REF_TYPE.TYPE
+    '    WHERE 
+    '        REF_PROVIDER_ADDRESS.PROVIDERID = :PROVIDERID
+    '    ORDER BY 
+    '        REF_PROVIDER_ADDRESS.PROVIDERID ASC"
+
+    '        ' Create and configure the Oracle command
+    '        Using oracleCmd As New OracleCommand(oracleQuery, Oracon)
+    '            ' Bind the parameter securely
+    '            oracleCmd.Parameters.Add(New OracleParameter("PROVIDERID", codeTxt.Text.Trim()))
+
+    '            ' Execute the query and process the results
+    '            Using reader As OracleDataReader = oracleCmd.ExecuteReader()
+    '                If reader.Read() Then
+    '                    ' Extract and validate data from the reader
+    '                    Dim providerId As String = If(Not reader.IsDBNull(0), reader("PROVIDERID").ToString(), String.Empty)
+    '                    Dim city As String = If(Not reader.IsDBNull(1), reader("CITY").ToString(), String.Empty).ToUpper()
+    '                    Dim county As String = If(Not reader.IsDBNull(2), reader("COUNTY").ToString(), String.Empty)
+    '                    Dim descr1 As String = If(Not reader.IsDBNull(3), reader("DESCR1").ToString(), String.Empty)
+    '                    Dim descr As String = If(Not reader.IsDBNull(4), reader("DESCR").ToString(), String.Empty)
+
+    '                    ' Determine the term based on descr
+    '                    Dim term As Integer = If(
+    '                {"LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT", "OTHERS"}.Contains(descr),
+    '                60,
+    '                45
+    '            )
+
+    '                    ' Calculate the due date based on the term
+    '                    Dim purchaseDate As Date = Date.Today ' Replace with actual purchase date if available
+    '                    Dim dueDate As Date = purchaseDate.AddDays(term)
+
+    '                    ' Update the UI on the main thread
+    '                    Me.Invoke(Sub()
+    '                                  codeTxt.Text = providerId
+    '                                  nameBox.Text = descr1
+    '                                  termBox.Text = term.ToString()
+    '                                  dtpicker1.Value = dueDate
+    '                                  typeText.Text = descr
+
+    '                                  ' Check the lopezCheck if conditions are met
+    '                                  Dim targetCounty As String = "QUEZON"
+    '                                  Dim targetCities As HashSet(Of String) = New HashSet(Of String) From {
+    '                              "UNISAN", "TAGKAWAYAN", "SAN FRANCISCO", "PLARIDEL",
+    '                              "PEREZ", "PADRE BURGOS", "MULANAY", "MAUBAN",
+    '                              "LOPEZ", "GUMACA", "GUINAYANGAN", "GENERAL NAKAR",
+    '                              "GENERAL LUNA", "CATANAUAN", "CALAUAG", "BURDEOS",
+    '                              "BUENAVISTA", "ALABAT", "AGDANGAN", "JOMALIG", "PAGBILAO"
+    '                          }
+
+    '                                  lopezCheck.Checked = (county = targetCounty AndAlso targetCities.Contains(city))
+    '                              End Sub)
+    '                Else
+    '                    ' No matching record found
+    '                    Me.Invoke(Sub()
+    '                                  nameBox.Clear()
+    '                                  termBox.Clear()
+    '                                  dtpicker1.Value = Date.Now
+    '                                  lopezCheck.Checked = False
+    '                              End Sub)
+    '                End If
+    '            End Using
+    '        End Using
+    '    Catch ex As OracleException
+    '        MessageBox.Show("Oracle Database Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    Catch ex As Exception
+    '        MessageBox.Show("An unexpected error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    Finally
+    '        ' Ensure the connection is closed
+    '        If Oracon.State = ConnectionState.Open Then
+    '            Oracon.Close()
+    '        End If
+    '    End Try
+
+    '    UpdateDateTimePicker2()
+    'End Sub
+
     Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
         If String.IsNullOrEmpty(codeTxt.Text) Then
             cleartxt()
@@ -206,6 +354,13 @@ Public Class Pos
                 odbcAdapter.Fill(odbcDataSet, "acccounting")
                 dgv1.DataSource = odbcDataSet.Tables("acccounting").DefaultView
             End Using
+
+            ' Disable rows where cancel column has the value "CANCELLED"
+            For Each row As DataGridViewRow In dgv1.Rows
+                If Not row.IsNewRow AndAlso row.Cells("cancel").Value IsNot Nothing AndAlso row.Cells("cancel").Value.ToString().ToUpper() = "CANCELLED" Then
+                    row.ReadOnly = True ' Disable entire row
+                End If
+            Next
         Catch ex As Exception
             MessageBox.Show("ODBC Error: " & ex.Message)
         End Try
@@ -254,10 +409,10 @@ Public Class Pos
 
                         ' Determine the term based on descr
                         Dim term As Integer = If(
-                    {"LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT", "OTHERS"}.Contains(descr),
-                    60,
-                    45
-                )
+                        {"LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT", "OTHERS"}.Contains(descr),
+                        60,
+                        45
+                    )
 
                         ' Calculate the due date based on the term
                         Dim purchaseDate As Date = Date.Today ' Replace with actual purchase date if available
@@ -274,12 +429,12 @@ Public Class Pos
                                       ' Check the lopezCheck if conditions are met
                                       Dim targetCounty As String = "QUEZON"
                                       Dim targetCities As HashSet(Of String) = New HashSet(Of String) From {
-                                  "UNISAN", "TAGKAWAYAN", "SAN FRANCISCO", "PLARIDEL",
-                                  "PEREZ", "PADRE BURGOS", "MULANAY", "MAUBAN",
-                                  "LOPEZ", "GUMACA", "GUINAYANGAN", "GENERAL NAKAR",
-                                  "GENERAL LUNA", "CATANAUAN", "CALAUAG", "BURDEOS",
-                                  "BUENAVISTA", "ALABAT", "AGDANGAN", "JOMALIG", "PAGBILAO"
-                              }
+                                      "UNISAN", "TAGKAWAYAN", "SAN FRANCISCO", "PLARIDEL",
+                                      "PEREZ", "PADRE BURGOS", "MULANAY", "MAUBAN",
+                                      "LOPEZ", "GUMACA", "GUINAYANGAN", "GENERAL NAKAR",
+                                      "GENERAL LUNA", "CATANAUAN", "CALAUAG", "BURDEOS",
+                                      "BUENAVISTA", "ALABAT", "AGDANGAN", "JOMALIG", "PAGBILAO"
+                                  }
 
                                       lopezCheck.Checked = (county = targetCounty AndAlso targetCities.Contains(city))
                                   End Sub)
@@ -307,6 +462,7 @@ Public Class Pos
 
         UpdateDateTimePicker2()
     End Sub
+
 
 
     Private Sub brochureCheck_CheckedChanged(sender As Object, e As EventArgs) Handles brochureCheck.CheckedChanged
@@ -1176,8 +1332,32 @@ Public Class Pos
         remBox.Visible = False
     End Sub
 
+    'Private Sub CancelPurchaseOrders()
+    '    For Each row As DataGridViewRow In dgv1.Rows.Cast(Of DataGridViewRow)().Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
+    '        Try
+    '            row.Cells("total_amount").Value = 0
+    '            row.Cells("balance").Value = 0
+    '            row.Cells("remarks").Value = remBox.Text
+    '            row.Cells("order_type").Value &= " (Cancelled P.O)"
+
+    '            SaveCancellationToDatabase(remBox.Text, row.Cells("fac_code").Value.ToString())
+    '            MessageBox.Show("Cancelled P.O.")
+    '        Catch ex As Exception
+    '            MessageBox.Show("An error occurred during cancellation: " & ex.Message)
+    '        End Try
+    '    Next
+    'End Sub
+
     Private Sub CancelPurchaseOrders()
-        For Each row As DataGridViewRow In dgv1.Rows.Cast(Of DataGridViewRow)().Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
+        ' Check if remBox has a value before proceeding
+        If String.IsNullOrWhiteSpace(remBox.Text) Then
+            MessageBox.Show("Please enter remarks before cancelling the P.O.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        For Each row As DataGridViewRow In dgv1.Rows.Cast(Of DataGridViewRow)().
+        Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
+
             Try
                 row.Cells("total_amount").Value = 0
                 row.Cells("balance").Value = 0
@@ -1190,8 +1370,8 @@ Public Class Pos
                 MessageBox.Show("An error occurred during cancellation: " & ex.Message)
             End Try
         Next
-        'cleartxt()
     End Sub
+
 
     Private Sub AddNewOrder()
         Try
