@@ -1588,6 +1588,11 @@ Public Class Pos
         purchaseBox.SelectionStart = purchaseBox.Text.Length ' Keeps cursor at the end
     End Sub
 
+    Private Sub remBox_TextChanged(sender As Object, e As EventArgs) Handles remBox.TextChanged
+        remBox.Text = remBox.Text.ToUpper()
+        remBox.SelectionStart = remBox.Text.Length ' Keeps cursor at the end
+    End Sub
+
 
     'Public Sub loaddgv2()
     '    Call connection()
