@@ -61,7 +61,7 @@ Public Class Pos
 
 
         typeText.Visible = False
-        dgv1.Columns("cancel").Visible = False
+        'dgv1.Columns("cancel").Visible = False
 
     End Sub
 
@@ -105,17 +105,16 @@ Public Class Pos
             da.Fill(ds, "acccounting")
             dgv1.DataSource = ds.Tables("acccounting").DefaultView
 
-            ' Disable rows where the "cancel" column has the value "CANCELLED"
+            ' Disable all rows by making them read-only
             For Each row As DataGridViewRow In dgv1.Rows
-                If row.Cells("cancel").Value IsNot Nothing AndAlso row.Cells("cancel").Value.ToString().ToUpper() = "CANCELLED" Then
-                    row.ReadOnly = True ' Make the row read-only
-                End If
+                row.ReadOnly = True ' Make each row read-only
             Next
 
         Catch ex As Exception
             MessageBox.Show("Error loading data: " & ex.Message)
         End Try
     End Sub
+
 
 
 
@@ -1304,6 +1303,22 @@ Public Class Pos
         End Using
     End Function
 
+    'Private Sub CancelPurchaseOrders()
+    '    For Each row As DataGridViewRow In dgv1.Rows.Cast(Of DataGridViewRow)().Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
+    '        Try
+    '            row.Cells("total_amount").Value = 0
+    '            row.Cells("balance").Value = 0
+    '            row.Cells("remarks").Value = remBox.Text
+    '            row.Cells("order_type").Value &= " (Cancelled P.O)"
+
+    '            SaveCancellationToDatabase(remBox.Text, row.Cells("fac_code").Value.ToString())
+    '            MessageBox.Show("Cancelled P.O.")
+    '        Catch ex As Exception
+    '            MessageBox.Show("An error occurred during cancellation: " & ex.Message)
+    '        End Try
+    '    Next
+    'End Sub
+
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         ' Check if any row is marked for cancellation
         Dim isAnyChecked As Boolean = dgv1.Rows.Cast(Of DataGridViewRow)().
@@ -1330,10 +1345,19 @@ Public Class Pos
         addButton.Text = "ADD"
         remLbl.Visible = False
         remBox.Visible = False
+        replacementCheck.Checked = False
     End Sub
 
     'Private Sub CancelPurchaseOrders()
-    '    For Each row As DataGridViewRow In dgv1.Rows.Cast(Of DataGridViewRow)().Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
+    '    ' Check if remBox has a value before proceeding
+    '    If String.IsNullOrWhiteSpace(remBox.Text) Then
+    '        MessageBox.Show("Please enter remarks before cancelling the P.O.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+    '        Exit Sub
+    '    End If
+
+    '    For Each row As DataGridViewRow In dgv1.Rows.Cast(Of DataGridViewRow)().
+    '    Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
+
     '        Try
     '            row.Cells("total_amount").Value = 0
     '            row.Cells("balance").Value = 0
@@ -1356,7 +1380,7 @@ Public Class Pos
         End If
 
         For Each row As DataGridViewRow In dgv1.Rows.Cast(Of DataGridViewRow)().
-        Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
+    Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
 
             Try
                 row.Cells("total_amount").Value = 0
@@ -1364,6 +1388,8 @@ Public Class Pos
                 row.Cells("remarks").Value = remBox.Text
                 row.Cells("order_type").Value &= " (Cancelled P.O)"
 
+                ' Pass "CANCELLED" status when cancelling
+                InsertOrder("ENBS", "CANCELLED") ' Pass empty string for non-cancelled orders
                 SaveCancellationToDatabase(remBox.Text, row.Cells("fac_code").Value.ToString())
                 MessageBox.Show("Cancelled P.O.")
             Catch ex As Exception
@@ -1372,23 +1398,38 @@ Public Class Pos
         Next
     End Sub
 
-
     Private Sub AddNewOrder()
         Try
             If Not ValidateFields() Then Exit Sub
-            'If MessageBox.Show("Are all entries correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then Exit Sub
 
             Dim orderType As String = DetermineOrderType()
-            Dim soatxt As String = InsertOrder(orderType)
+
+            ' Pass empty string for orderStatus since it's a new order
+            Dim soatxt As String = InsertOrder(orderType, "")
 
             GenerateReport(soatxt, orderType)
-
-            'cleartxt()
 
         Catch ex As Exception
             MessageBox.Show("An error occurred during adding: " & ex.Message)
         End Try
     End Sub
+
+    'Private Sub AddNewOrder()
+    '    Try
+    '        If Not ValidateFields() Then Exit Sub
+    '        'If MessageBox.Show("Are all entries correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then Exit Sub
+
+    '        Dim orderType As String = DetermineOrderType()
+    '        Dim soatxt As String = InsertOrder(orderType)
+
+    '        GenerateReport(soatxt, orderType)
+
+    '        'cleartxt()
+
+    '    Catch ex As Exception
+    '        MessageBox.Show("An error occurred during adding: " & ex.Message)
+    '    End Try
+    'End Sub
 
     Private Function DetermineOrderType() As String
         If walkCheck.Checked Then Return "ENBS"
@@ -1398,7 +1439,37 @@ Public Class Pos
         Return "ENBS"
     End Function
 
-    Private Function InsertOrder(orderType As String) As String
+    'Private Function InsertOrder(orderType As String) As String
+    '    Dim soatxt As String = ""
+
+    '    ' Format the Double values to two decimal places for ads, total, and balance
+    '    Dim formattedAds As String = Double.Parse(adsTxt.Text).ToString("F2")
+    '    Dim formattedTotal As String = Double.Parse(totalTxt.Text).ToString("F2")
+    '    Dim formattedBalance As String = Double.Parse(totalTxt.Text).ToString("F2") ' Assuming you have a balance field
+
+    '    Dim replace As String
+    '    If replaceCombo.SelectedItem IsNot Nothing Then
+    '        replace = replaceCombo.SelectedItem.ToString()
+    '    Else
+    '        replace = "NULL"
+    '    End If
+
+    '    ' Insert the formatted values into the database
+    '    Dim soaNumber As Integer = InsertRecord(soatxt, Date.Now.Date, orderType, codeTxt.Text, nameBox.Text, termBox.Text,
+    '                                        purchaseBox.Text, dtpicker2.Value.Date, Integer.Parse(qtyTxt.Text),
+    '                                        Double.Parse(amountTxt.Text), ParseOrZero(brochureTxt.Text), ParseOrZero(posterTxt.Text),
+    '                                        ParseOrZero(dryingTxt.Text), ParseOrZero(replaceTxt.Text),
+    '                                        formattedAds, dtpicker1.Value.Date,
+    '                                        formattedTotal, formattedBalance,
+    '                                        Login.userTxt.Text, Double.Parse(amountTxt.Text), replace, typeText.Text, "CANCELLED")
+
+    '    UpdateSoaTxt(soatxt, soaNumber)
+
+    '    MessageBox.Show("Saved Successfully!")
+    '    Return soatxt  ' Return the updated SOA text
+    'End Function
+
+    Private Function InsertOrder(orderType As String, orderStatus As String) As String
         Dim soatxt As String = ""
 
         ' Format the Double values to two decimal places for ads, total, and balance
@@ -1420,13 +1491,14 @@ Public Class Pos
                                             ParseOrZero(dryingTxt.Text), ParseOrZero(replaceTxt.Text),
                                             formattedAds, dtpicker1.Value.Date,
                                             formattedTotal, formattedBalance,
-                                            Login.userTxt.Text, Double.Parse(amountTxt.Text), replace, typeText.Text, "CANCELLED")
+                                            Login.userTxt.Text, Double.Parse(amountTxt.Text), replace, typeText.Text, orderStatus)
 
         UpdateSoaTxt(soatxt, soaNumber)
 
         MessageBox.Show("Saved Successfully!")
         Return soatxt  ' Return the updated SOA text
     End Function
+
 
     Private Sub GenerateReport(soaTxt As String, orderType As String)
         Dim report As Object
@@ -1638,6 +1710,9 @@ Public Class Pos
 
     ' Handle the CurrentCellDirtyStateChanged event to commit changes immediately when a checkbox is clicked
     Private Sub dgv1_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles dgv1.CurrentCellDirtyStateChanged
+        'If dgv1.CurrentCell IsNot Nothing AndAlso dgv1.CurrentCell.ColumnIndex = 0 Then ' Replace 0 with your checkbox column index
+        '    dgv1.CommitEdit(DataGridViewDataErrorContexts.Commit)
+        'End If
         If dgv1.CurrentCell IsNot Nothing AndAlso dgv1.CurrentCell.ColumnIndex = 0 Then ' Replace 0 with your checkbox column index
             dgv1.CommitEdit(DataGridViewDataErrorContexts.Commit)
         End If
@@ -1645,16 +1720,37 @@ Public Class Pos
 
     ' Handle the CellValueChanged event to update the button text and ensure only one checkbox is checked
     Private Sub dgv1_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellValueChanged
+        '' Ensure we are working on the checkbox column
+        'If e.ColumnIndex = 0 Then ' Replace 0 with your checkbox column index
+        '    ' Allow only one checkbox to be checked at a time
+        '    For Each row As DataGridViewRow In dgv1.Rows
+        '        If row.Index <> e.RowIndex AndAlso Convert.ToBoolean(row.Cells(0).Value) Then
+        '            row.Cells(0).Value = False
+        '        End If
+        '    Next
+
+        '    ' Update the button text
+        '    If dgv1.Rows.Cast(Of DataGridViewRow)().Any(Function(r) Convert.ToBoolean(r.Cells(0).Value)) Then
+        '        addButton.Text = "CANCEL"
+        '        remLbl.Visible = True
+        '        remBox.Visible = True
+        '    Else
+        '        addButton.Text = "ADD"
+        '        remLbl.Visible = False
+        '        remBox.Visible = False
+        '        cleartxt()
+        '    End If
+        'End If
         ' Ensure we are working on the checkbox column
         If e.ColumnIndex = 0 Then ' Replace 0 with your checkbox column index
-            ' Allow only one checkbox to be checked at a time
+            ' Ensure only one checkbox is checked at a time
             For Each row As DataGridViewRow In dgv1.Rows
                 If row.Index <> e.RowIndex AndAlso Convert.ToBoolean(row.Cells(0).Value) Then
                     row.Cells(0).Value = False
                 End If
             Next
 
-            ' Update the button text
+            ' Update the button text based on the checkbox state
             If dgv1.Rows.Cast(Of DataGridViewRow)().Any(Function(r) Convert.ToBoolean(r.Cells(0).Value)) Then
                 addButton.Text = "CANCEL"
                 remLbl.Visible = True
@@ -1669,6 +1765,42 @@ Public Class Pos
     End Sub
 
     Private Sub dgv1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellContentClick
+        '' Check if the clicked row index is valid and the DataGridView has rows
+        'If e.RowIndex >= 0 AndAlso e.ColumnIndex >= 0 AndAlso dgv1.Rows.Count > 0 Then
+        '    Try
+        '        ' Check if the clicked column is the "cancelPo" checkbox column
+        '        If dgv1.Columns(e.ColumnIndex).Name = "cancelPo" Then
+        '            ' Get the checkbox value for the clicked row
+        '            Dim isChecked As Boolean = Convert.ToBoolean(dgv1.Rows(e.RowIndex).Cells("cancelPo").Value)
+
+        '            If isChecked Then
+        '                ' Proceed with the code if the checkbox is ticked
+        '                codeTxt.Text = dgv1.Rows(e.RowIndex).Cells("fac_code").Value.ToString()
+        '                nameBox.Text = dgv1.Rows(e.RowIndex).Cells("facility_name").Value.ToString()
+        '                termBox.Text = dgv1.Rows(e.RowIndex).Cells("term").Value.ToString()
+        '                purchaseBox.Text = dgv1.Rows(e.RowIndex).Cells("purchase_number").Value.ToString()
+        '                qtyTxt.Text = dgv1.Rows(e.RowIndex).Cells("quantity").Value.ToString()
+        '                amountTxt.Text = dgv1.Rows(e.RowIndex).Cells("sub_total").Value.ToString()
+        '                dtpicker2.Value = Convert.ToDateTime(dgv1.Rows(e.RowIndex).Cells("purchase_date").Value)
+        '                dtpicker1.Value = Convert.ToDateTime(dgv1.Rows(e.RowIndex).Cells("due_date").Value)
+        '                brochureTxt.Text = dgv1.Rows(e.RowIndex).Cells("brochure").Value.ToString()
+        '                posterTxt.Text = dgv1.Rows(e.RowIndex).Cells("poster").Value.ToString()
+        '                dryingTxt.Text = dgv1.Rows(e.RowIndex).Cells("drying_rack").Value.ToString()
+        '                replaceTxt.Text = dgv1.Rows(e.RowIndex).Cells("replacement").Value.ToString()
+        '                adsTxt.Text = dgv1.Rows(e.RowIndex).Cells("ads_amount").Value.ToString()
+        '                totalTxt.Text = dgv1.Rows(e.RowIndex).Cells("total_amount").Value.ToString()
+        '                totalTxt.Text = dgv1.Rows(e.RowIndex).Cells("balance").Value.ToString()
+
+        '                disableColumns()
+        '            Else
+        '                ' Optional: Handle cases when the checkbox is unchecked
+        '                'MessageBox.Show("The checkbox is not ticked.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        '            End If
+        '        End If
+        '    Catch ex As Exception
+        '        'MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    End Try
+        'End If
         ' Check if the clicked row index is valid and the DataGridView has rows
         If e.RowIndex >= 0 AndAlso e.ColumnIndex >= 0 AndAlso dgv1.Rows.Count > 0 Then
             Try
@@ -1698,7 +1830,7 @@ Public Class Pos
                         disableColumns()
                     Else
                         ' Optional: Handle cases when the checkbox is unchecked
-                        'MessageBox.Show("The checkbox is not ticked.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        ' You can add your logic here if needed
                     End If
                 End If
             Catch ex As Exception

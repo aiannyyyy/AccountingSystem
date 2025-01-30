@@ -1297,9 +1297,11 @@ Partial Class Pos
         '
         'cancel
         '
+        Me.cancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.cancel.DataPropertyName = "cancel"
         Me.cancel.HeaderText = "CANCELLED"
         Me.cancel.Name = "cancel"
+        Me.cancel.Width = 96
         '
         'Pos
         '
