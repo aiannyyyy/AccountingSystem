@@ -49,7 +49,9 @@ Partial Class Pos
         Me.GunaLabel9 = New Guna.UI.WinForms.GunaLabel()
         Me.qtyTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel8 = New Guna.UI.WinForms.GunaLabel()
+        Me.walkCheck = New System.Windows.Forms.CheckBox()
         Me.grpOrders = New Guna.UI.WinForms.GunaGroupBox()
+        Me.typeText = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel11 = New Guna.UI.WinForms.GunaLabel()
         Me.computeButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.dryingTxt = New Guna.UI.WinForms.GunaTextBox()
@@ -75,7 +77,6 @@ Partial Class Pos
         Me.replaceTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.lopezCheck = New System.Windows.Forms.CheckBox()
         Me.replacementCheck = New System.Windows.Forms.CheckBox()
-        Me.walkCheck = New System.Windows.Forms.CheckBox()
         Me.monitoringCheck = New System.Windows.Forms.CheckBox()
         Me.dgv1 = New Guna.UI.WinForms.GunaDataGridView()
         Me.cancelPo = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -109,7 +110,6 @@ Partial Class Pos
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.CachedStatementOfAccount1 = New AccountingSystem.CachedStatementOfAccount()
-        Me.typeText = New Guna.UI.WinForms.GunaTextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -519,6 +519,18 @@ Partial Class Pos
         Me.GunaLabel8.TabIndex = 20
         Me.GunaLabel8.Text = "QUANTITY"
         '
+        'walkCheck
+        '
+        Me.walkCheck.AutoSize = True
+        Me.walkCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.walkCheck.ForeColor = System.Drawing.Color.White
+        Me.walkCheck.Location = New System.Drawing.Point(158, 6)
+        Me.walkCheck.Name = "walkCheck"
+        Me.walkCheck.Size = New System.Drawing.Size(119, 17)
+        Me.walkCheck.TabIndex = 21
+        Me.walkCheck.Text = "WALK - IN PATIENT"
+        Me.walkCheck.UseVisualStyleBackColor = True
+        '
         'grpOrders
         '
         Me.grpOrders.BackColor = System.Drawing.Color.Transparent
@@ -545,6 +557,25 @@ Partial Class Pos
         Me.grpOrders.Size = New System.Drawing.Size(489, 182)
         Me.grpOrders.TabIndex = 10
         Me.grpOrders.TextLocation = New System.Drawing.Point(10, 8)
+        '
+        'typeText
+        '
+        Me.typeText.BackColor = System.Drawing.Color.Black
+        Me.typeText.BaseColor = System.Drawing.Color.White
+        Me.typeText.BorderColor = System.Drawing.Color.Black
+        Me.typeText.BorderSize = 1
+        Me.typeText.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.typeText.FocusedBaseColor = System.Drawing.Color.White
+        Me.typeText.FocusedBorderColor = System.Drawing.Color.Black
+        Me.typeText.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.typeText.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.typeText.Location = New System.Drawing.Point(288, 0)
+        Me.typeText.Multiline = True
+        Me.typeText.Name = "typeText"
+        Me.typeText.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.typeText.SelectedText = ""
+        Me.typeText.Size = New System.Drawing.Size(131, 28)
+        Me.typeText.TabIndex = 29
         '
         'GunaLabel11
         '
@@ -923,18 +954,6 @@ Partial Class Pos
         Me.replacementCheck.Text = "REPLACEMENT "
         Me.replacementCheck.UseVisualStyleBackColor = True
         '
-        'walkCheck
-        '
-        Me.walkCheck.AutoSize = True
-        Me.walkCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.walkCheck.ForeColor = System.Drawing.Color.White
-        Me.walkCheck.Location = New System.Drawing.Point(158, 6)
-        Me.walkCheck.Name = "walkCheck"
-        Me.walkCheck.Size = New System.Drawing.Size(119, 17)
-        Me.walkCheck.TabIndex = 21
-        Me.walkCheck.Text = "WALK - IN PATIENT"
-        Me.walkCheck.UseVisualStyleBackColor = True
-        '
         'monitoringCheck
         '
         Me.monitoringCheck.AutoSize = True
@@ -1274,25 +1293,6 @@ Partial Class Pos
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(1047, 39)
         Me.Panel6.TabIndex = 29
-        '
-        'typeText
-        '
-        Me.typeText.BackColor = System.Drawing.Color.Black
-        Me.typeText.BaseColor = System.Drawing.Color.White
-        Me.typeText.BorderColor = System.Drawing.Color.Black
-        Me.typeText.BorderSize = 1
-        Me.typeText.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.typeText.FocusedBaseColor = System.Drawing.Color.White
-        Me.typeText.FocusedBorderColor = System.Drawing.Color.Black
-        Me.typeText.FocusedForeColor = System.Drawing.SystemColors.ControlText
-        Me.typeText.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.typeText.Location = New System.Drawing.Point(288, 0)
-        Me.typeText.Multiline = True
-        Me.typeText.Name = "typeText"
-        Me.typeText.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.typeText.SelectedText = ""
-        Me.typeText.Size = New System.Drawing.Size(131, 28)
-        Me.typeText.TabIndex = 29
         '
         'Pos
         '

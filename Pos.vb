@@ -1583,6 +1583,11 @@ Public Class Pos
 
     End Sub
 
+    Private Sub purchaseBox_TextChanged(sender As Object, e As EventArgs) Handles purchaseBox.TextChanged
+        purchaseBox.Text = purchaseBox.Text.ToUpper()
+        purchaseBox.SelectionStart = purchaseBox.Text.Length ' Keeps cursor at the end
+    End Sub
+
 
     'Public Sub loaddgv2()
     '    Call connection()
