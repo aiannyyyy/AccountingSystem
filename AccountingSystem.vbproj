@@ -203,10 +203,10 @@
     <Compile Include="Pos.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReplacementForm.Designer.vb">
-      <DependentUpon>ReplacementForm.vb</DependentUpon>
+    <Compile Include="Replacement.Designer.vb">
+      <DependentUpon>Replacement.vb</DependentUpon>
     </Compile>
-    <Compile Include="ReplacementForm.vb">
+    <Compile Include="Replacement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ReprintSoa.Designer.vb">
@@ -254,8 +254,8 @@
     <EmbeddedResource Include="Pos.resx">
       <DependentUpon>Pos.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReplacementForm.resx">
-      <DependentUpon>ReplacementForm.vb</DependentUpon>
+    <EmbeddedResource Include="Replacement.resx">
+      <DependentUpon>Replacement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReprintSoa.resx">
       <DependentUpon>ReprintSoa.vb</DependentUpon>

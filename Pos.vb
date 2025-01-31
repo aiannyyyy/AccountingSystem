@@ -588,7 +588,7 @@ Public Class Pos
                 Dim nextSOANumber As String = GetNextSOANumber()
                 Dim codereplace As String = codeTxt.Text
                 ' Open the ReplacementForm with a new soaNumber
-                Dim replacementForm As New ReplacementForm("", nextSOANumber, codereplace) ' Pass empty currentSOANumber and the nextSOANumber
+                Dim replacementForm As New Replacement("", nextSOANumber, codereplace) ' Pass empty currentSOANumber and the nextSOANumber
                 replacementForm.ShowDialog() ' Show the form modally
 
                 replaceCombo.Enabled = True
@@ -612,7 +612,7 @@ Public Class Pos
                 ' Check if the user ticked the replacement checkbox
                 If replacementCheck.Checked Then
                     ' Open the ReplacementForm and pass both currentSOANumber and nextSOANumber
-                    Dim replacementForm As New ReplacementForm(currentSOANumber, nextSOANumber, codereplace)
+                    Dim replacementForm As New Replacement(currentSOANumber, nextSOANumber, codereplace)
                     replacementForm.ShowDialog() ' Show the form modally
                     replaceCombo.Enabled = True
                     'UncheckOtherCheckBoxes(replacementCheck)
@@ -1394,6 +1394,43 @@ Public Class Pos
 
                     cmd.CommandText = lastInsertedIdQuery
                     Dim lastInsertedId As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+                    ' Update replacement total in accounting table
+                    Dim query1 As String = "SELECT COALESCE(SUM(quantity), 0) FROM replacement_type WHERE soa_number = ?"
+                    Dim totalQuantity As Integer
+
+                    Using cmd2 As New OdbcCommand(query1, conn, transaction)
+                        cmd2.Parameters.AddWithValue("soa_number", newSoaNumber)
+                        totalQuantity = Convert.ToInt32(cmd2.ExecuteScalar())
+                    End Using
+
+                    Dim query2 As String = "UPDATE acccounting SET replacement = ? WHERE soa_number = ?"
+                    Using cmd3 As New OdbcCommand(query2, conn, transaction)
+                        cmd3.Parameters.AddWithValue("replacement", totalQuantity)
+                        cmd3.Parameters.AddWithValue("soa_number", newSoaNumber)
+                        cmd3.ExecuteNonQuery()
+                    End Using
+
+                    'this is for when a replacement_type has a price and need to add to the balance
+                    ' First, calculate the total price from the replacement_type table
+                    Dim query3 As String = "SELECT COALESCE(SUM(total_price), 0) FROM replacement_type WHERE soa_number = ?"
+                    Dim totalPrice As Double
+
+                    Using cmd4 As New OdbcCommand(query3, conn, transaction)
+                        cmd4.Parameters.AddWithValue("soa_number", newSoaNumber)
+                        totalPrice = Convert.ToDouble(cmd4.ExecuteScalar())
+                    End Using
+
+                    ' Add the total price to the current balance
+                    Dim newBalance As Double = balance + totalPrice
+
+                    ' Update the balance in the acccounting table
+                    Dim updateBalanceQuery As String = "UPDATE acccounting SET balance = ? WHERE soa_number = ?"
+                    Using cmd5 As New OdbcCommand(updateBalanceQuery, conn, transaction)
+                        cmd5.Parameters.AddWithValue("balance", newBalance)
+                        cmd5.Parameters.AddWithValue("soa_number", newSoaNumber)
+                        cmd5.ExecuteNonQuery()
+                    End Using
 
                     transaction.Commit()
                     Return lastInsertedId

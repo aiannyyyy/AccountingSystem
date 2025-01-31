@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class ReplacementForm
+Partial Class Replacement
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,12 +22,8 @@ Partial Class ReplacementForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReplacementForm))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Replacement))
         Me.dgv1 = New System.Windows.Forms.DataGridView()
-        Me.replaceCombo = New System.Windows.Forms.ComboBox()
-        Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
-        Me.quantityTxt = New Guna.UI.WinForms.GunaTextBox()
-        Me.GunaLabel2 = New Guna.UI.WinForms.GunaLabel()
         Me.addButton = New System.Windows.Forms.Button()
         Me.GunaLabel3 = New Guna.UI.WinForms.GunaLabel()
         Me.amountTxt = New Guna.UI.WinForms.GunaTextBox()
@@ -37,6 +33,10 @@ Partial Class ReplacementForm
         Me.codeTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.dtpicker2 = New Guna.UI.WinForms.GunaDateTimePicker()
         Me.GunaLabel6 = New Guna.UI.WinForms.GunaLabel()
+        Me.replace = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.labid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.newlabid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.test_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -45,58 +45,11 @@ Partial Class ReplacementForm
         Me.dgv1.AllowUserToAddRows = False
         Me.dgv1.AllowUserToDeleteRows = False
         Me.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.replace, Me.labid, Me.newlabid, Me.test_type})
         Me.dgv1.Location = New System.Drawing.Point(12, 128)
         Me.dgv1.Name = "dgv1"
-        Me.dgv1.ReadOnly = True
         Me.dgv1.Size = New System.Drawing.Size(739, 205)
         Me.dgv1.TabIndex = 31
-        '
-        'replaceCombo
-        '
-        Me.replaceCombo.FormattingEnabled = True
-        Me.replaceCombo.Location = New System.Drawing.Point(154, 75)
-        Me.replaceCombo.Name = "replaceCombo"
-        Me.replaceCombo.Size = New System.Drawing.Size(114, 21)
-        Me.replaceCombo.TabIndex = 32
-        '
-        'GunaLabel1
-        '
-        Me.GunaLabel1.AutoSize = True
-        Me.GunaLabel1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel1.Location = New System.Drawing.Point(18, 75)
-        Me.GunaLabel1.Name = "GunaLabel1"
-        Me.GunaLabel1.Size = New System.Drawing.Size(130, 17)
-        Me.GunaLabel1.TabIndex = 33
-        Me.GunaLabel1.Text = "REPLACEMENT TYPE:"
-        '
-        'quantityTxt
-        '
-        Me.quantityTxt.BackColor = System.Drawing.Color.Black
-        Me.quantityTxt.BaseColor = System.Drawing.Color.White
-        Me.quantityTxt.BorderColor = System.Drawing.Color.Black
-        Me.quantityTxt.BorderSize = 1
-        Me.quantityTxt.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.quantityTxt.FocusedBaseColor = System.Drawing.Color.White
-        Me.quantityTxt.FocusedBorderColor = System.Drawing.Color.Black
-        Me.quantityTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
-        Me.quantityTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.quantityTxt.Location = New System.Drawing.Point(364, 74)
-        Me.quantityTxt.Name = "quantityTxt"
-        Me.quantityTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.quantityTxt.SelectedText = ""
-        Me.quantityTxt.Size = New System.Drawing.Size(53, 28)
-        Me.quantityTxt.TabIndex = 36
-        Me.quantityTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'GunaLabel2
-        '
-        Me.GunaLabel2.AutoSize = True
-        Me.GunaLabel2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel2.Location = New System.Drawing.Point(286, 79)
-        Me.GunaLabel2.Name = "GunaLabel2"
-        Me.GunaLabel2.Size = New System.Drawing.Size(72, 17)
-        Me.GunaLabel2.TabIndex = 37
-        Me.GunaLabel2.Text = "QUANTITY:"
         '
         'addButton
         '
@@ -229,7 +182,30 @@ Partial Class ReplacementForm
         Me.GunaLabel6.TabIndex = 45
         Me.GunaLabel6.Text = "PURCHASE DATE:"
         '
-        'ReplacementForm
+        'replace
+        '
+        Me.replace.HeaderText = "REPLACE"
+        Me.replace.Name = "replace"
+        '
+        'labid
+        '
+        Me.labid.DataPropertyName = "labid"
+        Me.labid.HeaderText = "LABID"
+        Me.labid.Name = "labid"
+        '
+        'newlabid
+        '
+        Me.newlabid.DataPropertyName = "newlabid"
+        Me.newlabid.HeaderText = "NEWLABID"
+        Me.newlabid.Name = "newlabid"
+        '
+        'test_type
+        '
+        Me.test_type.DataPropertyName = "test_type"
+        Me.test_type.HeaderText = "TYPE"
+        Me.test_type.Name = "test_type"
+        '
+        'Replacement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -244,14 +220,10 @@ Partial Class ReplacementForm
         Me.Controls.Add(Me.amountTxt)
         Me.Controls.Add(Me.GunaLabel3)
         Me.Controls.Add(Me.addButton)
-        Me.Controls.Add(Me.GunaLabel2)
-        Me.Controls.Add(Me.quantityTxt)
-        Me.Controls.Add(Me.GunaLabel1)
-        Me.Controls.Add(Me.replaceCombo)
         Me.Controls.Add(Me.dgv1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Name = "ReplacementForm"
+        Me.Name = "Replacement"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Replacement"
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -261,10 +233,6 @@ Partial Class ReplacementForm
     End Sub
 
     Friend WithEvents dgv1 As DataGridView
-    Friend WithEvents replaceCombo As ComboBox
-    Friend WithEvents GunaLabel1 As Guna.UI.WinForms.GunaLabel
-    Friend WithEvents quantityTxt As Guna.UI.WinForms.GunaTextBox
-    Friend WithEvents GunaLabel2 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents addButton As Button
     Friend WithEvents GunaLabel3 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents amountTxt As Guna.UI.WinForms.GunaTextBox
@@ -274,4 +242,8 @@ Partial Class ReplacementForm
     Friend WithEvents codeTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents dtpicker2 As Guna.UI.WinForms.GunaDateTimePicker
     Friend WithEvents GunaLabel6 As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents replace As DataGridViewCheckBoxColumn
+    Friend WithEvents labid As DataGridViewTextBoxColumn
+    Friend WithEvents newlabid As DataGridViewTextBoxColumn
+    Friend WithEvents test_type As DataGridViewTextBoxColumn
 End Class
