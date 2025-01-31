@@ -65,6 +65,9 @@ Public Class Pos
         For Each column As DataGridViewColumn In dgv1.Columns
             column.SortMode = DataGridViewColumnSortMode.NotSortable
         Next
+
+        adsTxt.Enabled = False
+        totalTxt.Enabled = False
     End Sub
 
     Public Sub ordertext()
@@ -677,6 +680,9 @@ Public Class Pos
         expiredCheck.Enabled = False
         replacementCheck.Enabled = False
         soaButton.Enabled = False
+        brochureTxt.Enabled = False
+        posterTxt.Enabled = False
+        dryingTxt.Enabled = False
     End Sub
 
     Public Sub enableAds()
@@ -691,6 +697,9 @@ Public Class Pos
         expiredCheck.Enabled = True
         replacementCheck.Enabled = True
         soaButton.Enabled = True
+        brochureTxt.Enabled = True
+        posterTxt.Enabled = True
+        dryingTxt.Enabled = True
     End Sub
 
     Private Sub walkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles walkCheck.CheckedChanged
