@@ -155,9 +155,13 @@ Public Class Replacement
                 Dim replaceType As String = row.Cells("test_type").Value.ToString()
                 Dim labid As String = row.Cells("labid").Value.ToString()
                 Dim newlabid As String = row.Cells("newlabid").Value.ToString()
+                'Dim recordID As Integer = Convert.ToInt32(row.Cells("id").Value)
 
                 ' Insert the new record for each selected row
                 InsertRecord(facCode, soaNumber, replaceType, purchaseDate, quantity, unitPrice, totalPrice, labid, newlabid)
+
+                ' Update replacement table, setting replacement to "REPLACED"
+                updateRecord(labid, soaNumber)
             Next
             MessageBox.Show("Insert Success!")
             ' Clear all checkboxes after processing
@@ -168,5 +172,24 @@ Public Class Replacement
             MessageBox.Show("No checkboxes are selected.")
         End If
 
+    End Sub
+
+    Private Sub updateRecord(labid As String, remarks As String)
+        Dim query2 As String = "UPDATE replacement SET replacement = 'REPLACED', remarks = ? WHERE labid = ?"
+
+        Using conn As New OdbcConnection("DSN=dashboard")
+            conn.Open()
+            Using cmd As New OdbcCommand(query2, conn)
+                cmd.Parameters.AddWithValue("@remarks", remarks)
+                cmd.Parameters.AddWithValue("@labid", labid)
+
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                If rowsAffected > 0 Then
+                    MessageBox.Show("Update Success!")
+                Else
+                    MessageBox.Show("No records updated. LabID not found.")
+                End If
+            End Using
+        End Using
     End Sub
 End Class

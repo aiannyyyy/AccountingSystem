@@ -24,6 +24,10 @@ Partial Class Replacement
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Replacement))
         Me.dgv1 = New System.Windows.Forms.DataGridView()
+        Me.replace = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.labid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.newlabid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.test_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.addButton = New System.Windows.Forms.Button()
         Me.GunaLabel3 = New Guna.UI.WinForms.GunaLabel()
         Me.amountTxt = New Guna.UI.WinForms.GunaTextBox()
@@ -33,10 +37,6 @@ Partial Class Replacement
         Me.codeTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.dtpicker2 = New Guna.UI.WinForms.GunaDateTimePicker()
         Me.GunaLabel6 = New Guna.UI.WinForms.GunaLabel()
-        Me.replace = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.labid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.newlabid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.test_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -48,12 +48,35 @@ Partial Class Replacement
         Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.replace, Me.labid, Me.newlabid, Me.test_type})
         Me.dgv1.Location = New System.Drawing.Point(12, 128)
         Me.dgv1.Name = "dgv1"
-        Me.dgv1.Size = New System.Drawing.Size(739, 205)
+        Me.dgv1.Size = New System.Drawing.Size(468, 205)
         Me.dgv1.TabIndex = 31
+        '
+        'replace
+        '
+        Me.replace.HeaderText = "REPLACE"
+        Me.replace.Name = "replace"
+        '
+        'labid
+        '
+        Me.labid.DataPropertyName = "labid"
+        Me.labid.HeaderText = "LABID"
+        Me.labid.Name = "labid"
+        '
+        'newlabid
+        '
+        Me.newlabid.DataPropertyName = "newlabid"
+        Me.newlabid.HeaderText = "NEWLABID"
+        Me.newlabid.Name = "newlabid"
+        '
+        'test_type
+        '
+        Me.test_type.DataPropertyName = "test_type"
+        Me.test_type.HeaderText = "TYPE"
+        Me.test_type.Name = "test_type"
         '
         'addButton
         '
-        Me.addButton.Location = New System.Drawing.Point(653, 72)
+        Me.addButton.Location = New System.Drawing.Point(381, 90)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(75, 32)
         Me.addButton.TabIndex = 38
@@ -64,7 +87,7 @@ Partial Class Replacement
         '
         Me.GunaLabel3.AutoSize = True
         Me.GunaLabel3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel3.Location = New System.Drawing.Point(423, 79)
+        Me.GunaLabel3.Location = New System.Drawing.Point(282, 63)
         Me.GunaLabel3.Name = "GunaLabel3"
         Me.GunaLabel3.Size = New System.Drawing.Size(67, 17)
         Me.GunaLabel3.TabIndex = 39
@@ -81,7 +104,7 @@ Partial Class Replacement
         Me.amountTxt.FocusedBorderColor = System.Drawing.Color.Black
         Me.amountTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.amountTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.amountTxt.Location = New System.Drawing.Point(496, 72)
+        Me.amountTxt.Location = New System.Drawing.Point(355, 56)
         Me.amountTxt.Name = "amountTxt"
         Me.amountTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.amountTxt.SelectedText = ""
@@ -122,7 +145,7 @@ Partial Class Replacement
         '
         Me.GunaLabel5.AutoSize = True
         Me.GunaLabel5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel5.Location = New System.Drawing.Point(265, 21)
+        Me.GunaLabel5.Location = New System.Drawing.Point(18, 63)
         Me.GunaLabel5.Name = "GunaLabel5"
         Me.GunaLabel5.Size = New System.Drawing.Size(96, 17)
         Me.GunaLabel5.TabIndex = 43
@@ -139,7 +162,7 @@ Partial Class Replacement
         Me.codeTxt.FocusedBorderColor = System.Drawing.Color.Black
         Me.codeTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.codeTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.codeTxt.Location = New System.Drawing.Point(374, 17)
+        Me.codeTxt.Location = New System.Drawing.Point(117, 63)
         Me.codeTxt.Name = "codeTxt"
         Me.codeTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.codeTxt.SelectedText = ""
@@ -158,7 +181,7 @@ Partial Class Replacement
         Me.dtpicker2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dtpicker2.ForeColor = System.Drawing.Color.Black
         Me.dtpicker2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpicker2.Location = New System.Drawing.Point(630, 16)
+        Me.dtpicker2.Location = New System.Drawing.Point(365, 12)
         Me.dtpicker2.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpicker2.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpicker2.Name = "dtpicker2"
@@ -176,41 +199,18 @@ Partial Class Replacement
         '
         Me.GunaLabel6.AutoSize = True
         Me.GunaLabel6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel6.Location = New System.Drawing.Point(516, 21)
+        Me.GunaLabel6.Location = New System.Drawing.Point(251, 17)
         Me.GunaLabel6.Name = "GunaLabel6"
         Me.GunaLabel6.Size = New System.Drawing.Size(108, 17)
         Me.GunaLabel6.TabIndex = 45
         Me.GunaLabel6.Text = "PURCHASE DATE:"
-        '
-        'replace
-        '
-        Me.replace.HeaderText = "REPLACE"
-        Me.replace.Name = "replace"
-        '
-        'labid
-        '
-        Me.labid.DataPropertyName = "labid"
-        Me.labid.HeaderText = "LABID"
-        Me.labid.Name = "labid"
-        '
-        'newlabid
-        '
-        Me.newlabid.DataPropertyName = "newlabid"
-        Me.newlabid.HeaderText = "NEWLABID"
-        Me.newlabid.Name = "newlabid"
-        '
-        'test_type
-        '
-        Me.test_type.DataPropertyName = "test_type"
-        Me.test_type.HeaderText = "TYPE"
-        Me.test_type.Name = "test_type"
         '
         'Replacement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(760, 342)
+        Me.ClientSize = New System.Drawing.Size(492, 342)
         Me.Controls.Add(Me.dtpicker2)
         Me.Controls.Add(Me.GunaLabel6)
         Me.Controls.Add(Me.codeTxt)
