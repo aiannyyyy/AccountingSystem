@@ -62,6 +62,9 @@ Public Class Pos
 
         typeText.Visible = False
 
+        For Each column As DataGridViewColumn In dgv1.Columns
+            column.SortMode = DataGridViewColumnSortMode.NotSortable
+        Next
     End Sub
 
     Public Sub ordertext()

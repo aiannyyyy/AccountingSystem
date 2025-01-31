@@ -23,11 +23,11 @@ Partial Class Pos
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Pos))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GunaElipse1 = New Guna.UI.WinForms.GunaElipse(Me.components)
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -926,7 +926,7 @@ Partial Class Pos
         Me.replaceTxt.FocusedBorderColor = System.Drawing.Color.Black
         Me.replaceTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.replaceTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.replaceTxt.Location = New System.Drawing.Point(740, 5)
+        Me.replaceTxt.Location = New System.Drawing.Point(672, 5)
         Me.replaceTxt.Name = "replaceTxt"
         Me.replaceTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.replaceTxt.SelectedText = ""
@@ -971,45 +971,45 @@ Partial Class Pos
         '
         Me.dgv1.AllowUserToAddRows = False
         Me.dgv1.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        Me.dgv1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        Me.dgv1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
         Me.dgv1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv1.BackgroundColor = System.Drawing.Color.White
         Me.dgv1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgv1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(237, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.dgv1.ColumnHeadersHeight = 21
         Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cancelPo, Me.soa_number, Me.Column2, Me.order_type, Me.fac_code, Me.facility_name, Me.term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replacement, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.username, Me.remarks, Me.date_modified, Me.modified_by})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv1.DefaultCellStyle = DataGridViewCellStyle7
         Me.dgv1.EnableHeadersVisualStyles = False
         Me.dgv1.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
         Me.dgv1.Location = New System.Drawing.Point(23, 336)
         Me.dgv1.Name = "dgv1"
         Me.dgv1.RowHeadersVisible = False
         Me.dgv1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle8
         Me.dgv1.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv1.Size = New System.Drawing.Size(1004, 295)
         Me.dgv1.TabIndex = 16
-        Me.dgv1.Theme = Guna.UI.WinForms.GunaDataGridViewPresetThemes.WhiteGrid
+        Me.dgv1.Theme = Guna.UI.WinForms.GunaDataGridViewPresetThemes.LightGrid
         Me.dgv1.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
         Me.dgv1.ThemeStyle.AlternatingRowsStyle.Font = Nothing
         Me.dgv1.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty
@@ -1017,7 +1017,7 @@ Partial Class Pos
         Me.dgv1.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty
         Me.dgv1.ThemeStyle.BackColor = System.Drawing.Color.White
         Me.dgv1.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        Me.dgv1.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.White
+        Me.dgv1.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(237, Byte), Integer))
         Me.dgv1.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised
         Me.dgv1.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dgv1.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.Black
@@ -1051,7 +1051,7 @@ Partial Class Pos
         '
         'replaceAdd
         '
-        Me.replaceAdd.Location = New System.Drawing.Point(659, 7)
+        Me.replaceAdd.Location = New System.Drawing.Point(591, 7)
         Me.replaceAdd.Name = "replaceAdd"
         Me.replaceAdd.Size = New System.Drawing.Size(75, 23)
         Me.replaceAdd.TabIndex = 28
@@ -1080,19 +1080,19 @@ Partial Class Pos
         Me.remBox.FocusedBorderColor = System.Drawing.Color.Black
         Me.remBox.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.remBox.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.remBox.Location = New System.Drawing.Point(867, 3)
+        Me.remBox.Location = New System.Drawing.Point(816, 3)
         Me.remBox.Multiline = True
         Me.remBox.Name = "remBox"
         Me.remBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.remBox.SelectedText = ""
-        Me.remBox.Size = New System.Drawing.Size(131, 28)
+        Me.remBox.Size = New System.Drawing.Size(182, 28)
         Me.remBox.TabIndex = 26
         '
         'remLbl
         '
         Me.remLbl.AutoSize = True
         Me.remLbl.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.remLbl.Location = New System.Drawing.Point(792, 9)
+        Me.remLbl.Location = New System.Drawing.Point(741, 10)
         Me.remLbl.Name = "remLbl"
         Me.remLbl.Size = New System.Drawing.Size(69, 17)
         Me.remLbl.TabIndex = 26
@@ -1101,7 +1101,7 @@ Partial Class Pos
         'replaceCombo
         '
         Me.replaceCombo.FormattingEnabled = True
-        Me.replaceCombo.Location = New System.Drawing.Point(557, 8)
+        Me.replaceCombo.Location = New System.Drawing.Point(489, 8)
         Me.replaceCombo.Name = "replaceCombo"
         Me.replaceCombo.Size = New System.Drawing.Size(96, 21)
         Me.replaceCombo.TabIndex = 25
@@ -1149,19 +1149,19 @@ Partial Class Pos
         '
         'Column2
         '
-        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.Column2.DataPropertyName = "soa_date"
         Me.Column2.HeaderText = "SOA DATE"
         Me.Column2.Name = "Column2"
-        Me.Column2.Width = 88
+        Me.Column2.Width = 150
         '
         'order_type
         '
-        Me.order_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.order_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.order_type.DataPropertyName = "order_type"
         Me.order_type.HeaderText = "TYPE"
         Me.order_type.Name = "order_type"
-        Me.order_type.Width = 59
+        Me.order_type.Width = 220
         '
         'fac_code
         '
@@ -1197,11 +1197,11 @@ Partial Class Pos
         '
         'purchase_date
         '
-        Me.purchase_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.purchase_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.purchase_date.DataPropertyName = "purchase_date"
         Me.purchase_date.HeaderText = "PURCHASE DATE"
         Me.purchase_date.Name = "purchase_date"
-        Me.purchase_date.Width = 125
+        Me.purchase_date.Width = 150
         '
         'quantity
         '
@@ -1261,11 +1261,11 @@ Partial Class Pos
         '
         'due_date
         '
-        Me.due_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.due_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.due_date.DataPropertyName = "due_date"
         Me.due_date.HeaderText = "DUE DATE"
         Me.due_date.Name = "due_date"
-        Me.due_date.Width = 88
+        Me.due_date.Width = 150
         '
         'total_amount
         '
@@ -1277,11 +1277,11 @@ Partial Class Pos
         '
         'balance
         '
-        Me.balance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.balance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.balance.DataPropertyName = "balance"
         Me.balance.HeaderText = "BALANCE"
         Me.balance.Name = "balance"
-        Me.balance.Width = 84
+        Me.balance.Width = 120
         '
         'username
         '
@@ -1293,19 +1293,19 @@ Partial Class Pos
         '
         'remarks
         '
-        Me.remarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.remarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.remarks.DataPropertyName = "remarks"
         Me.remarks.HeaderText = "REMARKS"
         Me.remarks.Name = "remarks"
-        Me.remarks.Width = 88
+        Me.remarks.Width = 180
         '
         'date_modified
         '
-        Me.date_modified.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.date_modified.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.date_modified.DataPropertyName = "date_modified"
         Me.date_modified.HeaderText = "DATE MODIFIED"
         Me.date_modified.Name = "date_modified"
-        Me.date_modified.Width = 122
+        Me.date_modified.Width = 150
         '
         'modified_by
         '
