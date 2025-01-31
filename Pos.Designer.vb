@@ -110,7 +110,8 @@ Partial Class Pos
         Me.balance = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.username = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cancel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.date_modified = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.modified_by = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -976,7 +977,7 @@ Partial Class Pos
         Me.dgv1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv1.BackgroundColor = System.Drawing.Color.White
         Me.dgv1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.dgv1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgv1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -986,8 +987,8 @@ Partial Class Pos
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv1.ColumnHeadersHeight = 21
-        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cancelPo, Me.soa_number, Me.Column2, Me.order_type, Me.fac_code, Me.facility_name, Me.term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replacement, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.username, Me.remarks, Me.cancel})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cancelPo, Me.soa_number, Me.Column2, Me.order_type, Me.fac_code, Me.facility_name, Me.term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replacement, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.username, Me.remarks, Me.date_modified, Me.modified_by})
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
@@ -1000,8 +1001,11 @@ Partial Class Pos
         Me.dgv1.Location = New System.Drawing.Point(23, 336)
         Me.dgv1.Name = "dgv1"
         Me.dgv1.RowHeadersVisible = False
+        Me.dgv1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle4
+        Me.dgv1.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv1.Size = New System.Drawing.Size(1004, 295)
         Me.dgv1.TabIndex = 16
@@ -1295,13 +1299,21 @@ Partial Class Pos
         Me.remarks.Name = "remarks"
         Me.remarks.Width = 88
         '
-        'cancel
+        'date_modified
         '
-        Me.cancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.cancel.DataPropertyName = "cancel"
-        Me.cancel.HeaderText = "CANCELLED"
-        Me.cancel.Name = "cancel"
-        Me.cancel.Width = 96
+        Me.date_modified.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.date_modified.DataPropertyName = "date_modified"
+        Me.date_modified.HeaderText = "DATE MODIFIED"
+        Me.date_modified.Name = "date_modified"
+        Me.date_modified.Width = 122
+        '
+        'modified_by
+        '
+        Me.modified_by.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.modified_by.DataPropertyName = "modified_by"
+        Me.modified_by.HeaderText = "MODIFIED BY"
+        Me.modified_by.Name = "modified_by"
+        Me.modified_by.Width = 108
         '
         'Pos
         '
@@ -1418,5 +1430,6 @@ Partial Class Pos
     Friend WithEvents balance As DataGridViewTextBoxColumn
     Friend WithEvents username As DataGridViewTextBoxColumn
     Friend WithEvents remarks As DataGridViewTextBoxColumn
-    Friend WithEvents cancel As DataGridViewTextBoxColumn
+    Friend WithEvents date_modified As DataGridViewTextBoxColumn
+    Friend WithEvents modified_by As DataGridViewTextBoxColumn
 End Class

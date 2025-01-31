@@ -61,7 +61,6 @@ Public Class Pos
 
 
         typeText.Visible = False
-        'dgv1.Columns("cancel").Visible = False
 
     End Sub
 
@@ -95,6 +94,21 @@ Public Class Pos
     '    End Try
     'End Sub
 
+    'Public Sub loaddgv()
+    '    Try
+    '        Call connection()
+    '        Dim query As String = "SELECT * FROM acccounting ORDER BY soa_date DESC"
+    '        Dim da As New OdbcDataAdapter(query, conn)
+    '        Dim ds As New DataSet()
+    '        ds.Clear()
+    '        da.Fill(ds, "acccounting")
+    '        dgv1.DataSource = ds.Tables("acccounting").DefaultView
+
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error loading data: " & ex.Message)
+    '    End Try
+    'End Sub
+
     Public Sub loaddgv()
         Try
             Call connection()
@@ -114,8 +128,6 @@ Public Class Pos
             MessageBox.Show("Error loading data: " & ex.Message)
         End Try
     End Sub
-
-
 
 
     'Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
@@ -354,12 +366,19 @@ Public Class Pos
                 dgv1.DataSource = odbcDataSet.Tables("acccounting").DefaultView
             End Using
 
-            ' Disable rows where cancel column has the value "CANCELLED"
+            ' Set rows to read-only if "order_type" contains "(Cancelled P.O)"
             For Each row As DataGridViewRow In dgv1.Rows
-                If Not row.IsNewRow AndAlso row.Cells("cancel").Value IsNot Nothing AndAlso row.Cells("cancel").Value.ToString().ToUpper() = "CANCELLED" Then
-                    row.ReadOnly = True ' Disable entire row
+                If Not row.IsNewRow AndAlso row.Cells("order_type").Value IsNot Nothing Then
+                    Dim orderType As String = row.Cells("order_type").Value.ToString()
+                    ' Check if the order_type contains "(Cancelled P.O)"
+                    If orderType.Contains("(Cancelled P.O)") Then
+                        row.ReadOnly = True
+                    Else
+                        row.ReadOnly = False
+                    End If
                 End If
             Next
+
         Catch ex As Exception
             MessageBox.Show("ODBC Error: " & ex.Message)
         End Try
@@ -461,9 +480,6 @@ Public Class Pos
 
         UpdateDateTimePicker2()
     End Sub
-
-
-
     Private Sub brochureCheck_CheckedChanged(sender As Object, e As EventArgs) Handles brochureCheck.CheckedChanged
         If brochureCheck.Checked Then
             brochureTxt.Enabled = True
@@ -1193,8 +1209,118 @@ Public Class Pos
     '    End Using
     'End Function
 
-    Private Function InsertRecord(ByRef soatxt As String, soaDate As Date, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As Date, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String, type2 As String, cancel As String) As Double
-        Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type, type, cancel) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    'Private Function InsertRecord(ByRef soatxt As String, soaDate As DateTime, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As DateTime, quantity As Integer, subtotal As Integer, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As Date, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String, type2 As String, date_modified As DateTime) As Double
+    '    Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type, type, date_modified) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    '    Dim lastSoaQuery As String = "SELECT soa_number FROM acccounting WHERE LEFT(soa_number, 4) = ? ORDER BY soa_number DESC LIMIT 1"
+    '    Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
+
+    '    Dim year As String = purchaseDate.Year.ToString()
+    '    Dim newSoaNumber As String = ""
+
+    '    Using conn As New OdbcConnection("DSN=dashboard")
+    '        conn.Open()
+    '        Dim transaction As OdbcTransaction = conn.BeginTransaction()
+
+    '        Try
+    '            ' Generate new SOA number
+    '            Using cmd As New OdbcCommand(lastSoaQuery, conn, transaction)
+    '                cmd.Parameters.AddWithValue("year", year)
+    '                Dim lastSoa As Object = cmd.ExecuteScalar()
+
+    '                If lastSoa IsNot Nothing Then
+    '                    Dim lastIncrement As Integer = Convert.ToInt32(lastSoa.ToString().Substring(4)) + 1
+    '                    newSoaNumber = year & lastIncrement.ToString("D5")
+    '                Else
+    '                    newSoaNumber = year & "00001"
+    '                End If
+    '            End Using
+
+    '            soatxt = newSoaNumber
+
+    '            ' Insert record
+    '            Using cmd As New OdbcCommand(insertQuery, conn, transaction)
+    '                cmd.Parameters.AddWithValue("soa_number", newSoaNumber)
+    '                cmd.Parameters.AddWithValue("soa_txt", soatxt)
+    '                cmd.Parameters.AddWithValue("soa_date", soaDate.Datetime)
+    '                cmd.Parameters.AddWithValue("order_type", ordertype)
+    '                cmd.Parameters.AddWithValue("fac_code", code)
+    '                cmd.Parameters.AddWithValue("facility_name", name)
+    '                cmd.Parameters.AddWithValue("term", term)
+    '                cmd.Parameters.AddWithValue("purchase_number", purchaseNumber)
+    '                cmd.Parameters.AddWithValue("purchase_date", purchaseDate.Datetime)
+    '                cmd.Parameters.AddWithValue("quantity", quantity)
+    '                cmd.Parameters.AddWithValue("sub_total", subtotal)
+    '                cmd.Parameters.AddWithValue("brochure", brochure)
+    '                cmd.Parameters.AddWithValue("poster", poster)
+    '                cmd.Parameters.AddWithValue("drying_rack", drying)
+    '                cmd.Parameters.AddWithValue("replacement", replace)
+    '                cmd.Parameters.AddWithValue("ads_amount", Math.Round(ads, 2))
+    '                cmd.Parameters.AddWithValue("due_date", dueDate.Datetime)
+    '                cmd.Parameters.AddWithValue("total_amount", totalAmount)
+    '                cmd.Parameters.AddWithValue("balance", balance)
+    '                cmd.Parameters.AddWithValue("username", user)
+    '                cmd.Parameters.AddWithValue("sub_amount", subamount)
+    '                cmd.Parameters.AddWithValue("replace_type", replace_type)
+    '                cmd.Parameters.AddWithValue("type", type2)
+    '                cmd.Parameters.AddWithValue("date_modified", date_modified)
+
+    '                cmd.ExecuteNonQuery()
+
+    '                cmd.CommandText = lastInsertedIdQuery
+    '                Dim lastInsertedId As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+    '                ' Update replacement total in accounting table
+    '                Dim query1 As String = "SELECT COALESCE(SUM(quantity), 0) FROM replacement_type WHERE soa_number = ?"
+    '                Dim totalQuantity As Integer
+
+    '                Using cmd2 As New OdbcCommand(query1, conn, transaction)
+    '                    cmd2.Parameters.AddWithValue("soa_number", newSoaNumber)
+    '                    totalQuantity = Convert.ToInt32(cmd2.ExecuteScalar())
+    '                End Using
+
+    '                Dim query2 As String = "UPDATE acccounting SET replacement = ? WHERE soa_number = ?"
+    '                Using cmd3 As New OdbcCommand(query2, conn, transaction)
+    '                    cmd3.Parameters.AddWithValue("replacement", totalQuantity)
+    '                    cmd3.Parameters.AddWithValue("soa_number", newSoaNumber)
+    '                    cmd3.ExecuteNonQuery()
+    '                End Using
+
+    '                'this is for when a replacement_type has a price and need to add to the balance
+    '                ' First, calculate the total price from the replacement_type table
+    '                Dim query3 As String = "SELECT COALESCE(SUM(total_price), 0) FROM replacement_type WHERE soa_number = ?"
+    '                Dim totalPrice As Double
+
+    '                Using cmd4 As New OdbcCommand(query3, conn, transaction)
+    '                    cmd4.Parameters.AddWithValue("soa_number", newSoaNumber)
+    '                    totalPrice = Convert.ToDouble(cmd4.ExecuteScalar())
+    '                End Using
+
+    '                ' Add the total price to the current balance
+    '                Dim newBalance As Double = balance + totalPrice
+
+    '                ' Update the balance in the acccounting table
+    '                Dim updateBalanceQuery As String = "UPDATE acccounting SET balance = ? WHERE soa_number = ?"
+    '                Using cmd5 As New OdbcCommand(updateBalanceQuery, conn, transaction)
+    '                    cmd5.Parameters.AddWithValue("balance", newBalance)
+    '                    cmd5.Parameters.AddWithValue("soa_number", newSoaNumber)
+    '                    cmd5.ExecuteNonQuery()
+    '                End Using
+
+
+    '                transaction.Commit()
+    '                Return lastInsertedId
+    '            End Using
+    '        Catch ex As Exception
+    '            transaction.Rollback()
+    '            Throw New Exception("Error during record insertion: " & ex.Message)
+    '        Finally
+    '            conn.Close()
+    '        End Try
+    '    End Using
+    'End Function
+
+    Private Function InsertRecord(ByRef soatxt As String, soaDate As DateTime, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As DateTime, quantity As Integer, subtotal As Double, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As DateTime, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String, type2 As String, date_modified As DateTime, modified_by As String) As Double
+        Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type, type, date_modified, modified_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         Dim lastSoaQuery As String = "SELECT soa_number FROM acccounting WHERE LEFT(soa_number, 4) = ? ORDER BY soa_number DESC LIMIT 1"
         Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
 
@@ -1208,7 +1334,7 @@ Public Class Pos
             Try
                 ' Generate new SOA number
                 Using cmd As New OdbcCommand(lastSoaQuery, conn, transaction)
-                    cmd.Parameters.AddWithValue("year", year)
+                    cmd.Parameters.AddWithValue("@year", year)
                     Dim lastSoa As Object = cmd.ExecuteScalar()
 
                     If lastSoa IsNot Nothing Then
@@ -1223,73 +1349,39 @@ Public Class Pos
 
                 ' Insert record
                 Using cmd As New OdbcCommand(insertQuery, conn, transaction)
-                    cmd.Parameters.AddWithValue("soa_number", newSoaNumber)
-                    cmd.Parameters.AddWithValue("soa_txt", soatxt)
-                    cmd.Parameters.AddWithValue("soa_date", soaDate.Date)
-                    cmd.Parameters.AddWithValue("order_type", ordertype)
-                    cmd.Parameters.AddWithValue("fac_code", code)
-                    cmd.Parameters.AddWithValue("facility_name", name)
-                    cmd.Parameters.AddWithValue("term", term)
-                    cmd.Parameters.AddWithValue("purchase_number", purchaseNumber)
-                    cmd.Parameters.AddWithValue("purchase_date", purchaseDate.Date)
-                    cmd.Parameters.AddWithValue("quantity", quantity)
-                    cmd.Parameters.AddWithValue("sub_total", subtotal)
-                    cmd.Parameters.AddWithValue("brochure", brochure)
-                    cmd.Parameters.AddWithValue("poster", poster)
-                    cmd.Parameters.AddWithValue("drying_rack", drying)
-                    cmd.Parameters.AddWithValue("replacement", replace)
-                    cmd.Parameters.AddWithValue("ads_amount", Math.Round(ads, 2))
-                    cmd.Parameters.AddWithValue("due_date", dueDate.Date)
-                    cmd.Parameters.AddWithValue("total_amount", totalAmount)
-                    cmd.Parameters.AddWithValue("balance", balance)
-                    cmd.Parameters.AddWithValue("username", user)
-                    cmd.Parameters.AddWithValue("sub_amount", subamount)
-                    cmd.Parameters.AddWithValue("replace_type", replace_type)
-                    cmd.Parameters.AddWithValue("type", type2)
-                    cmd.Parameters.AddWithValue("cancel", cancel)
+                    cmd.Parameters.AddWithValue("@soa_number", newSoaNumber)
+                    cmd.Parameters.AddWithValue("@soa_txt", soatxt)
+                    'cmd.Parameters.AddWithValue("@soa_date", soaDate.Date)
+                    cmd.Parameters.AddWithValue("@soa_date", DateTime.Now)
+                    cmd.Parameters.AddWithValue("@order_type", ordertype)
+                    cmd.Parameters.AddWithValue("@fac_code", code)
+                    cmd.Parameters.AddWithValue("@facility_name", name)
+                    cmd.Parameters.AddWithValue("@term", term)
+                    cmd.Parameters.AddWithValue("@purchase_number", purchaseNumber)
+                    'cmd.Parameters.AddWithValue("@purchase_date", purchaseDate.Date)
+                    cmd.Parameters.AddWithValue("@purchase_date", dtpicker2.Value)
+                    cmd.Parameters.AddWithValue("@quantity", quantity)
+                    cmd.Parameters.AddWithValue("@sub_total", subtotal)
+                    cmd.Parameters.AddWithValue("@brochure", brochure)
+                    cmd.Parameters.AddWithValue("@poster", poster)
+                    cmd.Parameters.AddWithValue("@drying_rack", drying)
+                    cmd.Parameters.AddWithValue("@replacement", If(replace = -1, DBNull.Value, replace))
+                    cmd.Parameters.AddWithValue("@ads_amount", ads)
+                    'cmd.Parameters.AddWithValue("@due_date", dueDate.Date)
+                    cmd.Parameters.AddWithValue("@due_date", dtpicker1.Value)
+                    cmd.Parameters.AddWithValue("@total_amount", totalAmount)
+                    cmd.Parameters.AddWithValue("@balance", balance)
+                    cmd.Parameters.AddWithValue("@username", user)
+                    cmd.Parameters.AddWithValue("@sub_amount", subamount)
+                    cmd.Parameters.AddWithValue("@replace_type", replace_type)
+                    cmd.Parameters.AddWithValue("@type", type2)
+                    cmd.Parameters.AddWithValue("@date_modified", DateTime.Now)
+                    cmd.Parameters.AddWithValue("@modified_by", modified_by)
 
                     cmd.ExecuteNonQuery()
 
                     cmd.CommandText = lastInsertedIdQuery
                     Dim lastInsertedId As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-
-                    ' Update replacement total in accounting table
-                    Dim query1 As String = "SELECT COALESCE(SUM(quantity), 0) FROM replacement_type WHERE soa_number = ?"
-                    Dim totalQuantity As Integer
-
-                    Using cmd2 As New OdbcCommand(query1, conn, transaction)
-                        cmd2.Parameters.AddWithValue("soa_number", newSoaNumber)
-                        totalQuantity = Convert.ToInt32(cmd2.ExecuteScalar())
-                    End Using
-
-                    Dim query2 As String = "UPDATE acccounting SET replacement = ? WHERE soa_number = ?"
-                    Using cmd3 As New OdbcCommand(query2, conn, transaction)
-                        cmd3.Parameters.AddWithValue("replacement", totalQuantity)
-                        cmd3.Parameters.AddWithValue("soa_number", newSoaNumber)
-                        cmd3.ExecuteNonQuery()
-                    End Using
-
-                    'this is for when a replacement_type has a price and need to add to the balance
-                    ' First, calculate the total price from the replacement_type table
-                    Dim query3 As String = "SELECT COALESCE(SUM(total_price), 0) FROM replacement_type WHERE soa_number = ?"
-                    Dim totalPrice As Double
-
-                    Using cmd4 As New OdbcCommand(query3, conn, transaction)
-                        cmd4.Parameters.AddWithValue("soa_number", newSoaNumber)
-                        totalPrice = Convert.ToDouble(cmd4.ExecuteScalar())
-                    End Using
-
-                    ' Add the total price to the current balance
-                    Dim newBalance As Double = balance + totalPrice
-
-                    ' Update the balance in the acccounting table
-                    Dim updateBalanceQuery As String = "UPDATE acccounting SET balance = ? WHERE soa_number = ?"
-                    Using cmd5 As New OdbcCommand(updateBalanceQuery, conn, transaction)
-                        cmd5.Parameters.AddWithValue("balance", newBalance)
-                        cmd5.Parameters.AddWithValue("soa_number", newSoaNumber)
-                        cmd5.ExecuteNonQuery()
-                    End Using
-
 
                     transaction.Commit()
                     Return lastInsertedId
@@ -1303,21 +1395,6 @@ Public Class Pos
         End Using
     End Function
 
-    'Private Sub CancelPurchaseOrders()
-    '    For Each row As DataGridViewRow In dgv1.Rows.Cast(Of DataGridViewRow)().Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
-    '        Try
-    '            row.Cells("total_amount").Value = 0
-    '            row.Cells("balance").Value = 0
-    '            row.Cells("remarks").Value = remBox.Text
-    '            row.Cells("order_type").Value &= " (Cancelled P.O)"
-
-    '            SaveCancellationToDatabase(remBox.Text, row.Cells("fac_code").Value.ToString())
-    '            MessageBox.Show("Cancelled P.O.")
-    '        Catch ex As Exception
-    '            MessageBox.Show("An error occurred during cancellation: " & ex.Message)
-    '        End Try
-    '    Next
-    'End Sub
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         ' Check if any row is marked for cancellation
@@ -1348,30 +1425,6 @@ Public Class Pos
         replacementCheck.Checked = False
     End Sub
 
-    'Private Sub CancelPurchaseOrders()
-    '    ' Check if remBox has a value before proceeding
-    '    If String.IsNullOrWhiteSpace(remBox.Text) Then
-    '        MessageBox.Show("Please enter remarks before cancelling the P.O.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-    '        Exit Sub
-    '    End If
-
-    '    For Each row As DataGridViewRow In dgv1.Rows.Cast(Of DataGridViewRow)().
-    '    Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
-
-    '        Try
-    '            row.Cells("total_amount").Value = 0
-    '            row.Cells("balance").Value = 0
-    '            row.Cells("remarks").Value = remBox.Text
-    '            row.Cells("order_type").Value &= " (Cancelled P.O)"
-
-    '            SaveCancellationToDatabase(remBox.Text, row.Cells("fac_code").Value.ToString())
-    '            MessageBox.Show("Cancelled P.O.")
-    '        Catch ex As Exception
-    '            MessageBox.Show("An error occurred during cancellation: " & ex.Message)
-    '        End Try
-    '    Next
-    'End Sub
-
     Private Sub CancelPurchaseOrders()
         ' Check if remBox has a value before proceeding
         If String.IsNullOrWhiteSpace(remBox.Text) Then
@@ -1380,17 +1433,16 @@ Public Class Pos
         End If
 
         For Each row As DataGridViewRow In dgv1.Rows.Cast(Of DataGridViewRow)().
-    Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
+        Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
 
             Try
                 row.Cells("total_amount").Value = 0
                 row.Cells("balance").Value = 0
                 row.Cells("remarks").Value = remBox.Text
                 row.Cells("order_type").Value &= " (Cancelled P.O)"
+                row.Cells("date_modified").Value = DateTime.Now
 
-                ' Pass "CANCELLED" status when cancelling
-                InsertOrder("ENBS", "CANCELLED") ' Pass empty string for non-cancelled orders
-                SaveCancellationToDatabase(remBox.Text, row.Cells("fac_code").Value.ToString())
+                SaveCancellationToDatabase(remBox.Text, row.Cells("soa_number").Value.ToString(), DateTime.Now, Login.userTxt.Text)
                 MessageBox.Show("Cancelled P.O.")
             Catch ex As Exception
                 MessageBox.Show("An error occurred during cancellation: " & ex.Message)
@@ -1401,35 +1453,19 @@ Public Class Pos
     Private Sub AddNewOrder()
         Try
             If Not ValidateFields() Then Exit Sub
+            'If MessageBox.Show("Are all entries correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then Exit Sub
 
             Dim orderType As String = DetermineOrderType()
-
-            ' Pass empty string for orderStatus since it's a new order
-            Dim soatxt As String = InsertOrder(orderType, "")
+            Dim soatxt As String = InsertOrder(orderType)
 
             GenerateReport(soatxt, orderType)
+
+            'cleartxt()
 
         Catch ex As Exception
             MessageBox.Show("An error occurred during adding: " & ex.Message)
         End Try
     End Sub
-
-    'Private Sub AddNewOrder()
-    '    Try
-    '        If Not ValidateFields() Then Exit Sub
-    '        'If MessageBox.Show("Are all entries correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then Exit Sub
-
-    '        Dim orderType As String = DetermineOrderType()
-    '        Dim soatxt As String = InsertOrder(orderType)
-
-    '        GenerateReport(soatxt, orderType)
-
-    '        'cleartxt()
-
-    '    Catch ex As Exception
-    '        MessageBox.Show("An error occurred during adding: " & ex.Message)
-    '    End Try
-    'End Sub
 
     Private Function DetermineOrderType() As String
         If walkCheck.Checked Then Return "ENBS"
@@ -1439,59 +1475,36 @@ Public Class Pos
         Return "ENBS"
     End Function
 
-    'Private Function InsertOrder(orderType As String) As String
-    '    Dim soatxt As String = ""
-
-    '    ' Format the Double values to two decimal places for ads, total, and balance
-    '    Dim formattedAds As String = Double.Parse(adsTxt.Text).ToString("F2")
-    '    Dim formattedTotal As String = Double.Parse(totalTxt.Text).ToString("F2")
-    '    Dim formattedBalance As String = Double.Parse(totalTxt.Text).ToString("F2") ' Assuming you have a balance field
-
-    '    Dim replace As String
-    '    If replaceCombo.SelectedItem IsNot Nothing Then
-    '        replace = replaceCombo.SelectedItem.ToString()
-    '    Else
-    '        replace = "NULL"
-    '    End If
-
-    '    ' Insert the formatted values into the database
-    '    Dim soaNumber As Integer = InsertRecord(soatxt, Date.Now.Date, orderType, codeTxt.Text, nameBox.Text, termBox.Text,
-    '                                        purchaseBox.Text, dtpicker2.Value.Date, Integer.Parse(qtyTxt.Text),
-    '                                        Double.Parse(amountTxt.Text), ParseOrZero(brochureTxt.Text), ParseOrZero(posterTxt.Text),
-    '                                        ParseOrZero(dryingTxt.Text), ParseOrZero(replaceTxt.Text),
-    '                                        formattedAds, dtpicker1.Value.Date,
-    '                                        formattedTotal, formattedBalance,
-    '                                        Login.userTxt.Text, Double.Parse(amountTxt.Text), replace, typeText.Text, "CANCELLED")
-
-    '    UpdateSoaTxt(soatxt, soaNumber)
-
-    '    MessageBox.Show("Saved Successfully!")
-    '    Return soatxt  ' Return the updated SOA text
-    'End Function
-
-    Private Function InsertOrder(orderType As String, orderStatus As String) As String
+    Private Function InsertOrder(orderType As String) As String
         Dim soatxt As String = ""
 
-        ' Format the Double values to two decimal places for ads, total, and balance
-        Dim formattedAds As String = Double.Parse(adsTxt.Text).ToString("F2")
-        Dim formattedTotal As String = Double.Parse(totalTxt.Text).ToString("F2")
-        Dim formattedBalance As String = Double.Parse(totalTxt.Text).ToString("F2") ' Assuming you have a balance field
+        ' Format double values safely
+        Dim formattedAds As Double = Convert.ToDouble(adsTxt.Text)
+        Dim formattedTotal As Double = Convert.ToDouble(totalTxt.Text)
+        Dim formattedBalance As Double = Convert.ToDouble(totalTxt.Text)
 
-        Dim replace As String
+        Dim replace As Integer = -1
         If replaceCombo.SelectedItem IsNot Nothing Then
-            replace = replaceCombo.SelectedItem.ToString()
-        Else
-            replace = "NULL"
+            Integer.TryParse(replaceCombo.SelectedItem.ToString(), replace)
         End If
 
-        ' Insert the formatted values into the database
-        Dim soaNumber As Integer = InsertRecord(soatxt, Date.Now.Date, orderType, codeTxt.Text, nameBox.Text, termBox.Text,
-                                            purchaseBox.Text, dtpicker2.Value.Date, Integer.Parse(qtyTxt.Text),
-                                            Double.Parse(amountTxt.Text), ParseOrZero(brochureTxt.Text), ParseOrZero(posterTxt.Text),
-                                            ParseOrZero(dryingTxt.Text), ParseOrZero(replaceTxt.Text),
-                                            formattedAds, dtpicker1.Value.Date,
-                                            formattedTotal, formattedBalance,
-                                            Login.userTxt.Text, Double.Parse(amountTxt.Text), replace, typeText.Text, orderStatus)
+        '' Insert the formatted values into the database
+        'Dim soaNumber As Integer = InsertRecord(soatxt, Date.Now.Date, orderType, codeTxt.Text, nameBox.Text, termBox.Text,
+        '                                    purchaseBox.Text, dtpicker2.Value.Date, Integer.Parse(qtyTxt.Text),
+        '                                    Convert.ToDouble(amountTxt.Text), ParseOrZero(brochureTxt.Text), ParseOrZero(posterTxt.Text),
+        '                                    ParseOrZero(dryingTxt.Text), replace,
+        '                                    formattedAds, dtpicker1.Value.Date,
+        '                                    formattedTotal, formattedBalance,
+        '                                    Login.userTxt.Text, Convert.ToDouble(amountTxt.Text), replace.ToString(), typeText.Text, DateTime.Now)
+
+        Dim soaNumber As Integer = InsertRecord(soatxt, DateTime.Now, orderType, codeTxt.Text, nameBox.Text, termBox.Text,
+             purchaseBox.Text, dtpicker2.Value, Integer.Parse(qtyTxt.Text),
+             Double.Parse(amountTxt.Text), ParseOrZero(brochureTxt.Text), ParseOrZero(posterTxt.Text),
+             ParseOrZero(dryingTxt.Text), ParseOrZero(replaceTxt.Text),
+             formattedAds, dtpicker1.Value,
+             formattedTotal, formattedBalance,
+             Login.userTxt.Text, Double.Parse(amountTxt.Text), replace, typeText.Text, DateTime.Now, Login.userTxt.Text)
+
 
         UpdateSoaTxt(soatxt, soaNumber)
 
@@ -1543,19 +1556,21 @@ Public Class Pos
         End Using
     End Sub
 
-    Private Sub SaveCancellationToDatabase(remarks As String, facCode As String)
+    Private Sub SaveCancellationToDatabase(remarks As String, soaNumber As String, date_modified As DateTime, modified_by As String)
         Try
             ' Establish the database connection
             Using conn As New OdbcConnection("DSN=dashboard")
                 conn.Open()
 
-                ' Create the SQL update query
-                Dim query As String = "UPDATE acccounting SET total_amount = 0, balance = 0, remarks = ?, order_type = CONCAT(order_type, ' (Cancelled P.O)') WHERE fac_code = ?"
+                ' Corrected SQL query with proper placeholders
+                Dim query As String = "UPDATE acccounting SET total_amount = 0, balance = 0, remarks = ?, order_type = CONCAT(order_type, ' (Cancelled P.O)'), date_modified = ?, modified_by = ? WHERE soa_number = ?"
 
-                ' Create the command and add parameters
+                ' Create the command and add parameters in the correct order
                 Using cmd As New OdbcCommand(query, conn)
-                    cmd.Parameters.AddWithValue("@remarks", remarks)
-                    cmd.Parameters.AddWithValue("@fac_code", facCode)
+                    cmd.Parameters.AddWithValue("?", remarks)          ' First ?
+                    cmd.Parameters.AddWithValue("?", date_modified)    ' Second ?
+                    cmd.Parameters.AddWithValue("?", modified_by)
+                    cmd.Parameters.AddWithValue("?", soaNumber)        ' Third ?
 
                     ' Execute the update command
                     cmd.ExecuteNonQuery()
@@ -1714,43 +1729,23 @@ Public Class Pos
         '    dgv1.CommitEdit(DataGridViewDataErrorContexts.Commit)
         'End If
         If dgv1.CurrentCell IsNot Nothing AndAlso dgv1.CurrentCell.ColumnIndex = 0 Then ' Replace 0 with your checkbox column index
-            dgv1.CommitEdit(DataGridViewDataErrorContexts.Commit)
+            ' Commit the edit to ensure the first click is immediately reflected
+            dgv1.EndEdit()
         End If
     End Sub
 
     ' Handle the CellValueChanged event to update the button text and ensure only one checkbox is checked
     Private Sub dgv1_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellValueChanged
-        '' Ensure we are working on the checkbox column
-        'If e.ColumnIndex = 0 Then ' Replace 0 with your checkbox column index
-        '    ' Allow only one checkbox to be checked at a time
-        '    For Each row As DataGridViewRow In dgv1.Rows
-        '        If row.Index <> e.RowIndex AndAlso Convert.ToBoolean(row.Cells(0).Value) Then
-        '            row.Cells(0).Value = False
-        '        End If
-        '    Next
-
-        '    ' Update the button text
-        '    If dgv1.Rows.Cast(Of DataGridViewRow)().Any(Function(r) Convert.ToBoolean(r.Cells(0).Value)) Then
-        '        addButton.Text = "CANCEL"
-        '        remLbl.Visible = True
-        '        remBox.Visible = True
-        '    Else
-        '        addButton.Text = "ADD"
-        '        remLbl.Visible = False
-        '        remBox.Visible = False
-        '        cleartxt()
-        '    End If
-        'End If
         ' Ensure we are working on the checkbox column
         If e.ColumnIndex = 0 Then ' Replace 0 with your checkbox column index
-            ' Ensure only one checkbox is checked at a time
+            ' Allow only one checkbox to be checked at a time
             For Each row As DataGridViewRow In dgv1.Rows
                 If row.Index <> e.RowIndex AndAlso Convert.ToBoolean(row.Cells(0).Value) Then
                     row.Cells(0).Value = False
                 End If
             Next
 
-            ' Update the button text based on the checkbox state
+            ' Update the button text
             If dgv1.Rows.Cast(Of DataGridViewRow)().Any(Function(r) Convert.ToBoolean(r.Cells(0).Value)) Then
                 addButton.Text = "CANCEL"
                 remLbl.Visible = True
@@ -1759,48 +1754,12 @@ Public Class Pos
                 addButton.Text = "ADD"
                 remLbl.Visible = False
                 remBox.Visible = False
-                cleartxt()
+                'cleartxt()
             End If
         End If
     End Sub
 
     Private Sub dgv1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellContentClick
-        '' Check if the clicked row index is valid and the DataGridView has rows
-        'If e.RowIndex >= 0 AndAlso e.ColumnIndex >= 0 AndAlso dgv1.Rows.Count > 0 Then
-        '    Try
-        '        ' Check if the clicked column is the "cancelPo" checkbox column
-        '        If dgv1.Columns(e.ColumnIndex).Name = "cancelPo" Then
-        '            ' Get the checkbox value for the clicked row
-        '            Dim isChecked As Boolean = Convert.ToBoolean(dgv1.Rows(e.RowIndex).Cells("cancelPo").Value)
-
-        '            If isChecked Then
-        '                ' Proceed with the code if the checkbox is ticked
-        '                codeTxt.Text = dgv1.Rows(e.RowIndex).Cells("fac_code").Value.ToString()
-        '                nameBox.Text = dgv1.Rows(e.RowIndex).Cells("facility_name").Value.ToString()
-        '                termBox.Text = dgv1.Rows(e.RowIndex).Cells("term").Value.ToString()
-        '                purchaseBox.Text = dgv1.Rows(e.RowIndex).Cells("purchase_number").Value.ToString()
-        '                qtyTxt.Text = dgv1.Rows(e.RowIndex).Cells("quantity").Value.ToString()
-        '                amountTxt.Text = dgv1.Rows(e.RowIndex).Cells("sub_total").Value.ToString()
-        '                dtpicker2.Value = Convert.ToDateTime(dgv1.Rows(e.RowIndex).Cells("purchase_date").Value)
-        '                dtpicker1.Value = Convert.ToDateTime(dgv1.Rows(e.RowIndex).Cells("due_date").Value)
-        '                brochureTxt.Text = dgv1.Rows(e.RowIndex).Cells("brochure").Value.ToString()
-        '                posterTxt.Text = dgv1.Rows(e.RowIndex).Cells("poster").Value.ToString()
-        '                dryingTxt.Text = dgv1.Rows(e.RowIndex).Cells("drying_rack").Value.ToString()
-        '                replaceTxt.Text = dgv1.Rows(e.RowIndex).Cells("replacement").Value.ToString()
-        '                adsTxt.Text = dgv1.Rows(e.RowIndex).Cells("ads_amount").Value.ToString()
-        '                totalTxt.Text = dgv1.Rows(e.RowIndex).Cells("total_amount").Value.ToString()
-        '                totalTxt.Text = dgv1.Rows(e.RowIndex).Cells("balance").Value.ToString()
-
-        '                disableColumns()
-        '            Else
-        '                ' Optional: Handle cases when the checkbox is unchecked
-        '                'MessageBox.Show("The checkbox is not ticked.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        '            End If
-        '        End If
-        '    Catch ex As Exception
-        '        'MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '    End Try
-        'End If
         ' Check if the clicked row index is valid and the DataGridView has rows
         If e.RowIndex >= 0 AndAlso e.ColumnIndex >= 0 AndAlso dgv1.Rows.Count > 0 Then
             Try
@@ -1830,7 +1789,7 @@ Public Class Pos
                         disableColumns()
                     Else
                         ' Optional: Handle cases when the checkbox is unchecked
-                        ' You can add your logic here if needed
+                        'MessageBox.Show("The checkbox is not ticked.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     End If
                 End If
             Catch ex As Exception
@@ -2938,6 +2897,22 @@ End Class
 
 '' Update totalTxt.Text by adding the value from adsTxt.Text
 'UpdateTotalAmount()
+
+'Private Sub CancelPurchaseOrders()
+'    For Each row As DataGridViewRow In dgv1.Rows.Cast(Of DataGridViewRow)().Where(Function(r) Not r.IsNewRow AndAlso Convert.ToBoolean(r.Cells("cancelPo").Value))
+'        Try
+'            row.Cells("total_amount").Value = 0
+'            row.Cells("balance").Value = 0
+'            row.Cells("remarks").Value = remBox.Text
+'            row.Cells("order_type").Value &= " (Cancelled P.O)"
+
+'            SaveCancellationToDatabase(remBox.Text, row.Cells("fac_code").Value.ToString())
+'            MessageBox.Show("Cancelled P.O.")
+'        Catch ex As Exception
+'            MessageBox.Show("An error occurred during cancellation: " & ex.Message)
+'        End Try
+'    Next
+'End Sub
 
 
 
