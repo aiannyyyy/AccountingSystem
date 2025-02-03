@@ -11,10 +11,6 @@ Public Class Pos
 
     Private addCount As Integer = 0
 
-    'This is the method to simulate Button1's click from Form2
-    Public Sub TriggerButton1Click()
-        addButton.PerformClick()
-    End Sub
     Private Sub Pos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         replaceCombo.Items.AddRange({"CONTAMINATED", "INSUFFICIENT"})
 

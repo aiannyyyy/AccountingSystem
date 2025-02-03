@@ -44,7 +44,13 @@ Public Class Replacement
             End If
 
             'Dim odbcQuery As String = "SELECT labid, newlabid, test_type, date_replace FROM replacement WHERE fac_code = ? order by date_replace desc"
-            Dim odbcQuery As String = "SELECT labid, newlabid, test_type, date_replace FROM replacement WHERE fac_code = ? AND replacement <> 'REPLACED' ORDER BY date_replace DESC"
+            Dim odbcQuery As String = "SELECT labid, newlabid, test_type, date_replace " &
+                          "FROM replacement " &
+                          "WHERE fac_code = ? " &
+                          "  AND replacement <> 'REPLACED' " &
+                          "  AND NOT ((replacement IS NULL OR replacement = '') " &
+                          "           AND ntreplace = 'IRREPLACABLE') " &
+                          "ORDER BY date_replace DESC"
 
             Using odbcCmd As New OdbcCommand(odbcQuery, conn)
                 odbcCmd.Parameters.AddWithValue("@fac_code", facCode)
@@ -150,23 +156,69 @@ Public Class Replacement
 
     ' Event handler for the Add Button to insert a new record
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
+        'Dim facCode As String = codeTxt.Text
+        'Dim soaNumber As String = soaTxt.Text
+
+        'Dim purchaseDate As Date = dtpicker2.Value
+        'Dim quantity As Integer = 1 ' Convert quantity to Integer
+        'Dim unitPrice As Decimal = Convert.ToDecimal(amountTxt.Text) ' Convert unitPrice to Decimal
+        'Dim totalPrice As Decimal = quantity * unitPrice ' Calculate totalPrice
+
+        'Dim selectedRows As New List(Of DataGridViewRow)
+
+        '' Loop through all rows in the DataGridView
+        'For Each selectedRow As DataGridViewRow In dgv1.Rows
+        '    ' Check if the checkbox is checked in the current row
+        '    Dim checkboxChecked As Boolean = Convert.ToBoolean(selectedRow.Cells("replace").Value)
+
+        '    If checkboxChecked Then
+        '        selectedRows.Add(selectedRow)
+        '    End If
+        'Next
+
+        'If selectedRows.Count > 0 Then
+        '    ' Loop through all selected rows and insert records
+        '    For Each row As DataGridViewRow In selectedRows
+        '        Dim replaceType As String = row.Cells("test_type").Value.ToString()
+        '        Dim labid As String = row.Cells("labid").Value.ToString()
+        '        Dim newlabid As String = row.Cells("newlabid").Value.ToString()
+        '        'Dim recordID As Integer = Convert.ToInt32(row.Cells("id").Value)
+
+        '        ' Insert the new record for each selected row
+        '        InsertRecord(facCode, soaNumber, replaceType, purchaseDate, quantity, unitPrice, totalPrice, labid, newlabid)
+
+        '        ' Update replacement table, setting replacement to "REPLACED"
+        '        updateRecord(labid, soaNumber)
+        '    Next
+        '    MessageBox.Show("Insert Success!")
+        '    FilterDataGrid(facCode)
+        '    ' Clear all checkboxes after processing
+        '    For Each row As DataGridViewRow In dgv1.Rows
+        '        row.Cells("replace").Value = False
+        '    Next
+        'Else
+        '    MessageBox.Show("No checkboxes are selected.")
+        'End If
         Dim facCode As String = codeTxt.Text
         Dim soaNumber As String = soaTxt.Text
-
         Dim purchaseDate As Date = dtpicker2.Value
-        Dim quantity As Integer = 1 ' Convert quantity to Integer
-        Dim unitPrice As Decimal = Convert.ToDecimal(amountTxt.Text) ' Convert unitPrice to Decimal
-        Dim totalPrice As Decimal = quantity * unitPrice ' Calculate totalPrice
+        Dim quantity As Integer = 1 ' Fixed quantity of 1
+        Dim unitPrice As Decimal
 
+        ' Validate if amountTxt contains a valid decimal
+        If Not Decimal.TryParse(amountTxt.Text, unitPrice) Then
+            MessageBox.Show("Invalid amount entered.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        Dim totalPrice As Decimal = quantity * unitPrice ' Calculate total price
         Dim selectedRows As New List(Of DataGridViewRow)
 
-        ' Loop through all rows in the DataGridView
-        For Each selectedRow As DataGridViewRow In dgv1.Rows
-            ' Check if the checkbox is checked in the current row
-            Dim checkboxChecked As Boolean = Convert.ToBoolean(selectedRow.Cells("replace").Value)
-
+        ' Loop through all rows in the DataGridView to find checked rows
+        For Each row As DataGridViewRow In dgv1.Rows
+            Dim checkboxChecked As Boolean = Convert.ToBoolean(row.Cells("replace").Value)
             If checkboxChecked Then
-                selectedRows.Add(selectedRow)
+                selectedRows.Add(row)
             End If
         Next
 
@@ -176,7 +228,6 @@ Public Class Replacement
                 Dim replaceType As String = row.Cells("test_type").Value.ToString()
                 Dim labid As String = row.Cells("labid").Value.ToString()
                 Dim newlabid As String = row.Cells("newlabid").Value.ToString()
-                'Dim recordID As Integer = Convert.ToInt32(row.Cells("id").Value)
 
                 ' Insert the new record for each selected row
                 InsertRecord(facCode, soaNumber, replaceType, purchaseDate, quantity, unitPrice, totalPrice, labid, newlabid)
@@ -184,14 +235,16 @@ Public Class Replacement
                 ' Update replacement table, setting replacement to "REPLACED"
                 updateRecord(labid, soaNumber)
             Next
+
             MessageBox.Show("Insert Success!")
             FilterDataGrid(facCode)
-            ' Clear all checkboxes after processing
+
+            ' Clear checkboxes after processing
             For Each row As DataGridViewRow In dgv1.Rows
                 row.Cells("replace").Value = False
             Next
         Else
-            MessageBox.Show("No checkboxes are selected.")
+            MessageBox.Show("No checkboxes are selected. Please select at least one record to add.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
     End Sub
 
