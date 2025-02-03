@@ -852,8 +852,9 @@ Public Class Pos
 
             ' Display the total amount in amountTxt
             amountTxt.Text = totalAmount.ToString("F2") ' Format with 2 decimal places
-        Else
             adsTxt.Text = "0.00"
+        Else
+
             amountTxt.Text = "0.00"
         End If
     End Sub
