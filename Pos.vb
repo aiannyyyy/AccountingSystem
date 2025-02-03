@@ -700,6 +700,7 @@ Public Class Pos
 
     Private Sub walkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles walkCheck.CheckedChanged
         If walkCheck.Checked Then
+            qtyTxt.Text = "1"
             codeTxt.Text = "7345"
             CalculateTotalAmount(1800) ' Ensure unit price 1800 is used
             UncheckOtherCheckBoxes(walkCheck) ' Uncheck other checkboxes
