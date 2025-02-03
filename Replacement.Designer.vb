@@ -76,7 +76,7 @@ Partial Class Replacement
         '
         'addButton
         '
-        Me.addButton.Location = New System.Drawing.Point(381, 90)
+        Me.addButton.Location = New System.Drawing.Point(206, 90)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(75, 32)
         Me.addButton.TabIndex = 38
@@ -145,7 +145,7 @@ Partial Class Replacement
         '
         Me.GunaLabel5.AutoSize = True
         Me.GunaLabel5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel5.Location = New System.Drawing.Point(18, 63)
+        Me.GunaLabel5.Location = New System.Drawing.Point(18, 56)
         Me.GunaLabel5.Name = "GunaLabel5"
         Me.GunaLabel5.Size = New System.Drawing.Size(96, 17)
         Me.GunaLabel5.TabIndex = 43
@@ -162,7 +162,7 @@ Partial Class Replacement
         Me.codeTxt.FocusedBorderColor = System.Drawing.Color.Black
         Me.codeTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.codeTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.codeTxt.Location = New System.Drawing.Point(117, 63)
+        Me.codeTxt.Location = New System.Drawing.Point(117, 56)
         Me.codeTxt.Name = "codeTxt"
         Me.codeTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.codeTxt.SelectedText = ""

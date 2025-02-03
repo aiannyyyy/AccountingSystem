@@ -185,7 +185,7 @@ Public Class Replacement
 
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
                 If rowsAffected > 0 Then
-                    MessageBox.Show("Update Success!")
+                    'MessageBox.Show("Update Success!")
                 Else
                     MessageBox.Show("No records updated. LabID not found.")
                 End If
