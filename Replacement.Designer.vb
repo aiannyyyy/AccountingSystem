@@ -24,10 +24,6 @@ Partial Class Replacement
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Replacement))
         Me.dgv1 = New System.Windows.Forms.DataGridView()
-        Me.replace = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.labid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.newlabid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.test_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.addButton = New System.Windows.Forms.Button()
         Me.GunaLabel3 = New Guna.UI.WinForms.GunaLabel()
         Me.amountTxt = New Guna.UI.WinForms.GunaTextBox()
@@ -37,6 +33,11 @@ Partial Class Replacement
         Me.codeTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.dtpicker2 = New Guna.UI.WinForms.GunaDateTimePicker()
         Me.GunaLabel6 = New Guna.UI.WinForms.GunaLabel()
+        Me.replace = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.labid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.newlabid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.test_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.date_replace = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -45,34 +46,11 @@ Partial Class Replacement
         Me.dgv1.AllowUserToAddRows = False
         Me.dgv1.AllowUserToDeleteRows = False
         Me.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.replace, Me.labid, Me.newlabid, Me.test_type})
+        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.replace, Me.labid, Me.newlabid, Me.test_type, Me.date_replace})
         Me.dgv1.Location = New System.Drawing.Point(12, 128)
         Me.dgv1.Name = "dgv1"
         Me.dgv1.Size = New System.Drawing.Size(468, 205)
         Me.dgv1.TabIndex = 31
-        '
-        'replace
-        '
-        Me.replace.HeaderText = "REPLACE"
-        Me.replace.Name = "replace"
-        '
-        'labid
-        '
-        Me.labid.DataPropertyName = "labid"
-        Me.labid.HeaderText = "LABID"
-        Me.labid.Name = "labid"
-        '
-        'newlabid
-        '
-        Me.newlabid.DataPropertyName = "newlabid"
-        Me.newlabid.HeaderText = "NEWLABID"
-        Me.newlabid.Name = "newlabid"
-        '
-        'test_type
-        '
-        Me.test_type.DataPropertyName = "test_type"
-        Me.test_type.HeaderText = "TYPE"
-        Me.test_type.Name = "test_type"
         '
         'addButton
         '
@@ -205,6 +183,35 @@ Partial Class Replacement
         Me.GunaLabel6.TabIndex = 45
         Me.GunaLabel6.Text = "PURCHASE DATE:"
         '
+        'replace
+        '
+        Me.replace.HeaderText = "REPLACE"
+        Me.replace.Name = "replace"
+        '
+        'labid
+        '
+        Me.labid.DataPropertyName = "labid"
+        Me.labid.HeaderText = "LABID"
+        Me.labid.Name = "labid"
+        '
+        'newlabid
+        '
+        Me.newlabid.DataPropertyName = "newlabid"
+        Me.newlabid.HeaderText = "REPLACED"
+        Me.newlabid.Name = "newlabid"
+        '
+        'test_type
+        '
+        Me.test_type.DataPropertyName = "test_type"
+        Me.test_type.HeaderText = "TYPE"
+        Me.test_type.Name = "test_type"
+        '
+        'date_replace
+        '
+        Me.date_replace.DataPropertyName = "date_replace"
+        Me.date_replace.HeaderText = "DATE REPLACE"
+        Me.date_replace.Name = "date_replace"
+        '
         'Replacement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -246,4 +253,5 @@ Partial Class Replacement
     Friend WithEvents labid As DataGridViewTextBoxColumn
     Friend WithEvents newlabid As DataGridViewTextBoxColumn
     Friend WithEvents test_type As DataGridViewTextBoxColumn
+    Friend WithEvents date_replace As DataGridViewTextBoxColumn
 End Class

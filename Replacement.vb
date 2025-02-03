@@ -25,7 +25,7 @@ Public Class Replacement
         codeTxt.Text = _codeReplace
         soaTxt.Text = _nextSOANumber
         'replaceCombo.Items.AddRange({"CONTAMINATED", "INSUFFICIENT"})
-        loaddgv() ' Load the DataGridView with existing replacement data
+        'loaddgv() ' Load the DataGridView with existing replacement data
 
         amountTxt.Text = "0.00"
 
@@ -43,7 +43,9 @@ Public Class Replacement
                 conn.Open()
             End If
 
-            Dim odbcQuery As String = "SELECT labid, newlabid, test_type, date_replace FROM replacement WHERE fac_code = ? order by date_replace desc"
+            'Dim odbcQuery As String = "SELECT labid, newlabid, test_type, date_replace FROM replacement WHERE fac_code = ? order by date_replace desc"
+            Dim odbcQuery As String = "SELECT labid, newlabid, test_type, date_replace FROM replacement WHERE fac_code = ? AND replacement <> 'REPLACED' ORDER BY date_replace DESC"
+
             Using odbcCmd As New OdbcCommand(odbcQuery, conn)
                 odbcCmd.Parameters.AddWithValue("@fac_code", facCode)
 
@@ -74,20 +76,39 @@ Public Class Replacement
     'End Sub
 
     ' Loads data from the database into the DataGridView
-    Public Sub loaddgv()
-        Call connection()
-        Dim query As String = "SELECT labid, newlabid, test_type FROM replacement"
+    'Public Sub loaddgv()
+    '    Call connection()
+    '    'Dim query As String = "SELECT labid, newlabid, test_type FROM replacement"
+    '    Dim query As String = "SELECT labid, newlabid, test_type FROM replacement " &
+    '                  "WHERE ([replacement] IS NULL OR [replacement] <> 'REPLACED')"
 
-        Dim dtAdapter As New OdbcDataAdapter(query, connString)
-        Dim dtDatatable As New DataTable
 
-        Try
-            dtAdapter.Fill(dtDatatable)
-            dgv1.DataSource = dtDatatable
-        Catch ex As Exception
-            MessageBox.Show("Error loading data: " & ex.Message)
-        End Try
-    End Sub
+    '    Dim dtAdapter As New OdbcDataAdapter(query, connString)
+    '    Dim dtDatatable As New DataTable
+
+    '    Try
+    '        dtAdapter.Fill(dtDatatable)
+    '        dgv1.DataSource = dtDatatable
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error loading data: " & ex.Message)
+    '    End Try
+    'End Sub
+
+    'Public Sub loaddgv()
+    '    Call connection() ' This should open and set the global "conn" variable.
+
+    '    Dim query As String = "SELECT labid, newlabid, test_type FROM replacement"
+
+    '    Dim dtAdapter As New OdbcDataAdapter(query, conn)
+    '    Dim dtDatatable As New DataTable
+
+    '    Try
+    '        dtAdapter.Fill(dtDatatable)
+    '        dgv1.DataSource = dtDatatable
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error loading data: " & ex.Message)
+    '    End Try
+    'End Sub
 
     ' Function to execute a query that doesn't return any results (like UPDATE, INSERT)
     Private Function ExecuteQuery(query As String) As Integer
@@ -164,6 +185,7 @@ Public Class Replacement
                 updateRecord(labid, soaNumber)
             Next
             MessageBox.Show("Insert Success!")
+            FilterDataGrid(facCode)
             ' Clear all checkboxes after processing
             For Each row As DataGridViewRow In dgv1.Rows
                 row.Cells("replace").Value = False
@@ -171,7 +193,6 @@ Public Class Replacement
         Else
             MessageBox.Show("No checkboxes are selected.")
         End If
-
     End Sub
 
     Private Sub updateRecord(labid As String, remarks As String)
