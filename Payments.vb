@@ -8,6 +8,8 @@ Public Class Payments
     ' Variable to store the last value of codeTxt.Text
     Private lastCodeTxtValue As String = String.Empty
     Private Sub Payments_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Oracon.ConnectionString = "Data Source=(DESCRIPTION= (ADDRESS=(PROTOCOL=TCP)(HOST=10.1.1.191)(PORT=1521)) (CONNECT_DATA=(SERVICE_NAME=PROD)));User Id=user1;Password=newborn"
+
         codeTxt.SetOnGotFocus()
         mopCombo.Items.AddRange({"BANK TO BANK", "WALK IN"})
         formCombo.Items.AddRange({"CASH", "CHECK"})
@@ -21,9 +23,6 @@ Public Class Payments
 
         loaddgv()
         payments()
-
-        adsLbl.Visible = False
-        adsTxt.Visible = False
     End Sub
 
     Public Sub loaddgv()
@@ -147,45 +146,75 @@ Public Class Payments
         End If
 
         Try
-            ' Open the connection if it's not already open
-            If conn.State <> ConnectionState.Open Then
-                conn.Open()
+            ' Open the Oracle connection if not already open
+            If Oracon.State <> ConnectionState.Open Then
+                Oracon.Open()
             End If
 
             ' Correct the query to join the tables properly and use parameterized query
-            Dim query As String = "SELECT fac_code, fac_name, type2 FROM facility_data WHERE fac_code = ?"
+            'Dim query As String = "SELECT fac_code, fac_name, type2 FROM facility_data WHERE fac_code = ?"
 
-            Using cmd As New OdbcCommand(query, conn)
-                cmd.Parameters.AddWithValue("fac_code", codeTxt.Text)
+            ' Define the query to fetch provider information
+            Dim oracleQuery As String = "
+        SELECT 
+            REF_PROVIDER_ADDRESS.PROVIDERID, 
+            REF_PROVIDER_ADDRESS.CITY, 
+            REF_PROVIDER_ADDRESS.COUNTY, 
+            REF_PROVIDER_ADDRESS.DESCR1, 
+            REF_TYPE.DESCR
+        FROM 
+            PHMSDS.REF_PROVIDER_ADDRESS 
+        INNER JOIN 
+            PHMSDS.REF_PROVIDERTYPE 
+            ON REF_PROVIDER_ADDRESS.PROVIDERID = REF_PROVIDERTYPE.PROVIDERID
+        INNER JOIN 
+            PHMSDS.REF_TYPE 
+            ON REF_PROVIDERTYPE.TYPE = REF_TYPE.TYPE
+        WHERE 
+            REF_PROVIDER_ADDRESS.PROVIDERID = :PROVIDERID
+        ORDER BY 
+            REF_PROVIDER_ADDRESS.PROVIDERID ASC"
 
-                Using rd As OdbcDataReader = cmd.ExecuteReader()
-                    If rd.Read() Then
-                        ' Ensure the UI update is done on the main thread
-                        If Me.IsHandleCreated Then
-                            Me.Invoke(Sub()
-                                          codeTxt.Text = rd("fac_code").ToString()
-                                          nameBox.Text = rd("fac_name").ToString()
-                                          Dim term As Integer
+            Using cmd As New OracleCommand(oracleQuery, Oracon)
+                ' Bind the parameter securely
+                cmd.Parameters.Add(New OracleParameter("PROVIDERID", codeTxt.Text.Trim()))
+                'cmd.Parameters.AddWithValue("PROVIDERID", codeTxt.Text)
+                ' Execute the query and process the results
+                Using reader As OracleDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        ' Extract and validate data from the reader
+                        Dim providerId As String = If(Not reader.IsDBNull(0), reader("PROVIDERID").ToString(), String.Empty)
+                        Dim city As String = If(Not reader.IsDBNull(1), reader("CITY").ToString(), String.Empty).ToUpper()
+                        Dim county As String = If(Not reader.IsDBNull(2), reader("COUNTY").ToString(), String.Empty)
+                        Dim descr1 As String = If(Not reader.IsDBNull(3), reader("DESCR1").ToString(), String.Empty)
+                        Dim descr As String = If(Not reader.IsDBNull(4), reader("DESCR").ToString(), String.Empty)
 
-                                          Select Case rd("type2").ToString()
-                                              Case "GOVERNMENT", "LGU"
-                                                  term = 60
-                                              Case "PRIVATE"
-                                                  term = 45
-                                              Case Else
-                                                  term = 0 ' default term value if type2 is not matched
-                                          End Select
+                        ' Determine the term based on descr
+                        Dim term As Integer = If(
+                        {"LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT", "OTHERS"}.Contains(descr),
+                        60,
+                        45
+                    )
 
-                                          termBox.Text = term.ToString()
-                                      End Sub)
-                        End If
+                        ' Calculate the due date based on the term
+                        Dim purchaseDate As Date = Date.Today ' Replace with actual purchase date if available
+                        Dim dueDate As Date = purchaseDate.AddDays(term)
+
+                        ' Update the UI on the main thread
+                        Me.Invoke(Sub()
+                                      codeTxt.Text = providerId
+                                      nameBox.Text = descr1
+                                      termBox.Text = term.ToString()
+                                      dtpicker1.Value = dueDate
+
+                                  End Sub)
                     Else
-                        If Me.IsHandleCreated Then
-                            Me.Invoke(Sub()
-                                          nameBox.Clear()
-                                          termBox.Clear()
-                                      End Sub)
-                        End If
+                        ' No matching record found
+                        Me.Invoke(Sub()
+                                      nameBox.Clear()
+                                      termBox.Clear()
+                                      dtpicker1.Value = Date.Now
+                                  End Sub)
                     End If
                 End Using
             End Using
@@ -208,9 +237,6 @@ Public Class Payments
 
             ' Update balanceBox with the grandTotal value
             totalBalance.Text = grandTotal.ToString("F2")
-
-            ' Calculate interest and update related fields
-            'CalculateAndUpdateInterest()
 
             adsTxt.Text = 0
             baddebtsTxt.Text = 0
@@ -651,8 +677,10 @@ Public Class Payments
         ' Disable the TextBox if the selected item is "Disable"
         If formCombo.SelectedItem IsNot Nothing AndAlso formCombo.SelectedItem.ToString() = "CASH" Then
             chequeTxt.Enabled = False
+            bankCombo.Enabled = False
         Else
             chequeTxt.Enabled = True
+            bankCombo.Enabled = True
         End If
     End Sub
 

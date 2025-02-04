@@ -1722,7 +1722,7 @@ Partial Class Payments
         Me.adsTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.adsTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.adsTxt.ForeColor = System.Drawing.Color.Black
-        Me.adsTxt.Location = New System.Drawing.Point(113, 224)
+        Me.adsTxt.Location = New System.Drawing.Point(111, 225)
         Me.adsTxt.Name = "adsTxt"
         Me.adsTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.adsTxt.SelectedText = ""

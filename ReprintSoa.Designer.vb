@@ -31,6 +31,10 @@ Partial Class ReprintSoa
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
         Me.soaButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.soaTxt = New Guna.UI.WinForms.GunaLineTextBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.GunaLabel2 = New Guna.UI.WinForms.GunaLabel()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -41,6 +45,7 @@ Partial Class ReprintSoa
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.GunaLabel2)
         Me.Panel1.Controls.Add(Me.GunaControlBox1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
@@ -126,12 +131,50 @@ Partial Class ReprintSoa
         Me.soaTxt.TabIndex = 23
         Me.soaTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(241, Byte), Integer))
+        Me.Panel2.Location = New System.Drawing.Point(219, 28)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(37, 157)
+        Me.Panel2.TabIndex = 25
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(241, Byte), Integer))
+        Me.Panel3.Location = New System.Drawing.Point(0, 152)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(227, 42)
+        Me.Panel3.TabIndex = 26
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(241, Byte), Integer))
+        Me.Panel4.Location = New System.Drawing.Point(-30, 28)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(37, 157)
+        Me.Panel4.TabIndex = 26
+        '
+        'GunaLabel2
+        '
+        Me.GunaLabel2.AutoSize = True
+        Me.GunaLabel2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GunaLabel2.ForeColor = System.Drawing.Color.White
+        Me.GunaLabel2.Location = New System.Drawing.Point(4, 5)
+        Me.GunaLabel2.Name = "GunaLabel2"
+        Me.GunaLabel2.Size = New System.Drawing.Size(90, 17)
+        Me.GunaLabel2.TabIndex = 27
+        Me.GunaLabel2.Text = "REPRINT SOA"
+        '
         'ReprintSoa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(227, 156)
+        Me.ClientSize = New System.Drawing.Size(227, 161)
+        Me.Controls.Add(Me.Panel4)
+        Me.Controls.Add(Me.Panel3)
+        Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.soaButton)
         Me.Controls.Add(Me.soaTxt)
         Me.Controls.Add(Me.GunaLabel1)
@@ -142,6 +185,7 @@ Partial Class ReprintSoa
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ReprintSoa"
         Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -154,4 +198,8 @@ Partial Class ReprintSoa
     Friend WithEvents Panel1 As Panel
     Friend WithEvents GunaControlBox1 As Guna.UI.WinForms.GunaControlBox
     Friend WithEvents GunaDragControl1 As Guna.UI.WinForms.GunaDragControl
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents GunaLabel2 As Guna.UI.WinForms.GunaLabel
 End Class
