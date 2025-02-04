@@ -1513,10 +1513,10 @@ Public Class Pos
     End Sub
 
     Private Function DetermineOrderType() As String
-        If walkCheck.Checked Then Return "ENBS"
+        If walkCheck.Checked Then Return "ENBS."
         If monitoringCheck.Checked Then Return "Monitoring"
         If expiredCheck.Checked Then Return "ENBS Expired Filter Card"
-        If lopezCheck.Checked Then Return "ENBS"
+        If lopezCheck.Checked Then Return "ENBS."
         Return "ENBS"
     End Function
 

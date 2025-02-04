@@ -2,9 +2,12 @@
     Private Sub soaButton_Click(sender As Object, e As EventArgs) Handles soaButton.Click
         ' Assuming you are checking the value of the first row and the fourth column
         Dim rowIndex As Integer = 0 ' Change this to the row you want to check
-        Dim cellValue As String = Pos.dgv1.Rows(rowIndex).Cells(3).Value.ToString()
+        'Dim cellValue As String = Pos.dgv1.Rows(rowIndex).Cells(3).Value.ToString()
+        Dim cellValue As String = Pos.dgv1.Rows(rowIndex).Cells("order_type").Value.ToString()
+        Dim cellValue1 As String = Pos.dgv1.Rows(rowIndex).Cells("fac_code").Value.ToString()
 
-        If cellValue = "ENBS" Then
+
+        If cellValue = "ENBS" OrElse cellValue = "Monitoring" OrElse cellValue = "ENBS Expired Filter Card" Then
             Dim report As New StatementOfAccount()
             Dim selformula As String = "{acccounting1.soa_txt} = '" & soaTxt.Text & "'"
             report.RecordSelectionFormula = selformula
