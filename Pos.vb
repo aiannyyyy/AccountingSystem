@@ -1441,8 +1441,6 @@ Public Class Pos
             End Try
         End Using
     End Function
-
-
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         ' Check if any row is marked for cancellation
         Dim isAnyChecked As Boolean = dgv1.Rows.Cast(Of DataGridViewRow)().
