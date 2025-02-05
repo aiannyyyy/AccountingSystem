@@ -431,8 +431,6 @@ Public Class Payments
         End If
     End Sub
 
-
-
     ' Add this helper method to refresh the balance
     Private Sub RefreshBalance(rowIndex As Integer)
         ' Parse and format the balance (balanceTxt) in case it changes dynamically
@@ -596,50 +594,65 @@ Public Class Payments
         ' Update the grand total in the payments table after the payment
         Dim updateGrandTotalQuery As String = $"UPDATE payments SET grand_total = grand_total - {amountPaid.ToString("F2")} - {badDebts.ToString("F2")} - {businessTax.ToString("F2")} - {wtax.ToString("F2")} WHERE soa_number = '{soaNumber}'"
         ExecuteQuery(updateGrandTotalQuery)
+
+        ' Update the balance in the payments table with the new value from accounting
+        Dim updatePaymentsBalanceQuery As String = $"UPDATE payments SET balance = balance - {amountPaid.ToString("F2")} - {badDebts.ToString("F2")} - {businessTax.ToString("F2")} - {wtax.ToString("F2")} WHERE balance = '{balance}'"
+        ExecuteQuery(updatePaymentsBalanceQuery)
     End Sub
 
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
-        Dim selectedRow As DataGridViewRow = dgv1.CurrentRow
+        ' Ask for confirmation before inserting the record
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to process the payment?", "Confirm Payment", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
-        ' Retrieve input values
-        Dim soaNumber As String = soaTxt.Text
-        Dim enbs As String = enbsTxt.Text
-        Dim facCode As String = codeTxt.Text
-        Dim balance As Double = Convert.ToDouble(balanceperSoa.Text)
-        Dim adsAmount As Double = If(selectedRow IsNot Nothing AndAlso Not IsDBNull(selectedRow.Cells("ads_amount").Value), Convert.ToDouble(selectedRow.Cells("ads_amount").Value), 0)
-        Dim dueDate As Date = dtpicker1.Value
-        Dim soaAmount As Double = Convert.ToDouble(soamountTxt.Text)
-        Dim interestDate As Date = dtpicker2.Value
-        Dim interest As Double = Convert.ToDouble(interestTxt.Text)
-        Dim paid_interest As Double
-        Dim orDate As Date = dtpicker3.Value
-        Dim orNumber As String = orderTxt.Text
-        Dim badDebts As Double = Convert.ToDouble(baddebtsTxt.Text)
-        Dim businessTax As Double = Convert.ToDouble(btaxText.Text)
-        Dim wtax As Double = Convert.ToDouble(wtaxTxt.Text)
-        Dim others As String = othersTxt.Text
-        Dim grandTotal As Double = Convert.ToDouble(totalBalance.Text)
-        Dim mop As String = mopCombo.Text
-        Dim fop As String = formCombo.Text
-        Dim chequeDetails As String = chequeTxt.Text
-        Dim bank As String = bankCombo.Text
-        Dim datePayment As Date = dtpicker4.Value
-        Dim datePosted As Date = Date.Now ' Assuming current date for datePosted
-        Dim amountPaid As Double = Convert.ToDouble(amountpaidTxt.Text)
-        Dim remarks As String = remTxt.Text
-        Dim stopInterest As String = If(checkBox1.Checked, "STOP INTEREST", String.Empty)
-        Dim username As String = Login.userTxt.Text
+        If result = DialogResult.Yes Then
+            ' Proceed with record insertion if Yes is clicked
 
-        ' Insert the new record into the database
-        InsertRecord(soaNumber, enbs, facCode, balance, adsAmount, dueDate, soaAmount, interestDate, interest, paid_interest, orDate, orNumber, badDebts, businessTax, wtax, others, grandTotal, mop, fop, chequeDetails, bank, datePayment, datePosted, amountPaid, remarks, stopInterest, username)
+            Dim selectedRow As DataGridViewRow = dgv1.CurrentRow
 
-        ' Notify user of successful insertion
-        MessageBox.Show("Payment successfully processed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ' Retrieve input values
+            Dim soaNumber As String = soaTxt.Text
+            Dim enbs As String = enbsTxt.Text
+            Dim facCode As String = codeTxt.Text
+            Dim balance As Double = Convert.ToDouble(balanceperSoa.Text)
+            Dim adsAmount As Double = If(selectedRow IsNot Nothing AndAlso Not IsDBNull(selectedRow.Cells("ads_amount").Value), Convert.ToDouble(selectedRow.Cells("ads_amount").Value), 0)
+            Dim dueDate As Date = dtpicker1.Value
+            Dim soaAmount As Double = Convert.ToDouble(soamountTxt.Text)
+            Dim interestDate As Date = dtpicker2.Value
+            Dim interest As Double = Convert.ToDouble(interestTxt.Text)
+            Dim paid_interest As Double
+            Dim orDate As Date = dtpicker3.Value
+            Dim orNumber As String = orderTxt.Text
+            Dim badDebts As Double = Convert.ToDouble(baddebtsTxt.Text)
+            Dim businessTax As Double = Convert.ToDouble(btaxText.Text)
+            Dim wtax As Double = Convert.ToDouble(wtaxTxt.Text)
+            Dim others As String = othersTxt.Text
+            Dim grandTotal As Double = Convert.ToDouble(totalBalance.Text)
+            Dim mop As String = mopCombo.Text
+            Dim fop As String = formCombo.Text
+            Dim chequeDetails As String = chequeTxt.Text
+            Dim bank As String = bankCombo.Text
+            Dim datePayment As Date = dtpicker4.Value
+            Dim datePosted As Date = Date.Now ' Assuming current date for datePosted
+            Dim amountPaid As Double = Convert.ToDouble(amountpaidTxt.Text)
+            Dim remarks As String = remTxt.Text
+            Dim stopInterest As String = If(checkBox1.Checked, "STOP INTEREST", String.Empty)
+            Dim username As String = Login.userTxt.Text
 
-        loaddgv()
-        afterPay()
-        ClearFields()
+            ' Insert the new record into the database
+            InsertRecord(soaNumber, enbs, facCode, balance, adsAmount, dueDate, soaAmount, interestDate, interest, paid_interest, orDate, orNumber, badDebts, businessTax, wtax, others, grandTotal, mop, fop, chequeDetails, bank, datePayment, datePosted, amountPaid, remarks, stopInterest, username)
+
+            ' Notify user of successful insertion
+            MessageBox.Show("Payment successfully processed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            loaddgv()
+            afterPay()
+            ClearFields()
+
+        Else
+            ' If No is clicked, do nothing (keep fields unchanged)
+            MessageBox.Show("Payment processing canceled.", "Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
     End Sub
 
 
