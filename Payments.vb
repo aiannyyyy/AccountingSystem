@@ -23,6 +23,11 @@ Public Class Payments
 
         loaddgv()
         payments()
+
+        For Each column As DataGridViewColumn In dgv2.Columns
+            column.SortMode = DataGridViewColumnSortMode.NotSortable
+        Next
+
     End Sub
 
     Public Sub loaddgv()
