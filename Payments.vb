@@ -32,7 +32,7 @@ Public Class Payments
 
     Public Sub loaddgv()
         Call connection()
-        da = New OdbcDataAdapter("Select * from acccounting order by purchase_date desc", conn)
+        da = New OdbcDataAdapter("SELECT * FROM acccounting WHERE balance <> 0 ORDER BY purchase_date DESC", conn)
         ds = New DataSet
         ds.Clear()
         da.Fill(ds, "acccounting")
@@ -222,7 +222,7 @@ Public Class Payments
                                       baddebtsTxt.Text = "0.00"
                                       btaxText.Text = "0.00"
                                       wtaxTxt.Text = "0.00"
-
+                                      othersTxt.Text = "0.00"
                                   End Sub)
                     Else
                         ' No matching record found
@@ -234,14 +234,15 @@ Public Class Payments
                                       baddebtsTxt.Clear()
                                       btaxText.Clear()
                                       wtaxTxt.Clear()
+                                      othersTxt.Clear()
                                   End Sub)
                     End If
                 End Using
             End Using
 
             ' Fetch the accounting records and display in DataGridView
-            da = New OdbcDataAdapter("SELECT * FROM acccounting WHERE fac_code LIKE ? order by purchase_date desc", conn)
-            da.SelectCommand.Parameters.AddWithValue("fac_code", "%" & codeTxt.Text & "%")
+            da = New OdbcDataAdapter("SELECT * FROM acccounting WHERE fac_code LIKE ? AND balance <> 0 ORDER BY purchase_date DESC", conn)
+            da.SelectCommand.Parameters.AddWithValue("", "%" & codeTxt.Text & "%") ' ODBC uses positional parameters
 
             ds = New DataSet
             da.Fill(ds, "acccounting")
@@ -276,7 +277,7 @@ Public Class Payments
         End If
 
         ' Fetch the accounting records and display in DataGridView
-        da = New OdbcDataAdapter("SELECT * FROM payments WHERE fac_code LIKE ? order by or_date desc", conn)
+        da = New OdbcDataAdapter("SELECT * FROM payments WHERE fac_code LIKE ? order by date_posted desc", conn)
         da.SelectCommand.Parameters.AddWithValue("fac_code", "%" & codeTxt.Text & "%")
 
         ds = New DataSet
@@ -404,7 +405,6 @@ Public Class Payments
     '    End If
     'End Sub
     Private Sub dgv1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellContentClick
-        'If e.RowIndex >= 0 AndAlso e.RowIndex < dgv1.Rows.Count Then
 
         '    nameBox.Text = dgv1.Rows(e.RowIndex).Cells(5).Value.ToString()
         '    termBox.Text = dgv1.Rows(e.RowIndex).Cells(6).Value.ToString()
@@ -450,7 +450,6 @@ Public Class Payments
         '    UpdateBalanceWithInterest(cellValue) ' Call the function to add the interest
         'End If
         If e.RowIndex >= 0 AndAlso e.RowIndex < dgv1.Rows.Count Then
-            ' Populate fields from the clicked row
             nameBox.Text = dgv1.Rows(e.RowIndex).Cells(5).Value.ToString()
             termBox.Text = dgv1.Rows(e.RowIndex).Cells(6).Value.ToString()
             soaTxt.Text = dgv1.Rows(e.RowIndex).Cells(0).Value.ToString()
@@ -484,6 +483,7 @@ Public Class Payments
             baddebtsTxt.Text = "0.00"
             btaxText.Text = "0.00"
             wtaxTxt.Text = "0.00"
+            othersTxt.Text = "0.00"
 
             ' Get the facility code from the clicked row
             Dim selectedFacilityCode As String = dgv1.Rows(e.RowIndex).Cells("facility_code").Value.ToString()
@@ -870,7 +870,6 @@ Public Class Payments
         Else
         End If
     End Sub
-
 
     Private Sub orderButton_Click(sender As Object, e As EventArgs) Handles orderButton.Click
         Pos.Show()
