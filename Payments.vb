@@ -218,6 +218,10 @@ Public Class Payments
                                       nameBox.Text = descr1
                                       termBox.Text = term.ToString()
                                       dtpicker1.Value = dueDate
+                                      interestTxt.Text = "0.00"
+                                      baddebtsTxt.Text = "0.00"
+                                      btaxText.Text = "0.00"
+                                      wtaxTxt.Text = "0.00"
 
                                   End Sub)
                     Else
@@ -226,6 +230,10 @@ Public Class Payments
                                       nameBox.Clear()
                                       termBox.Clear()
                                       dtpicker1.Value = Date.Now
+                                      interestTxt.Clear()
+                                      baddebtsTxt.Clear()
+                                      btaxText.Clear()
+                                      wtaxTxt.Clear()
                                   End Sub)
                     End If
                 End Using
@@ -396,8 +404,55 @@ Public Class Payments
     '    End If
     'End Sub
     Private Sub dgv1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellContentClick
+        'If e.RowIndex >= 0 AndAlso e.RowIndex < dgv1.Rows.Count Then
+
+        '    nameBox.Text = dgv1.Rows(e.RowIndex).Cells(5).Value.ToString()
+        '    termBox.Text = dgv1.Rows(e.RowIndex).Cells(6).Value.ToString()
+
+        '    totalBalance.Text = dgv1.Rows(e.RowIndex).Cells(18).Value.ToString()
+        '    ' Populate other text fields from the clicked row
+        '    soaTxt.Text = dgv1.Rows(e.RowIndex).Cells(0).Value.ToString()
+        '    enbsTxt.Text = dgv1.Rows(e.RowIndex).Cells(9).Value.ToString()
+        '    adsTxt.Text = dgv1.Rows(e.RowIndex).Cells(15).Value.ToString()
+
+        '    ' Safely parse the date
+        '    Dim dateValue As DateTime
+        '    If DateTime.TryParse(dgv1.Rows(e.RowIndex).Cells(16).Value.ToString(), dateValue) Then
+        '        dtpicker1.Value = dateValue
+        '    Else
+        '        dtpicker1.Value = DateTime.Now ' Default to current date if parsing fails
+        '    End If
+
+
+
+        '    ' Parse and format the balance (balanceTxt)
+        '    Dim cellValue As Double
+        '    If Double.TryParse(dgv1.Rows(e.RowIndex).Cells("balance").Value.ToString(), cellValue) Then
+        '        balanceperSoa.Text = cellValue.ToString("F2")
+        '    Else
+        '        balanceperSoa.Text = "0.00"
+        '    End If
+
+        '    soamountTxt.Text = dgv1.Rows(e.RowIndex).Cells(10).Value.ToString()
+
+        '    interestTxt.Text = "0.00"
+        '    baddebtsTxt.Text = "0.00"
+        '    btaxText.Text = "0.00"
+        '    wtaxTxt.Text = "0.00"
+
+        '    ' Recalculate interest and update related fields
+        '    'CalculateAndUpdateInterest()
+
+        '    ' Refresh the balance whenever the row is clicked
+        '    RefreshBalance(e.RowIndex)
+
+        '    ' Update balanceperSoa to include interest
+        '    UpdateBalanceWithInterest(cellValue) ' Call the function to add the interest
+        'End If
         If e.RowIndex >= 0 AndAlso e.RowIndex < dgv1.Rows.Count Then
-            ' Populate other text fields from the clicked row
+            ' Populate fields from the clicked row
+            nameBox.Text = dgv1.Rows(e.RowIndex).Cells(5).Value.ToString()
+            termBox.Text = dgv1.Rows(e.RowIndex).Cells(6).Value.ToString()
             soaTxt.Text = dgv1.Rows(e.RowIndex).Cells(0).Value.ToString()
             enbsTxt.Text = dgv1.Rows(e.RowIndex).Cells(9).Value.ToString()
             adsTxt.Text = dgv1.Rows(e.RowIndex).Cells(15).Value.ToString()
@@ -410,7 +465,7 @@ Public Class Payments
                 dtpicker1.Value = DateTime.Now ' Default to current date if parsing fails
             End If
 
-            ' Parse and format the balance (balanceTxt)
+            ' Get the balance of the selected row
             Dim cellValue As Double
             If Double.TryParse(dgv1.Rows(e.RowIndex).Cells("balance").Value.ToString(), cellValue) Then
                 balanceperSoa.Text = cellValue.ToString("F2")
@@ -418,18 +473,48 @@ Public Class Payments
                 balanceperSoa.Text = "0.00"
             End If
 
+            If dgv1.Rows(e.RowIndex).Cells("facility_code").Value.ToString() = "7345" Then
+                mopCombo.SelectedItem = "WALK IN"
+            Else
+                mopCombo.SelectedIndex = -1
+            End If
+
             soamountTxt.Text = dgv1.Rows(e.RowIndex).Cells(10).Value.ToString()
+            interestTxt.Text = "0.00"
+            baddebtsTxt.Text = "0.00"
+            btaxText.Text = "0.00"
+            wtaxTxt.Text = "0.00"
 
-            ' Recalculate interest and update related fields
-            'CalculateAndUpdateInterest()
+            ' Get the facility code from the clicked row
+            Dim selectedFacilityCode As String = dgv1.Rows(e.RowIndex).Cells("facility_code").Value.ToString()
 
-            ' Refresh the balance whenever the row is clicked
+            ' Compute total balance for this facility
+            totalBalance.Text = ComputeTotalBalance(selectedFacilityCode).ToString("F2")
+
+            ' Refresh the balance
             RefreshBalance(e.RowIndex)
 
             ' Update balanceperSoa to include interest
-            UpdateBalanceWithInterest(cellValue) ' Call the function to add the interest
+            UpdateBalanceWithInterest(cellValue)
         End If
     End Sub
+
+    Private Function ComputeTotalBalance(facilityCode As String) As Double
+        Dim total As Double = 0.0
+
+        For Each row As DataGridViewRow In dgv1.Rows
+            ' Ensure the row is not a new row (avoid empty rows)
+            If Not row.IsNewRow AndAlso row.Cells("facility_code").Value.ToString() = facilityCode Then
+                Dim balance As Double
+                If Double.TryParse(row.Cells("balance").Value.ToString(), balance) Then
+                    total += balance
+                End If
+            End If
+        Next
+
+        Return total
+    End Function
+
 
     Private Sub UpdateBalanceWithInterest(balance As Double)
         Dim interest As Double
@@ -584,13 +669,13 @@ Public Class Payments
     '    Dim updateInterestQuery As String = $"UPDATE payments SET interest = 0 WHERE soa_number = '{soaNumber}'"
     '    ExecuteQuery(updateInterestQuery)
     'End Sub
-    Private Sub InsertRecord(soaNumber As String, enbs As String, facCode As String, balance As Double, adsAmount As Double, dueDate As Date, soaAmount As Double, interestDate As Date, interest As Double, paid_interest As Double, orDate As Date, orNumber As String, badDebts As Double, businessTax As Double, wtax As Double, others As String, grandTotal As Double, mop As String, fop As String, chequeDetails As String, bank As String, datePayment As Date, datePosted As Date, amountPaid As Double, remarks As String, stopInterest As String, username As String)
+    Private Sub InsertRecord(soaNumber As String, enbs As String, facCode As String, balance As Double, adsAmount As Double, dueDate As Date, soaAmount As Double, interestDate As Date, interest As Double, paid_interest As Double, orDate As Date, orNumber As String, badDebts As Double, businessTax As Double, wtax As Double, others As String, grandTotal As Double, mop As String, fop As String, chequeDetails As String, bank As String, datePayment As Date, datePosted As Date, amountPaid As Double, remarks As String, username As String)
         ' Prepare the SQL query for inserting the payment record
         'Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, balance, ads_amount, due_date, soa_amount, interest_date, interest, paid_interest, or_date, or_number, bad_debts, business_tax, wtax, others, grand_total, mop, fop, cheque_details, bank, date_payment, date_posted, amount_paid, remarks, stop_interest, username) " &
         '              $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {balance.ToString("F2")}, {adsAmount.ToString("F2")}, '{dueDate.ToString("yyyy-MM-dd")}', {soaAmount.ToString("F2")}, '{interestDate.ToString("yyyy-MM-dd")}', {interest.ToString("F2")}, 0.00, '{orDate.ToString("yyyy-MM-dd")}', '{orNumber}', {badDebts.ToString("F2")}, {businessTax.ToString("F2")}, {wtax.ToString("F2")}, '{others}', {grandTotal.ToString("F2")}, '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd")}', '{datePosted.ToString("yyyy-MM-dd")}', {amountPaid.ToString("F2")}, '{remarks}', '{stopInterest}', '{username}')"
 
-        Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, balance, ads_amount, due_date, soa_amount, interest_date, interest, paid_interest, or_date, or_number, bad_debts, business_tax, wtax, others, grand_total, mop, fop, cheque_details, bank, date_payment, date_posted, amount_paid, remarks, stop_interest, username) " &
-                  $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {balance.ToString("F2")}, {adsAmount.ToString("F2")}, '{dueDate.ToString("yyyy-MM-dd HH:mm:ss")}', {soaAmount.ToString("F2")}, '{interestDate.ToString("yyyy-MM-dd HH:mm:ss")}', {interest.ToString("F2")}, 0.00, '{orDate.ToString("yyyy-MM-dd HH:mm:ss")}', '{orNumber}', {badDebts.ToString("F2")}, {businessTax.ToString("F2")}, {wtax.ToString("F2")}, '{others}', {grandTotal.ToString("F2")}, '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd HH:mm:ss")}', '{datePosted.ToString("yyyy-MM-dd HH:mm:ss")}', {amountPaid.ToString("F2")}, '{remarks}', '{stopInterest}', '{username}')"
+        Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, balance, ads_amount, due_date, soa_amount, interest_date, interest, paid_interest, or_date, or_number, bad_debts, business_tax, wtax, others, grand_total, mop, fop, cheque_details, bank, date_payment, date_posted, amount_paid, remarks, username) " &
+                  $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {balance.ToString("F2")}, {adsAmount.ToString("F2")}, '{dueDate.ToString("yyyy-MM-dd HH:mm:ss")}', {soaAmount.ToString("F2")}, '{interestDate.ToString("yyyy-MM-dd HH:mm:ss")}', {interest.ToString("F2")}, 0.00, '{orDate.ToString("yyyy-MM-dd HH:mm:ss")}', '{orNumber}', {badDebts.ToString("F2")}, {businessTax.ToString("F2")}, {wtax.ToString("F2")}, '{others}', {grandTotal.ToString("F2")}, '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd HH:mm:ss")}', '{datePosted.ToString("yyyy-MM-dd HH:mm:ss")}', {amountPaid.ToString("F2")}, '{remarks}', '{username}')"
 
 
         ' Execute the insert query using ExecuteQuery function
@@ -691,7 +776,12 @@ Public Class Payments
             ' Retrieve input values
             Dim soaNumber As String = soaTxt.Text
             Dim enbs As String = enbsTxt.Text
-            Dim facCode As String = codeTxt.Text
+            Dim facCode As String = If(Not String.IsNullOrEmpty(codeTxt.Text),
+                           codeTxt.Text,
+                           If(dgv1.CurrentRow IsNot Nothing AndAlso
+                              dgv1.CurrentRow.Cells("facility_code").Value IsNot DBNull.Value,
+                              dgv1.CurrentRow.Cells("facility_code").Value.ToString(),
+                              String.Empty))
 
             ' Get previous balance from DataGridView, defaulting to 0 if null
             Dim previousBalance As Double = 0
@@ -748,11 +838,11 @@ Public Class Payments
             Dim datePayment As Date = dtpicker4.Value
             Dim datePosted As Date = Date.Now ' Use current date for datePosted
             Dim remarks As String = remTxt.Text
-            Dim stopInterest As String = If(stopInterestCheck.Checked, "STOP INTEREST", String.Empty)
+            'Dim stopInterest As String = If(stopInterestCheck.Checked, "STOP INTEREST", String.Empty)
             Dim username As String = Login.userTxt.Text
 
             ' Insert the new record into the database
-            InsertRecord(soaNumber, enbs, facCode, balance, adsAmount, dueDate, soaAmount, interestDate, interest, paid_interest, orDate, orNumber, badDebts, businessTax, wtax, others, grandTotal, mop, fop, chequeDetails, bank, datePayment, datePosted, amountPaid, remarks, stopInterest, username)
+            InsertRecord(soaNumber, enbs, facCode, balance, adsAmount, dueDate, soaAmount, interestDate, interest, paid_interest, orDate, orNumber, badDebts, businessTax, wtax, others, grandTotal, mop, fop, chequeDetails, bank, datePayment, datePosted, amountPaid, remarks, username)
 
             ' Notify user of successful insertion
             MessageBox.Show("Payment successfully processed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -1207,6 +1297,7 @@ Public Class Payments
         remTxt.Text = remTxt.Text.ToUpper()
         remTxt.SelectionStart = remTxt.Text.Length ' Keeps cursor at the end
     End Sub
+
 End Class
 
 'Private Sub CalculateAndUpdateInterest()

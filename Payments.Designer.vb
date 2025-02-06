@@ -582,12 +582,12 @@ Partial Class Payments
         '
         'Column23
         '
-        Me.Column23.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Column23.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.Column23.DataPropertyName = "remarks"
         Me.Column23.HeaderText = "REMARKS"
         Me.Column23.Name = "Column23"
         Me.Column23.ReadOnly = True
-        Me.Column23.Width = 83
+        Me.Column23.Width = 200
         '
         'Column24
         '
