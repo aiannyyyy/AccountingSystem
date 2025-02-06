@@ -693,46 +693,46 @@ Public Class Payments
             Dim facCode As String = codeTxt.Text
 
             ' Get previous balance from DataGridView, defaulting to 0 if null
-            Dim previousBalance As Decimal = 0
+            Dim previousBalance As Double = 0
             If selectedRow IsNot Nothing AndAlso Not IsDBNull(selectedRow.Cells("balance").Value) Then
-                Decimal.TryParse(selectedRow.Cells("balance").Value.ToString(), previousBalance)
+                Double.TryParse(selectedRow.Cells("balance").Value.ToString(), previousBalance)
             End If
 
             ' Convert input values, defaulting to 0 if empty or invalid
-            Dim amountPaid As Decimal = 0
-            Decimal.TryParse(amountpaidTxt.Text, amountPaid)
+            Dim amountPaid As Double = 0
+            Double.TryParse(amountpaidTxt.Text, amountPaid)
 
-            Dim wtax As Decimal = 0
-            Decimal.TryParse(wtaxTxt.Text, wtax)
+            Dim wtax As Double = 0
+            Double.TryParse(wtaxTxt.Text, wtax)
 
-            Dim badDebts As Decimal = 0
-            Decimal.TryParse(baddebtsTxt.Text, badDebts)
+            Dim badDebts As Double = 0
+            Double.TryParse(baddebtsTxt.Text, badDebts)
 
-            Dim interest As Decimal = 0
-            Decimal.TryParse(interestTxt.Text, interest)
+            Dim interest As Double = 0
+            Double.TryParse(interestTxt.Text, interest)
 
-            Dim businessTax As Decimal = 0
-            Decimal.TryParse(btaxText.Text, businessTax)
+            Dim businessTax As Double = 0
+            Double.TryParse(btaxText.Text, businessTax)
 
             ' Compute new balance
-            Dim balance As Decimal = previousBalance - amountPaid - wtax - badDebts - interest - businessTax
+            Dim balance As Double = previousBalance - amountPaid - wtax - badDebts - interest - businessTax
 
             ' Ensure balance does not go below zero
             If balance < 0 Then balance = 0
 
             ' Other required values with default values
-            Dim adsAmount As Decimal = 0
+            Dim adsAmount As Double = 0
             If selectedRow IsNot Nothing AndAlso Not IsDBNull(selectedRow.Cells("ads_amount").Value) Then
-                Decimal.TryParse(selectedRow.Cells("ads_amount").Value.ToString(), adsAmount)
+                Double.TryParse(selectedRow.Cells("ads_amount").Value.ToString(), adsAmount)
             End If
 
-            Dim soaAmount As Decimal = 0
-            Decimal.TryParse(soamountTxt.Text, soaAmount)
+            Dim soaAmount As Double = 0
+            Double.TryParse(soamountTxt.Text, soaAmount)
 
-            Dim paid_interest As Decimal = 0 ' Default paid interest
+            Dim paid_interest As Double = 0 ' Default paid interest
 
-            Dim grandTotal As Decimal = 0
-            Decimal.TryParse(totalBalance.Text, grandTotal)
+            Dim grandTotal As Double = 0
+            Double.TryParse(totalBalance.Text, grandTotal)
 
             ' Get other string and date values
             Dim dueDate As Date = dtpicker1.Value
