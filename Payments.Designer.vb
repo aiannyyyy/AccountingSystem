@@ -128,32 +128,32 @@ Partial Class Payments
         Me.nameBox = New Guna.UI.WinForms.GunaTextBox()
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.enbs = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fac_code = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ads = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.due = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.soa = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.interest = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.int = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.paid_interest = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column26 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column18 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column19 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column20 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column21 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column22 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column23 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column25 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.soanumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ordate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ornumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.baddebts = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btax = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.wtax = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.others = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.mop = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fop = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bank = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.datepayment = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dateposted = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.grandtotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.amountpaid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bal = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.remark = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.username = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GunaPanel1.SuspendLayout()
         Me.mainPanel.SuspendLayout()
         CType(Me.dgv2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -312,7 +312,7 @@ Partial Class Payments
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv2.ColumnHeadersHeight = 21
-        Me.dgv2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.paid_interest, Me.Column10, Me.Column11, Me.Column12, Me.Column26, Me.Column13, Me.Column14, Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20, Me.Column21, Me.Column15, Me.Column22, Me.Column4, Me.Column23, Me.Column25})
+        Me.dgv2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.enbs, Me.fac_code, Me.ads, Me.due, Me.soa, Me.interest, Me.int, Me.paid_interest, Me.soanumber, Me.ordate, Me.ornumber, Me.baddebts, Me.btax, Me.wtax, Me.others, Me.mop, Me.fop, Me.cheque, Me.bank, Me.datepayment, Me.dateposted, Me.grandtotal, Me.amountpaid, Me.bal, Me.remark, Me.username})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1647,77 +1647,68 @@ Partial Class Payments
         Me.GunaLabel1.TabIndex = 1
         Me.GunaLabel1.Text = "FACILITY CODE:"
         '
-        'Column1
+        'enbs
         '
-        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column1.DataPropertyName = "soa_number"
-        Me.Column1.HeaderText = "SOA NUMBER"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        Me.Column1.Width = 104
+        Me.enbs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.enbs.DataPropertyName = "enbs"
+        Me.enbs.HeaderText = "ENBS"
+        Me.enbs.Name = "enbs"
+        Me.enbs.ReadOnly = True
+        Me.enbs.Width = 61
         '
-        'Column2
+        'fac_code
         '
-        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column2.DataPropertyName = "enbs"
-        Me.Column2.HeaderText = "ENBS"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        Me.Column2.Width = 61
+        Me.fac_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.fac_code.DataPropertyName = "fac_code"
+        Me.fac_code.HeaderText = "FACILITY CODE"
+        Me.fac_code.Name = "fac_code"
+        Me.fac_code.ReadOnly = True
+        Me.fac_code.Width = 111
         '
-        'Column3
+        'ads
         '
-        Me.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column3.DataPropertyName = "fac_code"
-        Me.Column3.HeaderText = "FACILITY CODE"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        Me.Column3.Width = 111
+        Me.ads.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.ads.DataPropertyName = "ads_amount"
+        Me.ads.HeaderText = "ADS AMOUNT"
+        Me.ads.Name = "ads"
+        Me.ads.ReadOnly = True
+        Me.ads.Width = 104
         '
-        'Column5
+        'due
         '
-        Me.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column5.DataPropertyName = "ads_amount"
-        Me.Column5.HeaderText = "ADS AMOUNT"
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        Me.Column5.Width = 104
+        Me.due.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.due.DataPropertyName = "due_date"
+        Me.due.HeaderText = "DUE DATE"
+        Me.due.Name = "due"
+        Me.due.ReadOnly = True
+        Me.due.Width = 150
         '
-        'Column6
+        'soa
         '
-        Me.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.Column6.DataPropertyName = "due_date"
-        Me.Column6.HeaderText = "DUE DATE"
-        Me.Column6.Name = "Column6"
-        Me.Column6.ReadOnly = True
-        Me.Column6.Width = 150
+        Me.soa.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.soa.DataPropertyName = "soa_amount"
+        Me.soa.HeaderText = "SOA AMOUNT"
+        Me.soa.Name = "soa"
+        Me.soa.ReadOnly = True
+        Me.soa.Width = 104
         '
-        'Column7
+        'interest
         '
-        Me.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column7.DataPropertyName = "soa_amount"
-        Me.Column7.HeaderText = "SOA AMOUNT"
-        Me.Column7.Name = "Column7"
-        Me.Column7.ReadOnly = True
-        Me.Column7.Width = 104
+        Me.interest.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.interest.DataPropertyName = "interest_date"
+        Me.interest.HeaderText = "INTEREST DATE"
+        Me.interest.Name = "interest"
+        Me.interest.ReadOnly = True
+        Me.interest.Width = 150
         '
-        'Column8
+        'int
         '
-        Me.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.Column8.DataPropertyName = "interest_date"
-        Me.Column8.HeaderText = "INTEREST DATE"
-        Me.Column8.Name = "Column8"
-        Me.Column8.ReadOnly = True
-        Me.Column8.Width = 150
-        '
-        'Column9
-        '
-        Me.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column9.DataPropertyName = "interest"
-        Me.Column9.HeaderText = "INTEREST"
-        Me.Column9.Name = "Column9"
-        Me.Column9.ReadOnly = True
-        Me.Column9.Width = 86
+        Me.int.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.int.DataPropertyName = "interest"
+        Me.int.HeaderText = "INTEREST"
+        Me.int.Name = "int"
+        Me.int.ReadOnly = True
+        Me.int.Width = 86
         '
         'paid_interest
         '
@@ -1728,158 +1719,167 @@ Partial Class Payments
         Me.paid_interest.ReadOnly = True
         Me.paid_interest.Width = 114
         '
-        'Column10
+        'soanumber
         '
-        Me.Column10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.Column10.DataPropertyName = "or_date"
-        Me.Column10.HeaderText = "OR DATE"
-        Me.Column10.Name = "Column10"
-        Me.Column10.ReadOnly = True
-        Me.Column10.Width = 150
+        Me.soanumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.soanumber.DataPropertyName = "soa_number"
+        Me.soanumber.HeaderText = "SOA NUMBER"
+        Me.soanumber.Name = "soanumber"
+        Me.soanumber.ReadOnly = True
+        Me.soanumber.Width = 104
         '
-        'Column11
+        'ordate
         '
-        Me.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column11.DataPropertyName = "or_number"
-        Me.Column11.HeaderText = "OR NUMBER"
-        Me.Column11.Name = "Column11"
-        Me.Column11.ReadOnly = True
-        Me.Column11.Width = 98
+        Me.ordate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.ordate.DataPropertyName = "or_date"
+        Me.ordate.HeaderText = "OR DATE"
+        Me.ordate.Name = "ordate"
+        Me.ordate.ReadOnly = True
+        Me.ordate.Width = 150
         '
-        'Column12
+        'ornumber
         '
-        Me.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column12.DataPropertyName = "bad_debts"
-        Me.Column12.HeaderText = "BAD DEBTS"
-        Me.Column12.Name = "Column12"
-        Me.Column12.ReadOnly = True
-        Me.Column12.Width = 93
+        Me.ornumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.ornumber.DataPropertyName = "or_number"
+        Me.ornumber.HeaderText = "OR NUMBER"
+        Me.ornumber.Name = "ornumber"
+        Me.ornumber.ReadOnly = True
+        Me.ornumber.Width = 98
         '
-        'Column26
+        'baddebts
         '
-        Me.Column26.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column26.DataPropertyName = "business_tax"
-        Me.Column26.HeaderText = "BUSINESS TAX"
-        Me.Column26.Name = "Column26"
-        Me.Column26.ReadOnly = True
-        Me.Column26.Width = 110
+        Me.baddebts.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.baddebts.DataPropertyName = "bad_debts"
+        Me.baddebts.HeaderText = "BAD DEBTS"
+        Me.baddebts.Name = "baddebts"
+        Me.baddebts.ReadOnly = True
+        Me.baddebts.Width = 93
         '
-        'Column13
+        'btax
         '
-        Me.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column13.DataPropertyName = "wtax"
-        Me.Column13.HeaderText = "WTAX"
-        Me.Column13.Name = "Column13"
-        Me.Column13.ReadOnly = True
-        Me.Column13.Width = 64
+        Me.btax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.btax.DataPropertyName = "business_tax"
+        Me.btax.HeaderText = "BUSINESS TAX"
+        Me.btax.Name = "btax"
+        Me.btax.ReadOnly = True
+        Me.btax.Width = 110
         '
-        'Column14
+        'wtax
         '
-        Me.Column14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column14.DataPropertyName = "others"
-        Me.Column14.HeaderText = "OTHERS"
-        Me.Column14.Name = "Column14"
-        Me.Column14.ReadOnly = True
-        Me.Column14.Width = 77
+        Me.wtax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.wtax.DataPropertyName = "wtax"
+        Me.wtax.HeaderText = "WTAX"
+        Me.wtax.Name = "wtax"
+        Me.wtax.ReadOnly = True
+        Me.wtax.Width = 64
         '
-        'Column16
+        'others
         '
-        Me.Column16.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column16.DataPropertyName = "mop"
-        Me.Column16.HeaderText = "MODE OF PAYMENT"
-        Me.Column16.Name = "Column16"
-        Me.Column16.ReadOnly = True
-        Me.Column16.Width = 136
+        Me.others.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.others.DataPropertyName = "others"
+        Me.others.HeaderText = "OTHERS"
+        Me.others.Name = "others"
+        Me.others.ReadOnly = True
+        Me.others.Width = 77
         '
-        'Column17
+        'mop
         '
-        Me.Column17.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column17.DataPropertyName = "fop"
-        Me.Column17.HeaderText = "FORM OF PAYMENT"
-        Me.Column17.Name = "Column17"
-        Me.Column17.ReadOnly = True
-        Me.Column17.Width = 135
+        Me.mop.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.mop.DataPropertyName = "mop"
+        Me.mop.HeaderText = "MODE OF PAYMENT"
+        Me.mop.Name = "mop"
+        Me.mop.ReadOnly = True
+        Me.mop.Width = 136
         '
-        'Column18
+        'fop
         '
-        Me.Column18.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column18.DataPropertyName = "cheque_details"
-        Me.Column18.HeaderText = "CHEQUE DETAILS"
-        Me.Column18.Name = "Column18"
-        Me.Column18.ReadOnly = True
-        Me.Column18.Width = 125
+        Me.fop.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.fop.DataPropertyName = "fop"
+        Me.fop.HeaderText = "FORM OF PAYMENT"
+        Me.fop.Name = "fop"
+        Me.fop.ReadOnly = True
+        Me.fop.Width = 135
         '
-        'Column19
+        'cheque
         '
-        Me.Column19.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column19.DataPropertyName = "bank"
-        Me.Column19.HeaderText = "BANK"
-        Me.Column19.Name = "Column19"
-        Me.Column19.ReadOnly = True
-        Me.Column19.Width = 61
+        Me.cheque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.cheque.DataPropertyName = "cheque_details"
+        Me.cheque.HeaderText = "CHEQUE DETAILS"
+        Me.cheque.Name = "cheque"
+        Me.cheque.ReadOnly = True
+        Me.cheque.Width = 125
         '
-        'Column20
+        'bank
         '
-        Me.Column20.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.Column20.DataPropertyName = "date_payment"
-        Me.Column20.HeaderText = "DATE PAYMENT"
-        Me.Column20.Name = "Column20"
-        Me.Column20.ReadOnly = True
-        Me.Column20.Width = 150
+        Me.bank.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.bank.DataPropertyName = "bank"
+        Me.bank.HeaderText = "BANK"
+        Me.bank.Name = "bank"
+        Me.bank.ReadOnly = True
+        Me.bank.Width = 61
         '
-        'Column21
+        'datepayment
         '
-        Me.Column21.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.Column21.DataPropertyName = "date_posted"
-        Me.Column21.HeaderText = "DATE POSTED"
-        Me.Column21.Name = "Column21"
-        Me.Column21.ReadOnly = True
-        Me.Column21.Width = 150
+        Me.datepayment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.datepayment.DataPropertyName = "date_payment"
+        Me.datepayment.HeaderText = "DATE PAYMENT"
+        Me.datepayment.Name = "datepayment"
+        Me.datepayment.ReadOnly = True
+        Me.datepayment.Width = 150
         '
-        'Column15
+        'dateposted
         '
-        Me.Column15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column15.DataPropertyName = "grand_total"
-        Me.Column15.HeaderText = "GRAND TOTAL"
-        Me.Column15.Name = "Column15"
-        Me.Column15.ReadOnly = True
-        Me.Column15.Width = 109
+        Me.dateposted.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.dateposted.DataPropertyName = "date_posted"
+        Me.dateposted.HeaderText = "DATE POSTED"
+        Me.dateposted.Name = "dateposted"
+        Me.dateposted.ReadOnly = True
+        Me.dateposted.Width = 150
         '
-        'Column22
+        'grandtotal
         '
-        Me.Column22.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column22.DataPropertyName = "amount_paid"
-        Me.Column22.HeaderText = "AMOUNT PAID"
-        Me.Column22.Name = "Column22"
-        Me.Column22.ReadOnly = True
-        Me.Column22.Width = 107
+        Me.grandtotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.grandtotal.DataPropertyName = "grand_total"
+        Me.grandtotal.HeaderText = "GRAND TOTAL"
+        Me.grandtotal.Name = "grandtotal"
+        Me.grandtotal.ReadOnly = True
+        Me.grandtotal.Width = 109
         '
-        'Column4
+        'amountpaid
         '
-        Me.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column4.DataPropertyName = "balance"
-        Me.Column4.HeaderText = "BALANCE"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        Me.Column4.Width = 81
+        Me.amountpaid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.amountpaid.DataPropertyName = "amount_paid"
+        Me.amountpaid.HeaderText = "AMOUNT PAID"
+        Me.amountpaid.Name = "amountpaid"
+        Me.amountpaid.ReadOnly = True
+        Me.amountpaid.Width = 107
         '
-        'Column23
+        'bal
         '
-        Me.Column23.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.Column23.DataPropertyName = "remarks"
-        Me.Column23.HeaderText = "REMARKS"
-        Me.Column23.Name = "Column23"
-        Me.Column23.ReadOnly = True
-        Me.Column23.Width = 200
+        Me.bal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.bal.DataPropertyName = "balance"
+        Me.bal.HeaderText = "BALANCE"
+        Me.bal.Name = "bal"
+        Me.bal.ReadOnly = True
+        Me.bal.Width = 81
         '
-        'Column25
+        'remark
         '
-        Me.Column25.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Column25.DataPropertyName = "username"
-        Me.Column25.HeaderText = "USERNAME"
-        Me.Column25.Name = "Column25"
-        Me.Column25.ReadOnly = True
-        Me.Column25.Width = 93
+        Me.remark.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.remark.DataPropertyName = "remarks"
+        Me.remark.HeaderText = "REMARKS"
+        Me.remark.Name = "remark"
+        Me.remark.ReadOnly = True
+        Me.remark.Width = 200
+        '
+        'username
+        '
+        Me.username.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.username.DataPropertyName = "username"
+        Me.username.HeaderText = "USERNAME"
+        Me.username.Name = "username"
+        Me.username.ReadOnly = True
+        Me.username.Width = 93
         '
         'Payments
         '
@@ -2008,30 +2008,30 @@ Partial Class Payments
     Friend WithEvents balanceperSoa As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel5 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents computeInterest As Guna.UI.WinForms.GunaAdvenceButton
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As DataGridViewTextBoxColumn
-    Friend WithEvents Column8 As DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As DataGridViewTextBoxColumn
+    Friend WithEvents enbs As DataGridViewTextBoxColumn
+    Friend WithEvents fac_code As DataGridViewTextBoxColumn
+    Friend WithEvents ads As DataGridViewTextBoxColumn
+    Friend WithEvents due As DataGridViewTextBoxColumn
+    Friend WithEvents soa As DataGridViewTextBoxColumn
+    Friend WithEvents interest As DataGridViewTextBoxColumn
+    Friend WithEvents int As DataGridViewTextBoxColumn
     Friend WithEvents paid_interest As DataGridViewTextBoxColumn
-    Friend WithEvents Column10 As DataGridViewTextBoxColumn
-    Friend WithEvents Column11 As DataGridViewTextBoxColumn
-    Friend WithEvents Column12 As DataGridViewTextBoxColumn
-    Friend WithEvents Column26 As DataGridViewTextBoxColumn
-    Friend WithEvents Column13 As DataGridViewTextBoxColumn
-    Friend WithEvents Column14 As DataGridViewTextBoxColumn
-    Friend WithEvents Column16 As DataGridViewTextBoxColumn
-    Friend WithEvents Column17 As DataGridViewTextBoxColumn
-    Friend WithEvents Column18 As DataGridViewTextBoxColumn
-    Friend WithEvents Column19 As DataGridViewTextBoxColumn
-    Friend WithEvents Column20 As DataGridViewTextBoxColumn
-    Friend WithEvents Column21 As DataGridViewTextBoxColumn
-    Friend WithEvents Column15 As DataGridViewTextBoxColumn
-    Friend WithEvents Column22 As DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
-    Friend WithEvents Column23 As DataGridViewTextBoxColumn
-    Friend WithEvents Column25 As DataGridViewTextBoxColumn
+    Friend WithEvents soanumber As DataGridViewTextBoxColumn
+    Friend WithEvents ordate As DataGridViewTextBoxColumn
+    Friend WithEvents ornumber As DataGridViewTextBoxColumn
+    Friend WithEvents baddebts As DataGridViewTextBoxColumn
+    Friend WithEvents btax As DataGridViewTextBoxColumn
+    Friend WithEvents wtax As DataGridViewTextBoxColumn
+    Friend WithEvents others As DataGridViewTextBoxColumn
+    Friend WithEvents mop As DataGridViewTextBoxColumn
+    Friend WithEvents fop As DataGridViewTextBoxColumn
+    Friend WithEvents cheque As DataGridViewTextBoxColumn
+    Friend WithEvents bank As DataGridViewTextBoxColumn
+    Friend WithEvents datepayment As DataGridViewTextBoxColumn
+    Friend WithEvents dateposted As DataGridViewTextBoxColumn
+    Friend WithEvents grandtotal As DataGridViewTextBoxColumn
+    Friend WithEvents amountpaid As DataGridViewTextBoxColumn
+    Friend WithEvents bal As DataGridViewTextBoxColumn
+    Friend WithEvents remark As DataGridViewTextBoxColumn
+    Friend WithEvents username As DataGridViewTextBoxColumn
 End Class

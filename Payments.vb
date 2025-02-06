@@ -28,6 +28,33 @@ Public Class Payments
             column.SortMode = DataGridViewColumnSortMode.NotSortable
         Next
 
+        dgv2.Columns("enbs").DisplayIndex = 0 'Set first column
+        dgv2.Columns("fac_code").DisplayIndex = 1 'Set second column
+        dgv2.Columns("ads").DisplayIndex = 2 'Set second column
+        dgv2.Columns("due").DisplayIndex = 3 'Set second column
+        dgv2.Columns("soa").DisplayIndex = 4 'Set second column
+        dgv2.Columns("interest").DisplayIndex = 5 'Set second column
+        dgv2.Columns("int").DisplayIndex = 6 'Set second column
+        dgv2.Columns("paid_interest").DisplayIndex = 7 'Set second column
+        dgv2.Columns("soanumber").DisplayIndex = 8 'Set second column
+        dgv2.Columns("ordate").DisplayIndex = 9 'Set second column
+        dgv2.Columns("ornumber").DisplayIndex = 10 'Set second column
+        dgv2.Columns("baddebts").DisplayIndex = 11 'Set second column
+        dgv2.Columns("btax").DisplayIndex = 12 'Set second column
+        dgv2.Columns("wtax").DisplayIndex = 13 'Set second column
+        dgv2.Columns("others").DisplayIndex = 14 'Set second column
+        dgv2.Columns("mop").DisplayIndex = 15 'Set second column
+        dgv2.Columns("fop").DisplayIndex = 16 'Set second column
+        dgv2.Columns("cheque").DisplayIndex = 17 'Set second column
+        dgv2.Columns("bank").DisplayIndex = 18 'Set second column
+        dgv2.Columns("datepayment").DisplayIndex = 19 'Set second column
+        dgv2.Columns("dateposted").DisplayIndex = 20 'Set second column
+        dgv2.Columns("grandtotal").DisplayIndex = 21 'Set second column
+        dgv2.Columns("amountpaid").DisplayIndex = 22 'Set second column
+        dgv2.Columns("bal").DisplayIndex = 23 'Set second column
+        dgv2.Columns("remark").DisplayIndex = 24 'Set second column
+        dgv2.Columns("username").DisplayIndex = 25 'Set second column
+
     End Sub
 
     Public Sub loaddgv()
@@ -556,7 +583,7 @@ Public Class Payments
 
     Public Sub payments()
         Call connection()
-        da = New OdbcDataAdapter("Select * from payments order by or_date desc", conn)
+        da = New OdbcDataAdapter("Select * from payments order by date_posted desc", conn)
         ds = New DataSet
         ds.Clear()
         da.Fill(ds, "payments")
@@ -565,7 +592,7 @@ Public Class Payments
 
     Public Sub afterPay()
         ' Fetch the accounting records and display in DataGridView
-        da = New OdbcDataAdapter("SELECT * FROM payments WHERE fac_code LIKE ? order by or_date desc", conn)
+        da = New OdbcDataAdapter("SELECT * FROM payments WHERE fac_code LIKE ? order by date_posted desc", conn)
         da.SelectCommand.Parameters.AddWithValue("fac_code", "%" & codeTxt.Text & "%")
 
         ds = New DataSet
@@ -1319,6 +1346,9 @@ Public Class Payments
         remTxt.SelectionStart = remTxt.Text.Length ' Keeps cursor at the end
     End Sub
 
+    Private Sub dgv2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv2.CellContentClick
+
+    End Sub
 End Class
 
 'Private Sub CalculateAndUpdateInterest()
