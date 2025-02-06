@@ -866,6 +866,7 @@ Public Class Payments
             loaddgv()
             afterPay()
             ClearFields()
+            Pos.loaddgv()
         Else
         End If
     End Sub

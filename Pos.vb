@@ -1468,6 +1468,7 @@ Public Class Pos
         remLbl.Visible = False
         remBox.Visible = False
         replacementCheck.Checked = False
+        Payments.loaddgv()
     End Sub
 
     Private Sub CancelPurchaseOrders()
