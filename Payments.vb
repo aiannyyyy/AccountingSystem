@@ -515,9 +515,24 @@ Public Class Payments
         Return total
     End Function
 
-
     Private Sub UpdateBalanceWithInterest(balance As Double)
+        'Dim interest As Double
+        '' Attempt to parse the interest value from the interestTxt text box
+        'If Double.TryParse(interestTxt.Text, interest) Then
+        '    ' Add interest to the balance and update the display
+        '    balanceperSoa.Text = (balance + interest).ToString("F2")
+        'Else
+        '    ' If interest is not a valid number, just display the balance
+        '    balanceperSoa.Text = balance.ToString("F2")
+        'End If
+
         Dim interest As Double
+
+        ' Store the original balance only if it's not set
+        If originalBalance = 0 Then
+            originalBalance = balance
+        End If
+
         ' Attempt to parse the interest value from the interestTxt text box
         If Double.TryParse(interestTxt.Text, interest) Then
             ' Add interest to the balance and update the display
@@ -1103,9 +1118,7 @@ Public Class Payments
             End If
 
             ' Query to fetch data from accounting and facility_data tables
-            Dim query As String = "SELECT a.sub_total, a.due_date, f.type2 FROM acccounting a " &
-                              "INNER JOIN facility_data f ON a.fac_code = f.fac_code " &
-                              "WHERE a.fac_code = ?"
+            Dim query As String = "SELECT sub_total, due_date, type FROM acccounting WHERE fac_code = ?"
 
             Using cmd As New OdbcCommand(query, conn)
                 cmd.Parameters.AddWithValue("fac_code", codeTxt.Text)
@@ -1116,7 +1129,7 @@ Public Class Payments
                         Dim principal As Double = Convert.ToDouble(rd("sub_total"))
                         Dim dueDate As Date = Convert.ToDateTime(rd("due_date"))
                         Dim dateOfPayment As Date = dtpicker4.Value
-                        Dim type2 As String = rd("type2").ToString().ToUpper()
+                        Dim type2 As String = rd("type").ToString().ToUpper()
 
                         ' Initialize variables for calculations
                         Dim termDays As Integer
@@ -1286,10 +1299,18 @@ Public Class Payments
     End Sub
 
     Private Sub stopInterestCheck_CheckedChanged(sender As Object, e As EventArgs) Handles stopInterestCheck.CheckedChanged
+        'If stopInterestCheck.Checked = True Then
+        '    interestTxt.Text = "0.00"
+        'Else
+        '    CalculateAndUpdateInterest()
+        'End If
         If stopInterestCheck.Checked = True Then
             interestTxt.Text = "0.00"
+            balanceperSoa.Text = originalBalance.ToString("F2") ' Restore original balance
         Else
+            ' Restore balance first before adding interest
             CalculateAndUpdateInterest()
+            UpdateBalanceWithInterest(originalBalance)
         End If
     End Sub
 
