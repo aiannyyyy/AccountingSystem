@@ -302,7 +302,7 @@ Public Class Payments
         bankCombo.SelectedIndex = -1
         remTxt.Clear()
         amountpaidTxt.Clear()
-        checkBox1.Checked = False
+        stopInterestCheck.Checked = False
     End Sub
 
     'Private Sub dgv1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellContentClick
@@ -612,6 +612,74 @@ Public Class Payments
     End Sub
 
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
+        '' Ask for confirmation before inserting the record
+        'Dim result As DialogResult = MessageBox.Show("Are you sure you want to process the payment?", "Confirm Payment", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        'If result = DialogResult.Yes Then
+        '    ' Proceed with record insertion if Yes is clicked
+        '    Dim selectedRow As DataGridViewRow = dgv1.CurrentRow
+
+        '    ' Retrieve input values
+        '    Dim soaNumber As String = soaTxt.Text
+        '    Dim enbs As String = enbsTxt.Text
+        '    Dim facCode As String = codeTxt.Text
+
+        '    ' Get previous balance from DataGridView
+        '    Dim previousBalance As Double = If(selectedRow IsNot Nothing AndAlso Not IsDBNull(selectedRow.Cells("balance").Value), Convert.ToDouble(selectedRow.Cells("balance").Value), 0)
+
+        '    ' Get amount paid and deductions
+        '    Dim amountPaid As Double = Convert.ToDouble(amountpaidTxt.Text)
+        '    Dim wtax As Double = Convert.ToDouble(wtaxTxt.Text)
+        '    Dim badDebts As Double = Convert.ToDouble(baddebtsTxt.Text)
+        '    Dim interest As Double = If(Double.TryParse(interestTxt.Text, interest), interest, 0.0)
+        '    Dim businessTax As Double = Convert.ToDouble(btaxText.Text)
+
+        '    ' Compute new balance
+        '    Dim balance As Double = previousBalance - amountPaid - wtax - badDebts - interest - businessTax
+
+        '    ' Ensure balance does not go below zero
+        '    If balance < 0 Then
+        '        balance = 0
+        '    End If
+
+        '    ' Other required values
+        '    Dim adsAmount As Double = If(selectedRow IsNot Nothing AndAlso Not IsDBNull(selectedRow.Cells("ads_amount").Value), Convert.ToDouble(selectedRow.Cells("ads_amount").Value), 0)
+        '    Dim dueDate As Date = dtpicker1.Value
+        '    Dim soaAmount As Double = Convert.ToDouble(soamountTxt.Text)
+        '    Dim interestDate As Date = dtpicker2.Value
+        '    Dim paid_interest As Double
+        '    Dim orDate As Date = dtpicker3.Value
+        '    Dim orNumber As String = orderTxt.Text
+        '    Dim others As String = othersTxt.Text
+        '    Dim grandTotal As Double = Convert.ToDouble(totalBalance.Text)
+        '    Dim mop As String = mopCombo.Text
+        '    Dim fop As String = formCombo.Text
+        '    Dim chequeDetails As String = chequeTxt.Text
+        '    Dim bank As String = bankCombo.Text
+        '    Dim datePayment As Date = dtpicker4.Value
+        '    Dim datePosted As Date = Date.Now ' Assuming current date for datePosted
+        '    Dim remarks As String = remTxt.Text
+        '    Dim stopInterest As String = If(Me.stopInterestCheck.Checked, "STOP INTEREST", String.Empty)
+        '    Dim username As String = Login.userTxt.Text
+
+        '    'If Not stopInterestCheck.Checked Then
+        '    '    CalculateAndUpdateInterest()
+        '    'End If
+
+        '    ' Insert the new record into the database
+        '    InsertRecord(soaNumber, enbs, facCode, balance, adsAmount, dueDate, soaAmount, interestDate, interest, paid_interest, orDate, orNumber, badDebts, businessTax, wtax, others, grandTotal, mop, fop, chequeDetails, bank, datePayment, datePosted, amountPaid, remarks, stopInterest, username)
+
+        '    ' Notify user of successful insertion
+        '    MessageBox.Show("Payment successfully processed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        '    ' Refresh data and clear fields
+        '    loaddgv()
+        '    afterPay()
+        '    ClearFields()
+        'Else
+        '    ' If No is clicked, do nothing (keep fields unchanged)
+        '    MessageBox.Show("Payment processing canceled.", "Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        'End If
         ' Ask for confirmation before inserting the record
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to process the payment?", "Confirm Payment", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
@@ -624,42 +692,62 @@ Public Class Payments
             Dim enbs As String = enbsTxt.Text
             Dim facCode As String = codeTxt.Text
 
-            ' Get previous balance from DataGridView
-            Dim previousBalance As Double = If(selectedRow IsNot Nothing AndAlso Not IsDBNull(selectedRow.Cells("balance").Value), Convert.ToDouble(selectedRow.Cells("balance").Value), 0)
-
-            ' Get amount paid and deductions
-            Dim amountPaid As Double = Convert.ToDouble(amountpaidTxt.Text)
-            Dim wtax As Double = Convert.ToDouble(wtaxTxt.Text)
-            Dim badDebts As Double = Convert.ToDouble(baddebtsTxt.Text)
-            Dim interest As Double = If(Double.TryParse(interestTxt.Text, interest), interest, 0.0)
-            Dim businessTax As Double = Convert.ToDouble(btaxText.Text)
-
-            ' Compute new balance
-            Dim balance As Double = previousBalance - amountPaid - wtax - badDebts - interest - businessTax
-
-            ' Ensure balance does not go below zero
-            If balance < 0 Then
-                balance = 0
+            ' Get previous balance from DataGridView, defaulting to 0 if null
+            Dim previousBalance As Decimal = 0
+            If selectedRow IsNot Nothing AndAlso Not IsDBNull(selectedRow.Cells("balance").Value) Then
+                Decimal.TryParse(selectedRow.Cells("balance").Value.ToString(), previousBalance)
             End If
 
-            ' Other required values
-            Dim adsAmount As Double = If(selectedRow IsNot Nothing AndAlso Not IsDBNull(selectedRow.Cells("ads_amount").Value), Convert.ToDouble(selectedRow.Cells("ads_amount").Value), 0)
+            ' Convert input values, defaulting to 0 if empty or invalid
+            Dim amountPaid As Decimal = 0
+            Decimal.TryParse(amountpaidTxt.Text, amountPaid)
+
+            Dim wtax As Decimal = 0
+            Decimal.TryParse(wtaxTxt.Text, wtax)
+
+            Dim badDebts As Decimal = 0
+            Decimal.TryParse(baddebtsTxt.Text, badDebts)
+
+            Dim interest As Decimal = 0
+            Decimal.TryParse(interestTxt.Text, interest)
+
+            Dim businessTax As Decimal = 0
+            Decimal.TryParse(btaxText.Text, businessTax)
+
+            ' Compute new balance
+            Dim balance As Decimal = previousBalance - amountPaid - wtax - badDebts - interest - businessTax
+
+            ' Ensure balance does not go below zero
+            If balance < 0 Then balance = 0
+
+            ' Other required values with default values
+            Dim adsAmount As Decimal = 0
+            If selectedRow IsNot Nothing AndAlso Not IsDBNull(selectedRow.Cells("ads_amount").Value) Then
+                Decimal.TryParse(selectedRow.Cells("ads_amount").Value.ToString(), adsAmount)
+            End If
+
+            Dim soaAmount As Decimal = 0
+            Decimal.TryParse(soamountTxt.Text, soaAmount)
+
+            Dim paid_interest As Decimal = 0 ' Default paid interest
+
+            Dim grandTotal As Decimal = 0
+            Decimal.TryParse(totalBalance.Text, grandTotal)
+
+            ' Get other string and date values
             Dim dueDate As Date = dtpicker1.Value
-            Dim soaAmount As Double = Convert.ToDouble(soamountTxt.Text)
             Dim interestDate As Date = dtpicker2.Value
-            Dim paid_interest As Double
             Dim orDate As Date = dtpicker3.Value
             Dim orNumber As String = orderTxt.Text
             Dim others As String = othersTxt.Text
-            Dim grandTotal As Double = Convert.ToDouble(totalBalance.Text)
             Dim mop As String = mopCombo.Text
             Dim fop As String = formCombo.Text
             Dim chequeDetails As String = chequeTxt.Text
             Dim bank As String = bankCombo.Text
             Dim datePayment As Date = dtpicker4.Value
-            Dim datePosted As Date = Date.Now ' Assuming current date for datePosted
+            Dim datePosted As Date = Date.Now ' Use current date for datePosted
             Dim remarks As String = remTxt.Text
-            Dim stopInterest As String = If(checkBox1.Checked, "STOP INTEREST", String.Empty)
+            Dim stopInterest As String = If(stopInterestCheck.Checked, "STOP INTEREST", String.Empty)
             Dim username As String = Login.userTxt.Text
 
             ' Insert the new record into the database
@@ -673,7 +761,7 @@ Public Class Payments
             afterPay()
             ClearFields()
         Else
-            ' If No is clicked, do nothing (keep fields unchanged)
+            ' If No is clicked, do nothing
             MessageBox.Show("Payment processing canceled.", "Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
@@ -974,7 +1062,7 @@ Public Class Payments
                         ' Update UI fields
                         interestTxt.Text = interest.ToString("F2")
                     Else
-                        MessageBox.Show("No record found for the provided facility code.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        'MessageBox.Show("No record found for the provided facility code.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     End If
                 End Using
             End Using
@@ -1108,6 +1196,13 @@ Public Class Payments
         ' If no change, nothing happens, no calculation, no message
     End Sub
 
+    Private Sub stopInterestCheck_CheckedChanged(sender As Object, e As EventArgs) Handles stopInterestCheck.CheckedChanged
+        If stopInterestCheck.Checked = True Then
+            interestTxt.Text = "0.00"
+        Else
+            CalculateAndUpdateInterest()
+        End If
+    End Sub
 End Class
 
 'Private Sub CalculateAndUpdateInterest()
