@@ -28,32 +28,11 @@ Public Class Payments
             column.SortMode = DataGridViewColumnSortMode.NotSortable
         Next
 
-        dgv2.Columns("enbs").DisplayIndex = 0 'Set first column
-        dgv2.Columns("fac_code").DisplayIndex = 1 'Set second column
-        dgv2.Columns("ads").DisplayIndex = 2 'Set second column
-        dgv2.Columns("due").DisplayIndex = 3 'Set second column
-        dgv2.Columns("soa").DisplayIndex = 4 'Set second column
-        dgv2.Columns("interest").DisplayIndex = 5 'Set second column
-        dgv2.Columns("int").DisplayIndex = 6 'Set second column
-        dgv2.Columns("paid_interest").DisplayIndex = 7 'Set second column
-        dgv2.Columns("soanumber").DisplayIndex = 8 'Set second column
-        dgv2.Columns("ordate").DisplayIndex = 9 'Set second column
-        dgv2.Columns("ornumber").DisplayIndex = 10 'Set second column
-        dgv2.Columns("baddebts").DisplayIndex = 11 'Set second column
-        dgv2.Columns("btax").DisplayIndex = 12 'Set second column
-        dgv2.Columns("wtax").DisplayIndex = 13 'Set second column
-        dgv2.Columns("others").DisplayIndex = 14 'Set second column
-        dgv2.Columns("mop").DisplayIndex = 15 'Set second column
-        dgv2.Columns("fop").DisplayIndex = 16 'Set second column
-        dgv2.Columns("cheque").DisplayIndex = 17 'Set second column
-        dgv2.Columns("bank").DisplayIndex = 18 'Set second column
-        dgv2.Columns("datepayment").DisplayIndex = 19 'Set second column
-        dgv2.Columns("dateposted").DisplayIndex = 20 'Set second column
-        dgv2.Columns("grandtotal").DisplayIndex = 21 'Set second column
-        dgv2.Columns("amountpaid").DisplayIndex = 22 'Set second column
-        dgv2.Columns("bal").DisplayIndex = 23 'Set second column
-        dgv2.Columns("remark").DisplayIndex = 24 'Set second column
-        dgv2.Columns("username").DisplayIndex = 25 'Set second column
+        dgv2.Columns("id").Visible = False ' Hide the column
+
+        dgv1.ColumnHeadersHeight = 35 ' Set header height to 50 pixels
+        dgv2.ColumnHeadersHeight = 35 ' Set header height to 50 pixels
+
 
     End Sub
 
@@ -340,6 +319,7 @@ Public Class Payments
         remTxt.Clear()
         amountpaidTxt.Clear()
         stopInterestCheck.Checked = False
+        balanceperSoa.Clear()
     End Sub
 
     'Private Sub dgv1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellContentClick
@@ -711,13 +691,13 @@ Public Class Payments
     '    Dim updateInterestQuery As String = $"UPDATE payments SET interest = 0 WHERE soa_number = '{soaNumber}'"
     '    ExecuteQuery(updateInterestQuery)
     'End Sub
-    Private Sub InsertRecord(soaNumber As String, enbs As String, facCode As String, balance As Double, adsAmount As Double, dueDate As Date, soaAmount As Double, interestDate As Date, interest As Double, paid_interest As Double, orDate As Date, orNumber As String, badDebts As Double, businessTax As Double, wtax As Double, others As String, grandTotal As Double, mop As String, fop As String, chequeDetails As String, bank As String, datePayment As Date, datePosted As Date, amountPaid As Double, remarks As String, username As String)
+    Private Sub InsertRecord(soaNumber As String, enbs As String, facCode As String, adsAmount As Double, dueDate As Date, soaAmount As Double, interestDate As Date, interest As Double, paid_interest As Double, orDate As Date, orNumber As String, badDebts As Double, businessTax As Double, wtax As Double, others As Double, mop As String, fop As String, chequeDetails As String, bank As String, datePayment As Date, datePosted As Date, grandTotal As Double, amountPaid As Double, balance As Double, remarks As String, username As String)
         ' Prepare the SQL query for inserting the payment record
         'Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, balance, ads_amount, due_date, soa_amount, interest_date, interest, paid_interest, or_date, or_number, bad_debts, business_tax, wtax, others, grand_total, mop, fop, cheque_details, bank, date_payment, date_posted, amount_paid, remarks, stop_interest, username) " &
         '              $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {balance.ToString("F2")}, {adsAmount.ToString("F2")}, '{dueDate.ToString("yyyy-MM-dd")}', {soaAmount.ToString("F2")}, '{interestDate.ToString("yyyy-MM-dd")}', {interest.ToString("F2")}, 0.00, '{orDate.ToString("yyyy-MM-dd")}', '{orNumber}', {badDebts.ToString("F2")}, {businessTax.ToString("F2")}, {wtax.ToString("F2")}, '{others}', {grandTotal.ToString("F2")}, '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd")}', '{datePosted.ToString("yyyy-MM-dd")}', {amountPaid.ToString("F2")}, '{remarks}', '{stopInterest}', '{username}')"
 
-        Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, balance, ads_amount, due_date, soa_amount, interest_date, interest, paid_interest, or_date, or_number, bad_debts, business_tax, wtax, others, grand_total, mop, fop, cheque_details, bank, date_payment, date_posted, amount_paid, remarks, username) " &
-                  $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {balance.ToString("F2")}, {adsAmount.ToString("F2")}, '{dueDate.ToString("yyyy-MM-dd HH:mm:ss")}', {soaAmount.ToString("F2")}, '{interestDate.ToString("yyyy-MM-dd HH:mm:ss")}', {interest.ToString("F2")}, 0.00, '{orDate.ToString("yyyy-MM-dd HH:mm:ss")}', '{orNumber}', {badDebts.ToString("F2")}, {businessTax.ToString("F2")}, {wtax.ToString("F2")}, '{others}', {grandTotal.ToString("F2")}, '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd HH:mm:ss")}', '{datePosted.ToString("yyyy-MM-dd HH:mm:ss")}', {amountPaid.ToString("F2")}, '{remarks}', '{username}')"
+        Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, ads_amount, due_date, soa_amount, interest_date, interest, paid_interest, or_date, or_number, bad_debts, business_tax, wtax, others, mop, fop, cheque_details, bank, date_payment, date_posted, grand_total, amount_paid, balance, remarks, username) " &
+                  $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {adsAmount.ToString("F2")}, '{dueDate.ToString("yyyy-MM-dd HH:mm:ss")}', {soaAmount.ToString("F2")}, '{interestDate.ToString("yyyy-MM-dd HH:mm:ss")}', {interest.ToString("F2")}, 0.00, '{orDate.ToString("yyyy-MM-dd HH:mm:ss")}', '{orNumber}', {badDebts.ToString("F2")}, {businessTax.ToString("F2")}, {wtax.ToString("F2")}, '{others.ToString("F2")}', '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd HH:mm:ss")}', '{datePosted.ToString("yyyy-MM-dd HH:mm:ss")}', {grandTotal.ToString("F2")}, {amountPaid.ToString("F2")}, {balance.ToString("F2")}, '{remarks}', '{username}')"
 
 
         ' Execute the insert query using ExecuteQuery function
@@ -731,11 +711,11 @@ Public Class Payments
         Dim remainingAmount As Double = amountPaid - interest
 
         ' Update the accounting balance based on the soa_number
-        Dim updateBalanceQuery As String = $"UPDATE acccounting SET balance = balance - {remainingAmount.ToString("F2")} - {badDebts.ToString("F2")} - {businessTax.ToString("F2")} - {wtax.ToString("F2")} WHERE soa_number = '{soaNumber}'"
+        Dim updateBalanceQuery As String = $"UPDATE acccounting SET balance = balance - {remainingAmount.ToString("F2")} - {badDebts.ToString("F2")} - {businessTax.ToString("F2")} - {wtax.ToString("F2")} - {others.ToString("F2")} WHERE soa_number = '{soaNumber}'"
         ExecuteQuery(updateBalanceQuery)
 
         ' Update the grand total in the payments table after the payment
-        Dim updateGrandTotalQuery As String = $"UPDATE payments SET grand_total = grand_total - {amountPaid.ToString("F2")} - {badDebts.ToString("F2")} - {businessTax.ToString("F2")} - {wtax.ToString("F2")} WHERE soa_number = '{soaNumber}'"
+        Dim updateGrandTotalQuery As String = $"UPDATE payments SET grand_total = grand_total - {amountPaid.ToString("F2")} - {badDebts.ToString("F2")} - {businessTax.ToString("F2")} - {wtax.ToString("F2")} - {others.ToString("F2")} WHERE soa_number = '{soaNumber}'"
         ExecuteQuery(updateGrandTotalQuery)
     End Sub
 
@@ -847,8 +827,11 @@ Public Class Payments
             Dim businessTax As Double = 0
             Double.TryParse(btaxText.Text, businessTax)
 
+            Dim others As Double = 0
+            Double.TryParse(othersTxt.Text, others)
+
             ' Compute new balance
-            Dim balance As Double = previousBalance - amountPaid - wtax - badDebts - interest - businessTax
+            Dim balance As Double = previousBalance - amountPaid - wtax - badDebts - interest - businessTax - others
 
             ' Ensure balance does not go below zero
             If balance < 0 Then balance = 0
@@ -872,7 +855,7 @@ Public Class Payments
             Dim interestDate As Date = dtpicker2.Value
             Dim orDate As Date = dtpicker3.Value
             Dim orNumber As String = orderTxt.Text
-            Dim others As String = othersTxt.Text
+
             Dim mop As String = mopCombo.Text
             Dim fop As String = formCombo.Text
             Dim chequeDetails As String = chequeTxt.Text
@@ -884,7 +867,7 @@ Public Class Payments
             Dim username As String = Login.userTxt.Text
 
             ' Insert the new record into the database
-            InsertRecord(soaNumber, enbs, facCode, balance, adsAmount, dueDate, soaAmount, interestDate, interest, paid_interest, orDate, orNumber, badDebts, businessTax, wtax, others, grandTotal, mop, fop, chequeDetails, bank, datePayment, datePosted, amountPaid, remarks, username)
+            InsertRecord(soaNumber, enbs, facCode, adsAmount, dueDate, soaAmount, interestDate, interest, paid_interest, orDate, orNumber, badDebts, businessTax, wtax, others, mop, fop, chequeDetails, bank, datePayment, datePosted, grandTotal, amountPaid, balance, remarks, username)
 
             ' Notify user of successful insertion
             MessageBox.Show("Payment successfully processed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -893,7 +876,7 @@ Public Class Payments
             loaddgv()
             afterPay()
             ClearFields()
-            Pos.loaddgv()
+            'Pos.loaddgv()
         Else
         End If
     End Sub

@@ -64,6 +64,13 @@ Public Class Pos
 
         adsTxt.Enabled = False
         totalTxt.Enabled = False
+
+        dgv1.ColumnHeadersHeight = 35 ' Set header height to 50 pixels
+
+        dgv1.Columns("soa_txt").Visible = False ' Hide the column
+        dgv1.Columns("sub_amount").Visible = False ' Hide the column
+        dgv1.Columns("fac_type").Visible = False ' Hide the column
+        dgv1.Columns("replace_type").Visible = False ' Hide the column
     End Sub
 
     Public Sub ordertext()
@@ -1468,7 +1475,7 @@ Public Class Pos
         remLbl.Visible = False
         remBox.Visible = False
         replacementCheck.Checked = False
-        Payments.loaddgv()
+        'Payments.loaddgv()
     End Sub
 
     Private Sub CancelPurchaseOrders()

@@ -91,6 +91,7 @@ Partial Class Pos
         Me.CachedStatementOfAccount1 = New AccountingSystem.CachedStatementOfAccount()
         Me.cancelPo = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.soa_number = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.soa_txt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.order_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.fac_code = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -108,8 +109,11 @@ Partial Class Pos
         Me.due_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.total_amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.balance = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sub_amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.date_modified = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.modified_by = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.replace_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fac_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.username = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
@@ -987,7 +991,7 @@ Partial Class Pos
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv1.ColumnHeadersHeight = 21
-        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cancelPo, Me.soa_number, Me.Column2, Me.order_type, Me.fac_code, Me.facility_name, Me.term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replacement, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.date_modified, Me.modified_by, Me.username, Me.remarks})
+        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cancelPo, Me.soa_number, Me.soa_txt, Me.Column2, Me.order_type, Me.fac_code, Me.facility_name, Me.term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replacement, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.sub_amount, Me.date_modified, Me.modified_by, Me.replace_type, Me.fac_type, Me.username, Me.remarks})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1147,6 +1151,14 @@ Partial Class Pos
         Me.soa_number.Name = "soa_number"
         Me.soa_number.Width = 110
         '
+        'soa_txt
+        '
+        Me.soa_txt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.soa_txt.DataPropertyName = "soa_txt"
+        Me.soa_txt.HeaderText = "SOA TXT"
+        Me.soa_txt.Name = "soa_txt"
+        Me.soa_txt.Width = 81
+        '
         'Column2
         '
         Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
@@ -1283,6 +1295,14 @@ Partial Class Pos
         Me.balance.Name = "balance"
         Me.balance.Width = 120
         '
+        'sub_amount
+        '
+        Me.sub_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.sub_amount.DataPropertyName = "sub_amount"
+        Me.sub_amount.HeaderText = "SUB AMOUNT"
+        Me.sub_amount.Name = "sub_amount"
+        Me.sub_amount.Width = 112
+        '
         'date_modified
         '
         Me.date_modified.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
@@ -1298,6 +1318,22 @@ Partial Class Pos
         Me.modified_by.HeaderText = "MODIFIED BY"
         Me.modified_by.Name = "modified_by"
         Me.modified_by.Width = 108
+        '
+        'replace_type
+        '
+        Me.replace_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.replace_type.DataPropertyName = "replace_type"
+        Me.replace_type.HeaderText = "REPLACE TYPE"
+        Me.replace_type.Name = "replace_type"
+        Me.replace_type.Width = 110
+        '
+        'fac_type
+        '
+        Me.fac_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.fac_type.DataPropertyName = "type"
+        Me.fac_type.HeaderText = "FACILITY TYPE"
+        Me.fac_type.Name = "fac_type"
+        Me.fac_type.Width = 110
         '
         'username
         '
@@ -1411,6 +1447,7 @@ Partial Class Pos
     Friend WithEvents typeText As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents cancelPo As DataGridViewCheckBoxColumn
     Friend WithEvents soa_number As DataGridViewTextBoxColumn
+    Friend WithEvents soa_txt As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents order_type As DataGridViewTextBoxColumn
     Friend WithEvents fac_code As DataGridViewTextBoxColumn
@@ -1428,8 +1465,11 @@ Partial Class Pos
     Friend WithEvents due_date As DataGridViewTextBoxColumn
     Friend WithEvents total_amount As DataGridViewTextBoxColumn
     Friend WithEvents balance As DataGridViewTextBoxColumn
+    Friend WithEvents sub_amount As DataGridViewTextBoxColumn
     Friend WithEvents date_modified As DataGridViewTextBoxColumn
     Friend WithEvents modified_by As DataGridViewTextBoxColumn
+    Friend WithEvents replace_type As DataGridViewTextBoxColumn
+    Friend WithEvents fac_type As DataGridViewTextBoxColumn
     Friend WithEvents username As DataGridViewTextBoxColumn
     Friend WithEvents remarks As DataGridViewTextBoxColumn
 End Class

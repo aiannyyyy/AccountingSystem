@@ -128,6 +128,8 @@ Partial Class Payments
         Me.nameBox = New Guna.UI.WinForms.GunaTextBox()
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
+        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.soanumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.enbs = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.fac_code = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ads = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -136,7 +138,6 @@ Partial Class Payments
         Me.interest = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.int = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.paid_interest = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.soanumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ordate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ornumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.baddebts = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -296,6 +297,8 @@ Partial Class Payments
         '
         Me.dgv2.AllowUserToAddRows = False
         Me.dgv2.AllowUserToDeleteRows = False
+        Me.dgv2.AllowUserToResizeColumns = False
+        Me.dgv2.AllowUserToResizeRows = False
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
         Me.dgv2.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
@@ -312,7 +315,7 @@ Partial Class Payments
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv2.ColumnHeadersHeight = 21
-        Me.dgv2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.enbs, Me.fac_code, Me.ads, Me.due, Me.soa, Me.interest, Me.int, Me.paid_interest, Me.soanumber, Me.ordate, Me.ornumber, Me.baddebts, Me.btax, Me.wtax, Me.others, Me.mop, Me.fop, Me.cheque, Me.bank, Me.datepayment, Me.dateposted, Me.grandtotal, Me.amountpaid, Me.bal, Me.remark, Me.username})
+        Me.dgv2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.soanumber, Me.enbs, Me.fac_code, Me.ads, Me.due, Me.soa, Me.interest, Me.int, Me.paid_interest, Me.ordate, Me.ornumber, Me.baddebts, Me.btax, Me.wtax, Me.others, Me.mop, Me.fop, Me.cheque, Me.bank, Me.datepayment, Me.dateposted, Me.grandtotal, Me.amountpaid, Me.bal, Me.remark, Me.username})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1647,6 +1650,24 @@ Partial Class Payments
         Me.GunaLabel1.TabIndex = 1
         Me.GunaLabel1.Text = "FACILITY CODE:"
         '
+        'id
+        '
+        Me.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.id.DataPropertyName = "id"
+        Me.id.HeaderText = "ID"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Width = 43
+        '
+        'soanumber
+        '
+        Me.soanumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.soanumber.DataPropertyName = "soa_number"
+        Me.soanumber.HeaderText = "SOA NUMBER"
+        Me.soanumber.Name = "soanumber"
+        Me.soanumber.ReadOnly = True
+        Me.soanumber.Width = 104
+        '
         'enbs
         '
         Me.enbs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -1718,15 +1739,6 @@ Partial Class Payments
         Me.paid_interest.Name = "paid_interest"
         Me.paid_interest.ReadOnly = True
         Me.paid_interest.Width = 114
-        '
-        'soanumber
-        '
-        Me.soanumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.soanumber.DataPropertyName = "soa_number"
-        Me.soanumber.HeaderText = "SOA NUMBER"
-        Me.soanumber.Name = "soanumber"
-        Me.soanumber.ReadOnly = True
-        Me.soanumber.Width = 104
         '
         'ordate
         '
@@ -2008,6 +2020,8 @@ Partial Class Payments
     Friend WithEvents balanceperSoa As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel5 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents computeInterest As Guna.UI.WinForms.GunaAdvenceButton
+    Friend WithEvents id As DataGridViewTextBoxColumn
+    Friend WithEvents soanumber As DataGridViewTextBoxColumn
     Friend WithEvents enbs As DataGridViewTextBoxColumn
     Friend WithEvents fac_code As DataGridViewTextBoxColumn
     Friend WithEvents ads As DataGridViewTextBoxColumn
@@ -2016,7 +2030,6 @@ Partial Class Payments
     Friend WithEvents interest As DataGridViewTextBoxColumn
     Friend WithEvents int As DataGridViewTextBoxColumn
     Friend WithEvents paid_interest As DataGridViewTextBoxColumn
-    Friend WithEvents soanumber As DataGridViewTextBoxColumn
     Friend WithEvents ordate As DataGridViewTextBoxColumn
     Friend WithEvents ornumber As DataGridViewTextBoxColumn
     Friend WithEvents baddebts As DataGridViewTextBoxColumn
