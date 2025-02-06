@@ -145,6 +145,7 @@ Public Class Payments
 
     Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
         If String.IsNullOrEmpty(codeTxt.Text) Then
+            interestTxt.Clear()
             payments()
             ClearFields()
             Return
@@ -681,7 +682,7 @@ Public Class Payments
         '    MessageBox.Show("Payment processing canceled.", "Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information)
         'End If
         ' Ask for confirmation before inserting the record
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to process the payment?", "Confirm Payment", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        Dim result As DialogResult = MessageBox.Show("Are all entries correct?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
         If result = DialogResult.Yes Then
             ' Proceed with record insertion if Yes is clicked
@@ -761,8 +762,6 @@ Public Class Payments
             afterPay()
             ClearFields()
         Else
-            ' If No is clicked, do nothing
-            MessageBox.Show("Payment processing canceled.", "Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
@@ -1202,6 +1201,11 @@ Public Class Payments
         Else
             CalculateAndUpdateInterest()
         End If
+    End Sub
+
+    Private Sub remTxt_TextChanged(sender As Object, e As EventArgs) Handles remTxt.TextChanged
+        remTxt.Text = remTxt.Text.ToUpper()
+        remTxt.SelectionStart = remTxt.Text.Length ' Keeps cursor at the end
     End Sub
 End Class
 
