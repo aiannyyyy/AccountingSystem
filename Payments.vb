@@ -32,8 +32,6 @@ Public Class Payments
 
         dgv1.ColumnHeadersHeight = 35 ' Set header height to 50 pixels
         dgv2.ColumnHeadersHeight = 35 ' Set header height to 50 pixels
-
-
     End Sub
 
     Public Sub loaddgv()
@@ -915,10 +913,10 @@ Public Class Payments
         ' Disable the TextBox if the selected item is "Disable"
         If formCombo.SelectedItem IsNot Nothing AndAlso formCombo.SelectedItem.ToString() = "CASH" Then
             chequeTxt.Enabled = False
-            bankCombo.Enabled = False
+            'bankCombo.Enabled = False
         Else
             chequeTxt.Enabled = True
-            bankCombo.Enabled = True
+            'bankCombo.Enabled = True
         End If
     End Sub
 
