@@ -23,11 +23,11 @@ Partial Class Pos
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Pos))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GunaElipse1 = New Guna.UI.WinForms.GunaElipse(Me.components)
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -88,7 +88,6 @@ Partial Class Pos
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.CachedStatementOfAccount1 = New AccountingSystem.CachedStatementOfAccount()
         Me.cancelPo = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.soa_number = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.soa_txt = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -116,6 +115,9 @@ Partial Class Pos
         Me.fac_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.username = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.excess = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GunaLabel12 = New Guna.UI.WinForms.GunaLabel()
+        Me.excessTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -542,6 +544,8 @@ Partial Class Pos
         Me.grpOrders.BackColor = System.Drawing.Color.Transparent
         Me.grpOrders.BaseColor = System.Drawing.Color.White
         Me.grpOrders.BorderColor = System.Drawing.Color.Gainsboro
+        Me.grpOrders.Controls.Add(Me.excessTxt)
+        Me.grpOrders.Controls.Add(Me.GunaLabel12)
         Me.grpOrders.Controls.Add(Me.typeText)
         Me.grpOrders.Controls.Add(Me.GunaLabel11)
         Me.grpOrders.Controls.Add(Me.computeButton)
@@ -975,40 +979,40 @@ Partial Class Pos
         '
         Me.dgv1.AllowUserToAddRows = False
         Me.dgv1.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        Me.dgv1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        Me.dgv1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
         Me.dgv1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv1.BackgroundColor = System.Drawing.Color.White
         Me.dgv1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgv1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(237, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(237, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.dgv1.ColumnHeadersHeight = 21
-        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cancelPo, Me.soa_number, Me.soa_txt, Me.Column2, Me.order_type, Me.fac_code, Me.facility_name, Me.term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replacement, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.sub_amount, Me.date_modified, Me.modified_by, Me.replace_type, Me.fac_type, Me.username, Me.remarks})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv1.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cancelPo, Me.soa_number, Me.soa_txt, Me.Column2, Me.order_type, Me.fac_code, Me.facility_name, Me.term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replacement, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.sub_amount, Me.date_modified, Me.modified_by, Me.replace_type, Me.fac_type, Me.username, Me.remarks, Me.excess})
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv1.DefaultCellStyle = DataGridViewCellStyle7
         Me.dgv1.EnableHeadersVisualStyles = False
         Me.dgv1.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
         Me.dgv1.Location = New System.Drawing.Point(23, 336)
         Me.dgv1.Name = "dgv1"
         Me.dgv1.RowHeadersVisible = False
         Me.dgv1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle8
         Me.dgv1.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv1.Size = New System.Drawing.Size(1004, 295)
@@ -1351,6 +1355,44 @@ Partial Class Pos
         Me.remarks.Name = "remarks"
         Me.remarks.Width = 180
         '
+        'excess
+        '
+        Me.excess.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.excess.DataPropertyName = "excess"
+        Me.excess.HeaderText = "EXCESS"
+        Me.excess.Name = "excess"
+        Me.excess.Width = 73
+        '
+        'GunaLabel12
+        '
+        Me.GunaLabel12.AutoSize = True
+        Me.GunaLabel12.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GunaLabel12.Location = New System.Drawing.Point(397, 35)
+        Me.GunaLabel12.Name = "GunaLabel12"
+        Me.GunaLabel12.Size = New System.Drawing.Size(55, 26)
+        Me.GunaLabel12.TabIndex = 26
+        Me.GunaLabel12.Text = "EXCESS " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "AMOUNT"
+        Me.GunaLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'excessTxt
+        '
+        Me.excessTxt.BackColor = System.Drawing.Color.Black
+        Me.excessTxt.BaseColor = System.Drawing.Color.White
+        Me.excessTxt.BorderColor = System.Drawing.Color.Black
+        Me.excessTxt.BorderSize = 1
+        Me.excessTxt.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.excessTxt.FocusedBaseColor = System.Drawing.Color.White
+        Me.excessTxt.FocusedBorderColor = System.Drawing.Color.Black
+        Me.excessTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.excessTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.excessTxt.Location = New System.Drawing.Point(382, 67)
+        Me.excessTxt.Name = "excessTxt"
+        Me.excessTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.excessTxt.SelectedText = ""
+        Me.excessTxt.Size = New System.Drawing.Size(85, 27)
+        Me.excessTxt.TabIndex = 26
+        Me.excessTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'Pos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1443,7 +1485,6 @@ Partial Class Pos
     Friend WithEvents remLbl As Guna.UI.WinForms.GunaLabel
     Friend WithEvents expiredCheck As CheckBox
     Friend WithEvents replaceAdd As Button
-    Friend WithEvents CachedStatementOfAccount1 As CachedStatementOfAccount
     Friend WithEvents typeText As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents cancelPo As DataGridViewCheckBoxColumn
     Friend WithEvents soa_number As DataGridViewTextBoxColumn
@@ -1472,4 +1513,7 @@ Partial Class Pos
     Friend WithEvents fac_type As DataGridViewTextBoxColumn
     Friend WithEvents username As DataGridViewTextBoxColumn
     Friend WithEvents remarks As DataGridViewTextBoxColumn
+    Friend WithEvents excess As DataGridViewTextBoxColumn
+    Friend WithEvents excessTxt As Guna.UI.WinForms.GunaTextBox
+    Friend WithEvents GunaLabel12 As Guna.UI.WinForms.GunaLabel
 End Class

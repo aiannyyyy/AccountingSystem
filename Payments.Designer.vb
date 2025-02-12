@@ -47,6 +47,7 @@ Partial Class Payments
         Me.dgv2 = New Guna.UI.WinForms.GunaDataGridView()
         Me.dgv1 = New Guna.UI.WinForms.GunaDataGridView()
         Me.soa_number = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.soa_txt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.soa_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ordertype = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.facility_code = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -64,7 +65,14 @@ Partial Class Payments
         Me.due_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.total_amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.balance = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.old_amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.user = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sub_amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.replace_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.type = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.date_modified = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.modified_by = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.groupDetails = New Guna.UI.WinForms.GunaGroupBox()
         Me.balanceperSoa = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel5 = New Guna.UI.WinForms.GunaLabel()
@@ -155,6 +163,7 @@ Partial Class Payments
         Me.bal = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.remark = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.username = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.excess_balance = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GunaPanel1.SuspendLayout()
         Me.mainPanel.SuspendLayout()
         CType(Me.dgv2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -315,7 +324,7 @@ Partial Class Payments
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv2.ColumnHeadersHeight = 21
-        Me.dgv2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.soanumber, Me.enbs, Me.fac_code, Me.ads, Me.due, Me.soa, Me.interest, Me.int, Me.paid_interest, Me.ordate, Me.ornumber, Me.baddebts, Me.btax, Me.wtax, Me.others, Me.mop, Me.fop, Me.cheque, Me.bank, Me.datepayment, Me.dateposted, Me.grandtotal, Me.amountpaid, Me.bal, Me.remark, Me.username})
+        Me.dgv2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.soanumber, Me.enbs, Me.fac_code, Me.ads, Me.due, Me.soa, Me.interest, Me.int, Me.paid_interest, Me.ordate, Me.ornumber, Me.baddebts, Me.btax, Me.wtax, Me.others, Me.mop, Me.fop, Me.cheque, Me.bank, Me.datepayment, Me.dateposted, Me.grandtotal, Me.amountpaid, Me.bal, Me.remark, Me.username, Me.excess_balance})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -386,7 +395,7 @@ Partial Class Payments
         DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.dgv1.ColumnHeadersHeight = 21
-        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.soa_number, Me.soa_date, Me.ordertype, Me.facility_code, Me.facility_name, Me.type_term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replace, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.user})
+        Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.soa_number, Me.soa_txt, Me.soa_date, Me.ordertype, Me.facility_code, Me.facility_name, Me.type_term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replace, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.old_amount, Me.user, Me.sub_amount, Me.remarks, Me.replace_type, Me.type, Me.date_modified, Me.modified_by})
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -437,7 +446,16 @@ Partial Class Payments
         Me.soa_number.Name = "soa_number"
         Me.soa_number.ReadOnly = True
         Me.soa_number.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.soa_number.Width = 85
+        Me.soa_number.Width = 83
+        '
+        'soa_txt
+        '
+        Me.soa_txt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.soa_txt.DataPropertyName = "soa_txt"
+        Me.soa_txt.HeaderText = "SOA TXT"
+        Me.soa_txt.Name = "soa_txt"
+        Me.soa_txt.ReadOnly = True
+        Me.soa_txt.Width = 76
         '
         'soa_date
         '
@@ -447,7 +465,7 @@ Partial Class Payments
         Me.soa_date.Name = "soa_date"
         Me.soa_date.ReadOnly = True
         Me.soa_date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.soa_date.Width = 67
+        Me.soa_date.Width = 65
         '
         'ordertype
         '
@@ -457,7 +475,7 @@ Partial Class Payments
         Me.ordertype.Name = "ordertype"
         Me.ordertype.ReadOnly = True
         Me.ordertype.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ordertype.Width = 41
+        Me.ordertype.Width = 39
         '
         'facility_code
         '
@@ -467,7 +485,7 @@ Partial Class Payments
         Me.facility_code.Name = "facility_code"
         Me.facility_code.ReadOnly = True
         Me.facility_code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.facility_code.Width = 92
+        Me.facility_code.Width = 90
         '
         'facility_name
         '
@@ -477,7 +495,7 @@ Partial Class Payments
         Me.facility_name.Name = "facility_name"
         Me.facility_name.ReadOnly = True
         Me.facility_name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.facility_name.Width = 93
+        Me.facility_name.Width = 91
         '
         'type_term
         '
@@ -487,7 +505,7 @@ Partial Class Payments
         Me.type_term.Name = "type_term"
         Me.type_term.ReadOnly = True
         Me.type_term.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.type_term.Width = 44
+        Me.type_term.Width = 42
         '
         'purchase_number
         '
@@ -497,7 +515,7 @@ Partial Class Payments
         Me.purchase_number.Name = "purchase_number"
         Me.purchase_number.ReadOnly = True
         Me.purchase_number.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.purchase_number.Width = 122
+        Me.purchase_number.Width = 120
         '
         'purchase_date
         '
@@ -507,7 +525,7 @@ Partial Class Payments
         Me.purchase_date.Name = "purchase_date"
         Me.purchase_date.ReadOnly = True
         Me.purchase_date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.purchase_date.Width = 104
+        Me.purchase_date.Width = 102
         '
         'quantity
         '
@@ -517,7 +535,7 @@ Partial Class Payments
         Me.quantity.Name = "quantity"
         Me.quantity.ReadOnly = True
         Me.quantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.quantity.Width = 68
+        Me.quantity.Width = 66
         '
         'sub_total
         '
@@ -527,7 +545,7 @@ Partial Class Payments
         Me.sub_total.Name = "sub_total"
         Me.sub_total.ReadOnly = True
         Me.sub_total.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.sub_total.Width = 73
+        Me.sub_total.Width = 71
         '
         'brochure
         '
@@ -537,7 +555,7 @@ Partial Class Payments
         Me.brochure.Name = "brochure"
         Me.brochure.ReadOnly = True
         Me.brochure.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.brochure.Width = 74
+        Me.brochure.Width = 72
         '
         'poster
         '
@@ -547,7 +565,7 @@ Partial Class Payments
         Me.poster.Name = "poster"
         Me.poster.ReadOnly = True
         Me.poster.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.poster.Width = 57
+        Me.poster.Width = 55
         '
         'drying_rack
         '
@@ -557,7 +575,7 @@ Partial Class Payments
         Me.drying_rack.Name = "drying_rack"
         Me.drying_rack.ReadOnly = True
         Me.drying_rack.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.drying_rack.Width = 87
+        Me.drying_rack.Width = 85
         '
         'replace
         '
@@ -567,7 +585,7 @@ Partial Class Payments
         Me.replace.Name = "replace"
         Me.replace.ReadOnly = True
         Me.replace.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.replace.Width = 93
+        Me.replace.Width = 91
         '
         'ads_amount
         '
@@ -577,7 +595,7 @@ Partial Class Payments
         Me.ads_amount.Name = "ads_amount"
         Me.ads_amount.ReadOnly = True
         Me.ads_amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ads_amount.Width = 85
+        Me.ads_amount.Width = 83
         '
         'due_date
         '
@@ -587,7 +605,7 @@ Partial Class Payments
         Me.due_date.Name = "due_date"
         Me.due_date.ReadOnly = True
         Me.due_date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.due_date.Width = 68
+        Me.due_date.Width = 66
         '
         'total_amount
         '
@@ -597,7 +615,7 @@ Partial Class Payments
         Me.total_amount.Name = "total_amount"
         Me.total_amount.ReadOnly = True
         Me.total_amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.total_amount.Width = 98
+        Me.total_amount.Width = 96
         '
         'balance
         '
@@ -607,7 +625,16 @@ Partial Class Payments
         Me.balance.Name = "balance"
         Me.balance.ReadOnly = True
         Me.balance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.balance.Width = 62
+        Me.balance.Width = 60
+        '
+        'old_amount
+        '
+        Me.old_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.old_amount.DataPropertyName = "excess"
+        Me.old_amount.HeaderText = "EXCESS BALANCE"
+        Me.old_amount.Name = "old_amount"
+        Me.old_amount.ReadOnly = True
+        Me.old_amount.Width = 124
         '
         'user
         '
@@ -617,7 +644,61 @@ Partial Class Payments
         Me.user.Name = "user"
         Me.user.ReadOnly = True
         Me.user.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.user.Width = 74
+        Me.user.Width = 72
+        '
+        'sub_amount
+        '
+        Me.sub_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.sub_amount.DataPropertyName = "sub_amount"
+        Me.sub_amount.HeaderText = "SUB AMOUNT"
+        Me.sub_amount.Name = "sub_amount"
+        Me.sub_amount.ReadOnly = True
+        Me.sub_amount.Width = 102
+        '
+        'remarks
+        '
+        Me.remarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.remarks.DataPropertyName = "remarks"
+        Me.remarks.HeaderText = "REMARKS"
+        Me.remarks.Name = "remarks"
+        Me.remarks.ReadOnly = True
+        Me.remarks.Width = 83
+        '
+        'replace_type
+        '
+        Me.replace_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.replace_type.DataPropertyName = "replace_type"
+        Me.replace_type.HeaderText = "REPLACE TYPE"
+        Me.replace_type.Name = "replace_type"
+        Me.replace_type.ReadOnly = True
+        Me.replace_type.Width = 110
+        '
+        'type
+        '
+        Me.type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.type.DataPropertyName = "type"
+        Me.type.HeaderText = "TYPE"
+        Me.type.Name = "type"
+        Me.type.ReadOnly = True
+        Me.type.Width = 58
+        '
+        'date_modified
+        '
+        Me.date_modified.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.date_modified.DataPropertyName = "date_modified"
+        Me.date_modified.HeaderText = "DATE MODIFIED"
+        Me.date_modified.Name = "date_modified"
+        Me.date_modified.ReadOnly = True
+        Me.date_modified.Width = 114
+        '
+        'modified_by
+        '
+        Me.modified_by.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.modified_by.DataPropertyName = "modified_by"
+        Me.modified_by.HeaderText = "MODIFIED BY"
+        Me.modified_by.Name = "modified_by"
+        Me.modified_by.ReadOnly = True
+        Me.modified_by.Width = 99
         '
         'groupDetails
         '
@@ -895,7 +976,7 @@ Partial Class Payments
         '
         Me.GunaPictureBox6.BaseColor = System.Drawing.Color.White
         Me.GunaPictureBox6.Image = CType(resources.GetObject("GunaPictureBox6.Image"), System.Drawing.Image)
-        Me.GunaPictureBox6.Location = New System.Drawing.Point(744, 128)
+        Me.GunaPictureBox6.Location = New System.Drawing.Point(736, 126)
         Me.GunaPictureBox6.Name = "GunaPictureBox6"
         Me.GunaPictureBox6.Size = New System.Drawing.Size(15, 15)
         Me.GunaPictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -906,7 +987,7 @@ Partial Class Payments
         '
         Me.GunaPictureBox5.BaseColor = System.Drawing.Color.White
         Me.GunaPictureBox5.Image = CType(resources.GetObject("GunaPictureBox5.Image"), System.Drawing.Image)
-        Me.GunaPictureBox5.Location = New System.Drawing.Point(745, 95)
+        Me.GunaPictureBox5.Location = New System.Drawing.Point(737, 93)
         Me.GunaPictureBox5.Name = "GunaPictureBox5"
         Me.GunaPictureBox5.Size = New System.Drawing.Size(15, 15)
         Me.GunaPictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -917,7 +998,7 @@ Partial Class Payments
         '
         Me.GunaPictureBox4.BaseColor = System.Drawing.Color.White
         Me.GunaPictureBox4.Image = CType(resources.GetObject("GunaPictureBox4.Image"), System.Drawing.Image)
-        Me.GunaPictureBox4.Location = New System.Drawing.Point(745, 63)
+        Me.GunaPictureBox4.Location = New System.Drawing.Point(737, 61)
         Me.GunaPictureBox4.Name = "GunaPictureBox4"
         Me.GunaPictureBox4.Size = New System.Drawing.Size(15, 15)
         Me.GunaPictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -928,7 +1009,7 @@ Partial Class Payments
         '
         Me.GunaPictureBox3.BaseColor = System.Drawing.Color.White
         Me.GunaPictureBox3.Image = CType(resources.GetObject("GunaPictureBox3.Image"), System.Drawing.Image)
-        Me.GunaPictureBox3.Location = New System.Drawing.Point(745, 32)
+        Me.GunaPictureBox3.Location = New System.Drawing.Point(737, 30)
         Me.GunaPictureBox3.Name = "GunaPictureBox3"
         Me.GunaPictureBox3.Size = New System.Drawing.Size(15, 15)
         Me.GunaPictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -963,7 +1044,7 @@ Partial Class Payments
         Me.stopInterestCheck.CheckedOnColor = System.Drawing.Color.Black
         Me.stopInterestCheck.FillColor = System.Drawing.Color.White
         Me.stopInterestCheck.ForeColor = System.Drawing.Color.DarkRed
-        Me.stopInterestCheck.Location = New System.Drawing.Point(892, 123)
+        Me.stopInterestCheck.Location = New System.Drawing.Point(892, 122)
         Me.stopInterestCheck.Name = "stopInterestCheck"
         Me.stopInterestCheck.Size = New System.Drawing.Size(120, 20)
         Me.stopInterestCheck.TabIndex = 52
@@ -979,11 +1060,11 @@ Partial Class Payments
         Me.remTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.remTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.remTxt.ForeColor = System.Drawing.Color.Black
-        Me.remTxt.Location = New System.Drawing.Point(628, 162)
+        Me.remTxt.Location = New System.Drawing.Point(620, 157)
         Me.remTxt.Name = "remTxt"
         Me.remTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.remTxt.SelectedText = ""
-        Me.remTxt.Size = New System.Drawing.Size(369, 26)
+        Me.remTxt.Size = New System.Drawing.Size(385, 30)
         Me.remTxt.TabIndex = 51
         Me.remTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -991,7 +1072,7 @@ Partial Class Payments
         '
         Me.GunaLabel24.AutoSize = True
         Me.GunaLabel24.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel24.Location = New System.Drawing.Point(543, 165)
+        Me.GunaLabel24.Location = New System.Drawing.Point(544, 162)
         Me.GunaLabel24.Name = "GunaLabel24"
         Me.GunaLabel24.Size = New System.Drawing.Size(69, 17)
         Me.GunaLabel24.TabIndex = 50
@@ -1001,7 +1082,7 @@ Partial Class Payments
         '
         Me.GunaLabel23.AutoSize = True
         Me.GunaLabel23.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel23.Location = New System.Drawing.Point(789, 90)
+        Me.GunaLabel23.Location = New System.Drawing.Point(789, 89)
         Me.GunaLabel23.Name = "GunaLabel23"
         Me.GunaLabel23.Size = New System.Drawing.Size(97, 17)
         Me.GunaLabel23.TabIndex = 49
@@ -1017,7 +1098,7 @@ Partial Class Payments
         Me.amountpaidTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.amountpaidTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.amountpaidTxt.ForeColor = System.Drawing.Color.Black
-        Me.amountpaidTxt.Location = New System.Drawing.Point(892, 87)
+        Me.amountpaidTxt.Location = New System.Drawing.Point(892, 86)
         Me.amountpaidTxt.Name = "amountpaidTxt"
         Me.amountpaidTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.amountpaidTxt.SelectedText = ""
@@ -1029,7 +1110,7 @@ Partial Class Payments
         '
         Me.GunaLabel22.AutoSize = True
         Me.GunaLabel22.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel22.Location = New System.Drawing.Point(794, 61)
+        Me.GunaLabel22.Location = New System.Drawing.Point(794, 60)
         Me.GunaLabel22.Name = "GunaLabel22"
         Me.GunaLabel22.Size = New System.Drawing.Size(92, 17)
         Me.GunaLabel22.TabIndex = 47
@@ -1045,7 +1126,7 @@ Partial Class Payments
         Me.dtpicker5.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dtpicker5.ForeColor = System.Drawing.Color.Black
         Me.dtpicker5.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpicker5.Location = New System.Drawing.Point(892, 57)
+        Me.dtpicker5.Location = New System.Drawing.Point(892, 56)
         Me.dtpicker5.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpicker5.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpicker5.Name = "dtpicker5"
@@ -1068,7 +1149,7 @@ Partial Class Payments
         Me.dtpicker4.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dtpicker4.ForeColor = System.Drawing.Color.Black
         Me.dtpicker4.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpicker4.Location = New System.Drawing.Point(892, 26)
+        Me.dtpicker4.Location = New System.Drawing.Point(892, 25)
         Me.dtpicker4.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpicker4.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpicker4.Name = "dtpicker4"
@@ -1085,7 +1166,7 @@ Partial Class Payments
         '
         Me.GunaLabel21.AutoSize = True
         Me.GunaLabel21.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel21.Location = New System.Drawing.Point(765, 32)
+        Me.GunaLabel21.Location = New System.Drawing.Point(765, 31)
         Me.GunaLabel21.Name = "GunaLabel21"
         Me.GunaLabel21.Size = New System.Drawing.Size(121, 17)
         Me.GunaLabel21.TabIndex = 44
@@ -1102,7 +1183,7 @@ Partial Class Payments
         Me.bankCombo.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.bankCombo.ForeColor = System.Drawing.Color.Black
         Me.bankCombo.FormattingEnabled = True
-        Me.bankCombo.Location = New System.Drawing.Point(628, 123)
+        Me.bankCombo.Location = New System.Drawing.Point(620, 121)
         Me.bankCombo.Name = "bankCombo"
         Me.bankCombo.OnHoverItemBaseColor = System.Drawing.Color.Black
         Me.bankCombo.OnHoverItemForeColor = System.Drawing.Color.White
@@ -1113,7 +1194,7 @@ Partial Class Payments
         '
         Me.GunaLabel20.AutoSize = True
         Me.GunaLabel20.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel20.Location = New System.Drawing.Point(569, 126)
+        Me.GunaLabel20.Location = New System.Drawing.Point(569, 124)
         Me.GunaLabel20.Name = "GunaLabel20"
         Me.GunaLabel20.Size = New System.Drawing.Size(44, 17)
         Me.GunaLabel20.TabIndex = 42
@@ -1129,7 +1210,7 @@ Partial Class Payments
         Me.chequeTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.chequeTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chequeTxt.ForeColor = System.Drawing.Color.Black
-        Me.chequeTxt.Location = New System.Drawing.Point(628, 90)
+        Me.chequeTxt.Location = New System.Drawing.Point(620, 88)
         Me.chequeTxt.Name = "chequeTxt"
         Me.chequeTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.chequeTxt.SelectedText = ""
@@ -1141,7 +1222,7 @@ Partial Class Payments
         '
         Me.GunaLabel19.AutoSize = True
         Me.GunaLabel19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel19.Location = New System.Drawing.Point(502, 95)
+        Me.GunaLabel19.Location = New System.Drawing.Point(502, 93)
         Me.GunaLabel19.Name = "GunaLabel19"
         Me.GunaLabel19.Size = New System.Drawing.Size(111, 17)
         Me.GunaLabel19.TabIndex = 40
@@ -1158,7 +1239,7 @@ Partial Class Payments
         Me.formCombo.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.formCombo.ForeColor = System.Drawing.Color.Black
         Me.formCombo.FormattingEnabled = True
-        Me.formCombo.Location = New System.Drawing.Point(628, 58)
+        Me.formCombo.Location = New System.Drawing.Point(620, 56)
         Me.formCombo.Name = "formCombo"
         Me.formCombo.OnHoverItemBaseColor = System.Drawing.Color.Black
         Me.formCombo.OnHoverItemForeColor = System.Drawing.Color.White
@@ -1169,7 +1250,7 @@ Partial Class Payments
         '
         Me.GunaLabel18.AutoSize = True
         Me.GunaLabel18.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel18.Location = New System.Drawing.Point(486, 62)
+        Me.GunaLabel18.Location = New System.Drawing.Point(486, 60)
         Me.GunaLabel18.Name = "GunaLabel18"
         Me.GunaLabel18.Size = New System.Drawing.Size(127, 17)
         Me.GunaLabel18.TabIndex = 38
@@ -1186,7 +1267,7 @@ Partial Class Payments
         Me.mopCombo.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.mopCombo.ForeColor = System.Drawing.Color.Black
         Me.mopCombo.FormattingEnabled = True
-        Me.mopCombo.Location = New System.Drawing.Point(628, 26)
+        Me.mopCombo.Location = New System.Drawing.Point(620, 24)
         Me.mopCombo.Name = "mopCombo"
         Me.mopCombo.OnHoverItemBaseColor = System.Drawing.Color.Black
         Me.mopCombo.OnHoverItemForeColor = System.Drawing.Color.White
@@ -1197,7 +1278,7 @@ Partial Class Payments
         '
         Me.GunaLabel17.AutoSize = True
         Me.GunaLabel17.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel17.Location = New System.Drawing.Point(484, 32)
+        Me.GunaLabel17.Location = New System.Drawing.Point(484, 30)
         Me.GunaLabel17.Name = "GunaLabel17"
         Me.GunaLabel17.Size = New System.Drawing.Size(129, 17)
         Me.GunaLabel17.TabIndex = 36
@@ -1852,10 +1933,10 @@ Partial Class Payments
         '
         Me.grandtotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.grandtotal.DataPropertyName = "grand_total"
-        Me.grandtotal.HeaderText = "GRAND TOTAL"
+        Me.grandtotal.HeaderText = "TOTAL AMOUNT"
         Me.grandtotal.Name = "grandtotal"
         Me.grandtotal.ReadOnly = True
-        Me.grandtotal.Width = 109
+        Me.grandtotal.Width = 117
         '
         'amountpaid
         '
@@ -1893,6 +1974,15 @@ Partial Class Payments
         Me.username.ReadOnly = True
         Me.username.Width = 93
         '
+        'excess_balance
+        '
+        Me.excess_balance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.excess_balance.DataPropertyName = "excess"
+        Me.excess_balance.HeaderText = "EXCESS"
+        Me.excess_balance.Name = "excess_balance"
+        Me.excess_balance.ReadOnly = True
+        Me.excess_balance.Width = 74
+        '
         'Payments
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1929,25 +2019,6 @@ Partial Class Payments
     Friend WithEvents mainPanel As Panel
     Friend WithEvents dgv2 As Guna.UI.WinForms.GunaDataGridView
     Friend WithEvents dgv1 As Guna.UI.WinForms.GunaDataGridView
-    Friend WithEvents soa_number As DataGridViewTextBoxColumn
-    Friend WithEvents soa_date As DataGridViewTextBoxColumn
-    Friend WithEvents ordertype As DataGridViewTextBoxColumn
-    Friend WithEvents facility_code As DataGridViewTextBoxColumn
-    Friend WithEvents facility_name As DataGridViewTextBoxColumn
-    Friend WithEvents type_term As DataGridViewTextBoxColumn
-    Friend WithEvents purchase_number As DataGridViewTextBoxColumn
-    Friend WithEvents purchase_date As DataGridViewTextBoxColumn
-    Friend WithEvents quantity As DataGridViewTextBoxColumn
-    Friend WithEvents sub_total As DataGridViewTextBoxColumn
-    Friend WithEvents brochure As DataGridViewTextBoxColumn
-    Friend WithEvents poster As DataGridViewTextBoxColumn
-    Friend WithEvents drying_rack As DataGridViewTextBoxColumn
-    Friend WithEvents replace As DataGridViewTextBoxColumn
-    Friend WithEvents ads_amount As DataGridViewTextBoxColumn
-    Friend WithEvents due_date As DataGridViewTextBoxColumn
-    Friend WithEvents total_amount As DataGridViewTextBoxColumn
-    Friend WithEvents balance As DataGridViewTextBoxColumn
-    Friend WithEvents user As DataGridViewTextBoxColumn
     Friend WithEvents groupDetails As Guna.UI.WinForms.GunaGroupBox
     Friend WithEvents btaxText As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel15 As Guna.UI.WinForms.GunaLabel
@@ -2020,6 +2091,33 @@ Partial Class Payments
     Friend WithEvents balanceperSoa As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel5 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents computeInterest As Guna.UI.WinForms.GunaAdvenceButton
+    Friend WithEvents soa_number As DataGridViewTextBoxColumn
+    Friend WithEvents soa_txt As DataGridViewTextBoxColumn
+    Friend WithEvents soa_date As DataGridViewTextBoxColumn
+    Friend WithEvents ordertype As DataGridViewTextBoxColumn
+    Friend WithEvents facility_code As DataGridViewTextBoxColumn
+    Friend WithEvents facility_name As DataGridViewTextBoxColumn
+    Friend WithEvents type_term As DataGridViewTextBoxColumn
+    Friend WithEvents purchase_number As DataGridViewTextBoxColumn
+    Friend WithEvents purchase_date As DataGridViewTextBoxColumn
+    Friend WithEvents quantity As DataGridViewTextBoxColumn
+    Friend WithEvents sub_total As DataGridViewTextBoxColumn
+    Friend WithEvents brochure As DataGridViewTextBoxColumn
+    Friend WithEvents poster As DataGridViewTextBoxColumn
+    Friend WithEvents drying_rack As DataGridViewTextBoxColumn
+    Friend WithEvents replace As DataGridViewTextBoxColumn
+    Friend WithEvents ads_amount As DataGridViewTextBoxColumn
+    Friend WithEvents due_date As DataGridViewTextBoxColumn
+    Friend WithEvents total_amount As DataGridViewTextBoxColumn
+    Friend WithEvents balance As DataGridViewTextBoxColumn
+    Friend WithEvents old_amount As DataGridViewTextBoxColumn
+    Friend WithEvents user As DataGridViewTextBoxColumn
+    Friend WithEvents sub_amount As DataGridViewTextBoxColumn
+    Friend WithEvents remarks As DataGridViewTextBoxColumn
+    Friend WithEvents replace_type As DataGridViewTextBoxColumn
+    Friend WithEvents type As DataGridViewTextBoxColumn
+    Friend WithEvents date_modified As DataGridViewTextBoxColumn
+    Friend WithEvents modified_by As DataGridViewTextBoxColumn
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents soanumber As DataGridViewTextBoxColumn
     Friend WithEvents enbs As DataGridViewTextBoxColumn
@@ -2047,4 +2145,5 @@ Partial Class Payments
     Friend WithEvents bal As DataGridViewTextBoxColumn
     Friend WithEvents remark As DataGridViewTextBoxColumn
     Friend WithEvents username As DataGridViewTextBoxColumn
+    Friend WithEvents excess_balance As DataGridViewTextBoxColumn
 End Class

@@ -71,6 +71,10 @@ Public Class Pos
         dgv1.Columns("sub_amount").Visible = False ' Hide the column
         dgv1.Columns("fac_type").Visible = False ' Hide the column
         dgv1.Columns("replace_type").Visible = False ' Hide the column
+
+
+
+        excessTxt.Enabled = False
     End Sub
 
     Public Sub ordertext()
@@ -359,6 +363,50 @@ Public Class Pos
             Return
         End If
 
+        '' Fetch data from the ODBC source (conn)
+        'Try
+        '    If conn.State <> ConnectionState.Open Then
+        '        conn.Open()
+        '    End If
+
+        '    Dim odbcQuery As String = "SELECT * FROM acccounting WHERE fac_code = ? ORDER BY purchase_date DESC"
+        '    Using odbcCmd As New OdbcCommand(odbcQuery, conn)
+        '        odbcCmd.Parameters.AddWithValue("fac_code", codeTxt.Text)
+
+        '        Dim odbcAdapter As New OdbcDataAdapter(odbcCmd)
+        '        Dim odbcDataSet As New DataSet
+        '        odbcAdapter.Fill(odbcDataSet, "acccounting")
+        '        dgv1.DataSource = odbcDataSet.Tables("acccounting").DefaultView
+        '    End Using
+
+        '    ' Set rows to read-only if "order_type" contains "(Cancelled P.O)"
+        '    For Each row As DataGridViewRow In dgv1.Rows
+        '        If Not row.IsNewRow AndAlso row.Cells("order_type").Value IsNot Nothing Then
+        '            Dim orderType As String = row.Cells("order_type").Value.ToString()
+        '            ' Check if the order_type contains "(Cancelled P.O)"
+        '            If orderType.Contains("(Cancelled P.O)") Then
+        '                row.ReadOnly = True
+        '            Else
+        '                row.ReadOnly = False
+        '            End If
+        '        End If
+        '    Next
+
+        '    ' Calculate the total excess of a facility
+        '    Dim excessTotal As Decimal = 0
+        '    For Each row As DataRow In ds.Tables("acccounting").Rows
+        '        If Not IsDBNull(row("excess")) Then
+        '            excessTotal += Convert.ToDecimal(row("excess"))
+        '        End If
+        '    Next
+
+        '    ' Update balanceBox with the grandTotal value
+        '    excessTxt.Text = excessTotal.ToString("F2")
+
+        'Catch ex As Exception
+        '    MessageBox.Show("ODBC Error: " & ex.Message)
+        'End Try
+
         ' Fetch data from the ODBC source (conn)
         Try
             If conn.State <> ConnectionState.Open Then
@@ -367,12 +415,23 @@ Public Class Pos
 
             Dim odbcQuery As String = "SELECT * FROM acccounting WHERE fac_code = ? ORDER BY purchase_date DESC"
             Using odbcCmd As New OdbcCommand(odbcQuery, conn)
-                odbcCmd.Parameters.AddWithValue("fac_code", codeTxt.Text)
+                odbcCmd.Parameters.Add(New OdbcParameter("fac_code", codeTxt.Text))
 
                 Dim odbcAdapter As New OdbcDataAdapter(odbcCmd)
                 Dim odbcDataSet As New DataSet
                 odbcAdapter.Fill(odbcDataSet, "acccounting")
                 dgv1.DataSource = odbcDataSet.Tables("acccounting").DefaultView
+
+                ' Calculate the total excess of a facility
+                Dim excessTotal As Decimal = 0
+                For Each row As DataRow In odbcDataSet.Tables("acccounting").Rows
+                    If Not IsDBNull(row("excess")) Then
+                        excessTotal += Convert.ToDecimal(row("excess"))
+                    End If
+                Next
+
+                ' Update excessTxt with the total excess value
+                excessTxt.Text = excessTotal.ToString("F2")
             End Using
 
             ' Set rows to read-only if "order_type" contains "(Cancelled P.O)"
@@ -380,16 +439,14 @@ Public Class Pos
                 If Not row.IsNewRow AndAlso row.Cells("order_type").Value IsNot Nothing Then
                     Dim orderType As String = row.Cells("order_type").Value.ToString()
                     ' Check if the order_type contains "(Cancelled P.O)"
-                    If orderType.Contains("(Cancelled P.O)") Then
-                        row.ReadOnly = True
-                    Else
-                        row.ReadOnly = False
-                    End If
+                    row.ReadOnly = orderType.Contains("(Cancelled P.O)")
                 End If
             Next
 
+
+
         Catch ex As Exception
-            MessageBox.Show("ODBC Error: " & ex.Message)
+            MessageBox.Show("ODBC Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
         Try
@@ -538,6 +595,39 @@ Public Class Pos
     'End Sub
 
     Private Sub computeButton_Click(sender As Object, e As EventArgs) Handles computeButton.Click
+        'Dim brochureamount As Double = 0
+        'Dim posteramount As Double = 0
+        'Dim dryingamount As Double = 0
+        'Dim replaceamount As Double = 0
+
+        'Dim brochureCount As Double = 0
+        'Dim posterCount As Double = 0
+        'Dim replaceCount As Double = 0
+
+        '' Check and parse brochure count
+        'If Not String.IsNullOrEmpty(brochureTxt.Text) AndAlso Double.TryParse(brochureTxt.Text, brochureCount) Then
+        '    brochureamount = brochureCount * 1.5
+        'End If
+
+        '' Check and parse poster count
+        'If Not String.IsNullOrEmpty(posterTxt.Text) AndAlso Double.TryParse(posterTxt.Text, posterCount) Then
+        '    posteramount = posterCount * 10.0
+        '    dryingamount = posterCount * 0.0 ' This will always be 0 as per your code
+        'End If
+
+        '' Check and parse replace count
+        'If Not String.IsNullOrEmpty(replaceTxt.Text) AndAlso Double.TryParse(replaceTxt.Text, replaceCount) Then
+        '    replaceamount = replaceCount * 0.0 ' This will always be 0 as per your code
+        'End If
+
+        '' Calculate the total amount
+        'Dim totalamount As Double = brochureamount + posteramount + dryingamount + replaceamount
+
+        '' Display the amounts in the appropriate text boxes
+        'adsTxt.Text = totalamount.ToString("F2") ' Format as fixed-point number with 1 decimal place
+
+        '' Update totalTxt.Text by adding the value from amountTxt.Text
+        'UpdateTotalAmount()
         Dim brochureamount As Double = 0
         Dim posteramount As Double = 0
         Dim dryingamount As Double = 0
@@ -546,6 +636,18 @@ Public Class Pos
         Dim brochureCount As Double = 0
         Dim posterCount As Double = 0
         Dim replaceCount As Double = 0
+        Dim excessAmount As Double = 0
+        Dim previousTotal As Double = 0
+
+        ' Parse excess amount
+        If Not String.IsNullOrEmpty(excessTxt.Text) Then
+            Double.TryParse(excessTxt.Text, excessAmount)
+        End If
+
+        ' Parse the previous total from totalTxt (before recomputing)
+        If Not String.IsNullOrEmpty(totalTxt.Text) Then
+            Double.TryParse(totalTxt.Text, previousTotal)
+        End If
 
         ' Check and parse brochure count
         If Not String.IsNullOrEmpty(brochureTxt.Text) AndAlso Double.TryParse(brochureTxt.Text, brochureCount) Then
@@ -555,22 +657,40 @@ Public Class Pos
         ' Check and parse poster count
         If Not String.IsNullOrEmpty(posterTxt.Text) AndAlso Double.TryParse(posterTxt.Text, posterCount) Then
             posteramount = posterCount * 10.0
-            dryingamount = posterCount * 0.0 ' This will always be 0 as per your code
+            dryingamount = posterCount * 0.0 ' This remains 0 as per your logic
         End If
 
         ' Check and parse replace count
         If Not String.IsNullOrEmpty(replaceTxt.Text) AndAlso Double.TryParse(replaceTxt.Text, replaceCount) Then
-            replaceamount = replaceCount * 0.0 ' This will always be 0 as per your code
+            replaceamount = replaceCount * 0.0 ' This remains 0 as per your logic
         End If
 
-        ' Calculate the total amount
-        Dim totalamount As Double = brochureamount + posteramount + dryingamount + replaceamount
+        ' Compute total amount for the new calculation
+        Dim totalAmount As Double = brochureamount + posteramount + dryingamount + replaceamount
 
-        ' Display the amounts in the appropriate text boxes
-        adsTxt.Text = totalamount.ToString("F2") ' Format as fixed-point number with 1 decimal place
+        ' Display the computed amount in adsTxt
+        adsTxt.Text = totalAmount.ToString("F2") ' Format as fixed-point number with 2 decimal places
 
-        ' Update totalTxt.Text by adding the value from amountTxt.Text
+        ' Call UpdateTotalAmount to add amountTxt and adsTxt
         UpdateTotalAmount()
+
+        ' Now, deduct the excess amount from the updated total
+        Dim updatedTotal As Double = 0
+        Double.TryParse(totalTxt.Text, updatedTotal) ' Get updated total from UpdateTotalAmount()
+        updatedTotal -= excessAmount ' Deduct excess amount
+
+        ' Ensure the total never goes negative
+        If updatedTotal < 0 Then
+            updatedTotal = 0
+        End If
+
+        ' Display the adjusted total
+        totalTxt.Text = updatedTotal.ToString("F2")
+
+        ' If excessAmount was used, reset it to 0 so that it is not deducted multiple times
+        If excessAmount > 0 Then
+            excessTxt.Text = "0.00"
+        End If
     End Sub
 
     Private Sub replacementCheck_CheckedChanged(sender As Object, e As EventArgs) Handles replacementCheck.CheckedChanged
@@ -1336,8 +1456,8 @@ Public Class Pos
     '    End Using
     'End Function
 
-    Private Function InsertRecord(ByRef soatxt As String, soaDate As DateTime, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As DateTime, quantity As Integer, subtotal As Double, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As DateTime, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String, type2 As String, date_modified As DateTime, modified_by As String) As Double
-        Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type, type, date_modified, modified_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    Private Function InsertRecord(ByRef soatxt As String, soaDate As DateTime, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As DateTime, quantity As Integer, subtotal As Double, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As DateTime, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String, type2 As String, date_modified As DateTime, modified_by As String, excess As Double) As Double
+        Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type, type, date_modified, modified_by, excess) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         Dim lastSoaQuery As String = "SELECT soa_number FROM acccounting WHERE LEFT(soa_number, 4) = ? ORDER BY soa_number DESC LIMIT 1"
         Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
 
@@ -1394,6 +1514,7 @@ Public Class Pos
                     cmd.Parameters.AddWithValue("@type", type2)
                     cmd.Parameters.AddWithValue("@date_modified", DateTime.Now)
                     cmd.Parameters.AddWithValue("@modified_by", modified_by)
+                    cmd.Parameters.AddWithValue("@excess", excess)
 
                     cmd.ExecuteNonQuery()
 
@@ -1437,6 +1558,22 @@ Public Class Pos
                         cmd5.ExecuteNonQuery()
                     End Using
 
+                    Dim updateExcessQuery As String = "UPDATE payments SET excess = ? WHERE fac_code = ? AND excess <> ''"
+
+                    Using cmd6 As New OdbcCommand(updateExcessQuery, conn, transaction)
+                        cmd6.Parameters.AddWithValue("excess", excessTxt.Text)
+                        cmd6.Parameters.AddWithValue("fac_code", codeTxt.Text)
+                        cmd6.ExecuteNonQuery()
+                    End Using
+
+                    Dim updateExcess As String = "UPDATE acccounting SET excess = ? WHERE fac_code = ? AND excess <> ''"
+
+                    Using cmd7 As New OdbcCommand(updateExcess, conn, transaction)
+                        cmd7.Parameters.AddWithValue("excess", excessTxt.Text)
+                        cmd7.Parameters.AddWithValue("fac_code", codeTxt.Text)
+                        cmd7.ExecuteNonQuery()
+                    End Using
+
                     transaction.Commit()
                     Return lastInsertedId
                 End Using
@@ -1460,6 +1597,8 @@ Public Class Pos
                 CancelPurchaseOrders()  ' Proceed with cancellation
                 cleartxt()  ' Clear fields after successful cancellation
                 loaddgv()  ' Reload the DataGridView to reflect the changes
+                Payments.loaddgv()
+                Payments.payments()
             End If
         Else
             ' If adding a new order, ask user for confirmation
@@ -1467,6 +1606,8 @@ Public Class Pos
                 AddNewOrder()  ' Proceed with adding the new order
                 cleartxt()  ' Clear fields after successful addition
                 loaddgv()  ' Reload the DataGridView to reflect the changes
+                Payments.loaddgv()
+                Payments.payments()
             End If
         End If
 
@@ -1541,6 +1682,8 @@ Public Class Pos
             Integer.TryParse(replaceCombo.SelectedItem.ToString(), replace)
         End If
 
+        Dim excess As Double = "0.00"
+
         '' Insert the formatted values into the database
         'Dim soaNumber As Integer = InsertRecord(soatxt, Date.Now.Date, orderType, codeTxt.Text, nameBox.Text, termBox.Text,
         '                                    purchaseBox.Text, dtpicker2.Value.Date, Integer.Parse(qtyTxt.Text),
@@ -1556,7 +1699,7 @@ Public Class Pos
              ParseOrZero(dryingTxt.Text), ParseOrZero(replaceTxt.Text),
              formattedAds, dtpicker1.Value,
              formattedTotal, formattedBalance,
-             Login.userTxt.Text, Double.Parse(amountTxt.Text), replace, typeText.Text, DateTime.Now, Login.userTxt.Text)
+             Login.userTxt.Text, Double.Parse(amountTxt.Text), replace, typeText.Text, DateTime.Now, Login.userTxt.Text, excess)
 
 
         UpdateSoaTxt(soatxt, soaNumber)
