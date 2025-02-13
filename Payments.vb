@@ -1448,6 +1448,21 @@ Public Class Payments
     Private Sub dgv2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv2.CellContentClick
 
     End Sub
+
+    Private Sub mopCombo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles mopCombo.SelectedIndexChanged
+        ' Disable the TextBox if the selected item is "Disable"
+        If mopCombo.SelectedItem IsNot Nothing AndAlso mopCombo.SelectedItem.ToString() = "WALK IN" Then
+            bankCombo.SelectedItem = "PNB"
+            'bankCombo.Enabled = False
+        Else
+            bankCombo.SelectedIndex = -1
+            'bankCombo.Enabled = True
+        End If
+    End Sub
+
+    Private Sub dailySalesBtn_Click(sender As Object, e As EventArgs) Handles dailySalesBtn.Click
+        DailySales.Show()
+    End Sub
 End Class
 
 'Private Sub CalculateAndUpdateInterest()
