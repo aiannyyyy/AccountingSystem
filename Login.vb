@@ -29,6 +29,9 @@ Public Class Login
             ElseIf userName = "ACCOUNTANT" OrElse userName = "ACCOUNTING ASSISTANT" Then
                 Pos.Show()
                 Me.Hide()
+            ElseIf userName = "CASHIER" OrElse userName = "COLLECTIONS" Then
+                Payments.Show()
+                Me.Hide()
             End If
         Else
             MsgBox("Login Failed. Username or password is incorrect.")

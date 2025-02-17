@@ -120,6 +120,30 @@
   <metadata name="GunaElipse1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>230, 17</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>53</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="PictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAA1lJREFUaEPt
+        mE9IVEEcx7dDBV3yWpDZJfNmCgURuO4f/4HrO4TWQVwIO3QIhSgvuUunBQ0khGKFXDykkagdbIMCxRW6
+        tZdOdtAOnoLcLru3fs33OW97O2+e7G67M5vsFz4gM7/5zvfnm9n16amrrrrUKxgMtvp8vojf798QCQQC
+        Xl5Wu0JIFjbNmiA30Awvr02xkGNi6COYZw2N8KW1IxZqRhK2GHbZWoPb6BWOkyRgqYS5nT6xEHtCqHI4
+        6OnpaeKW6sUChIVAR9Lf66fYgy56cq/LMYfjyW3ViwXYFAOJWOFTz/uIkv15MCbU7nJb9RKC5HELLyI2
+        o+V4iZe82PAi9ma0fFlajdwxAiWHFxm9HTAb0fJRzDaOYvPxkaA0XCnAA17w5PbqdGwa6e/1xSrdCDy5
+        vRrRamvDr0TL99HBDkcj+wt+yq653xnMocY+Bo/RwU6CJ7z5NtUXLTWP0eJloret9GGqNx/o55tumug+
+        Rwv3WwqC2sEcalBrjZkeqzfI9Fy8ou7PFbaZ12rEHhK/bQT9GGkvGLeDOdQ4ntrKdasRtR/BbNMoLbd9
+        KwjzL8CLeXJ7taKk4ZWGKgtD75sjJUMZebBSCGW4nT6xEAl5uFIIJbidPrEj0SQPVyx4ooa+dxG7WKCw
+        M2DR6H87tKusI/Y+pO9l6ijRyrUYrf/9gnQFNayWL6s90QuPl+In2ZdaM9G7DmcDGMMcalgtX1Z7Mht5
+        6aECXp09RBz/7xpxoxYbaZn9cvFSdGOu/XF8RxpaQvuj+A7WYC230Sfjc67J2M7NB9d/0ImhOZONGLsD
+        kuB2UGPV933KZOABL26rVkYqFxlI5cji/ETSDNYYnv59MHtG2gDAHGpQizV2D3hy++rLSFPDQCqbtgcA
+        eCqnhhNmM1fvTlJ6utHRBMYwhxrUYo3oA2/swberjvD42UYHzs0PaYt/pdPD8/ljg9DjD4dMrAYAam4u
+        7Uk9TLZyu1U7am5PQqRzZZ8ujL3OhxbBHGpkawup0pPBhZRvKAfHpuvZMt16OmWCn+VHyR0jla3snzDs
+        EnplG6mgokfM2M6uyTZRgbGVq8y7yuHdkG+iiorcFZ3HygIZeJzyxUyiMnOVIAOPU76OUSPZGWa0qRk9
+        /++qq65jI4/nD7uOULw/t3g7AAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="cancelPo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -204,7 +228,6 @@
   <metadata name="excess.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAABILAAASCwAAAAAAAAAA
@@ -2314,5 +2337,8 @@
   </data>
   <metadata name="GunaDragControl1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>348, 17</value>
+  </metadata>
+  <metadata name="Timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>502, 17</value>
   </metadata>
 </root>

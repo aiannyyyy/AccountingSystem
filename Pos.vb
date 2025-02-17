@@ -39,7 +39,7 @@ Public Class Pos
         ordertext()
 
         ' Display the fullname on the label when the form loads
-        lblshow.Text = "POINT OF SALE | USER: " & Login.userTxt.Text
+        lblshow.Text = Login.userTxt.Text
 
         replaceCombo.Enabled = False
 
@@ -75,6 +75,9 @@ Public Class Pos
 
 
         excessTxt.Enabled = False
+
+        Timer1.Interval = 1000 ' Update every second
+        Timer1.Start() ' Start the timer
     End Sub
 
     Public Sub ordertext()
@@ -125,7 +128,7 @@ Public Class Pos
     Public Sub loaddgv()
         Try
             Call connection()
-            Dim query As String = "SELECT * FROM acccounting ORDER BY soa_date DESC"
+            Dim query As String = "SELECT * FROM acccounting WHERE balance <> 0 ORDER BY soa_date DESC"
             Dim da As New OdbcDataAdapter(query, conn)
             Dim ds As New DataSet()
             ds.Clear()
@@ -2058,6 +2061,11 @@ Public Class Pos
     Private Sub remBox_TextChanged(sender As Object, e As EventArgs) Handles remBox.TextChanged
         remBox.Text = remBox.Text.ToUpper()
         remBox.SelectionStart = remBox.Text.Length ' Keeps cursor at the end
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Dim pstTime As DateTime = DateTime.UtcNow.AddHours(8) ' Convert UTC to PST (UTC+8)
+        dtLabel.Text = "Date Today: " & pstTime.ToString("yyyy-MM-dd") & " Time Today: " & pstTime.ToString("HH:mm:ss") & " PST"
     End Sub
 
 

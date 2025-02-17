@@ -51,6 +51,8 @@ Partial Class Pos
         Me.GunaLabel8 = New Guna.UI.WinForms.GunaLabel()
         Me.walkCheck = New System.Windows.Forms.CheckBox()
         Me.grpOrders = New Guna.UI.WinForms.GunaGroupBox()
+        Me.excessTxt = New Guna.UI.WinForms.GunaTextBox()
+        Me.GunaLabel12 = New Guna.UI.WinForms.GunaLabel()
         Me.typeText = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel11 = New Guna.UI.WinForms.GunaLabel()
         Me.computeButton = New Guna.UI.WinForms.GunaAdvenceButton()
@@ -79,15 +81,6 @@ Partial Class Pos
         Me.replacementCheck = New System.Windows.Forms.CheckBox()
         Me.monitoringCheck = New System.Windows.Forms.CheckBox()
         Me.dgv1 = New Guna.UI.WinForms.GunaDataGridView()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.replaceAdd = New System.Windows.Forms.Button()
-        Me.expiredCheck = New System.Windows.Forms.CheckBox()
-        Me.remBox = New Guna.UI.WinForms.GunaTextBox()
-        Me.remLbl = New Guna.UI.WinForms.GunaLabel()
-        Me.replaceCombo = New System.Windows.Forms.ComboBox()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.cancelPo = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.soa_number = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.soa_txt = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -116,8 +109,20 @@ Partial Class Pos
         Me.username = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.excess = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.GunaLabel12 = New Guna.UI.WinForms.GunaLabel()
-        Me.excessTxt = New Guna.UI.WinForms.GunaTextBox()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.replaceAdd = New System.Windows.Forms.Button()
+        Me.expiredCheck = New System.Windows.Forms.CheckBox()
+        Me.remBox = New Guna.UI.WinForms.GunaTextBox()
+        Me.remLbl = New Guna.UI.WinForms.GunaLabel()
+        Me.replaceCombo = New System.Windows.Forms.ComboBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.dtLabel = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -125,6 +130,8 @@ Partial Class Pos
         Me.grpOrders.SuspendLayout()
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
+        Me.Panel7.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GunaElipse1
@@ -134,15 +141,15 @@ Partial Class Pos
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.PictureBox1)
-        Me.Panel1.Controls.Add(Me.lblshow)
         Me.Panel1.Controls.Add(Me.GunaControlBox3)
         Me.Panel1.Controls.Add(Me.GunaControlBox2)
         Me.Panel1.Controls.Add(Me.GunaControlBox1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1047, 34)
+        Me.Panel1.Size = New System.Drawing.Size(1043, 34)
         Me.Panel1.TabIndex = 1
         '
         'PictureBox1
@@ -159,8 +166,8 @@ Partial Class Pos
         '
         Me.lblshow.AutoSize = True
         Me.lblshow.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblshow.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.lblshow.Location = New System.Drawing.Point(44, 8)
+        Me.lblshow.ForeColor = System.Drawing.Color.Black
+        Me.lblshow.Location = New System.Drawing.Point(934, 11)
         Me.lblshow.Name = "lblshow"
         Me.lblshow.Size = New System.Drawing.Size(83, 17)
         Me.lblshow.TabIndex = 4
@@ -173,7 +180,7 @@ Partial Class Pos
         Me.GunaControlBox3.AnimationSpeed = 0.03!
         Me.GunaControlBox3.IconColor = System.Drawing.Color.White
         Me.GunaControlBox3.IconSize = 15.0!
-        Me.GunaControlBox3.Location = New System.Drawing.Point(1013, 1)
+        Me.GunaControlBox3.Location = New System.Drawing.Point(1009, 1)
         Me.GunaControlBox3.Name = "GunaControlBox3"
         Me.GunaControlBox3.OnHoverBackColor = System.Drawing.Color.FromArgb(CType(CType(164, Byte), Integer), CType(CType(176, Byte), Integer), CType(CType(190, Byte), Integer))
         Me.GunaControlBox3.OnHoverIconColor = System.Drawing.Color.White
@@ -189,7 +196,7 @@ Partial Class Pos
         Me.GunaControlBox2.ControlBoxType = Guna.UI.WinForms.FormControlBoxType.MinimizeBox
         Me.GunaControlBox2.IconColor = System.Drawing.Color.White
         Me.GunaControlBox2.IconSize = 15.0!
-        Me.GunaControlBox2.Location = New System.Drawing.Point(941, 1)
+        Me.GunaControlBox2.Location = New System.Drawing.Point(937, 1)
         Me.GunaControlBox2.Name = "GunaControlBox2"
         Me.GunaControlBox2.OnHoverBackColor = System.Drawing.Color.FromArgb(CType(CType(164, Byte), Integer), CType(CType(176, Byte), Integer), CType(CType(190, Byte), Integer))
         Me.GunaControlBox2.OnHoverIconColor = System.Drawing.Color.White
@@ -206,7 +213,7 @@ Partial Class Pos
         Me.GunaControlBox1.Enabled = False
         Me.GunaControlBox1.IconColor = System.Drawing.Color.White
         Me.GunaControlBox1.IconSize = 15.0!
-        Me.GunaControlBox1.Location = New System.Drawing.Point(977, 1)
+        Me.GunaControlBox1.Location = New System.Drawing.Point(973, 1)
         Me.GunaControlBox1.Name = "GunaControlBox1"
         Me.GunaControlBox1.OnHoverBackColor = System.Drawing.Color.FromArgb(CType(CType(164, Byte), Integer), CType(CType(176, Byte), Integer), CType(CType(190, Byte), Integer))
         Me.GunaControlBox1.OnHoverIconColor = System.Drawing.Color.White
@@ -243,9 +250,9 @@ Partial Class Pos
         Me.grpBox.Controls.Add(Me.GunaLabel1)
         Me.grpBox.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpBox.LineColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.grpBox.Location = New System.Drawing.Point(20, 43)
+        Me.grpBox.Location = New System.Drawing.Point(14, 78)
         Me.grpBox.Name = "grpBox"
-        Me.grpBox.Size = New System.Drawing.Size(1007, 250)
+        Me.grpBox.Size = New System.Drawing.Size(1019, 251)
         Me.grpBox.TabIndex = 3
         Me.grpBox.TextLocation = New System.Drawing.Point(10, 8)
         '
@@ -470,7 +477,7 @@ Partial Class Pos
         '
         'amountTxt
         '
-        Me.amountTxt.BackColor = System.Drawing.Color.Black
+        Me.amountTxt.BackColor = System.Drawing.Color.Transparent
         Me.amountTxt.BaseColor = System.Drawing.Color.White
         Me.amountTxt.BorderColor = System.Drawing.Color.Black
         Me.amountTxt.BorderSize = 1
@@ -483,6 +490,7 @@ Partial Class Pos
         Me.amountTxt.Location = New System.Drawing.Point(373, 107)
         Me.amountTxt.Name = "amountTxt"
         Me.amountTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.amountTxt.Radius = 3
         Me.amountTxt.SelectedText = ""
         Me.amountTxt.Size = New System.Drawing.Size(123, 27)
         Me.amountTxt.TabIndex = 22
@@ -500,7 +508,7 @@ Partial Class Pos
         '
         'qtyTxt
         '
-        Me.qtyTxt.BackColor = System.Drawing.Color.Black
+        Me.qtyTxt.BackColor = System.Drawing.Color.Transparent
         Me.qtyTxt.BaseColor = System.Drawing.Color.White
         Me.qtyTxt.BorderColor = System.Drawing.Color.Black
         Me.qtyTxt.BorderSize = 1
@@ -512,6 +520,7 @@ Partial Class Pos
         Me.qtyTxt.Location = New System.Drawing.Point(293, 107)
         Me.qtyTxt.Name = "qtyTxt"
         Me.qtyTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.qtyTxt.Radius = 3
         Me.qtyTxt.SelectedText = ""
         Me.qtyTxt.Size = New System.Drawing.Size(74, 27)
         Me.qtyTxt.TabIndex = 20
@@ -568,9 +577,40 @@ Partial Class Pos
         Me.grpOrders.TabIndex = 10
         Me.grpOrders.TextLocation = New System.Drawing.Point(10, 8)
         '
+        'excessTxt
+        '
+        Me.excessTxt.BackColor = System.Drawing.Color.Transparent
+        Me.excessTxt.BaseColor = System.Drawing.Color.White
+        Me.excessTxt.BorderColor = System.Drawing.Color.Black
+        Me.excessTxt.BorderSize = 1
+        Me.excessTxt.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.excessTxt.FocusedBaseColor = System.Drawing.Color.White
+        Me.excessTxt.FocusedBorderColor = System.Drawing.Color.Black
+        Me.excessTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.excessTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.excessTxt.Location = New System.Drawing.Point(382, 67)
+        Me.excessTxt.Name = "excessTxt"
+        Me.excessTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.excessTxt.Radius = 3
+        Me.excessTxt.SelectedText = ""
+        Me.excessTxt.Size = New System.Drawing.Size(85, 27)
+        Me.excessTxt.TabIndex = 26
+        Me.excessTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'GunaLabel12
+        '
+        Me.GunaLabel12.AutoSize = True
+        Me.GunaLabel12.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GunaLabel12.Location = New System.Drawing.Point(397, 35)
+        Me.GunaLabel12.Name = "GunaLabel12"
+        Me.GunaLabel12.Size = New System.Drawing.Size(55, 26)
+        Me.GunaLabel12.TabIndex = 26
+        Me.GunaLabel12.Text = "EXCESS " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "AMOUNT"
+        Me.GunaLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'typeText
         '
-        Me.typeText.BackColor = System.Drawing.Color.Black
+        Me.typeText.BackColor = System.Drawing.Color.Transparent
         Me.typeText.BaseColor = System.Drawing.Color.White
         Me.typeText.BorderColor = System.Drawing.Color.Black
         Me.typeText.BorderSize = 1
@@ -583,6 +623,7 @@ Partial Class Pos
         Me.typeText.Multiline = True
         Me.typeText.Name = "typeText"
         Me.typeText.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.typeText.Radius = 3
         Me.typeText.SelectedText = ""
         Me.typeText.Size = New System.Drawing.Size(131, 28)
         Me.typeText.TabIndex = 29
@@ -634,7 +675,7 @@ Partial Class Pos
         '
         'dryingTxt
         '
-        Me.dryingTxt.BackColor = System.Drawing.Color.Black
+        Me.dryingTxt.BackColor = System.Drawing.Color.Transparent
         Me.dryingTxt.BaseColor = System.Drawing.Color.White
         Me.dryingTxt.BorderColor = System.Drawing.Color.Black
         Me.dryingTxt.BorderSize = 1
@@ -646,6 +687,7 @@ Partial Class Pos
         Me.dryingTxt.Location = New System.Drawing.Point(288, 68)
         Me.dryingTxt.Name = "dryingTxt"
         Me.dryingTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.dryingTxt.Radius = 3
         Me.dryingTxt.SelectedText = ""
         Me.dryingTxt.Size = New System.Drawing.Size(84, 26)
         Me.dryingTxt.TabIndex = 17
@@ -653,7 +695,7 @@ Partial Class Pos
         '
         'posterTxt
         '
-        Me.posterTxt.BackColor = System.Drawing.Color.Black
+        Me.posterTxt.BackColor = System.Drawing.Color.Transparent
         Me.posterTxt.BaseColor = System.Drawing.Color.White
         Me.posterTxt.BorderColor = System.Drawing.Color.Black
         Me.posterTxt.BorderSize = 1
@@ -665,6 +707,7 @@ Partial Class Pos
         Me.posterTxt.Location = New System.Drawing.Point(198, 68)
         Me.posterTxt.Name = "posterTxt"
         Me.posterTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.posterTxt.Radius = 3
         Me.posterTxt.SelectedText = ""
         Me.posterTxt.Size = New System.Drawing.Size(84, 26)
         Me.posterTxt.TabIndex = 16
@@ -672,7 +715,7 @@ Partial Class Pos
         '
         'totalTxt
         '
-        Me.totalTxt.BackColor = System.Drawing.Color.Black
+        Me.totalTxt.BackColor = System.Drawing.Color.Transparent
         Me.totalTxt.BaseColor = System.Drawing.Color.White
         Me.totalTxt.BorderColor = System.Drawing.Color.Black
         Me.totalTxt.BorderSize = 1
@@ -684,6 +727,7 @@ Partial Class Pos
         Me.totalTxt.Location = New System.Drawing.Point(104, 145)
         Me.totalTxt.Name = "totalTxt"
         Me.totalTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.totalTxt.Radius = 3
         Me.totalTxt.SelectedText = ""
         Me.totalTxt.Size = New System.Drawing.Size(178, 26)
         Me.totalTxt.TabIndex = 15
@@ -691,7 +735,7 @@ Partial Class Pos
         '
         'adsTxt
         '
-        Me.adsTxt.BackColor = System.Drawing.Color.Black
+        Me.adsTxt.BackColor = System.Drawing.Color.Transparent
         Me.adsTxt.BaseColor = System.Drawing.Color.White
         Me.adsTxt.BorderColor = System.Drawing.Color.Black
         Me.adsTxt.BorderSize = 1
@@ -703,6 +747,7 @@ Partial Class Pos
         Me.adsTxt.Location = New System.Drawing.Point(104, 106)
         Me.adsTxt.Name = "adsTxt"
         Me.adsTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.adsTxt.Radius = 3
         Me.adsTxt.SelectedText = ""
         Me.adsTxt.Size = New System.Drawing.Size(178, 26)
         Me.adsTxt.TabIndex = 14
@@ -710,7 +755,7 @@ Partial Class Pos
         '
         'brochureTxt
         '
-        Me.brochureTxt.BackColor = System.Drawing.Color.Black
+        Me.brochureTxt.BackColor = System.Drawing.Color.Transparent
         Me.brochureTxt.BaseColor = System.Drawing.Color.White
         Me.brochureTxt.BorderColor = System.Drawing.Color.Black
         Me.brochureTxt.BorderSize = 1
@@ -722,6 +767,7 @@ Partial Class Pos
         Me.brochureTxt.Location = New System.Drawing.Point(104, 68)
         Me.brochureTxt.Name = "brochureTxt"
         Me.brochureTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.brochureTxt.Radius = 3
         Me.brochureTxt.SelectedText = ""
         Me.brochureTxt.Size = New System.Drawing.Size(84, 26)
         Me.brochureTxt.TabIndex = 11
@@ -874,6 +920,7 @@ Partial Class Pos
         Me.termBox.Location = New System.Drawing.Point(929, 35)
         Me.termBox.Name = "termBox"
         Me.termBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.termBox.Radius = 3
         Me.termBox.SelectedText = ""
         Me.termBox.Size = New System.Drawing.Size(49, 33)
         Me.termBox.TabIndex = 3
@@ -881,7 +928,7 @@ Partial Class Pos
         '
         'nameBox
         '
-        Me.nameBox.BackColor = System.Drawing.Color.Black
+        Me.nameBox.BackColor = System.Drawing.Color.Transparent
         Me.nameBox.BaseColor = System.Drawing.Color.White
         Me.nameBox.BorderColor = System.Drawing.Color.Black
         Me.nameBox.BorderSize = 1
@@ -894,6 +941,7 @@ Partial Class Pos
         Me.nameBox.Location = New System.Drawing.Point(280, 35)
         Me.nameBox.Name = "nameBox"
         Me.nameBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.nameBox.Radius = 3
         Me.nameBox.SelectedText = ""
         Me.nameBox.Size = New System.Drawing.Size(634, 33)
         Me.nameBox.TabIndex = 2
@@ -1006,7 +1054,7 @@ Partial Class Pos
         Me.dgv1.DefaultCellStyle = DataGridViewCellStyle7
         Me.dgv1.EnableHeadersVisualStyles = False
         Me.dgv1.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        Me.dgv1.Location = New System.Drawing.Point(23, 336)
+        Me.dgv1.Location = New System.Drawing.Point(17, 380)
         Me.dgv1.Name = "dgv1"
         Me.dgv1.RowHeadersVisible = False
         Me.dgv1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders
@@ -1015,7 +1063,7 @@ Partial Class Pos
         Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle8
         Me.dgv1.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgv1.Size = New System.Drawing.Size(1004, 295)
+        Me.dgv1.Size = New System.Drawing.Size(1004, 214)
         Me.dgv1.TabIndex = 16
         Me.dgv1.Theme = Guna.UI.WinForms.GunaDataGridViewPresetThemes.LightGrid
         Me.dgv1.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
@@ -1040,6 +1088,231 @@ Partial Class Pos
         Me.dgv1.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
         Me.dgv1.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black
         '
+        'cancelPo
+        '
+        Me.cancelPo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.cancelPo.HeaderText = "CANCEL P.O"
+        Me.cancelPo.Name = "cancelPo"
+        Me.cancelPo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.cancelPo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.cancelPo.Width = 93
+        '
+        'soa_number
+        '
+        Me.soa_number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.soa_number.DataPropertyName = "soa_number"
+        Me.soa_number.HeaderText = "SOA NUMBER"
+        Me.soa_number.Name = "soa_number"
+        Me.soa_number.Width = 108
+        '
+        'soa_txt
+        '
+        Me.soa_txt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.soa_txt.DataPropertyName = "soa_txt"
+        Me.soa_txt.HeaderText = "SOA TXT"
+        Me.soa_txt.Name = "soa_txt"
+        Me.soa_txt.Width = 79
+        '
+        'Column2
+        '
+        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.Column2.DataPropertyName = "soa_date"
+        Me.Column2.HeaderText = "SOA DATE"
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 150
+        '
+        'order_type
+        '
+        Me.order_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.order_type.DataPropertyName = "order_type"
+        Me.order_type.HeaderText = "TYPE"
+        Me.order_type.Name = "order_type"
+        Me.order_type.Width = 220
+        '
+        'fac_code
+        '
+        Me.fac_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.fac_code.DataPropertyName = "fac_code"
+        Me.fac_code.HeaderText = "FACILITY CODE"
+        Me.fac_code.Name = "fac_code"
+        Me.fac_code.Width = 112
+        '
+        'facility_name
+        '
+        Me.facility_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.facility_name.DataPropertyName = "facility_name"
+        Me.facility_name.HeaderText = "FACILITY NAME"
+        Me.facility_name.Name = "facility_name"
+        Me.facility_name.Width = 115
+        '
+        'term
+        '
+        Me.term.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.term.DataPropertyName = "term"
+        Me.term.HeaderText = "TERM"
+        Me.term.Name = "term"
+        Me.term.Width = 62
+        '
+        'purchase_number
+        '
+        Me.purchase_number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.purchase_number.DataPropertyName = "purchase_number"
+        Me.purchase_number.HeaderText = "PURCHASE NUMBER"
+        Me.purchase_number.Name = "purchase_number"
+        Me.purchase_number.Width = 145
+        '
+        'purchase_date
+        '
+        Me.purchase_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.purchase_date.DataPropertyName = "purchase_date"
+        Me.purchase_date.HeaderText = "PURCHASE DATE"
+        Me.purchase_date.Name = "purchase_date"
+        Me.purchase_date.Width = 150
+        '
+        'quantity
+        '
+        Me.quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.quantity.DataPropertyName = "quantity"
+        Me.quantity.HeaderText = "QUANTITY"
+        Me.quantity.Name = "quantity"
+        Me.quantity.Width = 90
+        '
+        'sub_total
+        '
+        Me.sub_total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.sub_total.DataPropertyName = "sub_total"
+        Me.sub_total.HeaderText = "SUB TOTAL"
+        Me.sub_total.Name = "sub_total"
+        Me.sub_total.Width = 93
+        '
+        'brochure
+        '
+        Me.brochure.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.brochure.DataPropertyName = "brochure"
+        Me.brochure.HeaderText = "BROCHURE"
+        Me.brochure.Name = "brochure"
+        Me.brochure.Width = 94
+        '
+        'poster
+        '
+        Me.poster.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.poster.DataPropertyName = "poster"
+        Me.poster.HeaderText = "POSTER"
+        Me.poster.Name = "poster"
+        Me.poster.Width = 74
+        '
+        'drying_rack
+        '
+        Me.drying_rack.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.drying_rack.DataPropertyName = "drying_rack"
+        Me.drying_rack.HeaderText = "DRYING RACK"
+        Me.drying_rack.Name = "drying_rack"
+        Me.drying_rack.Width = 110
+        '
+        'replacement
+        '
+        Me.replacement.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.replacement.DataPropertyName = "replacement"
+        Me.replacement.HeaderText = "REPLACEMENT"
+        Me.replacement.Name = "replacement"
+        Me.replacement.Width = 111
+        '
+        'ads_amount
+        '
+        Me.ads_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.ads_amount.DataPropertyName = "ads_amount"
+        Me.ads_amount.HeaderText = "ADS AMOUNT"
+        Me.ads_amount.Name = "ads_amount"
+        Me.ads_amount.Width = 110
+        '
+        'due_date
+        '
+        Me.due_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.due_date.DataPropertyName = "due_date"
+        Me.due_date.HeaderText = "DUE DATE"
+        Me.due_date.Name = "due_date"
+        Me.due_date.Width = 150
+        '
+        'total_amount
+        '
+        Me.total_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.total_amount.DataPropertyName = "total_amount"
+        Me.total_amount.HeaderText = "TOTAL AMOUNT"
+        Me.total_amount.Name = "total_amount"
+        Me.total_amount.Width = 122
+        '
+        'balance
+        '
+        Me.balance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.balance.DataPropertyName = "balance"
+        Me.balance.HeaderText = "BALANCE"
+        Me.balance.Name = "balance"
+        Me.balance.Width = 120
+        '
+        'sub_amount
+        '
+        Me.sub_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.sub_amount.DataPropertyName = "sub_amount"
+        Me.sub_amount.HeaderText = "SUB AMOUNT"
+        Me.sub_amount.Name = "sub_amount"
+        Me.sub_amount.Width = 110
+        '
+        'date_modified
+        '
+        Me.date_modified.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.date_modified.DataPropertyName = "date_modified"
+        Me.date_modified.HeaderText = "DATE MODIFIED"
+        Me.date_modified.Name = "date_modified"
+        Me.date_modified.Width = 150
+        '
+        'modified_by
+        '
+        Me.modified_by.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.modified_by.DataPropertyName = "modified_by"
+        Me.modified_by.HeaderText = "MODIFIED BY"
+        Me.modified_by.Name = "modified_by"
+        Me.modified_by.Width = 106
+        '
+        'replace_type
+        '
+        Me.replace_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.replace_type.DataPropertyName = "replace_type"
+        Me.replace_type.HeaderText = "REPLACE TYPE"
+        Me.replace_type.Name = "replace_type"
+        Me.replace_type.Width = 108
+        '
+        'fac_type
+        '
+        Me.fac_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.fac_type.DataPropertyName = "type"
+        Me.fac_type.HeaderText = "FACILITY TYPE"
+        Me.fac_type.Name = "fac_type"
+        Me.fac_type.Width = 108
+        '
+        'username
+        '
+        Me.username.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.username.DataPropertyName = "username"
+        Me.username.HeaderText = "USERNAME"
+        Me.username.Name = "username"
+        Me.username.Width = 94
+        '
+        'remarks
+        '
+        Me.remarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.remarks.DataPropertyName = "remarks"
+        Me.remarks.HeaderText = "REMARKS"
+        Me.remarks.Name = "remarks"
+        Me.remarks.Width = 180
+        '
+        'excess
+        '
+        Me.excess.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.excess.DataPropertyName = "excess"
+        Me.excess.HeaderText = "EXCESS"
+        Me.excess.Name = "excess"
+        Me.excess.Width = 71
+        '
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
@@ -1052,7 +1325,7 @@ Partial Class Pos
         Me.Panel4.Controls.Add(Me.lopezCheck)
         Me.Panel4.Controls.Add(Me.replacementCheck)
         Me.Panel4.Controls.Add(Me.monitoringCheck)
-        Me.Panel4.Location = New System.Drawing.Point(23, 294)
+        Me.Panel4.Location = New System.Drawing.Point(17, 338)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1001, 36)
         Me.Panel4.TabIndex = 17
@@ -1079,7 +1352,7 @@ Partial Class Pos
         '
         'remBox
         '
-        Me.remBox.BackColor = System.Drawing.Color.Black
+        Me.remBox.BackColor = System.Drawing.Color.Transparent
         Me.remBox.BaseColor = System.Drawing.Color.White
         Me.remBox.BorderColor = System.Drawing.Color.Black
         Me.remBox.BorderSize = 1
@@ -1092,6 +1365,7 @@ Partial Class Pos
         Me.remBox.Multiline = True
         Me.remBox.Name = "remBox"
         Me.remBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.remBox.Radius = 3
         Me.remBox.SelectedText = ""
         Me.remBox.Size = New System.Drawing.Size(182, 28)
         Me.remBox.TabIndex = 26
@@ -1117,289 +1391,79 @@ Partial Class Pos
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Panel2.Location = New System.Drawing.Point(1042, 34)
+        Me.Panel2.Location = New System.Drawing.Point(1034, 34)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(71, 619)
+        Me.Panel2.Size = New System.Drawing.Size(71, 713)
         Me.Panel2.TabIndex = 27
         '
         'Panel5
         '
         Me.Panel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Panel5.Location = New System.Drawing.Point(-67, 34)
+        Me.Panel5.Location = New System.Drawing.Point(-72, 34)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(71, 619)
+        Me.Panel5.Size = New System.Drawing.Size(78, 713)
         Me.Panel5.TabIndex = 28
         '
         'Panel6
         '
         Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Panel6.Location = New System.Drawing.Point(0, 649)
+        Me.Panel6.Location = New System.Drawing.Point(0, 606)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(1047, 39)
+        Me.Panel6.Size = New System.Drawing.Size(1047, 33)
         Me.Panel6.TabIndex = 29
         '
-        'cancelPo
+        'Label1
         '
-        Me.cancelPo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
-        Me.cancelPo.HeaderText = "CANCEL P.O"
-        Me.cancelPo.Name = "cancelPo"
-        Me.cancelPo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.cancelPo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.cancelPo.Width = 95
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Label1.Location = New System.Drawing.Point(435, 5)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(159, 25)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "POINT OF SALES"
         '
-        'soa_number
+        'Panel7
         '
-        Me.soa_number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.soa_number.DataPropertyName = "soa_number"
-        Me.soa_number.HeaderText = "SOA NUMBER"
-        Me.soa_number.Name = "soa_number"
-        Me.soa_number.Width = 110
+        Me.Panel7.Controls.Add(Me.dtLabel)
+        Me.Panel7.Controls.Add(Me.PictureBox2)
+        Me.Panel7.Controls.Add(Me.lblshow)
+        Me.Panel7.Location = New System.Drawing.Point(8, 34)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(1025, 38)
+        Me.Panel7.TabIndex = 30
         '
-        'soa_txt
+        'PictureBox2
         '
-        Me.soa_txt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.soa_txt.DataPropertyName = "soa_txt"
-        Me.soa_txt.HeaderText = "SOA TXT"
-        Me.soa_txt.Name = "soa_txt"
-        Me.soa_txt.Width = 81
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(878, 1)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(46, 35)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.TabIndex = 5
+        Me.PictureBox2.TabStop = False
         '
-        'Column2
+        'Timer1
         '
-        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.Column2.DataPropertyName = "soa_date"
-        Me.Column2.HeaderText = "SOA DATE"
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 150
         '
-        'order_type
+        'dtLabel
         '
-        Me.order_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.order_type.DataPropertyName = "order_type"
-        Me.order_type.HeaderText = "TYPE"
-        Me.order_type.Name = "order_type"
-        Me.order_type.Width = 220
-        '
-        'fac_code
-        '
-        Me.fac_code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.fac_code.DataPropertyName = "fac_code"
-        Me.fac_code.HeaderText = "FACILITY CODE"
-        Me.fac_code.Name = "fac_code"
-        Me.fac_code.Width = 114
-        '
-        'facility_name
-        '
-        Me.facility_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.facility_name.DataPropertyName = "facility_name"
-        Me.facility_name.HeaderText = "FACILITY NAME"
-        Me.facility_name.Name = "facility_name"
-        Me.facility_name.Width = 117
-        '
-        'term
-        '
-        Me.term.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.term.DataPropertyName = "term"
-        Me.term.HeaderText = "TERM"
-        Me.term.Name = "term"
-        Me.term.Width = 64
-        '
-        'purchase_number
-        '
-        Me.purchase_number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.purchase_number.DataPropertyName = "purchase_number"
-        Me.purchase_number.HeaderText = "PURCHASE NUMBER"
-        Me.purchase_number.Name = "purchase_number"
-        Me.purchase_number.Width = 147
-        '
-        'purchase_date
-        '
-        Me.purchase_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.purchase_date.DataPropertyName = "purchase_date"
-        Me.purchase_date.HeaderText = "PURCHASE DATE"
-        Me.purchase_date.Name = "purchase_date"
-        Me.purchase_date.Width = 150
-        '
-        'quantity
-        '
-        Me.quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.quantity.DataPropertyName = "quantity"
-        Me.quantity.HeaderText = "QUANTITY"
-        Me.quantity.Name = "quantity"
-        Me.quantity.Width = 92
-        '
-        'sub_total
-        '
-        Me.sub_total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.sub_total.DataPropertyName = "sub_total"
-        Me.sub_total.HeaderText = "SUB TOTAL"
-        Me.sub_total.Name = "sub_total"
-        Me.sub_total.Width = 95
-        '
-        'brochure
-        '
-        Me.brochure.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.brochure.DataPropertyName = "brochure"
-        Me.brochure.HeaderText = "BROCHURE"
-        Me.brochure.Name = "brochure"
-        Me.brochure.Width = 96
-        '
-        'poster
-        '
-        Me.poster.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.poster.DataPropertyName = "poster"
-        Me.poster.HeaderText = "POSTER"
-        Me.poster.Name = "poster"
-        Me.poster.Width = 76
-        '
-        'drying_rack
-        '
-        Me.drying_rack.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.drying_rack.DataPropertyName = "drying_rack"
-        Me.drying_rack.HeaderText = "DRYING RACK"
-        Me.drying_rack.Name = "drying_rack"
-        Me.drying_rack.Width = 112
-        '
-        'replacement
-        '
-        Me.replacement.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.replacement.DataPropertyName = "replacement"
-        Me.replacement.HeaderText = "REPLACEMENT"
-        Me.replacement.Name = "replacement"
-        Me.replacement.Width = 113
-        '
-        'ads_amount
-        '
-        Me.ads_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.ads_amount.DataPropertyName = "ads_amount"
-        Me.ads_amount.HeaderText = "ADS AMOUNT"
-        Me.ads_amount.Name = "ads_amount"
-        Me.ads_amount.Width = 112
-        '
-        'due_date
-        '
-        Me.due_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.due_date.DataPropertyName = "due_date"
-        Me.due_date.HeaderText = "DUE DATE"
-        Me.due_date.Name = "due_date"
-        Me.due_date.Width = 150
-        '
-        'total_amount
-        '
-        Me.total_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.total_amount.DataPropertyName = "total_amount"
-        Me.total_amount.HeaderText = "TOTAL AMOUNT"
-        Me.total_amount.Name = "total_amount"
-        Me.total_amount.Width = 124
-        '
-        'balance
-        '
-        Me.balance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.balance.DataPropertyName = "balance"
-        Me.balance.HeaderText = "BALANCE"
-        Me.balance.Name = "balance"
-        Me.balance.Width = 120
-        '
-        'sub_amount
-        '
-        Me.sub_amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.sub_amount.DataPropertyName = "sub_amount"
-        Me.sub_amount.HeaderText = "SUB AMOUNT"
-        Me.sub_amount.Name = "sub_amount"
-        Me.sub_amount.Width = 112
-        '
-        'date_modified
-        '
-        Me.date_modified.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.date_modified.DataPropertyName = "date_modified"
-        Me.date_modified.HeaderText = "DATE MODIFIED"
-        Me.date_modified.Name = "date_modified"
-        Me.date_modified.Width = 150
-        '
-        'modified_by
-        '
-        Me.modified_by.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.modified_by.DataPropertyName = "modified_by"
-        Me.modified_by.HeaderText = "MODIFIED BY"
-        Me.modified_by.Name = "modified_by"
-        Me.modified_by.Width = 108
-        '
-        'replace_type
-        '
-        Me.replace_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.replace_type.DataPropertyName = "replace_type"
-        Me.replace_type.HeaderText = "REPLACE TYPE"
-        Me.replace_type.Name = "replace_type"
-        Me.replace_type.Width = 110
-        '
-        'fac_type
-        '
-        Me.fac_type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.fac_type.DataPropertyName = "type"
-        Me.fac_type.HeaderText = "FACILITY TYPE"
-        Me.fac_type.Name = "fac_type"
-        Me.fac_type.Width = 110
-        '
-        'username
-        '
-        Me.username.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.username.DataPropertyName = "username"
-        Me.username.HeaderText = "USERNAME"
-        Me.username.Name = "username"
-        Me.username.Width = 96
-        '
-        'remarks
-        '
-        Me.remarks.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.remarks.DataPropertyName = "remarks"
-        Me.remarks.HeaderText = "REMARKS"
-        Me.remarks.Name = "remarks"
-        Me.remarks.Width = 180
-        '
-        'excess
-        '
-        Me.excess.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.excess.DataPropertyName = "excess"
-        Me.excess.HeaderText = "EXCESS"
-        Me.excess.Name = "excess"
-        Me.excess.Width = 73
-        '
-        'GunaLabel12
-        '
-        Me.GunaLabel12.AutoSize = True
-        Me.GunaLabel12.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel12.Location = New System.Drawing.Point(397, 35)
-        Me.GunaLabel12.Name = "GunaLabel12"
-        Me.GunaLabel12.Size = New System.Drawing.Size(55, 26)
-        Me.GunaLabel12.TabIndex = 26
-        Me.GunaLabel12.Text = "EXCESS " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "AMOUNT"
-        Me.GunaLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'excessTxt
-        '
-        Me.excessTxt.BackColor = System.Drawing.Color.Black
-        Me.excessTxt.BaseColor = System.Drawing.Color.White
-        Me.excessTxt.BorderColor = System.Drawing.Color.Black
-        Me.excessTxt.BorderSize = 1
-        Me.excessTxt.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.excessTxt.FocusedBaseColor = System.Drawing.Color.White
-        Me.excessTxt.FocusedBorderColor = System.Drawing.Color.Black
-        Me.excessTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
-        Me.excessTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.excessTxt.Location = New System.Drawing.Point(382, 67)
-        Me.excessTxt.Name = "excessTxt"
-        Me.excessTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.excessTxt.SelectedText = ""
-        Me.excessTxt.Size = New System.Drawing.Size(85, 27)
-        Me.excessTxt.TabIndex = 26
-        Me.excessTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.dtLabel.AutoSize = True
+        Me.dtLabel.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtLabel.Location = New System.Drawing.Point(13, 11)
+        Me.dtLabel.Name = "dtLabel"
+        Me.dtLabel.Size = New System.Drawing.Size(46, 17)
+        Me.dtLabel.TabIndex = 6
+        Me.dtLabel.Text = "Label2"
         '
         'Pos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1047, 654)
+        Me.ClientSize = New System.Drawing.Size(1043, 617)
         Me.Controls.Add(Me.Panel6)
+        Me.Controls.Add(Me.Panel7)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel4)
@@ -1422,6 +1486,9 @@ Partial Class Pos
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
+        Me.Panel7.ResumeLayout(False)
+        Me.Panel7.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1516,4 +1583,9 @@ Partial Class Pos
     Friend WithEvents excess As DataGridViewTextBoxColumn
     Friend WithEvents excessTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel12 As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents Panel7 As Panel
+    Friend WithEvents Label1 As Label
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents dtLabel As Label
 End Class
