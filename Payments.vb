@@ -298,10 +298,6 @@ Public Class Payments
         dgv2.DataSource = ds.Tables("payments").DefaultView
     End Sub
 
-    Public Sub newBalance()
-
-    End Sub
-
     Private Sub interestTxt_TextChanged(sender As Object, e As EventArgs) Handles interestTxt.TextChanged
     End Sub
 
