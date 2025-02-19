@@ -40,6 +40,7 @@ Public Class Payments
         dgv1.Columns("replace_type").Visible = False ' Hide the column
         dgv1.Columns("date_modified").Visible = False ' Hide the column
         dgv1.Columns("modified_by").Visible = False ' Hide the column
+        dgv2.Columns("paid_ads").Visible = False ' Hide the column
     End Sub
 
     Public Sub loaddgv()
