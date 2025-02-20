@@ -808,6 +808,8 @@ Public Class Payments
             ' Insert the new record into the database
             InsertRecord(soaNumber, enbs, facCode, adsAmount, dueDate, soaAmount, interestDate, interest, paid_interest, orDate, orNumber, badDebts, businessTax, wtax, others, mop, fop, chequeDetails, bank, datePayment, datePosted, grandtotal, amountPaid, balance, remarks, username, excess, paid_ads)
 
+
+
             ' Notify user of successful insertion
             MessageBox.Show("Payment successfully processed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -816,7 +818,26 @@ Public Class Payments
             afterPay()
             ClearFields()
             Pos.loaddgv()
+            generateCrystal(orNumber)
         End If
+    End Sub
+
+    Public Sub generateCrystal(orNumber As String)
+        ' Generate the Crystal Report
+        Dim report1 As New Receipt
+        Dim selformula1 As String = "{payments1.or_number} = '" & orNumber & "'"
+        report1.RecordSelectionFormula = selformula1
+
+        ' Refresh the report to load data
+        report1.Refresh()
+
+        Dim reportForm1 As New Form
+        Dim crystalReportViewer1 As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+        crystalReportViewer1.ReportSource = report1 ' Corrected this line
+        crystalReportViewer1.Dock = DockStyle.Fill
+        reportForm1.Controls.Add(crystalReportViewer1) ' Corrected this line
+        reportForm1.WindowState = FormWindowState.Maximized
+        reportForm1.Show()
     End Sub
 
 
