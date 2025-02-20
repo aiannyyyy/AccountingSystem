@@ -221,6 +221,12 @@
     <Compile Include="Pos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Receipt.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Receipt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Replacement.Designer.vb">
       <DependentUpon>Replacement.vb</DependentUpon>
     </Compile>
@@ -282,6 +288,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pos.resx">
       <DependentUpon>Pos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receipt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Receipt.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Replacement.resx">
       <DependentUpon>Replacement.vb</DependentUpon>
