@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class Receipt_No_Lines
+Public Class ReceiptNoLines
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class Receipt_No_Lines
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "Receipt No Lines.rpt"
+            Return "ReceiptNoLines.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class Receipt_No_Lines
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "AccountingSystem.Receipt No Lines.rpt"
+            Return "AccountingSystem.ReceiptNoLines.rpt"
         End Get
         Set
             'Do nothing
@@ -110,7 +110,7 @@ Public Class Receipt_No_Lines
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedReceipt_No_Lines
+Public Class CachedReceiptNoLines
     Inherits Component
     Implements ICachedReport
     
@@ -152,7 +152,7 @@ Public Class CachedReceipt_No_Lines
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As Receipt_No_Lines = New Receipt_No_Lines()
+        Dim rpt As ReceiptNoLines = New ReceiptNoLines()
         rpt.Site = Me.Site
         Return rpt
     End Function
