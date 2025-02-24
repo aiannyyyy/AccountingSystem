@@ -21,7 +21,9 @@ Public Class Login
             dr.Read() ' Move to the first row
             Dim userName As String = dr("position").ToString() ' Assuming 'position' is the correct column for the user's role/name
             Dim fullname As String = dr("name").ToString()
-            MsgBox("Login Successful. Welcome, " & userName & "!")
+            'MsgBox("Login Successful. Welcome, " & userName & "!")
+            MsgBox("Login Successful. Welcome, " & userName & "!", vbInformation, "Point of Sales")
+
 
             If userName = "Administrator" OrElse userName = "MIS OFFICER" OrElse userName = "FIRST VERIFIER" Then
                 Pos.Show()

@@ -808,8 +808,6 @@ Public Class Payments
             ' Insert the new record into the database
             InsertRecord(soaNumber, enbs, facCode, adsAmount, dueDate, soaAmount, interestDate, interest, paid_interest, orDate, orNumber, badDebts, businessTax, wtax, others, mop, fop, chequeDetails, bank, datePayment, datePosted, grandtotal, amountPaid, balance, remarks, username, excess, paid_ads)
 
-
-
             ' Notify user of successful insertion
             MessageBox.Show("Payment successfully processed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 

@@ -25,7 +25,7 @@ Public Class Pos
             ' Test the connection (optional)
             conn.Open()
             'MessageBox.Show("Database connection established successfully!")
-            conn.Close()
+            'conn.Close()
         Catch ex As Exception
             MessageBox.Show("Failed to connect to the database: " & ex.Message)
         End Try

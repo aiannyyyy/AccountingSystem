@@ -31,4 +31,10 @@
         ' Show the form
         reportForm.Show()
     End Sub
+
+    Private Sub PrintReceipt_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        orTxt.SetOnGotFocus()
+
+        Me.AcceptButton = genBtn
+    End Sub
 End Class
