@@ -1307,6 +1307,10 @@ Public Class Payments
     Private Sub dailySalesBtn_Click(sender As Object, e As EventArgs) Handles dailySalesBtn.Click
         DailySales.Show()
     End Sub
+
+    Private Sub printButton_Click(sender As Object, e As EventArgs) Handles printButton.Click
+        PrintReceipt.Show()
+    End Sub
 End Class
 
 'Private Sub CalculateAndUpdateInterest()
