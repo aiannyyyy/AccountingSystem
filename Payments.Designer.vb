@@ -105,6 +105,9 @@ Partial Class Payments
         Me.date_modified = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.modified_by = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.groupDetails = New Guna.UI.WinForms.GunaGroupBox()
+        Me.GunaPictureBox5 = New Guna.UI.WinForms.GunaPictureBox()
+        Me.chequeTxt = New Guna.UI.WinForms.GunaTextBox()
+        Me.GunaLabel19 = New Guna.UI.WinForms.GunaLabel()
         Me.balanceperSoa = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel5 = New Guna.UI.WinForms.GunaLabel()
         Me.btaxText = New Guna.UI.WinForms.GunaTextBox()
@@ -164,21 +167,18 @@ Partial Class Payments
         Me.nameBox = New Guna.UI.WinForms.GunaTextBox()
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
-        Me.GunaPictureBox5 = New Guna.UI.WinForms.GunaPictureBox()
-        Me.chequeTxt = New Guna.UI.WinForms.GunaTextBox()
-        Me.GunaLabel19 = New Guna.UI.WinForms.GunaLabel()
         Me.GunaPanel1.SuspendLayout()
         Me.mainPanel.SuspendLayout()
         CType(Me.dgv2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.groupDetails.SuspendLayout()
+        CType(Me.GunaPictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.GunaPictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GunaPictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GunaPictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GunaPictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GunaPictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GunaPictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GunaElipse1
@@ -1052,6 +1052,48 @@ Partial Class Payments
         Me.groupDetails.TabIndex = 8
         Me.groupDetails.Text = "DETAILS"
         Me.groupDetails.TextLocation = New System.Drawing.Point(10, 8)
+        '
+        'GunaPictureBox5
+        '
+        Me.GunaPictureBox5.BaseColor = System.Drawing.Color.White
+        Me.GunaPictureBox5.Image = CType(resources.GetObject("GunaPictureBox5.Image"), System.Drawing.Image)
+        Me.GunaPictureBox5.Location = New System.Drawing.Point(737, 126)
+        Me.GunaPictureBox5.Name = "GunaPictureBox5"
+        Me.GunaPictureBox5.Size = New System.Drawing.Size(15, 15)
+        Me.GunaPictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.GunaPictureBox5.TabIndex = 65
+        Me.GunaPictureBox5.TabStop = False
+        '
+        'chequeTxt
+        '
+        Me.chequeTxt.BackColor = System.Drawing.Color.Transparent
+        Me.chequeTxt.BaseColor = System.Drawing.Color.White
+        Me.chequeTxt.BorderColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.chequeTxt.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.chequeTxt.FocusedBaseColor = System.Drawing.Color.White
+        Me.chequeTxt.FocusedBorderColor = System.Drawing.Color.Black
+        Me.chequeTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.chequeTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chequeTxt.ForeColor = System.Drawing.Color.Black
+        Me.chequeTxt.Location = New System.Drawing.Point(620, 121)
+        Me.chequeTxt.Name = "chequeTxt"
+        Me.chequeTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.chequeTxt.Radius = 3
+        Me.chequeTxt.SelectedText = ""
+        Me.chequeTxt.Size = New System.Drawing.Size(113, 26)
+        Me.chequeTxt.TabIndex = 64
+        Me.chequeTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'GunaLabel19
+        '
+        Me.GunaLabel19.AutoSize = True
+        Me.GunaLabel19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GunaLabel19.Location = New System.Drawing.Point(464, 120)
+        Me.GunaLabel19.Name = "GunaLabel19"
+        Me.GunaLabel19.Size = New System.Drawing.Size(155, 34)
+        Me.GunaLabel19.TabIndex = 63
+        Me.GunaLabel19.Text = "CHEQUE / REFERENCE # " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "DETAILS"
+        Me.GunaLabel19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'balanceperSoa
         '
@@ -2022,48 +2064,6 @@ Partial Class Payments
         Me.GunaLabel1.TabIndex = 1
         Me.GunaLabel1.Text = "FACILITY CODE:"
         '
-        'GunaPictureBox5
-        '
-        Me.GunaPictureBox5.BaseColor = System.Drawing.Color.White
-        Me.GunaPictureBox5.Image = CType(resources.GetObject("GunaPictureBox5.Image"), System.Drawing.Image)
-        Me.GunaPictureBox5.Location = New System.Drawing.Point(737, 126)
-        Me.GunaPictureBox5.Name = "GunaPictureBox5"
-        Me.GunaPictureBox5.Size = New System.Drawing.Size(15, 15)
-        Me.GunaPictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.GunaPictureBox5.TabIndex = 65
-        Me.GunaPictureBox5.TabStop = False
-        '
-        'chequeTxt
-        '
-        Me.chequeTxt.BackColor = System.Drawing.Color.Transparent
-        Me.chequeTxt.BaseColor = System.Drawing.Color.White
-        Me.chequeTxt.BorderColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.chequeTxt.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.chequeTxt.FocusedBaseColor = System.Drawing.Color.White
-        Me.chequeTxt.FocusedBorderColor = System.Drawing.Color.Black
-        Me.chequeTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
-        Me.chequeTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chequeTxt.ForeColor = System.Drawing.Color.Black
-        Me.chequeTxt.Location = New System.Drawing.Point(620, 121)
-        Me.chequeTxt.Name = "chequeTxt"
-        Me.chequeTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.chequeTxt.Radius = 3
-        Me.chequeTxt.SelectedText = ""
-        Me.chequeTxt.Size = New System.Drawing.Size(113, 26)
-        Me.chequeTxt.TabIndex = 64
-        Me.chequeTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'GunaLabel19
-        '
-        Me.GunaLabel19.AutoSize = True
-        Me.GunaLabel19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel19.Location = New System.Drawing.Point(464, 120)
-        Me.GunaLabel19.Name = "GunaLabel19"
-        Me.GunaLabel19.Size = New System.Drawing.Size(155, 34)
-        Me.GunaLabel19.TabIndex = 63
-        Me.GunaLabel19.Text = "CHEQUE / REFERENCE # " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "DETAILS"
-        Me.GunaLabel19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'Payments
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2085,13 +2085,13 @@ Partial Class Payments
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.groupDetails.ResumeLayout(False)
         Me.groupDetails.PerformLayout()
+        CType(Me.GunaPictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         CType(Me.GunaPictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GunaPictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GunaPictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GunaPictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GunaPictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GunaPictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

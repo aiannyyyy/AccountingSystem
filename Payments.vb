@@ -878,12 +878,14 @@ Public Class Payments
 
         If formCombo.SelectedItem IsNot Nothing Then
             Select Case formCombo.SelectedItem.ToString()
-                Case "CASH", "CHECK"
+                Case "CASH"
+                    chequeTxt.Enabled = True
+                    bankCombo.Items.AddRange({"BPI", "LANDBANK", "PNB"})
+                Case "CHECK"
                     chequeTxt.Enabled = False
                     bankCombo.Items.AddRange({"BPI", "LANDBANK", "PNB"})
-
                 Case "ECPAY"
-                    chequeTxt.Enabled = False
+                    chequeTxt.Enabled = True
                     bankCombo.Items.AddRange({"GCASH", "MAYA"})
             End Select
         End If
@@ -1317,6 +1319,10 @@ Public Class Payments
 
     Private Sub printButton_Click(sender As Object, e As EventArgs)
         PrintReceipt.Show()
+    End Sub
+
+    Private Sub bankCombo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles bankCombo.SelectedIndexChanged
+
     End Sub
 End Class
 
