@@ -105,19 +105,16 @@ Partial Class Payments
         Me.date_modified = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.modified_by = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.groupDetails = New Guna.UI.WinForms.GunaGroupBox()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.dailySalesBtn = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.balanceperSoa = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel5 = New Guna.UI.WinForms.GunaLabel()
         Me.btaxText = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel15 = New Guna.UI.WinForms.GunaLabel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.dailySalesBtn = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.computeInterest = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.orderButton = New Guna.UI.WinForms.GunaAdvenceButton()
-        Me.printButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.addButton = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.GunaPictureBox6 = New Guna.UI.WinForms.GunaPictureBox()
-        Me.GunaPictureBox5 = New Guna.UI.WinForms.GunaPictureBox()
         Me.GunaPictureBox4 = New Guna.UI.WinForms.GunaPictureBox()
         Me.GunaPictureBox3 = New Guna.UI.WinForms.GunaPictureBox()
         Me.GunaPictureBox2 = New Guna.UI.WinForms.GunaPictureBox()
@@ -133,8 +130,6 @@ Partial Class Payments
         Me.GunaLabel21 = New Guna.UI.WinForms.GunaLabel()
         Me.bankCombo = New Guna.UI.WinForms.GunaComboBox()
         Me.GunaLabel20 = New Guna.UI.WinForms.GunaLabel()
-        Me.chequeTxt = New Guna.UI.WinForms.GunaTextBox()
-        Me.GunaLabel19 = New Guna.UI.WinForms.GunaLabel()
         Me.formCombo = New Guna.UI.WinForms.GunaComboBox()
         Me.GunaLabel18 = New Guna.UI.WinForms.GunaLabel()
         Me.mopCombo = New Guna.UI.WinForms.GunaComboBox()
@@ -169,19 +164,21 @@ Partial Class Payments
         Me.nameBox = New Guna.UI.WinForms.GunaTextBox()
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
+        Me.GunaPictureBox5 = New Guna.UI.WinForms.GunaPictureBox()
+        Me.chequeTxt = New Guna.UI.WinForms.GunaTextBox()
+        Me.GunaLabel19 = New Guna.UI.WinForms.GunaLabel()
         Me.GunaPanel1.SuspendLayout()
         Me.mainPanel.SuspendLayout()
         CType(Me.dgv2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.groupDetails.SuspendLayout()
-        Me.Panel5.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.GunaPictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GunaPictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GunaPictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GunaPictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GunaPictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GunaPictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GunaPictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GunaElipse1
@@ -994,14 +991,15 @@ Partial Class Payments
         Me.groupDetails.BackColor = System.Drawing.Color.Transparent
         Me.groupDetails.BaseColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.groupDetails.BorderColor = System.Drawing.Color.White
-        Me.groupDetails.Controls.Add(Me.Panel5)
+        Me.groupDetails.Controls.Add(Me.GunaPictureBox5)
+        Me.groupDetails.Controls.Add(Me.chequeTxt)
+        Me.groupDetails.Controls.Add(Me.GunaLabel19)
         Me.groupDetails.Controls.Add(Me.balanceperSoa)
         Me.groupDetails.Controls.Add(Me.GunaLabel5)
         Me.groupDetails.Controls.Add(Me.btaxText)
         Me.groupDetails.Controls.Add(Me.GunaLabel15)
         Me.groupDetails.Controls.Add(Me.Panel1)
         Me.groupDetails.Controls.Add(Me.GunaPictureBox6)
-        Me.groupDetails.Controls.Add(Me.GunaPictureBox5)
         Me.groupDetails.Controls.Add(Me.GunaPictureBox4)
         Me.groupDetails.Controls.Add(Me.GunaPictureBox3)
         Me.groupDetails.Controls.Add(Me.GunaPictureBox2)
@@ -1017,8 +1015,6 @@ Partial Class Payments
         Me.groupDetails.Controls.Add(Me.GunaLabel21)
         Me.groupDetails.Controls.Add(Me.bankCombo)
         Me.groupDetails.Controls.Add(Me.GunaLabel20)
-        Me.groupDetails.Controls.Add(Me.chequeTxt)
-        Me.groupDetails.Controls.Add(Me.GunaLabel19)
         Me.groupDetails.Controls.Add(Me.formCombo)
         Me.groupDetails.Controls.Add(Me.GunaLabel18)
         Me.groupDetails.Controls.Add(Me.mopCombo)
@@ -1056,48 +1052,6 @@ Partial Class Payments
         Me.groupDetails.TabIndex = 8
         Me.groupDetails.Text = "DETAILS"
         Me.groupDetails.TextLocation = New System.Drawing.Point(10, 8)
-        '
-        'Panel5
-        '
-        Me.Panel5.Controls.Add(Me.dailySalesBtn)
-        Me.Panel5.Location = New System.Drawing.Point(474, 191)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(139, 60)
-        Me.Panel5.TabIndex = 63
-        '
-        'dailySalesBtn
-        '
-        Me.dailySalesBtn.AnimationHoverSpeed = 0.07!
-        Me.dailySalesBtn.AnimationSpeed = 0.03!
-        Me.dailySalesBtn.BackColor = System.Drawing.Color.Transparent
-        Me.dailySalesBtn.BaseColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.dailySalesBtn.BorderColor = System.Drawing.Color.Black
-        Me.dailySalesBtn.CheckedBaseColor = System.Drawing.Color.Gray
-        Me.dailySalesBtn.CheckedBorderColor = System.Drawing.Color.Black
-        Me.dailySalesBtn.CheckedForeColor = System.Drawing.Color.White
-        Me.dailySalesBtn.CheckedImage = Nothing
-        Me.dailySalesBtn.CheckedLineColor = System.Drawing.Color.DimGray
-        Me.dailySalesBtn.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.dailySalesBtn.FocusedColor = System.Drawing.Color.Empty
-        Me.dailySalesBtn.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dailySalesBtn.ForeColor = System.Drawing.Color.Black
-        Me.dailySalesBtn.Image = Nothing
-        Me.dailySalesBtn.ImageSize = New System.Drawing.Size(20, 20)
-        Me.dailySalesBtn.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.dailySalesBtn.Location = New System.Drawing.Point(13, 13)
-        Me.dailySalesBtn.Name = "dailySalesBtn"
-        Me.dailySalesBtn.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.dailySalesBtn.OnHoverBorderColor = System.Drawing.Color.Black
-        Me.dailySalesBtn.OnHoverForeColor = System.Drawing.Color.Black
-        Me.dailySalesBtn.OnHoverImage = Nothing
-        Me.dailySalesBtn.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.dailySalesBtn.OnPressedColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.dailySalesBtn.Radius = 2
-        Me.dailySalesBtn.Size = New System.Drawing.Size(117, 30)
-        Me.dailySalesBtn.TabIndex = 27
-        Me.dailySalesBtn.Text = "DAILY SALES REPORT"
-        Me.dailySalesBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.dailySalesBtn.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
         'balanceperSoa
         '
@@ -1163,14 +1117,48 @@ Partial Class Payments
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.dailySalesBtn)
         Me.Panel1.Controls.Add(Me.computeInterest)
         Me.Panel1.Controls.Add(Me.orderButton)
-        Me.Panel1.Controls.Add(Me.printButton)
         Me.Panel1.Controls.Add(Me.addButton)
-        Me.Panel1.Location = New System.Drawing.Point(620, 193)
+        Me.Panel1.Location = New System.Drawing.Point(589, 193)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(386, 57)
+        Me.Panel1.Size = New System.Drawing.Size(417, 57)
         Me.Panel1.TabIndex = 58
+        '
+        'dailySalesBtn
+        '
+        Me.dailySalesBtn.AnimationHoverSpeed = 0.07!
+        Me.dailySalesBtn.AnimationSpeed = 0.03!
+        Me.dailySalesBtn.BackColor = System.Drawing.Color.Transparent
+        Me.dailySalesBtn.BaseColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.dailySalesBtn.BorderColor = System.Drawing.Color.Black
+        Me.dailySalesBtn.CheckedBaseColor = System.Drawing.Color.Gray
+        Me.dailySalesBtn.CheckedBorderColor = System.Drawing.Color.Black
+        Me.dailySalesBtn.CheckedForeColor = System.Drawing.Color.White
+        Me.dailySalesBtn.CheckedImage = Nothing
+        Me.dailySalesBtn.CheckedLineColor = System.Drawing.Color.DimGray
+        Me.dailySalesBtn.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.dailySalesBtn.FocusedColor = System.Drawing.Color.Empty
+        Me.dailySalesBtn.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dailySalesBtn.ForeColor = System.Drawing.Color.Black
+        Me.dailySalesBtn.Image = Nothing
+        Me.dailySalesBtn.ImageSize = New System.Drawing.Size(20, 20)
+        Me.dailySalesBtn.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.dailySalesBtn.Location = New System.Drawing.Point(9, 13)
+        Me.dailySalesBtn.Name = "dailySalesBtn"
+        Me.dailySalesBtn.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.dailySalesBtn.OnHoverBorderColor = System.Drawing.Color.Black
+        Me.dailySalesBtn.OnHoverForeColor = System.Drawing.Color.Black
+        Me.dailySalesBtn.OnHoverImage = Nothing
+        Me.dailySalesBtn.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.dailySalesBtn.OnPressedColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.dailySalesBtn.Radius = 2
+        Me.dailySalesBtn.Size = New System.Drawing.Size(117, 30)
+        Me.dailySalesBtn.TabIndex = 27
+        Me.dailySalesBtn.Text = "DAILY SALES REPORT"
+        Me.dailySalesBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.dailySalesBtn.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
         'computeInterest
         '
@@ -1191,7 +1179,7 @@ Partial Class Payments
         Me.computeInterest.Image = Nothing
         Me.computeInterest.ImageSize = New System.Drawing.Size(20, 20)
         Me.computeInterest.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeInterest.Location = New System.Drawing.Point(10, 11)
+        Me.computeInterest.Location = New System.Drawing.Point(132, 13)
         Me.computeInterest.Name = "computeInterest"
         Me.computeInterest.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.computeInterest.OnHoverBorderColor = System.Drawing.Color.Black
@@ -1225,7 +1213,7 @@ Partial Class Payments
         Me.orderButton.Image = Nothing
         Me.orderButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.orderButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.orderButton.Location = New System.Drawing.Point(310, 11)
+        Me.orderButton.Location = New System.Drawing.Point(341, 13)
         Me.orderButton.Name = "orderButton"
         Me.orderButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.orderButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -1239,40 +1227,6 @@ Partial Class Payments
         Me.orderButton.Text = "ORDER KITS"
         Me.orderButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.orderButton.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
-        '
-        'printButton
-        '
-        Me.printButton.AnimationHoverSpeed = 0.07!
-        Me.printButton.AnimationSpeed = 0.03!
-        Me.printButton.BackColor = System.Drawing.Color.Transparent
-        Me.printButton.BaseColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.printButton.BorderColor = System.Drawing.Color.Black
-        Me.printButton.CheckedBaseColor = System.Drawing.Color.Gray
-        Me.printButton.CheckedBorderColor = System.Drawing.Color.Black
-        Me.printButton.CheckedForeColor = System.Drawing.Color.White
-        Me.printButton.CheckedImage = Nothing
-        Me.printButton.CheckedLineColor = System.Drawing.Color.DimGray
-        Me.printButton.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.printButton.FocusedColor = System.Drawing.Color.Empty
-        Me.printButton.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.printButton.ForeColor = System.Drawing.Color.Black
-        Me.printButton.Image = Nothing
-        Me.printButton.ImageSize = New System.Drawing.Size(20, 20)
-        Me.printButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.printButton.Location = New System.Drawing.Point(219, 11)
-        Me.printButton.Name = "printButton"
-        Me.printButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.printButton.OnHoverBorderColor = System.Drawing.Color.Black
-        Me.printButton.OnHoverForeColor = System.Drawing.Color.Black
-        Me.printButton.OnHoverImage = Nothing
-        Me.printButton.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.printButton.OnPressedColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.printButton.Radius = 2
-        Me.printButton.Size = New System.Drawing.Size(85, 30)
-        Me.printButton.TabIndex = 24
-        Me.printButton.Text = "PRINT RECEIPT"
-        Me.printButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.printButton.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
         'addButton
         '
@@ -1293,7 +1247,7 @@ Partial Class Payments
         Me.addButton.Image = Nothing
         Me.addButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.addButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.addButton.Location = New System.Drawing.Point(127, 11)
+        Me.addButton.Location = New System.Drawing.Point(249, 13)
         Me.addButton.Name = "addButton"
         Me.addButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.addButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -1312,23 +1266,12 @@ Partial Class Payments
         '
         Me.GunaPictureBox6.BaseColor = System.Drawing.Color.White
         Me.GunaPictureBox6.Image = CType(resources.GetObject("GunaPictureBox6.Image"), System.Drawing.Image)
-        Me.GunaPictureBox6.Location = New System.Drawing.Point(736, 126)
+        Me.GunaPictureBox6.Location = New System.Drawing.Point(736, 93)
         Me.GunaPictureBox6.Name = "GunaPictureBox6"
         Me.GunaPictureBox6.Size = New System.Drawing.Size(15, 15)
         Me.GunaPictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.GunaPictureBox6.TabIndex = 57
         Me.GunaPictureBox6.TabStop = False
-        '
-        'GunaPictureBox5
-        '
-        Me.GunaPictureBox5.BaseColor = System.Drawing.Color.White
-        Me.GunaPictureBox5.Image = CType(resources.GetObject("GunaPictureBox5.Image"), System.Drawing.Image)
-        Me.GunaPictureBox5.Location = New System.Drawing.Point(737, 93)
-        Me.GunaPictureBox5.Name = "GunaPictureBox5"
-        Me.GunaPictureBox5.Size = New System.Drawing.Size(15, 15)
-        Me.GunaPictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.GunaPictureBox5.TabIndex = 56
-        Me.GunaPictureBox5.TabStop = False
         '
         'GunaPictureBox4
         '
@@ -1527,7 +1470,7 @@ Partial Class Payments
         Me.bankCombo.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.bankCombo.ForeColor = System.Drawing.Color.Black
         Me.bankCombo.FormattingEnabled = True
-        Me.bankCombo.Location = New System.Drawing.Point(620, 121)
+        Me.bankCombo.Location = New System.Drawing.Point(620, 88)
         Me.bankCombo.Name = "bankCombo"
         Me.bankCombo.OnHoverItemBaseColor = System.Drawing.Color.Black
         Me.bankCombo.OnHoverItemForeColor = System.Drawing.Color.White
@@ -1539,41 +1482,11 @@ Partial Class Payments
         '
         Me.GunaLabel20.AutoSize = True
         Me.GunaLabel20.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel20.Location = New System.Drawing.Point(569, 124)
+        Me.GunaLabel20.Location = New System.Drawing.Point(569, 91)
         Me.GunaLabel20.Name = "GunaLabel20"
         Me.GunaLabel20.Size = New System.Drawing.Size(44, 17)
         Me.GunaLabel20.TabIndex = 42
         Me.GunaLabel20.Text = "BANK:"
-        '
-        'chequeTxt
-        '
-        Me.chequeTxt.BackColor = System.Drawing.Color.Transparent
-        Me.chequeTxt.BaseColor = System.Drawing.Color.White
-        Me.chequeTxt.BorderColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.chequeTxt.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.chequeTxt.FocusedBaseColor = System.Drawing.Color.White
-        Me.chequeTxt.FocusedBorderColor = System.Drawing.Color.Black
-        Me.chequeTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
-        Me.chequeTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chequeTxt.ForeColor = System.Drawing.Color.Black
-        Me.chequeTxt.Location = New System.Drawing.Point(620, 88)
-        Me.chequeTxt.Name = "chequeTxt"
-        Me.chequeTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.chequeTxt.Radius = 3
-        Me.chequeTxt.SelectedText = ""
-        Me.chequeTxt.Size = New System.Drawing.Size(113, 26)
-        Me.chequeTxt.TabIndex = 41
-        Me.chequeTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'GunaLabel19
-        '
-        Me.GunaLabel19.AutoSize = True
-        Me.GunaLabel19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel19.Location = New System.Drawing.Point(502, 93)
-        Me.GunaLabel19.Name = "GunaLabel19"
-        Me.GunaLabel19.Size = New System.Drawing.Size(111, 17)
-        Me.GunaLabel19.TabIndex = 40
-        Me.GunaLabel19.Text = "CHEQUE DETAILS:"
         '
         'formCombo
         '
@@ -2109,6 +2022,48 @@ Partial Class Payments
         Me.GunaLabel1.TabIndex = 1
         Me.GunaLabel1.Text = "FACILITY CODE:"
         '
+        'GunaPictureBox5
+        '
+        Me.GunaPictureBox5.BaseColor = System.Drawing.Color.White
+        Me.GunaPictureBox5.Image = CType(resources.GetObject("GunaPictureBox5.Image"), System.Drawing.Image)
+        Me.GunaPictureBox5.Location = New System.Drawing.Point(737, 126)
+        Me.GunaPictureBox5.Name = "GunaPictureBox5"
+        Me.GunaPictureBox5.Size = New System.Drawing.Size(15, 15)
+        Me.GunaPictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.GunaPictureBox5.TabIndex = 65
+        Me.GunaPictureBox5.TabStop = False
+        '
+        'chequeTxt
+        '
+        Me.chequeTxt.BackColor = System.Drawing.Color.Transparent
+        Me.chequeTxt.BaseColor = System.Drawing.Color.White
+        Me.chequeTxt.BorderColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.chequeTxt.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.chequeTxt.FocusedBaseColor = System.Drawing.Color.White
+        Me.chequeTxt.FocusedBorderColor = System.Drawing.Color.Black
+        Me.chequeTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.chequeTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chequeTxt.ForeColor = System.Drawing.Color.Black
+        Me.chequeTxt.Location = New System.Drawing.Point(620, 121)
+        Me.chequeTxt.Name = "chequeTxt"
+        Me.chequeTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.chequeTxt.Radius = 3
+        Me.chequeTxt.SelectedText = ""
+        Me.chequeTxt.Size = New System.Drawing.Size(113, 26)
+        Me.chequeTxt.TabIndex = 64
+        Me.chequeTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'GunaLabel19
+        '
+        Me.GunaLabel19.AutoSize = True
+        Me.GunaLabel19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GunaLabel19.Location = New System.Drawing.Point(464, 120)
+        Me.GunaLabel19.Name = "GunaLabel19"
+        Me.GunaLabel19.Size = New System.Drawing.Size(155, 34)
+        Me.GunaLabel19.TabIndex = 63
+        Me.GunaLabel19.Text = "CHEQUE / REFERENCE # " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "DETAILS"
+        Me.GunaLabel19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Payments
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2130,14 +2085,13 @@ Partial Class Payments
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.groupDetails.ResumeLayout(False)
         Me.groupDetails.PerformLayout()
-        Me.Panel5.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         CType(Me.GunaPictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GunaPictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GunaPictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GunaPictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GunaPictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GunaPictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GunaPictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2151,10 +2105,8 @@ Partial Class Payments
     Friend WithEvents GunaLabel15 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents Panel1 As Panel
     Friend WithEvents orderButton As Guna.UI.WinForms.GunaAdvenceButton
-    Friend WithEvents printButton As Guna.UI.WinForms.GunaAdvenceButton
     Friend WithEvents addButton As Guna.UI.WinForms.GunaAdvenceButton
     Friend WithEvents GunaPictureBox6 As Guna.UI.WinForms.GunaPictureBox
-    Friend WithEvents GunaPictureBox5 As Guna.UI.WinForms.GunaPictureBox
     Friend WithEvents GunaPictureBox4 As Guna.UI.WinForms.GunaPictureBox
     Friend WithEvents GunaPictureBox3 As Guna.UI.WinForms.GunaPictureBox
     Friend WithEvents GunaPictureBox2 As Guna.UI.WinForms.GunaPictureBox
@@ -2170,8 +2122,6 @@ Partial Class Payments
     Friend WithEvents GunaLabel21 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents bankCombo As Guna.UI.WinForms.GunaComboBox
     Friend WithEvents GunaLabel20 As Guna.UI.WinForms.GunaLabel
-    Friend WithEvents chequeTxt As Guna.UI.WinForms.GunaTextBox
-    Friend WithEvents GunaLabel19 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents formCombo As Guna.UI.WinForms.GunaComboBox
     Friend WithEvents GunaLabel18 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents mopCombo As Guna.UI.WinForms.GunaComboBox
@@ -2245,7 +2195,6 @@ Partial Class Payments
     Friend WithEvents type As DataGridViewTextBoxColumn
     Friend WithEvents date_modified As DataGridViewTextBoxColumn
     Friend WithEvents modified_by As DataGridViewTextBoxColumn
-    Friend WithEvents Panel5 As Panel
     Friend WithEvents dailySalesBtn As Guna.UI.WinForms.GunaAdvenceButton
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
@@ -2278,4 +2227,7 @@ Partial Class Payments
     Friend WithEvents username As DataGridViewTextBoxColumn
     Friend WithEvents excess_balance As DataGridViewTextBoxColumn
     Friend WithEvents paid_ads As DataGridViewTextBoxColumn
+    Friend WithEvents GunaPictureBox5 As Guna.UI.WinForms.GunaPictureBox
+    Friend WithEvents chequeTxt As Guna.UI.WinForms.GunaTextBox
+    Friend WithEvents GunaLabel19 As Guna.UI.WinForms.GunaLabel
 End Class

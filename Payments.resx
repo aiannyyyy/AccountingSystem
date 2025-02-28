@@ -289,7 +289,7 @@
     <value>True</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="GunaPictureBox6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="GunaPictureBox5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAjFJREFUaEPt
         2c1LVFEYx/FBtFVgmqD0Bwi1UYRIWwiBKG3Foly4022rXjSFFi2ifYte0GqjC6EX+g8SaeHOjS3auxCJ
@@ -304,7 +304,7 @@
         o9Ut81FPmTJl/rtUKsc7yCtEUujpGAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="GunaPictureBox5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="GunaPictureBox6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAjFJREFUaEPt
         2c1LVFEYx/FBtFVgmqD0Bwi1UYRIWwiBKG3Foly4022rXjSFFi2ifYte0GqjC6EX+g8SaeHOjS3auxCJ

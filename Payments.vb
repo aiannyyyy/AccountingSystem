@@ -12,8 +12,8 @@ Public Class Payments
 
         codeTxt.SetOnGotFocus()
         mopCombo.Items.AddRange({"BANK TO BANK", "WALK IN"})
-        formCombo.Items.AddRange({"CASH", "CHECK"})
-        bankCombo.Items.AddRange({"BPI", "LANDBANK", "PNB"})
+        formCombo.Items.AddRange({"CASH", "CHECK", "ECPAY"})
+        bankCombo.Items.AddRange({"BPI", "LANDBANK", "PNB", "GCASH", "MAYA"})
         dtpicker2.Value = Date.Now
         dtpicker3.Value = Date.Now
         dtpicker4.Value = Date.Now
@@ -870,13 +870,22 @@ Public Class Payments
     End Sub
 
     Private Sub formCombo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles formCombo.SelectedIndexChanged
-        ' Disable the TextBox if the selected item is "Disable"
-        If formCombo.SelectedItem IsNot Nothing AndAlso formCombo.SelectedItem.ToString() = "CASH" Then
-            chequeTxt.Enabled = False
-            'bankCombo.Enabled = False
-        Else
-            chequeTxt.Enabled = True
-            'bankCombo.Enabled = True
+        ' Disable chequeTxt by default
+        chequeTxt.Enabled = True
+
+        ' Clear previous items before adding new ones
+        bankCombo.Items.Clear()
+
+        If formCombo.SelectedItem IsNot Nothing Then
+            Select Case formCombo.SelectedItem.ToString()
+                Case "CASH", "CHECK"
+                    chequeTxt.Enabled = False
+                    bankCombo.Items.AddRange({"BPI", "LANDBANK", "PNB"})
+
+                Case "ECPAY"
+                    chequeTxt.Enabled = False
+                    bankCombo.Items.AddRange({"GCASH", "MAYA"})
+            End Select
         End If
     End Sub
 
@@ -1306,7 +1315,7 @@ Public Class Payments
         DailySales.Show()
     End Sub
 
-    Private Sub printButton_Click(sender As Object, e As EventArgs) Handles printButton.Click
+    Private Sub printButton_Click(sender As Object, e As EventArgs)
         PrintReceipt.Show()
     End Sub
 End Class
