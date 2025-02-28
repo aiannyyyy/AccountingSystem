@@ -1163,9 +1163,9 @@ Partial Class Payments
         Me.Panel1.Controls.Add(Me.computeInterest)
         Me.Panel1.Controls.Add(Me.orderButton)
         Me.Panel1.Controls.Add(Me.addButton)
-        Me.Panel1.Location = New System.Drawing.Point(589, 193)
+        Me.Panel1.Location = New System.Drawing.Point(603, 193)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(417, 57)
+        Me.Panel1.Size = New System.Drawing.Size(403, 57)
         Me.Panel1.TabIndex = 58
         '
         'dailySalesBtn
@@ -1187,7 +1187,7 @@ Partial Class Payments
         Me.dailySalesBtn.Image = Nothing
         Me.dailySalesBtn.ImageSize = New System.Drawing.Size(20, 20)
         Me.dailySalesBtn.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.dailySalesBtn.Location = New System.Drawing.Point(9, 13)
+        Me.dailySalesBtn.Location = New System.Drawing.Point(13, 14)
         Me.dailySalesBtn.Name = "dailySalesBtn"
         Me.dailySalesBtn.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.dailySalesBtn.OnHoverBorderColor = System.Drawing.Color.Black
@@ -1196,9 +1196,9 @@ Partial Class Payments
         Me.dailySalesBtn.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.dailySalesBtn.OnPressedColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.dailySalesBtn.Radius = 2
-        Me.dailySalesBtn.Size = New System.Drawing.Size(117, 30)
+        Me.dailySalesBtn.Size = New System.Drawing.Size(95, 30)
         Me.dailySalesBtn.TabIndex = 27
-        Me.dailySalesBtn.Text = "DAILY SALES REPORT"
+        Me.dailySalesBtn.Text = "DAILY REPORT"
         Me.dailySalesBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.dailySalesBtn.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
@@ -1221,7 +1221,7 @@ Partial Class Payments
         Me.computeInterest.Image = Nothing
         Me.computeInterest.ImageSize = New System.Drawing.Size(20, 20)
         Me.computeInterest.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.computeInterest.Location = New System.Drawing.Point(132, 13)
+        Me.computeInterest.Location = New System.Drawing.Point(114, 14)
         Me.computeInterest.Name = "computeInterest"
         Me.computeInterest.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.computeInterest.OnHoverBorderColor = System.Drawing.Color.Black
@@ -1255,7 +1255,7 @@ Partial Class Payments
         Me.orderButton.Image = Nothing
         Me.orderButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.orderButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.orderButton.Location = New System.Drawing.Point(341, 13)
+        Me.orderButton.Location = New System.Drawing.Point(323, 14)
         Me.orderButton.Name = "orderButton"
         Me.orderButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.orderButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -1289,7 +1289,7 @@ Partial Class Payments
         Me.addButton.Image = Nothing
         Me.addButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.addButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.addButton.Location = New System.Drawing.Point(249, 13)
+        Me.addButton.Location = New System.Drawing.Point(231, 14)
         Me.addButton.Name = "addButton"
         Me.addButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.addButton.OnHoverBorderColor = System.Drawing.Color.Black

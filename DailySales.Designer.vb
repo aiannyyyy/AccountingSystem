@@ -26,13 +26,15 @@ Partial Class DailySales
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dtpicker1 = New Guna.UI.WinForms.GunaDateTimePicker()
         Me.addButton = New Guna.UI.WinForms.GunaAdvenceButton()
+        Me.salesRadio = New System.Windows.Forms.RadioButton()
+        Me.remitRadio = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(58, 9)
+        Me.Label1.Location = New System.Drawing.Point(69, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(67, 15)
         Me.Label1.TabIndex = 0
@@ -48,7 +50,7 @@ Partial Class DailySales
         Me.dtpicker1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dtpicker1.ForeColor = System.Drawing.Color.Black
         Me.dtpicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpicker1.Location = New System.Drawing.Point(39, 28)
+        Me.dtpicker1.Location = New System.Drawing.Point(50, 28)
         Me.dtpicker1.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpicker1.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpicker1.Name = "dtpicker1"
@@ -80,7 +82,7 @@ Partial Class DailySales
         Me.addButton.Image = Nothing
         Me.addButton.ImageSize = New System.Drawing.Size(20, 20)
         Me.addButton.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.addButton.Location = New System.Drawing.Point(50, 56)
+        Me.addButton.Location = New System.Drawing.Point(60, 109)
         Me.addButton.Name = "addButton"
         Me.addButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.addButton.OnHoverBorderColor = System.Drawing.Color.Black
@@ -95,12 +97,36 @@ Partial Class DailySales
         Me.addButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.addButton.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
+        'salesRadio
+        '
+        Me.salesRadio.AutoSize = True
+        Me.salesRadio.Location = New System.Drawing.Point(33, 61)
+        Me.salesRadio.Name = "salesRadio"
+        Me.salesRadio.Size = New System.Drawing.Size(147, 17)
+        Me.salesRadio.TabIndex = 48
+        Me.salesRadio.TabStop = True
+        Me.salesRadio.Text = "Daily Sales and Collection"
+        Me.salesRadio.UseVisualStyleBackColor = True
+        '
+        'remitRadio
+        '
+        Me.remitRadio.AutoSize = True
+        Me.remitRadio.Location = New System.Drawing.Point(50, 84)
+        Me.remitRadio.Name = "remitRadio"
+        Me.remitRadio.Size = New System.Drawing.Size(105, 17)
+        Me.remitRadio.TabIndex = 49
+        Me.remitRadio.TabStop = True
+        Me.remitRadio.Text = "Daily Remittance"
+        Me.remitRadio.UseVisualStyleBackColor = True
+        '
         'DailySales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(186, 93)
+        Me.ClientSize = New System.Drawing.Size(214, 151)
+        Me.Controls.Add(Me.remitRadio)
+        Me.Controls.Add(Me.salesRadio)
         Me.Controls.Add(Me.addButton)
         Me.Controls.Add(Me.dtpicker1)
         Me.Controls.Add(Me.Label1)
@@ -109,7 +135,7 @@ Partial Class DailySales
         Me.MaximizeBox = False
         Me.Name = "DailySales"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Daily Sales Report"
+        Me.Text = "Daily Report"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -118,4 +144,6 @@ Partial Class DailySales
     Friend WithEvents Label1 As Label
     Friend WithEvents dtpicker1 As Guna.UI.WinForms.GunaDateTimePicker
     Friend WithEvents addButton As Guna.UI.WinForms.GunaAdvenceButton
+    Friend WithEvents salesRadio As RadioButton
+    Friend WithEvents remitRadio As RadioButton
 End Class
