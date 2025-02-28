@@ -883,14 +883,14 @@ Public Class Payments
         If formCombo.SelectedItem IsNot Nothing Then
             Select Case formCombo.SelectedItem.ToString()
                 Case "CASH"
-                    chequeTxt.Enabled = True
-                    bankCombo.Items.AddRange({"BPI", "LANDBANK", "PNB"})
-                Case "CHECK"
                     chequeTxt.Enabled = False
-                    bankCombo.Items.AddRange({"BPI", "LANDBANK", "PNB"})
+                    bankCombo.Items.AddRange({"BPI", "LANDBANK", "PNB", "OTHERS"})
+                Case "CHECK"
+                    chequeTxt.Enabled = True
+                    bankCombo.Items.AddRange({"BPI", "LANDBANK", "PNB", "OTHERS"})
                 Case "ECPAY"
                     chequeTxt.Enabled = True
-                    bankCombo.Items.AddRange({"GCASH", "MAYA"})
+                    bankCombo.Items.AddRange({"GCASH", "MAYA", "OTHERS"})
             End Select
         End If
     End Sub
