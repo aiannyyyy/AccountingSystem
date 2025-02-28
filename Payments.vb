@@ -18,6 +18,7 @@ Public Class Payments
         dtpicker3.Value = Date.Now
         dtpicker4.Value = Date.Now
         dtpicker5.Value = Date.Now
+        chequeDate.Value = Date.Now
 
         lblshow.Text = "PAYMENTS | USER: " + Login.userTxt.Text + ""
 
