@@ -23,18 +23,19 @@ Partial Class Pos
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Pos))
         Me.GunaElipse1 = New Guna.UI.WinForms.GunaElipse(Me.components)
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.lblshow = New Guna.UI.WinForms.GunaLabel()
         Me.GunaControlBox3 = New Guna.UI.WinForms.GunaControlBox()
         Me.GunaControlBox2 = New Guna.UI.WinForms.GunaControlBox()
         Me.GunaControlBox1 = New Guna.UI.WinForms.GunaControlBox()
+        Me.lblshow = New Guna.UI.WinForms.GunaLabel()
         Me.GunaDragControl1 = New Guna.UI.WinForms.GunaDragControl(Me.components)
         Me.grpBox = New Guna.UI.WinForms.GunaGroupBox()
         Me.GunaLabel10 = New Guna.UI.WinForms.GunaLabel()
@@ -118,11 +119,10 @@ Partial Class Pos
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.dtLabel = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.dtLabel = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -152,6 +152,17 @@ Partial Class Pos
         Me.Panel1.Size = New System.Drawing.Size(1043, 34)
         Me.Panel1.TabIndex = 1
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Label1.Location = New System.Drawing.Point(435, 5)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(159, 25)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "POINT OF SALES"
+        '
         'PictureBox1
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
@@ -161,17 +172,6 @@ Partial Class Pos
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 5
         Me.PictureBox1.TabStop = False
-        '
-        'lblshow
-        '
-        Me.lblshow.AutoSize = True
-        Me.lblshow.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblshow.ForeColor = System.Drawing.Color.Black
-        Me.lblshow.Location = New System.Drawing.Point(934, 11)
-        Me.lblshow.Name = "lblshow"
-        Me.lblshow.Size = New System.Drawing.Size(83, 17)
-        Me.lblshow.TabIndex = 4
-        Me.lblshow.Text = "GunaLabel10"
         '
         'GunaControlBox3
         '
@@ -220,6 +220,17 @@ Partial Class Pos
         Me.GunaControlBox1.OnPressedColor = System.Drawing.Color.Black
         Me.GunaControlBox1.Size = New System.Drawing.Size(30, 30)
         Me.GunaControlBox1.TabIndex = 1
+        '
+        'lblshow
+        '
+        Me.lblshow.AutoSize = True
+        Me.lblshow.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblshow.ForeColor = System.Drawing.Color.Black
+        Me.lblshow.Location = New System.Drawing.Point(934, 11)
+        Me.lblshow.Name = "lblshow"
+        Me.lblshow.Size = New System.Drawing.Size(83, 17)
+        Me.lblshow.TabIndex = 4
+        Me.lblshow.Text = "GunaLabel10"
         '
         'GunaDragControl1
         '
@@ -888,7 +899,7 @@ Partial Class Pos
         Me.purchaseBox.FocusedLineColor = System.Drawing.Color.Black
         Me.purchaseBox.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.purchaseBox.LineColor = System.Drawing.Color.Black
-        Me.purchaseBox.Location = New System.Drawing.Point(162, 89)
+        Me.purchaseBox.Location = New System.Drawing.Point(159, 100)
         Me.purchaseBox.Name = "purchaseBox"
         Me.purchaseBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.purchaseBox.SelectedText = ""
@@ -902,12 +913,14 @@ Partial Class Pos
         Me.GunaLabel2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GunaLabel2.Location = New System.Drawing.Point(24, 98)
         Me.GunaLabel2.Name = "GunaLabel2"
-        Me.GunaLabel2.Size = New System.Drawing.Size(131, 17)
+        Me.GunaLabel2.Size = New System.Drawing.Size(121, 34)
         Me.GunaLabel2.TabIndex = 4
-        Me.GunaLabel2.Text = "PURCHASE NUMBER:"
+        Me.GunaLabel2.Text = "PURCHASE ORDER " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "NUMBER"
+        Me.GunaLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'termBox
         '
+        Me.termBox.BackColor = System.Drawing.Color.Transparent
         Me.termBox.BaseColor = System.Drawing.Color.White
         Me.termBox.BorderColor = System.Drawing.Color.Black
         Me.termBox.BorderSize = 1
@@ -1027,40 +1040,40 @@ Partial Class Pos
         '
         Me.dgv1.AllowUserToAddRows = False
         Me.dgv1.AllowUserToDeleteRows = False
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        Me.dgv1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        Me.dgv1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgv1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv1.BackgroundColor = System.Drawing.Color.White
         Me.dgv1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgv1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(237, Byte), Integer))
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(237, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv1.ColumnHeadersHeight = 21
         Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cancelPo, Me.soa_number, Me.soa_txt, Me.Column2, Me.order_type, Me.fac_code, Me.facility_name, Me.term, Me.purchase_number, Me.purchase_date, Me.quantity, Me.sub_total, Me.brochure, Me.poster, Me.drying_rack, Me.replacement, Me.ads_amount, Me.due_date, Me.total_amount, Me.balance, Me.sub_amount, Me.date_modified, Me.modified_by, Me.replace_type, Me.fac_type, Me.username, Me.remarks, Me.excess})
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv1.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv1.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgv1.EnableHeadersVisualStyles = False
         Me.dgv1.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
         Me.dgv1.Location = New System.Drawing.Point(17, 380)
         Me.dgv1.Name = "dgv1"
         Me.dgv1.RowHeadersVisible = False
         Me.dgv1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv1.RowsDefaultCellStyle = DataGridViewCellStyle4
         Me.dgv1.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv1.Size = New System.Drawing.Size(1004, 214)
@@ -1412,17 +1425,6 @@ Partial Class Pos
         Me.Panel6.Size = New System.Drawing.Size(1047, 33)
         Me.Panel6.TabIndex = 29
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(435, 5)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(159, 25)
-        Me.Label1.TabIndex = 6
-        Me.Label1.Text = "POINT OF SALES"
-        '
         'Panel7
         '
         Me.Panel7.Controls.Add(Me.dtLabel)
@@ -1432,6 +1434,16 @@ Partial Class Pos
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(1025, 38)
         Me.Panel7.TabIndex = 30
+        '
+        'dtLabel
+        '
+        Me.dtLabel.AutoSize = True
+        Me.dtLabel.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtLabel.Location = New System.Drawing.Point(13, 11)
+        Me.dtLabel.Name = "dtLabel"
+        Me.dtLabel.Size = New System.Drawing.Size(46, 17)
+        Me.dtLabel.TabIndex = 6
+        Me.dtLabel.Text = "Label2"
         '
         'PictureBox2
         '
@@ -1445,16 +1457,6 @@ Partial Class Pos
         '
         'Timer1
         '
-        '
-        'dtLabel
-        '
-        Me.dtLabel.AutoSize = True
-        Me.dtLabel.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtLabel.Location = New System.Drawing.Point(13, 11)
-        Me.dtLabel.Name = "dtLabel"
-        Me.dtLabel.Size = New System.Drawing.Size(46, 17)
-        Me.dtLabel.TabIndex = 6
-        Me.dtLabel.Text = "Label2"
         '
         'Pos
         '
