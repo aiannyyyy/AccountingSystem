@@ -442,7 +442,7 @@ Public Class Pos
                 If Not row.IsNewRow AndAlso row.Cells("order_type").Value IsNot Nothing Then
                     Dim orderType As String = row.Cells("order_type").Value.ToString()
                     ' Check if the order_type contains "(Cancelled P.O)"
-                    row.ReadOnly = orderType.Contains("(Cancelled P.O)")
+                    row.ReadOnly = orderType.Contains("(Cancelled SOA)")
                 End If
             Next
 
