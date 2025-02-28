@@ -80,18 +80,32 @@ Public Class Remittance
         ' Convert date to Crystal Reports format (yyyy, MM, dd)
         Dim selformula1 As String = "{daily_remittance1.date_posted} = Date(" & date_posted.Year & ", " & date_posted.Month & ", " & date_posted.Day & ")"
 
+        ' Apply main report selection formula
         report.RecordSelectionFormula = selformula1
+
+        ' Apply filter to the subreport named "subreport"
+        report.Subreports("subreport").RecordSelectionFormula = "{payments1.fop} = 'CHECK' " &
+            "AND {payments1.date_posted} IN DateTime(" & date_posted.Year & ", " & date_posted.Month & ", " & date_posted.Day & ", 00, 00, 00) " &
+            "TO DateTime(" & date_posted.Year & ", " & date_posted.Month & ", " & date_posted.Day & ", 23, 59, 59)"
+
+        ' Refresh the report
         report.Refresh()
 
+        ' Create a new form to display the report
         Dim reportForm1 As New Form
         Dim crystalReportViewer1 As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+
+        ' Configure the CrystalReportViewer
         crystalReportViewer1.ReportSource = report
         crystalReportViewer1.Dock = DockStyle.Fill
+
+        ' Add the viewer to the form
         reportForm1.Controls.Add(crystalReportViewer1)
         reportForm1.WindowState = FormWindowState.Maximized
+
+        ' Show the form
         reportForm1.Show()
     End Sub
-
 
     Public Sub clear()
         txt1.Clear()

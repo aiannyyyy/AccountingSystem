@@ -41,6 +41,8 @@ Public Class Payments
         dgv1.Columns("date_modified").Visible = False ' Hide the column
         dgv1.Columns("modified_by").Visible = False ' Hide the column
         dgv2.Columns("paid_ads").Visible = False ' Hide the column
+        dgv2.Columns("bank_name").Visible = False ' Hide the column
+        dgv2.Columns("cheque_date").Visible = False ' Hide the column
     End Sub
 
     Public Sub loaddgv()
@@ -696,9 +698,9 @@ Public Class Payments
     '    Dim updateInterestQuery As String = $"UPDATE payments SET interest = 0 WHERE soa_number = '{soaNumber}'"
     '    ExecuteQuery(updateInterestQuery)
     'End Sub
-    Private Sub InsertRecord(soaNumber As String, enbs As String, facCode As String, adsAmount As Double, dueDate As Date, soaAmount As Double, interestDate As Date, interest As Double, paid_interest As Double, orDate As Date, orNumber As String, badDebts As Double, businessTax As Double, wtax As Double, others As Double, mop As String, fop As String, chequeDetails As String, bank As String, datePayment As Date, datePosted As Date, grandTotal As Double, amountPaid As Double, balance As Double, remarks As String, username As String, excess As Double, paid_ads As Decimal)
-        Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, ads_amount, due_date, soa_amount, interest_date, interest, paid_interest, or_date, or_number, bad_debts, business_tax, wtax, others, mop, fop, cheque_details, bank, date_payment, date_posted, grand_total, amount_paid, balance, remarks, username, excess, paid_ads) " &
-              $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {adsAmount.ToString("F2")}, '{dueDate.ToString("yyyy-MM-dd HH:mm:ss")}', {soaAmount.ToString("F2")}, '{interestDate.ToString("yyyy-MM-dd HH:mm:ss")}', {interest.ToString("F2")}, 0.00, '{orDate.ToString("yyyy-MM-dd HH:mm:ss")}', '{orNumber}', {badDebts.ToString("F2")}, {businessTax.ToString("F2")}, {wtax.ToString("F2")}, '{others.ToString("F2")}', '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd HH:mm:ss")}', '{datePosted.ToString("yyyy-MM-dd HH:mm:ss")}', {grandTotal.ToString("F2")}, {amountPaid.ToString("F2")}, {balance.ToString("F2")}, '{remarks}', '{username}', {excess.ToString("F2")}, {paid_ads.ToString("F2")})"
+    Private Sub InsertRecord(soaNumber As String, enbs As String, facCode As String, adsAmount As Double, dueDate As Date, soaAmount As Double, interestDate As Date, interest As Double, paid_interest As Double, orDate As Date, orNumber As String, badDebts As Double, businessTax As Double, wtax As Double, others As Double, mop As String, fop As String, chequeDetails As String, bank As String, datePayment As Date, datePosted As Date, grandTotal As Double, amountPaid As Double, balance As Double, remarks As String, username As String, excess As Double, paid_ads As Decimal, bank_name As String, cheque_date As Date)
+        Dim query As String = $"INSERT INTO payments (soa_number, enbs, fac_code, ads_amount, due_date, soa_amount, interest_date, interest, paid_interest, or_date, or_number, bad_debts, business_tax, wtax, others, mop, fop, cheque_details, bank, date_payment, date_posted, grand_total, amount_paid, balance, remarks, username, excess, paid_ads, bank_name, cheque_date) " &
+              $"VALUES ('{soaNumber}', '{enbs}', '{facCode}', {adsAmount.ToString("F2")}, '{dueDate.ToString("yyyy-MM-dd HH:mm:ss")}', {soaAmount.ToString("F2")}, '{interestDate.ToString("yyyy-MM-dd HH:mm:ss")}', {interest.ToString("F2")}, 0.00, '{orDate.ToString("yyyy-MM-dd HH:mm:ss")}', '{orNumber}', {badDebts.ToString("F2")}, {businessTax.ToString("F2")}, {wtax.ToString("F2")}, '{others.ToString("F2")}', '{mop}', '{fop}', '{chequeDetails}', '{bank}', '{datePayment.ToString("yyyy-MM-dd HH:mm:ss")}', '{datePosted.ToString("yyyy-MM-dd HH:mm:ss")}', {grandTotal.ToString("F2")}, {amountPaid.ToString("F2")}, {balance.ToString("F2")}, '{remarks}', '{username}', {excess.ToString("F2")}, {paid_ads.ToString("F2")}, '{bank_name}', '{datePayment.ToString("yyyy-MM-dd HH:mm:ss")}')"
         ' Execute the insert query using ExecuteQuery function
         ExecuteQuery(query)
 
@@ -804,9 +806,11 @@ Public Class Payments
             Dim datePosted As Date = Date.Now ' Use current date for datePosted
             Dim remarks As String = remTxt.Text
             Dim username As String = Login.userTxt.Text
+            Dim bank_name As String = bankTxt.Text
+            Dim cheque_date As Date = chequeDate.Value
 
             ' Insert the new record into the database
-            InsertRecord(soaNumber, enbs, facCode, adsAmount, dueDate, soaAmount, interestDate, interest, paid_interest, orDate, orNumber, badDebts, businessTax, wtax, others, mop, fop, chequeDetails, bank, datePayment, datePosted, grandtotal, amountPaid, balance, remarks, username, excess, paid_ads)
+            InsertRecord(soaNumber, enbs, facCode, adsAmount, dueDate, soaAmount, interestDate, interest, paid_interest, orDate, orNumber, badDebts, businessTax, wtax, others, mop, fop, chequeDetails, bank, datePayment, datePosted, grandtotal, amountPaid, balance, remarks, username, excess, paid_ads, bank_name, cheque_date)
 
             ' Notify user of successful insertion
             MessageBox.Show("Payment successfully processed", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
