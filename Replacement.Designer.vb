@@ -24,6 +24,11 @@ Partial Class Replacement
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Replacement))
         Me.dgv1 = New System.Windows.Forms.DataGridView()
+        Me.replace = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.labid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.newlabid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.test_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.date_replace = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.addButton = New System.Windows.Forms.Button()
         Me.GunaLabel3 = New Guna.UI.WinForms.GunaLabel()
         Me.amountTxt = New Guna.UI.WinForms.GunaTextBox()
@@ -33,11 +38,6 @@ Partial Class Replacement
         Me.codeTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.dtpicker2 = New Guna.UI.WinForms.GunaDateTimePicker()
         Me.GunaLabel6 = New Guna.UI.WinForms.GunaLabel()
-        Me.replace = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.labid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.newlabid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.test_type = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.date_replace = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -52,9 +52,38 @@ Partial Class Replacement
         Me.dgv1.Size = New System.Drawing.Size(468, 205)
         Me.dgv1.TabIndex = 31
         '
+        'replace
+        '
+        Me.replace.HeaderText = "REPLACE"
+        Me.replace.Name = "replace"
+        '
+        'labid
+        '
+        Me.labid.DataPropertyName = "labid"
+        Me.labid.HeaderText = "LABID"
+        Me.labid.Name = "labid"
+        '
+        'newlabid
+        '
+        Me.newlabid.DataPropertyName = "newlabid"
+        Me.newlabid.HeaderText = "REPLACED"
+        Me.newlabid.Name = "newlabid"
+        '
+        'test_type
+        '
+        Me.test_type.DataPropertyName = "test_type"
+        Me.test_type.HeaderText = "TYPE"
+        Me.test_type.Name = "test_type"
+        '
+        'date_replace
+        '
+        Me.date_replace.DataPropertyName = "date_replace"
+        Me.date_replace.HeaderText = "DATE REPLACE"
+        Me.date_replace.Name = "date_replace"
+        '
         'addButton
         '
-        Me.addButton.Location = New System.Drawing.Point(206, 90)
+        Me.addButton.Location = New System.Drawing.Point(215, 90)
         Me.addButton.Name = "addButton"
         Me.addButton.Size = New System.Drawing.Size(75, 32)
         Me.addButton.TabIndex = 38
@@ -159,7 +188,7 @@ Partial Class Replacement
         Me.dtpicker2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.dtpicker2.ForeColor = System.Drawing.Color.Black
         Me.dtpicker2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpicker2.Location = New System.Drawing.Point(365, 12)
+        Me.dtpicker2.Location = New System.Drawing.Point(355, 15)
         Me.dtpicker2.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpicker2.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpicker2.Name = "dtpicker2"
@@ -177,40 +206,11 @@ Partial Class Replacement
         '
         Me.GunaLabel6.AutoSize = True
         Me.GunaLabel6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel6.Location = New System.Drawing.Point(251, 17)
+        Me.GunaLabel6.Location = New System.Drawing.Point(241, 21)
         Me.GunaLabel6.Name = "GunaLabel6"
         Me.GunaLabel6.Size = New System.Drawing.Size(108, 17)
         Me.GunaLabel6.TabIndex = 45
         Me.GunaLabel6.Text = "PURCHASE DATE:"
-        '
-        'replace
-        '
-        Me.replace.HeaderText = "REPLACE"
-        Me.replace.Name = "replace"
-        '
-        'labid
-        '
-        Me.labid.DataPropertyName = "labid"
-        Me.labid.HeaderText = "LABID"
-        Me.labid.Name = "labid"
-        '
-        'newlabid
-        '
-        Me.newlabid.DataPropertyName = "newlabid"
-        Me.newlabid.HeaderText = "REPLACED"
-        Me.newlabid.Name = "newlabid"
-        '
-        'test_type
-        '
-        Me.test_type.DataPropertyName = "test_type"
-        Me.test_type.HeaderText = "TYPE"
-        Me.test_type.Name = "test_type"
-        '
-        'date_replace
-        '
-        Me.date_replace.DataPropertyName = "date_replace"
-        Me.date_replace.HeaderText = "DATE REPLACE"
-        Me.date_replace.Name = "date_replace"
         '
         'Replacement
         '

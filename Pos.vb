@@ -1625,7 +1625,7 @@ Public Class Pos
     Private Sub CancelPurchaseOrders()
         ' Check if remBox has a value before proceeding
         If String.IsNullOrWhiteSpace(remBox.Text) Then
-            MessageBox.Show("Please enter remarks before cancelling the P.O.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Please enter remarks before cancelling the SOA", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
 
@@ -1636,11 +1636,11 @@ Public Class Pos
                 row.Cells("total_amount").Value = 0
                 row.Cells("balance").Value = 0
                 row.Cells("remarks").Value = remBox.Text
-                row.Cells("order_type").Value &= " (Cancelled P.O)"
+                row.Cells("order_type").Value &= " (Cancelled SOA)"
                 row.Cells("date_modified").Value = DateTime.Now
 
                 SaveCancellationToDatabase(remBox.Text, row.Cells("soa_number").Value.ToString(), DateTime.Now, Login.userTxt.Text)
-                MessageBox.Show("Cancelled P.O.")
+                MessageBox.Show("Cancelled SOA")
             Catch ex As Exception
                 MessageBox.Show("An error occurred during cancellation: " & ex.Message)
             End Try
@@ -1762,7 +1762,7 @@ Public Class Pos
                 conn.Open()
 
                 ' Corrected SQL query with proper placeholders
-                Dim query As String = "UPDATE acccounting SET total_amount = 0, balance = 0, remarks = ?, order_type = CONCAT(order_type, ' (Cancelled P.O)'), date_modified = ?, modified_by = ? WHERE soa_number = ?"
+                Dim query As String = "UPDATE acccounting SET total_amount = 0, balance = 0, remarks = ?, order_type = CONCAT(order_type, ' (Cancelled SOA)'), date_modified = ?, modified_by = ? WHERE soa_number = ?"
 
                 ' Create the command and add parameters in the correct order
                 Using cmd As New OdbcCommand(query, conn)
