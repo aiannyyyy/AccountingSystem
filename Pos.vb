@@ -496,7 +496,7 @@ Public Class Pos
 
                         ' Determine the term based on descr
                         Dim term As Integer = If(
-                        {"LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT", "OTHERS"}.Contains(descr),
+                        {"LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT"}.Contains(descr),
                         60,
                         45
                     )

@@ -328,6 +328,7 @@ Public Class Payments
         stopInterestCheck.Checked = False
         balanceperSoa.Clear()
         dtpicker4.Value = Date.Now
+        bankTxt.Clear()
     End Sub
 
     'Private Sub dgv1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellContentClick
