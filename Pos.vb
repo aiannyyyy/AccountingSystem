@@ -494,6 +494,10 @@ Public Class Pos
                         Dim descr1 As String = If(Not reader.IsDBNull(3), reader("DESCR1").ToString(), String.Empty)
                         Dim descr As String = If(Not reader.IsDBNull(4), reader("DESCR").ToString(), String.Empty)
 
+                        If providerId = "7345" Then
+                            descr = "NSC SOUTHERN LUZON"
+                        End If
+
                         ' Determine the term based on descr
                         Dim term As Integer = If(
                         {"LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT"}.Contains(descr),

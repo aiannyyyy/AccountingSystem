@@ -30,6 +30,7 @@ Public Class Login
                 Me.Hide()
             ElseIf userName = "ACCOUNTANT" OrElse userName = "ACCOUNTING ASSISTANT" Then
                 Pos.Show()
+                Pos.dgv1.Columns("cancelPo").Visible = False
                 Me.Hide()
             ElseIf userName = "CASHIER" OrElse userName = "COLLECTIONS" Then
                 Payments.Show()
