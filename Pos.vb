@@ -77,6 +77,7 @@ Public Class Pos
         excessTxt.Enabled = False
 
         Timer1.Interval = 1000 ' Update every second
+        Timer1.Start() ' Start the timerTimer1.Interval = 1000 ' Update every second
         Timer1.Start() ' Start the timer
     End Sub
 

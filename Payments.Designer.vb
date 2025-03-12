@@ -35,7 +35,6 @@ Partial Class Payments
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Payments))
         Me.GunaElipse1 = New Guna.UI.WinForms.GunaElipse(Me.components)
         Me.GunaPanel1 = New Guna.UI.WinForms.GunaPanel()
-        Me.lblshow = New Guna.UI.WinForms.GunaLabel()
         Me.GunaControlBox3 = New Guna.UI.WinForms.GunaControlBox()
         Me.GunaControlBox2 = New Guna.UI.WinForms.GunaControlBox()
         Me.GunaControlBox1 = New Guna.UI.WinForms.GunaControlBox()
@@ -173,6 +172,15 @@ Partial Class Payments
         Me.nameBox = New Guna.UI.WinForms.GunaTextBox()
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.dtLabel = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.lblshow = New Guna.UI.WinForms.GunaLabel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.GunaDragControl2 = New Guna.UI.WinForms.GunaDragControl(Me.components)
+        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.GunaPanel1.SuspendLayout()
         Me.mainPanel.SuspendLayout()
         CType(Me.dgv2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -185,6 +193,9 @@ Partial Class Payments
         CType(Me.GunaPictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GunaPictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GunaPictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel5.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GunaElipse1
@@ -194,7 +205,8 @@ Partial Class Payments
         'GunaPanel1
         '
         Me.GunaPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.GunaPanel1.Controls.Add(Me.lblshow)
+        Me.GunaPanel1.Controls.Add(Me.Label3)
+        Me.GunaPanel1.Controls.Add(Me.PictureBox1)
         Me.GunaPanel1.Controls.Add(Me.GunaControlBox3)
         Me.GunaPanel1.Controls.Add(Me.GunaControlBox2)
         Me.GunaPanel1.Controls.Add(Me.GunaControlBox1)
@@ -203,17 +215,6 @@ Partial Class Payments
         Me.GunaPanel1.Name = "GunaPanel1"
         Me.GunaPanel1.Size = New System.Drawing.Size(1046, 34)
         Me.GunaPanel1.TabIndex = 1
-        '
-        'lblshow
-        '
-        Me.lblshow.AutoSize = True
-        Me.lblshow.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblshow.ForeColor = System.Drawing.Color.White
-        Me.lblshow.Location = New System.Drawing.Point(12, 9)
-        Me.lblshow.Name = "lblshow"
-        Me.lblshow.Size = New System.Drawing.Size(83, 17)
-        Me.lblshow.TabIndex = 5
-        Me.lblshow.Text = "GunaLabel10"
         '
         'GunaControlBox3
         '
@@ -269,6 +270,7 @@ Partial Class Payments
         '
         'mainPanel
         '
+        Me.mainPanel.Controls.Add(Me.Panel6)
         Me.mainPanel.Controls.Add(Me.Label2)
         Me.mainPanel.Controls.Add(Me.Label1)
         Me.mainPanel.Controls.Add(Me.Panel4)
@@ -283,17 +285,18 @@ Partial Class Payments
         Me.mainPanel.Controls.Add(Me.nameBox)
         Me.mainPanel.Controls.Add(Me.codeTxt)
         Me.mainPanel.Controls.Add(Me.GunaLabel1)
+        Me.mainPanel.Controls.Add(Me.Panel5)
         Me.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.mainPanel.Location = New System.Drawing.Point(0, 34)
         Me.mainPanel.Name = "mainPanel"
-        Me.mainPanel.Size = New System.Drawing.Size(1046, 833)
+        Me.mainPanel.Size = New System.Drawing.Size(1046, 887)
         Me.mainPanel.TabIndex = 2
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(13, 55)
+        Me.Label2.Location = New System.Drawing.Point(12, 92)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(112, 20)
         Me.Label2.TabIndex = 64
@@ -303,7 +306,7 @@ Partial Class Payments
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 540)
+        Me.Label1.Location = New System.Drawing.Point(12, 585)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(150, 20)
         Me.Label1.TabIndex = 63
@@ -312,7 +315,7 @@ Partial Class Payments
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.Panel4.Location = New System.Drawing.Point(-5, 824)
+        Me.Panel4.Location = New System.Drawing.Point(-5, 875)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1054, 43)
         Me.Panel4.TabIndex = 62
@@ -322,7 +325,7 @@ Partial Class Payments
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.Panel3.Location = New System.Drawing.Point(-31, 0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(38, 830)
+        Me.Panel3.Size = New System.Drawing.Size(39, 875)
         Me.Panel3.TabIndex = 62
         '
         'Panel2
@@ -330,7 +333,7 @@ Partial Class Payments
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.Panel2.Location = New System.Drawing.Point(1037, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(38, 830)
+        Me.Panel2.Size = New System.Drawing.Size(38, 875)
         Me.Panel2.TabIndex = 61
         '
         'dgv2
@@ -366,7 +369,7 @@ Partial Class Payments
         Me.dgv2.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgv2.EnableHeadersVisualStyles = False
         Me.dgv2.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        Me.dgv2.Location = New System.Drawing.Point(13, 566)
+        Me.dgv2.Location = New System.Drawing.Point(14, 612)
         Me.dgv2.Name = "dgv2"
         Me.dgv2.ReadOnly = True
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
@@ -712,7 +715,7 @@ Partial Class Payments
         Me.dgv1.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgv1.EnableHeadersVisualStyles = False
         Me.dgv1.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        Me.dgv1.Location = New System.Drawing.Point(14, 78)
+        Me.dgv1.Location = New System.Drawing.Point(14, 118)
         Me.dgv1.Name = "dgv1"
         Me.dgv1.ReadOnly = True
         Me.dgv1.RowHeadersVisible = False
@@ -1070,7 +1073,7 @@ Partial Class Payments
         Me.groupDetails.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.groupDetails.ForeColor = System.Drawing.Color.White
         Me.groupDetails.LineColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.groupDetails.Location = New System.Drawing.Point(15, 271)
+        Me.groupDetails.Location = New System.Drawing.Point(14, 314)
         Me.groupDetails.Name = "groupDetails"
         Me.groupDetails.Size = New System.Drawing.Size(1016, 266)
         Me.groupDetails.TabIndex = 8
@@ -2067,7 +2070,7 @@ Partial Class Payments
         Me.totalBalance.FocusedBorderColor = System.Drawing.Color.Black
         Me.totalBalance.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.totalBalance.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.totalBalance.Location = New System.Drawing.Point(922, 14)
+        Me.totalBalance.Location = New System.Drawing.Point(923, 56)
         Me.totalBalance.Name = "totalBalance"
         Me.totalBalance.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.totalBalance.Radius = 3
@@ -2080,7 +2083,7 @@ Partial Class Payments
         '
         Me.GunaLabel2.AutoSize = True
         Me.GunaLabel2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel2.Location = New System.Drawing.Point(833, 5)
+        Me.GunaLabel2.Location = New System.Drawing.Point(834, 54)
         Me.GunaLabel2.Name = "GunaLabel2"
         Me.GunaLabel2.Size = New System.Drawing.Size(86, 51)
         Me.GunaLabel2.TabIndex = 5
@@ -2099,7 +2102,7 @@ Partial Class Payments
         Me.termBox.FocusedBorderColor = System.Drawing.Color.Black
         Me.termBox.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.termBox.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.termBox.Location = New System.Drawing.Point(778, 14)
+        Me.termBox.Location = New System.Drawing.Point(779, 56)
         Me.termBox.Name = "termBox"
         Me.termBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.termBox.Radius = 3
@@ -2120,7 +2123,7 @@ Partial Class Payments
         Me.nameBox.FocusedBorderColor = System.Drawing.Color.Black
         Me.nameBox.FocusedForeColor = System.Drawing.SystemColors.ControlText
         Me.nameBox.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.nameBox.Location = New System.Drawing.Point(231, 14)
+        Me.nameBox.Location = New System.Drawing.Point(232, 56)
         Me.nameBox.Name = "nameBox"
         Me.nameBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.nameBox.Radius = 3
@@ -2135,7 +2138,7 @@ Partial Class Payments
         Me.codeTxt.FocusedLineColor = System.Drawing.Color.Black
         Me.codeTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.codeTxt.LineColor = System.Drawing.Color.Black
-        Me.codeTxt.Location = New System.Drawing.Point(122, 19)
+        Me.codeTxt.Location = New System.Drawing.Point(123, 61)
         Me.codeTxt.Name = "codeTxt"
         Me.codeTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.codeTxt.SelectedText = ""
@@ -2147,18 +2150,96 @@ Partial Class Payments
         '
         Me.GunaLabel1.AutoSize = True
         Me.GunaLabel1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel1.Location = New System.Drawing.Point(16, 21)
+        Me.GunaLabel1.Location = New System.Drawing.Point(17, 63)
         Me.GunaLabel1.Name = "GunaLabel1"
         Me.GunaLabel1.Size = New System.Drawing.Size(96, 17)
         Me.GunaLabel1.TabIndex = 1
         Me.GunaLabel1.Text = "FACILITY CODE:"
+        '
+        'Panel5
+        '
+        Me.Panel5.Controls.Add(Me.lblshow)
+        Me.Panel5.Controls.Add(Me.PictureBox2)
+        Me.Panel5.Controls.Add(Me.dtLabel)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel5.Location = New System.Drawing.Point(0, 0)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(1046, 40)
+        Me.Panel5.TabIndex = 65
+        '
+        'dtLabel
+        '
+        Me.dtLabel.AutoSize = True
+        Me.dtLabel.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtLabel.Location = New System.Drawing.Point(20, 12)
+        Me.dtLabel.Name = "dtLabel"
+        Me.dtLabel.Size = New System.Drawing.Size(46, 17)
+        Me.dtLabel.TabIndex = 7
+        Me.dtLabel.Text = "Label2"
+        '
+        'Timer1
+        '
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(874, 3)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(46, 34)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.TabIndex = 6
+        Me.PictureBox2.TabStop = False
+        '
+        'lblshow
+        '
+        Me.lblshow.AutoSize = True
+        Me.lblshow.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblshow.ForeColor = System.Drawing.Color.Black
+        Me.lblshow.Location = New System.Drawing.Point(936, 12)
+        Me.lblshow.Name = "lblshow"
+        Me.lblshow.Size = New System.Drawing.Size(83, 17)
+        Me.lblshow.TabIndex = 8
+        Me.lblshow.Text = "GunaLabel10"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(10, 3)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(31, 26)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 6
+        Me.PictureBox1.TabStop = False
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.White
+        Me.Label3.Location = New System.Drawing.Point(455, 1)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(123, 30)
+        Me.Label3.TabIndex = 7
+        Me.Label3.Text = "PAYMENTS"
+        '
+        'GunaDragControl2
+        '
+        Me.GunaDragControl2.TargetControl = Me.Label3
+        '
+        'Panel6
+        '
+        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.Panel6.Location = New System.Drawing.Point(6, 43)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(1031, 10)
+        Me.Panel6.TabIndex = 66
         '
         'Payments
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1046, 867)
+        Me.ClientSize = New System.Drawing.Size(1046, 921)
         Me.Controls.Add(Me.mainPanel)
         Me.Controls.Add(Me.GunaPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -2181,6 +2262,10 @@ Partial Class Payments
         CType(Me.GunaPictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GunaPictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GunaPictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2244,7 +2329,6 @@ Partial Class Payments
     Friend WithEvents codeTxt As Guna.UI.WinForms.GunaLineTextBox
     Friend WithEvents GunaLabel1 As Guna.UI.WinForms.GunaLabel
     Friend WithEvents GunaPanel1 As Guna.UI.WinForms.GunaPanel
-    Friend WithEvents lblshow As Guna.UI.WinForms.GunaLabel
     Friend WithEvents GunaControlBox3 As Guna.UI.WinForms.GunaControlBox
     Friend WithEvents GunaControlBox2 As Guna.UI.WinForms.GunaControlBox
     Friend WithEvents GunaControlBox1 As Guna.UI.WinForms.GunaControlBox
@@ -2325,4 +2409,13 @@ Partial Class Payments
     Friend WithEvents paid_ads As DataGridViewTextBoxColumn
     Friend WithEvents bank_name As DataGridViewTextBoxColumn
     Friend WithEvents cheque_date As DataGridViewTextBoxColumn
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents dtLabel As Label
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents lblshow As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents GunaDragControl2 As Guna.UI.WinForms.GunaDragControl
+    Friend WithEvents Panel6 As Panel
 End Class

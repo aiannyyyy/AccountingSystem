@@ -20,7 +20,7 @@ Public Class Payments
         dtpicker5.Value = Date.Now
         chequeDate.Value = Date.Now
 
-        lblshow.Text = "PAYMENTS | USER: " + Login.userTxt.Text + ""
+        lblshow.Text = Login.userTxt.Text
 
         loaddgv()
         payments()
@@ -44,6 +44,9 @@ Public Class Payments
         dgv2.Columns("paid_ads").Visible = False ' Hide the column
         dgv2.Columns("bank_name").Visible = False ' Hide the column
         dgv2.Columns("cheque_date").Visible = False ' Hide the column
+
+        Timer1.Interval = 1000 ' Update every second
+        Timer1.Start() ' Start the timer
     End Sub
 
     Public Sub loaddgv()
@@ -1329,6 +1332,11 @@ Public Class Payments
 
     Private Sub bankCombo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles bankCombo.SelectedIndexChanged
 
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Dim pstTime As DateTime = DateTime.UtcNow.AddHours(8) ' Convert UTC to PST (UTC+8)
+        dtLabel.Text = "Date Today: " & pstTime.ToString("yyyy-MM-dd") & " Time Today: " & pstTime.ToString("HH:mm:ss") & " PST"
     End Sub
 End Class
 
