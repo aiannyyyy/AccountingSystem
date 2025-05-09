@@ -361,57 +361,163 @@ Public Class Pos
     '    UpdateDateTimePicker2()
     'End Sub
 
-    Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
+    'Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
+    '    If String.IsNullOrEmpty(codeTxt.Text) Then
+    '        cleartxt()
+    '        Return
+    '    End If
+
+    '    ' Fetch data from the ODBC source (conn)
+    '    Try
+    '        If conn.State <> ConnectionState.Open Then
+    '            conn.Open()
+    '        End If
+
+    '        Dim odbcQuery As String = "SELECT * FROM acccounting WHERE fac_code = ? ORDER BY purchase_date DESC"
+    '        Using odbcCmd As New OdbcCommand(odbcQuery, conn)
+    '            odbcCmd.Parameters.Add(New OdbcParameter("fac_code", codeTxt.Text))
+
+    '            Dim odbcAdapter As New OdbcDataAdapter(odbcCmd)
+    '            Dim odbcDataSet As New DataSet
+    '            odbcAdapter.Fill(odbcDataSet, "acccounting")
+    '            dgv1.DataSource = odbcDataSet.Tables("acccounting").DefaultView
+
+    '            ' Calculate the total excess of a facility
+    '            Dim excessTotal As Decimal = 0
+    '            For Each row As DataRow In odbcDataSet.Tables("acccounting").Rows
+    '                If Not IsDBNull(row("excess")) Then
+    '                    excessTotal += Convert.ToDecimal(row("excess"))
+    '                End If
+    '            Next
+
+    '            ' Update excessTxt with the total excess value
+    '            excessTxt.Text = excessTotal.ToString("F2")
+    '        End Using
+
+    '        ' Set rows to read-only if "order_type" contains "(Cancelled P.O)"
+    '        For Each row As DataGridViewRow In dgv1.Rows
+    '            If Not row.IsNewRow AndAlso row.Cells("order_type").Value IsNot Nothing Then
+    '                Dim orderType As String = row.Cells("order_type").Value.ToString()
+    '                ' Check if the order_type contains "(Cancelled P.O)"
+    '                row.ReadOnly = orderType.Contains("(Cancelled SOA)")
+    '            End If
+    '        Next
+
+
+
+    '    Catch ex As Exception
+    '        MessageBox.Show("ODBC Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    End Try
+
+    '    Try
+    '        ' Open the Oracle connection if not already open
+    '        If Oracon.State <> ConnectionState.Open Then
+    '            Oracon.Open()
+    '        End If
+
+    '        ' Define the query to fetch provider information
+    '        Dim oracleQuery As String = "
+    '    SELECT 
+    '        REF_PROVIDER_ADDRESS.PROVIDERID, 
+    '        REF_PROVIDER_ADDRESS.CITY, 
+    '        REF_PROVIDER_ADDRESS.COUNTY, 
+    '        REF_PROVIDER_ADDRESS.DESCR1, 
+    '        REF_TYPE.DESCR
+    '    FROM 
+    '        PHMSDS.REF_PROVIDER_ADDRESS 
+    '    INNER JOIN 
+    '        PHMSDS.REF_PROVIDERTYPE 
+    '        ON REF_PROVIDER_ADDRESS.PROVIDERID = REF_PROVIDERTYPE.PROVIDERID
+    '    INNER JOIN 
+    '        PHMSDS.REF_TYPE 
+    '        ON REF_PROVIDERTYPE.TYPE = REF_TYPE.TYPE
+    '    WHERE 
+    '        REF_PROVIDER_ADDRESS.PROVIDERID = :PROVIDERID
+    '    ORDER BY 
+    '        REF_PROVIDER_ADDRESS.PROVIDERID ASC"
+
+    '        ' Create and configure the Oracle command
+    '        Using oracleCmd As New OracleCommand(oracleQuery, Oracon)
+    '            ' Bind the parameter securely
+    '            oracleCmd.Parameters.Add(New OracleParameter("PROVIDERID", codeTxt.Text.Trim()))
+
+    '            ' Execute the query and process the results
+    '            Using reader As OracleDataReader = oracleCmd.ExecuteReader()
+    '                If reader.Read() Then
+    '                    ' Extract and validate data from the reader
+    '                    Dim providerId As String = If(Not reader.IsDBNull(0), reader("PROVIDERID").ToString(), String.Empty)
+    '                    Dim city As String = If(Not reader.IsDBNull(1), reader("CITY").ToString(), String.Empty).ToUpper()
+    '                    Dim county As String = If(Not reader.IsDBNull(2), reader("COUNTY").ToString(), String.Empty)
+    '                    Dim descr1 As String = If(Not reader.IsDBNull(3), reader("DESCR1").ToString(), String.Empty)
+    '                    Dim descr As String = If(Not reader.IsDBNull(4), reader("DESCR").ToString(), String.Empty)
+
+    '                    If providerId = "7345" Then
+    '                        descr = "NSC SOUTHERN LUZON"
+    '                    End If
+
+    '                    ' Determine the term based on descr
+    '                    Dim term As Integer = If(
+    '                    {"LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT"}.Contains(descr),
+    '                    60,
+    '                    45
+    '                )
+
+    '                    ' Calculate the due date based on the term
+    '                    Dim purchaseDate As Date = Date.Today ' Replace with actual purchase date if available
+    '                    Dim dueDate As Date = purchaseDate.AddDays(term)
+
+    '                    ' Update the UI on the main thread
+    '                    Me.Invoke(Sub()
+    '                                  codeTxt.Text = providerId
+    '                                  nameBox.Text = descr1
+    '                                  termBox.Text = term.ToString()
+    '                                  dtpicker1.Value = dueDate
+    '                                  typeText.Text = descr
+
+    '                                  ' Check the lopezCheck if conditions are met
+    '                                  Dim targetCounty As String = "QUEZON"
+    '                                  Dim targetCities As HashSet(Of String) = New HashSet(Of String) From {
+    '                                  "UNISAN", "TAGKAWAYAN", "SAN FRANCISCO", "PLARIDEL",
+    '                                  "PEREZ", "PADRE BURGOS", "MULANAY", "MAUBAN",
+    '                                  "LOPEZ", "GUMACA", "GUINAYANGAN", "GENERAL NAKAR",
+    '                                  "GENERAL LUNA", "CATANAUAN", "CALAUAG", "BURDEOS",
+    '                                  "BUENAVISTA", "ALABAT", "AGDANGAN", "JOMALIG", "PAGBILAO"
+    '                              }
+
+    '                                  lopezCheck.Checked = (county = targetCounty AndAlso targetCities.Contains(city))
+    '                              End Sub)
+    '                Else
+    '                    ' No matching record found
+    '                    Me.Invoke(Sub()
+    '                                  nameBox.Clear()
+    '                                  termBox.Clear()
+    '                                  dtpicker1.Value = Date.Now
+    '                                  lopezCheck.Checked = False
+    '                              End Sub)
+    '                End If
+    '            End Using
+    '        End Using
+    '    Catch ex As OracleException
+    '        MessageBox.Show("Oracle Database Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    Catch ex As Exception
+    '        MessageBox.Show("An unexpected error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    Finally
+    '        ' Ensure the connection is closed
+    '        If Oracon.State = ConnectionState.Open Then
+    '            Oracon.Close()
+    '        End If
+    '    End Try
+
+    '    UpdateDateTimePicker2()
+    'End Sub
+
+    Private Sub ProcessCode()
         If String.IsNullOrEmpty(codeTxt.Text) Then
             cleartxt()
             Return
         End If
 
-        '' Fetch data from the ODBC source (conn)
-        'Try
-        '    If conn.State <> ConnectionState.Open Then
-        '        conn.Open()
-        '    End If
-
-        '    Dim odbcQuery As String = "SELECT * FROM acccounting WHERE fac_code = ? ORDER BY purchase_date DESC"
-        '    Using odbcCmd As New OdbcCommand(odbcQuery, conn)
-        '        odbcCmd.Parameters.AddWithValue("fac_code", codeTxt.Text)
-
-        '        Dim odbcAdapter As New OdbcDataAdapter(odbcCmd)
-        '        Dim odbcDataSet As New DataSet
-        '        odbcAdapter.Fill(odbcDataSet, "acccounting")
-        '        dgv1.DataSource = odbcDataSet.Tables("acccounting").DefaultView
-        '    End Using
-
-        '    ' Set rows to read-only if "order_type" contains "(Cancelled P.O)"
-        '    For Each row As DataGridViewRow In dgv1.Rows
-        '        If Not row.IsNewRow AndAlso row.Cells("order_type").Value IsNot Nothing Then
-        '            Dim orderType As String = row.Cells("order_type").Value.ToString()
-        '            ' Check if the order_type contains "(Cancelled P.O)"
-        '            If orderType.Contains("(Cancelled P.O)") Then
-        '                row.ReadOnly = True
-        '            Else
-        '                row.ReadOnly = False
-        '            End If
-        '        End If
-        '    Next
-
-        '    ' Calculate the total excess of a facility
-        '    Dim excessTotal As Decimal = 0
-        '    For Each row As DataRow In ds.Tables("acccounting").Rows
-        '        If Not IsDBNull(row("excess")) Then
-        '            excessTotal += Convert.ToDecimal(row("excess"))
-        '        End If
-        '    Next
-
-        '    ' Update balanceBox with the grandTotal value
-        '    excessTxt.Text = excessTotal.ToString("F2")
-
-        'Catch ex As Exception
-        '    MessageBox.Show("ODBC Error: " & ex.Message)
-        'End Try
-
-        ' Fetch data from the ODBC source (conn)
+        ' --- ODBC Section ---
         Try
             If conn.State <> ConnectionState.Open Then
                 conn.Open()
@@ -438,57 +544,48 @@ Public Class Pos
                 excessTxt.Text = excessTotal.ToString("F2")
             End Using
 
-            ' Set rows to read-only if "order_type" contains "(Cancelled P.O)"
+            ' Set rows to read-only if "order_type" contains "(Cancelled SOA)"
             For Each row As DataGridViewRow In dgv1.Rows
                 If Not row.IsNewRow AndAlso row.Cells("order_type").Value IsNot Nothing Then
                     Dim orderType As String = row.Cells("order_type").Value.ToString()
-                    ' Check if the order_type contains "(Cancelled P.O)"
                     row.ReadOnly = orderType.Contains("(Cancelled SOA)")
                 End If
             Next
-
-
-
         Catch ex As Exception
             MessageBox.Show("ODBC Error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
+        ' --- Oracle Section ---
         Try
-            ' Open the Oracle connection if not already open
             If Oracon.State <> ConnectionState.Open Then
                 Oracon.Open()
             End If
 
-            ' Define the query to fetch provider information
             Dim oracleQuery As String = "
-        SELECT 
-            REF_PROVIDER_ADDRESS.PROVIDERID, 
-            REF_PROVIDER_ADDRESS.CITY, 
-            REF_PROVIDER_ADDRESS.COUNTY, 
-            REF_PROVIDER_ADDRESS.DESCR1, 
-            REF_TYPE.DESCR
-        FROM 
-            PHMSDS.REF_PROVIDER_ADDRESS 
-        INNER JOIN 
-            PHMSDS.REF_PROVIDERTYPE 
-            ON REF_PROVIDER_ADDRESS.PROVIDERID = REF_PROVIDERTYPE.PROVIDERID
-        INNER JOIN 
-            PHMSDS.REF_TYPE 
-            ON REF_PROVIDERTYPE.TYPE = REF_TYPE.TYPE
-        WHERE 
-            REF_PROVIDER_ADDRESS.PROVIDERID = :PROVIDERID
-        ORDER BY 
-            REF_PROVIDER_ADDRESS.PROVIDERID ASC"
+            SELECT 
+                REF_PROVIDER_ADDRESS.PROVIDERID, 
+                REF_PROVIDER_ADDRESS.CITY, 
+                REF_PROVIDER_ADDRESS.COUNTY, 
+                REF_PROVIDER_ADDRESS.DESCR1, 
+                REF_TYPE.DESCR
+            FROM 
+                PHMSDS.REF_PROVIDER_ADDRESS 
+            INNER JOIN 
+                PHMSDS.REF_PROVIDERTYPE 
+                ON REF_PROVIDER_ADDRESS.PROVIDERID = REF_PROVIDERTYPE.PROVIDERID
+            INNER JOIN 
+                PHMSDS.REF_TYPE 
+                ON REF_PROVIDERTYPE.TYPE = REF_TYPE.TYPE
+            WHERE 
+                REF_PROVIDER_ADDRESS.PROVIDERID = :PROVIDERID
+            ORDER BY 
+                REF_PROVIDER_ADDRESS.PROVIDERID ASC"
 
-            ' Create and configure the Oracle command
             Using oracleCmd As New OracleCommand(oracleQuery, Oracon)
-                ' Bind the parameter securely
                 oracleCmd.Parameters.Add(New OracleParameter("PROVIDERID", codeTxt.Text.Trim()))
 
-                ' Execute the query and process the results
                 Using reader As OracleDataReader = oracleCmd.ExecuteReader()
                     If reader.Read() Then
-                        ' Extract and validate data from the reader
                         Dim providerId As String = If(Not reader.IsDBNull(0), reader("PROVIDERID").ToString(), String.Empty)
                         Dim city As String = If(Not reader.IsDBNull(1), reader("CITY").ToString(), String.Empty).ToUpper()
                         Dim county As String = If(Not reader.IsDBNull(2), reader("COUNTY").ToString(), String.Empty)
@@ -499,18 +596,15 @@ Public Class Pos
                             descr = "NSC SOUTHERN LUZON"
                         End If
 
-                        ' Determine the term based on descr
                         Dim term As Integer = If(
                         {"LYING-IN GOV'T", "LGU", "RHU", "DOH", "CITY HEALTH UNIT"}.Contains(descr),
                         60,
                         45
                     )
 
-                        ' Calculate the due date based on the term
-                        Dim purchaseDate As Date = Date.Today ' Replace with actual purchase date if available
+                        Dim purchaseDate As Date = Date.Today ' You can adjust this based on actual data
                         Dim dueDate As Date = purchaseDate.AddDays(term)
 
-                        ' Update the UI on the main thread
                         Me.Invoke(Sub()
                                       codeTxt.Text = providerId
                                       nameBox.Text = descr1
@@ -518,20 +612,18 @@ Public Class Pos
                                       dtpicker1.Value = dueDate
                                       typeText.Text = descr
 
-                                      ' Check the lopezCheck if conditions are met
                                       Dim targetCounty As String = "QUEZON"
                                       Dim targetCities As HashSet(Of String) = New HashSet(Of String) From {
-                                      "UNISAN", "TAGKAWAYAN", "SAN FRANCISCO", "PLARIDEL",
-                                      "PEREZ", "PADRE BURGOS", "MULANAY", "MAUBAN",
-                                      "LOPEZ", "GUMACA", "GUINAYANGAN", "GENERAL NAKAR",
-                                      "GENERAL LUNA", "CATANAUAN", "CALAUAG", "BURDEOS",
-                                      "BUENAVISTA", "ALABAT", "AGDANGAN", "JOMALIG", "PAGBILAO"
-                                  }
+                            "UNISAN", "TAGKAWAYAN", "SAN FRANCISCO", "PLARIDEL",
+                            "PEREZ", "PADRE BURGOS", "MULANAY", "MAUBAN",
+                            "LOPEZ", "GUMACA", "GUINAYANGAN", "GENERAL NAKAR",
+                            "GENERAL LUNA", "CATANAUAN", "CALAUAG", "BURDEOS",
+                            "BUENAVISTA", "ALABAT", "AGDANGAN", "JOMALIG", "PAGBILAO"
+                        }
 
                                       lopezCheck.Checked = (county = targetCounty AndAlso targetCities.Contains(city))
                                   End Sub)
                     Else
-                        ' No matching record found
                         Me.Invoke(Sub()
                                       nameBox.Clear()
                                       termBox.Clear()
@@ -546,7 +638,6 @@ Public Class Pos
         Catch ex As Exception
             MessageBox.Show("An unexpected error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            ' Ensure the connection is closed
             If Oracon.State = ConnectionState.Open Then
                 Oracon.Close()
             End If
@@ -1924,7 +2015,7 @@ Public Class Pos
     End Sub
 
     Private Sub dtpicker2_ValueChanged(sender As Object, e As EventArgs) Handles dtpicker2.ValueChanged
-        UpdateDateTimePicker2()
+        'UpdateDateTimePicker2()
     End Sub
 
     ' Handle the CurrentCellDirtyStateChanged event to commit changes immediately when a checkbox is clicked
@@ -2072,6 +2163,23 @@ Public Class Pos
         Dim pstTime As DateTime = DateTime.UtcNow.AddHours(8) ' Convert UTC to PST (UTC+8)
         dtLabel.Text = "Date Today: " & pstTime.ToString("yyyy-MM-dd") & " Time Today: " & pstTime.ToString("HH:mm:ss") & " PST"
     End Sub
+
+    Private Sub codeTxt_KeyDown(sender As Object, e As KeyEventArgs) Handles codeTxt.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            e.SuppressKeyPress = True ' Prevents the beep sound
+            ProcessCode()
+            purchaseBox.Focus()
+        End If
+    End Sub
+
+    Private Sub purchaseBox_KeyDown(sender As Object, e As KeyEventArgs) Handles purchaseBox.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            e.SuppressKeyPress = True
+            qtyTxt.Focus()
+        End If
+    End Sub
+
+
 
 
     'Public Sub loaddgv2()

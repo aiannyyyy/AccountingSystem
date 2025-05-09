@@ -831,7 +831,7 @@ Public Class Payments
 
     Public Sub generateCrystal(orNumber As String)
         ' Generate the Crystal Report
-        Dim report1 As New ReceiptNoLines
+        Dim report1 As New Receipt
         Dim selformula1 As String = "{payments1.or_number} = '" & orNumber & "'"
         report1.RecordSelectionFormula = selformula1
 
