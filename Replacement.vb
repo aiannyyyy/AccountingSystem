@@ -10,6 +10,13 @@ Public Class Replacement
     ' Create an instance of Pos form (assuming it's in the same project)
     Dim Pos As New Pos()
 
+    Public ReadOnly Property ReplacementCount As String
+        Get
+            Return replaceCountTxt.Text
+        End Get
+    End Property
+
+
     ' Constructor that accepts both the current And Next SOA numbers
     Public Sub New(currentSOANumber As String, nextSOANumber As String, codereplace As String)
         InitializeComponent()
@@ -24,8 +31,6 @@ Public Class Replacement
         dtpicker2.Value = Date.Now
         codeTxt.Text = _codeReplace
         soaTxt.Text = _nextSOANumber
-        'replaceCombo.Items.AddRange({"CONTAMINATED", "INSUFFICIENT"})
-        'loaddgv() ' Load the DataGridView with existing replacement data
 
         amountTxt.Text = "0.00"
 
@@ -33,6 +38,12 @@ Public Class Replacement
         If Not String.IsNullOrEmpty(codeTxt.Text) Then
             FilterDataGrid(codeTxt.Text)
         End If
+
+        replaceCountTxt.Enabled = False
+        codeTxt.Enabled = False
+        amountTxt.Enabled = False
+        soaTxt.Enabled = False
+        dtpicker2.Enabled = False
     End Sub
 
     ' Your FilterDataGrid method (same as before)
@@ -64,57 +75,6 @@ Public Class Replacement
             MessageBox.Show("ODBC Error: " & ex.Message)
         End Try
     End Sub
-
-    '' Loads data from the database into the DataGridView
-    'Public Sub loaddgv()
-    '    Call connection()
-    '    Dim query As String = "SELECT * FROM replacement_type ORDER BY component_id DESC"
-
-    '    Dim dtAdapter As New OdbcDataAdapter(query, connString)
-    '    Dim dtDatatable As New DataTable
-
-    '    Try
-    '        dtAdapter.Fill(dtDatatable)
-    '        dgv1.DataSource = dtDatatable
-    '    Catch ex As Exception
-    '        MessageBox.Show("Error loading data: " & ex.Message)
-    '    End Try
-    'End Sub
-
-    ' Loads data from the database into the DataGridView
-    'Public Sub loaddgv()
-    '    Call connection()
-    '    'Dim query As String = "SELECT labid, newlabid, test_type FROM replacement"
-    '    Dim query As String = "SELECT labid, newlabid, test_type FROM replacement " &
-    '                  "WHERE ([replacement] IS NULL OR [replacement] <> 'REPLACED')"
-
-
-    '    Dim dtAdapter As New OdbcDataAdapter(query, connString)
-    '    Dim dtDatatable As New DataTable
-
-    '    Try
-    '        dtAdapter.Fill(dtDatatable)
-    '        dgv1.DataSource = dtDatatable
-    '    Catch ex As Exception
-    '        MessageBox.Show("Error loading data: " & ex.Message)
-    '    End Try
-    'End Sub
-
-    'Public Sub loaddgv()
-    '    Call connection() ' This should open and set the global "conn" variable.
-
-    '    Dim query As String = "SELECT labid, newlabid, test_type FROM replacement"
-
-    '    Dim dtAdapter As New OdbcDataAdapter(query, conn)
-    '    Dim dtDatatable As New DataTable
-
-    '    Try
-    '        dtAdapter.Fill(dtDatatable)
-    '        dgv1.DataSource = dtDatatable
-    '    Catch ex As Exception
-    '        MessageBox.Show("Error loading data: " & ex.Message)
-    '    End Try
-    'End Sub
 
     ' Function to execute a query that doesn't return any results (like UPDATE, INSERT)
     Private Function ExecuteQuery(query As String) As Integer
@@ -156,49 +116,6 @@ Public Class Replacement
 
     ' Event handler for the Add Button to insert a new record
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
-        'Dim facCode As String = codeTxt.Text
-        'Dim soaNumber As String = soaTxt.Text
-
-        'Dim purchaseDate As Date = dtpicker2.Value
-        'Dim quantity As Integer = 1 ' Convert quantity to Integer
-        'Dim unitPrice As Decimal = Convert.ToDecimal(amountTxt.Text) ' Convert unitPrice to Decimal
-        'Dim totalPrice As Decimal = quantity * unitPrice ' Calculate totalPrice
-
-        'Dim selectedRows As New List(Of DataGridViewRow)
-
-        '' Loop through all rows in the DataGridView
-        'For Each selectedRow As DataGridViewRow In dgv1.Rows
-        '    ' Check if the checkbox is checked in the current row
-        '    Dim checkboxChecked As Boolean = Convert.ToBoolean(selectedRow.Cells("replace").Value)
-
-        '    If checkboxChecked Then
-        '        selectedRows.Add(selectedRow)
-        '    End If
-        'Next
-
-        'If selectedRows.Count > 0 Then
-        '    ' Loop through all selected rows and insert records
-        '    For Each row As DataGridViewRow In selectedRows
-        '        Dim replaceType As String = row.Cells("test_type").Value.ToString()
-        '        Dim labid As String = row.Cells("labid").Value.ToString()
-        '        Dim newlabid As String = row.Cells("newlabid").Value.ToString()
-        '        'Dim recordID As Integer = Convert.ToInt32(row.Cells("id").Value)
-
-        '        ' Insert the new record for each selected row
-        '        InsertRecord(facCode, soaNumber, replaceType, purchaseDate, quantity, unitPrice, totalPrice, labid, newlabid)
-
-        '        ' Update replacement table, setting replacement to "REPLACED"
-        '        updateRecord(labid, soaNumber)
-        '    Next
-        '    MessageBox.Show("Insert Success!")
-        '    FilterDataGrid(facCode)
-        '    ' Clear all checkboxes after processing
-        '    For Each row As DataGridViewRow In dgv1.Rows
-        '        row.Cells("replace").Value = False
-        '    Next
-        'Else
-        '    MessageBox.Show("No checkboxes are selected.")
-        'End If
         Dim facCode As String = codeTxt.Text
         Dim soaNumber As String = soaTxt.Text
         Dim purchaseDate As Date = dtpicker2.Value
@@ -239,6 +156,10 @@ Public Class Replacement
             MessageBox.Show("Insert Success!")
             FilterDataGrid(facCode)
 
+            Me.DialogResult = DialogResult.OK
+            Me.Close()
+
+
             ' Clear checkboxes after processing
             For Each row As DataGridViewRow In dgv1.Rows
                 row.Cells("replace").Value = False
@@ -266,4 +187,43 @@ Public Class Replacement
             End Using
         End Using
     End Sub
+
+    ' Find column index by name (case-insensitive)
+    Private Function GetColumnIndexByName(grid As DataGridView, columnName As String) As Integer
+        For Each col As DataGridViewColumn In grid.Columns
+            If String.Compare(col.Name, columnName, True) = 0 Then
+                Return col.Index
+            End If
+        Next
+        Return -1 ' Column not found
+    End Function
+
+    ' Then in your event handler:
+    Private Sub DataGridView1_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgv1.CellValueChanged
+        Dim replaceColIndex As Integer = GetColumnIndexByName(dgv1, "replace")
+        If replaceColIndex >= 0 AndAlso e.ColumnIndex = replaceColIndex Then
+            UpdateReplaceCount()
+        End If
+    End Sub
+
+    ' Ensures checkbox clicks are committed immediately
+    Private Sub DataGridView1_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles dgv1.CurrentCellDirtyStateChanged
+        If dgv1.IsCurrentCellDirty Then
+            dgv1.CommitEdit(DataGridViewDataErrorContexts.Commit)
+        End If
+    End Sub
+
+    ' Method to count how many checkboxes are checked
+    Private Sub UpdateReplaceCount()
+        Dim count As Integer = 0
+
+        For Each row As DataGridViewRow In dgv1.Rows
+            If Not row.IsNewRow AndAlso Convert.ToBoolean(row.Cells("replace").Value) = True Then
+                count += 1
+            End If
+        Next
+
+        replaceCountTxt.Text = count.ToString()
+    End Sub
+
 End Class

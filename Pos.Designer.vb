@@ -111,11 +111,9 @@ Partial Class Pos
         Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.excess = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.replaceAdd = New System.Windows.Forms.Button()
         Me.expiredCheck = New System.Windows.Forms.CheckBox()
         Me.remBox = New Guna.UI.WinForms.GunaTextBox()
         Me.remLbl = New Guna.UI.WinForms.GunaLabel()
-        Me.replaceCombo = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
@@ -124,6 +122,9 @@ Partial Class Pos
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.GunaDragControl2 = New Guna.UI.WinForms.GunaDragControl(Me.components)
+        Me.replaceAdd = New System.Windows.Forms.Button()
+        Me.replaceCombo = New System.Windows.Forms.ComboBox()
+        Me.replaceCount = New Guna.UI.WinForms.GunaTextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -247,6 +248,7 @@ Partial Class Pos
         Me.grpBox.Controls.Add(Me.dtpicker1)
         Me.grpBox.Controls.Add(Me.amountTxt)
         Me.grpBox.Controls.Add(Me.GunaLabel9)
+        Me.grpBox.Controls.Add(Me.replaceCombo)
         Me.grpBox.Controls.Add(Me.qtyTxt)
         Me.grpBox.Controls.Add(Me.GunaLabel8)
         Me.grpBox.Controls.Add(Me.walkCheck)
@@ -514,7 +516,7 @@ Partial Class Pos
         Me.GunaLabel9.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GunaLabel9.Location = New System.Drawing.Point(405, 82)
         Me.GunaLabel9.Name = "GunaLabel9"
-        Me.GunaLabel9.Size = New System.Drawing.Size(58, 15)
+        Me.GunaLabel9.Size = New System.Drawing.Size(59, 15)
         Me.GunaLabel9.TabIndex = 21
         Me.GunaLabel9.Text = "AMOUNT"
         '
@@ -544,7 +546,7 @@ Partial Class Pos
         Me.GunaLabel8.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GunaLabel8.Location = New System.Drawing.Point(297, 82)
         Me.GunaLabel8.Name = "GunaLabel8"
-        Me.GunaLabel8.Size = New System.Drawing.Size(63, 15)
+        Me.GunaLabel8.Size = New System.Drawing.Size(65, 15)
         Me.GunaLabel8.TabIndex = 20
         Me.GunaLabel8.Text = "QUANTITY"
         '
@@ -555,7 +557,7 @@ Partial Class Pos
         Me.walkCheck.ForeColor = System.Drawing.Color.White
         Me.walkCheck.Location = New System.Drawing.Point(158, 6)
         Me.walkCheck.Name = "walkCheck"
-        Me.walkCheck.Size = New System.Drawing.Size(119, 17)
+        Me.walkCheck.Size = New System.Drawing.Size(117, 17)
         Me.walkCheck.TabIndex = 21
         Me.walkCheck.Text = "WALK - IN PATIENT"
         Me.walkCheck.UseVisualStyleBackColor = True
@@ -615,7 +617,7 @@ Partial Class Pos
         Me.GunaLabel12.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GunaLabel12.Location = New System.Drawing.Point(397, 35)
         Me.GunaLabel12.Name = "GunaLabel12"
-        Me.GunaLabel12.Size = New System.Drawing.Size(55, 26)
+        Me.GunaLabel12.Size = New System.Drawing.Size(54, 26)
         Me.GunaLabel12.TabIndex = 26
         Me.GunaLabel12.Text = "EXCESS " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "AMOUNT"
         Me.GunaLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -791,7 +793,7 @@ Partial Class Pos
         Me.GunaLabel7.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GunaLabel7.Location = New System.Drawing.Point(8, 150)
         Me.GunaLabel7.Name = "GunaLabel7"
-        Me.GunaLabel7.Size = New System.Drawing.Size(85, 15)
+        Me.GunaLabel7.Size = New System.Drawing.Size(87, 15)
         Me.GunaLabel7.TabIndex = 13
         Me.GunaLabel7.Text = "GRAND TOTAL:"
         '
@@ -801,7 +803,7 @@ Partial Class Pos
         Me.GunaLabel6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GunaLabel6.Location = New System.Drawing.Point(8, 115)
         Me.GunaLabel6.Name = "GunaLabel6"
-        Me.GunaLabel6.Size = New System.Drawing.Size(86, 15)
+        Me.GunaLabel6.Size = New System.Drawing.Size(87, 15)
         Me.GunaLabel6.TabIndex = 12
         Me.GunaLabel6.Text = "ADS AMOUNT:"
         '
@@ -811,7 +813,7 @@ Partial Class Pos
         Me.GunaLabel5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GunaLabel5.Location = New System.Drawing.Point(8, 76)
         Me.GunaLabel5.Name = "GunaLabel5"
-        Me.GunaLabel5.Size = New System.Drawing.Size(88, 15)
+        Me.GunaLabel5.Size = New System.Drawing.Size(90, 15)
         Me.GunaLabel5.TabIndex = 11
         Me.GunaLabel5.Text = "TOTAL ORDERS:"
         '
@@ -832,7 +834,7 @@ Partial Class Pos
         Me.posterCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.posterCheck.Location = New System.Drawing.Point(207, 39)
         Me.posterCheck.Name = "posterCheck"
-        Me.posterCheck.Size = New System.Drawing.Size(66, 17)
+        Me.posterCheck.Size = New System.Drawing.Size(65, 17)
         Me.posterCheck.TabIndex = 1
         Me.posterCheck.Text = "POSTER"
         Me.posterCheck.UseVisualStyleBackColor = True
@@ -843,7 +845,7 @@ Partial Class Pos
         Me.brochureCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.brochureCheck.Location = New System.Drawing.Point(104, 39)
         Me.brochureCheck.Name = "brochureCheck"
-        Me.brochureCheck.Size = New System.Drawing.Size(84, 17)
+        Me.brochureCheck.Size = New System.Drawing.Size(85, 17)
         Me.brochureCheck.TabIndex = 0
         Me.brochureCheck.Text = "BROCHURE"
         Me.brochureCheck.UseVisualStyleBackColor = True
@@ -1021,7 +1023,7 @@ Partial Class Pos
         Me.replacementCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.replacementCheck.Location = New System.Drawing.Point(370, 10)
         Me.replacementCheck.Name = "replacementCheck"
-        Me.replacementCheck.Size = New System.Drawing.Size(103, 17)
+        Me.replacementCheck.Size = New System.Drawing.Size(102, 17)
         Me.replacementCheck.TabIndex = 20
         Me.replacementCheck.Text = "REPLACEMENT "
         Me.replacementCheck.UseVisualStyleBackColor = True
@@ -1032,7 +1034,7 @@ Partial Class Pos
         Me.monitoringCheck.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.monitoringCheck.Location = New System.Drawing.Point(13, 10)
         Me.monitoringCheck.Name = "monitoringCheck"
-        Me.monitoringCheck.Size = New System.Drawing.Size(96, 17)
+        Me.monitoringCheck.Size = New System.Drawing.Size(95, 17)
         Me.monitoringCheck.TabIndex = 22
         Me.monitoringCheck.Text = "MONITORING"
         Me.monitoringCheck.UseVisualStyleBackColor = True
@@ -1329,12 +1331,12 @@ Partial Class Pos
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.replaceCount)
         Me.Panel4.Controls.Add(Me.replaceAdd)
         Me.Panel4.Controls.Add(Me.expiredCheck)
         Me.Panel4.Controls.Add(Me.replaceTxt)
         Me.Panel4.Controls.Add(Me.remBox)
         Me.Panel4.Controls.Add(Me.remLbl)
-        Me.Panel4.Controls.Add(Me.replaceCombo)
         Me.Panel4.Controls.Add(Me.lopezCheck)
         Me.Panel4.Controls.Add(Me.replacementCheck)
         Me.Panel4.Controls.Add(Me.monitoringCheck)
@@ -1342,15 +1344,6 @@ Partial Class Pos
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1001, 36)
         Me.Panel4.TabIndex = 17
-        '
-        'replaceAdd
-        '
-        Me.replaceAdd.Location = New System.Drawing.Point(591, 7)
-        Me.replaceAdd.Name = "replaceAdd"
-        Me.replaceAdd.Size = New System.Drawing.Size(75, 23)
-        Me.replaceAdd.TabIndex = 28
-        Me.replaceAdd.Text = "ADD"
-        Me.replaceAdd.UseVisualStyleBackColor = True
         '
         'expiredCheck
         '
@@ -1392,14 +1385,6 @@ Partial Class Pos
         Me.remLbl.Size = New System.Drawing.Size(69, 17)
         Me.remLbl.TabIndex = 26
         Me.remLbl.Text = "REMARKS:"
-        '
-        'replaceCombo
-        '
-        Me.replaceCombo.FormattingEnabled = True
-        Me.replaceCombo.Location = New System.Drawing.Point(489, 8)
-        Me.replaceCombo.Name = "replaceCombo"
-        Me.replaceCombo.Size = New System.Drawing.Size(96, 21)
-        Me.replaceCombo.TabIndex = 25
         '
         'Panel2
         '
@@ -1461,6 +1446,42 @@ Partial Class Pos
         'GunaDragControl2
         '
         Me.GunaDragControl2.TargetControl = Me.Label1
+        '
+        'replaceAdd
+        '
+        Me.replaceAdd.Location = New System.Drawing.Point(591, 7)
+        Me.replaceAdd.Name = "replaceAdd"
+        Me.replaceAdd.Size = New System.Drawing.Size(75, 23)
+        Me.replaceAdd.TabIndex = 28
+        Me.replaceAdd.Text = "ADD"
+        Me.replaceAdd.UseVisualStyleBackColor = True
+        '
+        'replaceCombo
+        '
+        Me.replaceCombo.FormattingEnabled = True
+        Me.replaceCombo.Location = New System.Drawing.Point(481, 4)
+        Me.replaceCombo.Name = "replaceCombo"
+        Me.replaceCombo.Size = New System.Drawing.Size(96, 23)
+        Me.replaceCombo.TabIndex = 25
+        '
+        'replaceCount
+        '
+        Me.replaceCount.BackColor = System.Drawing.Color.Black
+        Me.replaceCount.BaseColor = System.Drawing.Color.White
+        Me.replaceCount.BorderColor = System.Drawing.Color.Black
+        Me.replaceCount.BorderSize = 1
+        Me.replaceCount.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.replaceCount.FocusedBaseColor = System.Drawing.Color.White
+        Me.replaceCount.FocusedBorderColor = System.Drawing.Color.Black
+        Me.replaceCount.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.replaceCount.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.replaceCount.Location = New System.Drawing.Point(477, 5)
+        Me.replaceCount.Name = "replaceCount"
+        Me.replaceCount.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.replaceCount.SelectedText = ""
+        Me.replaceCount.Size = New System.Drawing.Size(46, 26)
+        Me.replaceCount.TabIndex = 29
+        Me.replaceCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Pos
         '
@@ -1553,11 +1574,9 @@ Partial Class Pos
     Friend WithEvents Panel6 As Panel
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents replaceCombo As ComboBox
     Friend WithEvents remBox As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents remLbl As Guna.UI.WinForms.GunaLabel
     Friend WithEvents expiredCheck As CheckBox
-    Friend WithEvents replaceAdd As Button
     Friend WithEvents typeText As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents excessTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel12 As Guna.UI.WinForms.GunaLabel
@@ -1595,4 +1614,7 @@ Partial Class Pos
     Friend WithEvents remarks As DataGridViewTextBoxColumn
     Friend WithEvents excess As DataGridViewTextBoxColumn
     Friend WithEvents GunaDragControl2 As Guna.UI.WinForms.GunaDragControl
+    Friend WithEvents replaceCount As Guna.UI.WinForms.GunaTextBox
+    Friend WithEvents replaceAdd As Button
+    Friend WithEvents replaceCombo As ComboBox
 End Class

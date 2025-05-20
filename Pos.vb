@@ -9,6 +9,7 @@ Public Class Pos
     ' Public property to store the fullname
     Public Property FullName As String
 
+
     Private addCount As Integer = 0
 
     Private Sub Pos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -54,7 +55,7 @@ Public Class Pos
         replaceCombo.Visible = False
         replaceAdd.Visible = False
         replaceTxt.Visible = False
-
+        replaceCount.Enabled = False
 
         typeText.Visible = False
 
@@ -513,6 +514,7 @@ Public Class Pos
 
     Private Sub ProcessCode()
         If String.IsNullOrEmpty(codeTxt.Text) Then
+            loaddgv()
             cleartxt()
             Return
         End If
@@ -541,7 +543,7 @@ Public Class Pos
                 Next
 
                 ' Update excessTxt with the total excess value
-                excessTxt.Text = excessTotal.ToString("F2")
+                excessTxt.Text = excessTotal.ToString("N2")
             End Using
 
             ' Set rows to read-only if "order_type" contains "(Cancelled SOA)"
@@ -768,7 +770,7 @@ Public Class Pos
         Dim totalAmount As Double = brochureamount + posteramount + dryingamount + replaceamount
 
         ' Display the computed amount in adsTxt
-        adsTxt.Text = totalAmount.ToString("F2") ' Format as fixed-point number with 2 decimal places
+        adsTxt.Text = totalAmount.ToString("N2") ' Format as fixed-point number with 2 decimal places
 
         ' Call UpdateTotalAmount to add amountTxt and adsTxt
         UpdateTotalAmount()
@@ -784,7 +786,7 @@ Public Class Pos
         End If
 
         ' Display the adjusted total
-        totalTxt.Text = updatedTotal.ToString("F2")
+        totalTxt.Text = updatedTotal.ToString("N2")
 
         ' If excessAmount was used, reset it to 0 so that it is not deducted multiple times
         If excessAmount > 0 Then
@@ -811,17 +813,19 @@ Public Class Pos
                 Dim codereplace As String = codeTxt.Text
                 ' Open the ReplacementForm with a new soaNumber
                 Dim replacementForm As New Replacement("", nextSOANumber, codereplace) ' Pass empty currentSOANumber and the nextSOANumber
-                replacementForm.ShowDialog() ' Show the form modally
+                If replacementForm.ShowDialog() = DialogResult.OK Then
+                    replaceCount.Text = replacementForm.ReplacementCount ' 🔁 <-- This line passes the value!
+                End If ' Show the form modally
 
-                replaceCombo.Enabled = True
+                'replaceCombo.Enabled = True
                 UncheckOtherCheckBoxes(replacementCheck)
-                'CalculateTotalAmount(0)
-                ' Update the total after calculation
-                UpdateTotalAmount()
-                'replacementCheck.Checked = False
-            Else
+                    'CalculateTotalAmount(0)
+                    ' Update the total after calculation
+                    UpdateTotalAmount()
+                    'replacementCheck.Checked = False
+                Else
 
-            End If
+                End If
         Else
             ' If record is found, proceed with the normal process
             Dim currentSOANumber As String = foundRow.Cells("soa_number").Value.ToString()
@@ -931,6 +935,7 @@ Public Class Pos
             CalculateTotalAmount(1800) ' Ensure unit price 1800 is used
             UncheckOtherCheckBoxes(walkCheck) ' Uncheck other checkboxes
             disableAds()
+            ProcessCode
         Else
             codeTxt.Clear()
             ClearTextBoxesIfNoChecks()
@@ -1078,7 +1083,7 @@ Public Class Pos
             Dim totalAmount = quantity * unitPrice
 
             ' Display the total amount in amountTxt
-            amountTxt.Text = totalAmount.ToString("F2") ' Format with 2 decimal places
+            amountTxt.Text = totalAmount.ToString("N2") ' Format with 2 decimal places
             adsTxt.Text = "0.00"
         Else
 
@@ -1117,7 +1122,7 @@ Public Class Pos
         Dim combinedTotal = amountValue + adsValue
 
         ' Display the combined total in totalTxt
-        totalTxt.Text = combinedTotal.ToString("F2") ' Format with 2 decimal places
+        totalTxt.Text = combinedTotal.ToString("N2") ' Format with 2 decimal places
     End Sub
 
 
@@ -1147,6 +1152,7 @@ Public Class Pos
         replaceCombo.SelectedIndex = -1
         lopezCheck.Checked = False
         'dgv2.Visible = False
+        replaceCount.Text = ""
     End Sub
 
     Private Function ExecuteQuery(query As String) As Integer
@@ -1881,8 +1887,7 @@ Public Class Pos
         ' Check if any of the fields are blank in a single statement
         If String.IsNullOrWhiteSpace(codeTxt.Text) OrElse
            String.IsNullOrWhiteSpace(nameBox.Text) OrElse
-           String.IsNullOrWhiteSpace(termBox.Text) OrElse
-           String.IsNullOrWhiteSpace(purchaseBox.Text) Then
+           String.IsNullOrWhiteSpace(termBox.Text) Then
 
             ' Show the message box and return False if any field is blank
             MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1966,7 +1971,6 @@ Public Class Pos
     End Sub
 
     Private Sub noticeButton_Click(sender As Object, e As EventArgs) Handles noticeButton.Click
-        NoticeForm.Show()
     End Sub
 
     Private Sub codeTxt_KeyPress(sender As Object, e As KeyPressEventArgs) Handles codeTxt.KeyPress
@@ -1992,7 +1996,7 @@ Public Class Pos
 
     End Sub
 
-    Private Sub homeBtn_Click(sender As Object, e As EventArgs) 
+    Private Sub homeBtn_Click(sender As Object, e As EventArgs)
         Form1.Show()
         Me.Hide()
     End Sub
@@ -2116,9 +2120,9 @@ Public Class Pos
 
     Private Sub dgv1_BindingContextChanged(sender As Object, e As EventArgs) Handles dgv1.BindingContextChanged
         ' Set the format for the columns to display two decimal places
-        dgv1.Columns("ads_amount").DefaultCellStyle.Format = "F2" ' Replace "adsColumn" with your actual column name for ads
-        dgv1.Columns("total_amount").DefaultCellStyle.Format = "F2" ' Replace "totalColumn" with your actual column name for total amount
-        dgv1.Columns("balance").DefaultCellStyle.Format = "F2" ' Replace "balanceColumn" with your actual column name for balance
+        dgv1.Columns("ads_amount").DefaultCellStyle.Format = "N2" ' Replace "adsColumn" with your actual column name for ads
+        dgv1.Columns("total_amount").DefaultCellStyle.Format = "N2" ' Replace "totalColumn" with your actual column name for total amount
+        dgv1.Columns("balance").DefaultCellStyle.Format = "N2" ' Replace "balanceColumn" with your actual column name for balance
     End Sub
 
     Private Sub expiredCheck_CheckedChanged(sender As Object, e As EventArgs) Handles expiredCheck.CheckedChanged
@@ -2169,6 +2173,9 @@ Public Class Pos
             e.SuppressKeyPress = True ' Prevents the beep sound
             ProcessCode()
             purchaseBox.Focus()
+        Else
+            loaddgv()
+            cleartxt()
         End If
     End Sub
 
@@ -2178,9 +2185,6 @@ Public Class Pos
             qtyTxt.Focus()
         End If
     End Sub
-
-
-
 
     'Public Sub loaddgv2()
     '    Call connection()

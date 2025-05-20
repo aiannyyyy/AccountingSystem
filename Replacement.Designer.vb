@@ -38,6 +38,8 @@ Partial Class Replacement
         Me.codeTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.dtpicker2 = New Guna.UI.WinForms.GunaDateTimePicker()
         Me.GunaLabel6 = New Guna.UI.WinForms.GunaLabel()
+        Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
+        Me.replaceCountTxt = New Guna.UI.WinForms.GunaTextBox()
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -47,9 +49,9 @@ Partial Class Replacement
         Me.dgv1.AllowUserToDeleteRows = False
         Me.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.replace, Me.labid, Me.newlabid, Me.test_type, Me.date_replace})
-        Me.dgv1.Location = New System.Drawing.Point(12, 128)
+        Me.dgv1.Location = New System.Drawing.Point(12, 173)
         Me.dgv1.Name = "dgv1"
-        Me.dgv1.Size = New System.Drawing.Size(468, 205)
+        Me.dgv1.Size = New System.Drawing.Size(468, 190)
         Me.dgv1.TabIndex = 31
         '
         'replace
@@ -83,9 +85,9 @@ Partial Class Replacement
         '
         'addButton
         '
-        Me.addButton.Location = New System.Drawing.Point(215, 90)
+        Me.addButton.Location = New System.Drawing.Point(207, 130)
         Me.addButton.Name = "addButton"
-        Me.addButton.Size = New System.Drawing.Size(75, 32)
+        Me.addButton.Size = New System.Drawing.Size(84, 37)
         Me.addButton.TabIndex = 38
         Me.addButton.Text = "ADD"
         Me.addButton.UseVisualStyleBackColor = True
@@ -152,7 +154,7 @@ Partial Class Replacement
         '
         Me.GunaLabel5.AutoSize = True
         Me.GunaLabel5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GunaLabel5.Location = New System.Drawing.Point(18, 56)
+        Me.GunaLabel5.Location = New System.Drawing.Point(15, 63)
         Me.GunaLabel5.Name = "GunaLabel5"
         Me.GunaLabel5.Size = New System.Drawing.Size(96, 17)
         Me.GunaLabel5.TabIndex = 43
@@ -212,12 +214,43 @@ Partial Class Replacement
         Me.GunaLabel6.TabIndex = 45
         Me.GunaLabel6.Text = "PURCHASE DATE:"
         '
+        'GunaLabel1
+        '
+        Me.GunaLabel1.AutoSize = True
+        Me.GunaLabel1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GunaLabel1.Location = New System.Drawing.Point(15, 101)
+        Me.GunaLabel1.Name = "GunaLabel1"
+        Me.GunaLabel1.Size = New System.Drawing.Size(146, 17)
+        Me.GunaLabel1.TabIndex = 47
+        Me.GunaLabel1.Text = "REPLACEMENT COUNT:"
+        '
+        'replaceCountTxt
+        '
+        Me.replaceCountTxt.BackColor = System.Drawing.Color.Black
+        Me.replaceCountTxt.BaseColor = System.Drawing.Color.White
+        Me.replaceCountTxt.BorderColor = System.Drawing.Color.Black
+        Me.replaceCountTxt.BorderSize = 1
+        Me.replaceCountTxt.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.replaceCountTxt.FocusedBaseColor = System.Drawing.Color.White
+        Me.replaceCountTxt.FocusedBorderColor = System.Drawing.Color.Black
+        Me.replaceCountTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.replaceCountTxt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.replaceCountTxt.Location = New System.Drawing.Point(165, 96)
+        Me.replaceCountTxt.Name = "replaceCountTxt"
+        Me.replaceCountTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.replaceCountTxt.SelectedText = ""
+        Me.replaceCountTxt.Size = New System.Drawing.Size(116, 28)
+        Me.replaceCountTxt.TabIndex = 48
+        Me.replaceCountTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'Replacement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(492, 342)
+        Me.ClientSize = New System.Drawing.Size(492, 375)
+        Me.Controls.Add(Me.replaceCountTxt)
+        Me.Controls.Add(Me.GunaLabel1)
         Me.Controls.Add(Me.dtpicker2)
         Me.Controls.Add(Me.GunaLabel6)
         Me.Controls.Add(Me.codeTxt)
@@ -254,4 +287,6 @@ Partial Class Replacement
     Friend WithEvents newlabid As DataGridViewTextBoxColumn
     Friend WithEvents test_type As DataGridViewTextBoxColumn
     Friend WithEvents date_replace As DataGridViewTextBoxColumn
+    Friend WithEvents GunaLabel1 As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents replaceCountTxt As Guna.UI.WinForms.GunaTextBox
 End Class
