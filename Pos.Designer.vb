@@ -48,6 +48,7 @@ Partial Class Pos
         Me.dtpicker1 = New Guna.UI.WinForms.GunaDateTimePicker()
         Me.amountTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel9 = New Guna.UI.WinForms.GunaLabel()
+        Me.replaceCombo = New System.Windows.Forms.ComboBox()
         Me.qtyTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel8 = New Guna.UI.WinForms.GunaLabel()
         Me.walkCheck = New System.Windows.Forms.CheckBox()
@@ -111,6 +112,8 @@ Partial Class Pos
         Me.remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.excess = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.replaceCount = New Guna.UI.WinForms.GunaTextBox()
+        Me.replaceAdd = New System.Windows.Forms.Button()
         Me.expiredCheck = New System.Windows.Forms.CheckBox()
         Me.remBox = New Guna.UI.WinForms.GunaTextBox()
         Me.remLbl = New Guna.UI.WinForms.GunaLabel()
@@ -122,9 +125,7 @@ Partial Class Pos
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.GunaDragControl2 = New Guna.UI.WinForms.GunaDragControl(Me.components)
-        Me.replaceAdd = New System.Windows.Forms.Button()
-        Me.replaceCombo = New System.Windows.Forms.ComboBox()
-        Me.replaceCount = New Guna.UI.WinForms.GunaTextBox()
+        Me.salesReportBtn = New Guna.UI.WinForms.GunaAdvenceButton()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBox.SuspendLayout()
@@ -283,14 +284,15 @@ Partial Class Pos
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.salesReportBtn)
         Me.Panel3.Controls.Add(Me.addButton)
         Me.Panel3.Controls.Add(Me.noticeButton)
         Me.Panel3.Controls.Add(Me.reportButton)
         Me.Panel3.Controls.Add(Me.payButton)
         Me.Panel3.Controls.Add(Me.soaButton)
-        Me.Panel3.Location = New System.Drawing.Point(28, 189)
+        Me.Panel3.Location = New System.Drawing.Point(10, 189)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(395, 48)
+        Me.Panel3.Size = New System.Drawing.Size(499, 48)
         Me.Panel3.TabIndex = 25
         '
         'addButton
@@ -519,6 +521,14 @@ Partial Class Pos
         Me.GunaLabel9.Size = New System.Drawing.Size(59, 15)
         Me.GunaLabel9.TabIndex = 21
         Me.GunaLabel9.Text = "AMOUNT"
+        '
+        'replaceCombo
+        '
+        Me.replaceCombo.FormattingEnabled = True
+        Me.replaceCombo.Location = New System.Drawing.Point(481, 4)
+        Me.replaceCombo.Name = "replaceCombo"
+        Me.replaceCombo.Size = New System.Drawing.Size(96, 23)
+        Me.replaceCombo.TabIndex = 25
         '
         'qtyTxt
         '
@@ -1345,6 +1355,34 @@ Partial Class Pos
         Me.Panel4.Size = New System.Drawing.Size(1001, 36)
         Me.Panel4.TabIndex = 17
         '
+        'replaceCount
+        '
+        Me.replaceCount.BackColor = System.Drawing.Color.Black
+        Me.replaceCount.BaseColor = System.Drawing.Color.White
+        Me.replaceCount.BorderColor = System.Drawing.Color.Black
+        Me.replaceCount.BorderSize = 1
+        Me.replaceCount.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.replaceCount.FocusedBaseColor = System.Drawing.Color.White
+        Me.replaceCount.FocusedBorderColor = System.Drawing.Color.Black
+        Me.replaceCount.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.replaceCount.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.replaceCount.Location = New System.Drawing.Point(477, 5)
+        Me.replaceCount.Name = "replaceCount"
+        Me.replaceCount.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.replaceCount.SelectedText = ""
+        Me.replaceCount.Size = New System.Drawing.Size(46, 26)
+        Me.replaceCount.TabIndex = 29
+        Me.replaceCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'replaceAdd
+        '
+        Me.replaceAdd.Location = New System.Drawing.Point(591, 7)
+        Me.replaceAdd.Name = "replaceAdd"
+        Me.replaceAdd.Size = New System.Drawing.Size(75, 23)
+        Me.replaceAdd.TabIndex = 28
+        Me.replaceAdd.Text = "ADD"
+        Me.replaceAdd.UseVisualStyleBackColor = True
+        '
         'expiredCheck
         '
         Me.expiredCheck.AutoSize = True
@@ -1447,41 +1485,39 @@ Partial Class Pos
         '
         Me.GunaDragControl2.TargetControl = Me.Label1
         '
-        'replaceAdd
+        'salesReportBtn
         '
-        Me.replaceAdd.Location = New System.Drawing.Point(591, 7)
-        Me.replaceAdd.Name = "replaceAdd"
-        Me.replaceAdd.Size = New System.Drawing.Size(75, 23)
-        Me.replaceAdd.TabIndex = 28
-        Me.replaceAdd.Text = "ADD"
-        Me.replaceAdd.UseVisualStyleBackColor = True
-        '
-        'replaceCombo
-        '
-        Me.replaceCombo.FormattingEnabled = True
-        Me.replaceCombo.Location = New System.Drawing.Point(481, 4)
-        Me.replaceCombo.Name = "replaceCombo"
-        Me.replaceCombo.Size = New System.Drawing.Size(96, 23)
-        Me.replaceCombo.TabIndex = 25
-        '
-        'replaceCount
-        '
-        Me.replaceCount.BackColor = System.Drawing.Color.Black
-        Me.replaceCount.BaseColor = System.Drawing.Color.White
-        Me.replaceCount.BorderColor = System.Drawing.Color.Black
-        Me.replaceCount.BorderSize = 1
-        Me.replaceCount.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.replaceCount.FocusedBaseColor = System.Drawing.Color.White
-        Me.replaceCount.FocusedBorderColor = System.Drawing.Color.Black
-        Me.replaceCount.FocusedForeColor = System.Drawing.SystemColors.ControlText
-        Me.replaceCount.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.replaceCount.Location = New System.Drawing.Point(477, 5)
-        Me.replaceCount.Name = "replaceCount"
-        Me.replaceCount.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.replaceCount.SelectedText = ""
-        Me.replaceCount.Size = New System.Drawing.Size(46, 26)
-        Me.replaceCount.TabIndex = 29
-        Me.replaceCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.salesReportBtn.AnimationHoverSpeed = 0.07!
+        Me.salesReportBtn.AnimationSpeed = 0.03!
+        Me.salesReportBtn.BackColor = System.Drawing.Color.Transparent
+        Me.salesReportBtn.BaseColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(168, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.salesReportBtn.BorderColor = System.Drawing.Color.FromArgb(CType(CType(119, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(163, Byte), Integer))
+        Me.salesReportBtn.CheckedBaseColor = System.Drawing.Color.Gray
+        Me.salesReportBtn.CheckedBorderColor = System.Drawing.Color.Black
+        Me.salesReportBtn.CheckedForeColor = System.Drawing.Color.White
+        Me.salesReportBtn.CheckedImage = Nothing
+        Me.salesReportBtn.CheckedLineColor = System.Drawing.Color.DimGray
+        Me.salesReportBtn.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.salesReportBtn.FocusedColor = System.Drawing.Color.Empty
+        Me.salesReportBtn.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.salesReportBtn.ForeColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.salesReportBtn.Image = Nothing
+        Me.salesReportBtn.ImageSize = New System.Drawing.Size(20, 20)
+        Me.salesReportBtn.LineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.salesReportBtn.Location = New System.Drawing.Point(393, 9)
+        Me.salesReportBtn.Name = "salesReportBtn"
+        Me.salesReportBtn.OnHoverBaseColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.salesReportBtn.OnHoverBorderColor = System.Drawing.Color.Black
+        Me.salesReportBtn.OnHoverForeColor = System.Drawing.Color.Black
+        Me.salesReportBtn.OnHoverImage = Nothing
+        Me.salesReportBtn.OnHoverLineColor = System.Drawing.Color.FromArgb(CType(CType(206, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.salesReportBtn.OnPressedColor = System.Drawing.Color.Black
+        Me.salesReportBtn.Radius = 2
+        Me.salesReportBtn.Size = New System.Drawing.Size(103, 30)
+        Me.salesReportBtn.TabIndex = 25
+        Me.salesReportBtn.Text = "SALES REPORT"
+        Me.salesReportBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.salesReportBtn.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit
         '
         'Pos
         '
@@ -1617,4 +1653,5 @@ Partial Class Pos
     Friend WithEvents replaceCount As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents replaceAdd As Button
     Friend WithEvents replaceCombo As ComboBox
+    Friend WithEvents salesReportBtn As Guna.UI.WinForms.GunaAdvenceButton
 End Class

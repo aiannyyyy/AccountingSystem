@@ -1561,151 +1561,37 @@ Public Class Pos
     '    End Using
     'End Function
 
-    'Private Function InsertRecord(ByRef soatxt As String, soaDate As DateTime, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As DateTime, quantity As Integer, subtotal As Double, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As DateTime, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String, type2 As String, date_modified As DateTime, modified_by As String, excess As Double) As Double
-    '    Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type, type, date_modified, modified_by, excess) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    '    Dim lastSoaQuery As String = "SELECT soa_number FROM acccounting WHERE LEFT(soa_number, 4) = ? ORDER BY soa_number DESC LIMIT 1"
-    '    Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
-
-    '    Dim year As String = purchaseDate.Year.ToString()
-    '    Dim newSoaNumber As String = ""
-
-    '    Using conn As New OdbcConnection("DSN=dashboard")
-    '        conn.Open()
-    '        Dim transaction As OdbcTransaction = conn.BeginTransaction()
-
-    '        Try
-    '            ' Generate new SOA number
-    '            Using cmd As New OdbcCommand(lastSoaQuery, conn, transaction)
-    '                cmd.Parameters.AddWithValue("@year", year)
-    '                Dim lastSoa As Object = cmd.ExecuteScalar()
-
-    '                If lastSoa IsNot Nothing Then
-    '                    Dim lastIncrement As Integer = Convert.ToInt32(lastSoa.ToString().Substring(4)) + 1
-    '                    newSoaNumber = year & lastIncrement.ToString("D5")
-    '                Else
-    '                    newSoaNumber = year & "00001"
-    '                End If
-    '            End Using
-
-    '            soatxt = newSoaNumber
-
-    '            ' Insert record
-    '            Using cmd As New OdbcCommand(insertQuery, conn, transaction)
-    '                cmd.Parameters.AddWithValue("@soa_number", newSoaNumber)
-    '                cmd.Parameters.AddWithValue("@soa_txt", soatxt)
-    '                'cmd.Parameters.AddWithValue("@soa_date", soaDate.Date)
-    '                cmd.Parameters.AddWithValue("@soa_date", DateTime.Now)
-    '                cmd.Parameters.AddWithValue("@order_type", ordertype)
-    '                cmd.Parameters.AddWithValue("@fac_code", code)
-    '                cmd.Parameters.AddWithValue("@facility_name", name)
-    '                cmd.Parameters.AddWithValue("@term", term)
-    '                cmd.Parameters.AddWithValue("@purchase_number", purchaseNumber)
-    '                'cmd.Parameters.AddWithValue("@purchase_date", purchaseDate.Date)
-    '                cmd.Parameters.AddWithValue("@purchase_date", dtpicker2.Value)
-    '                cmd.Parameters.AddWithValue("@quantity", quantity)
-    '                cmd.Parameters.AddWithValue("@sub_total", subtotal)
-    '                cmd.Parameters.AddWithValue("@brochure", brochure)
-    '                cmd.Parameters.AddWithValue("@poster", poster)
-    '                cmd.Parameters.AddWithValue("@drying_rack", drying)
-    '                cmd.Parameters.AddWithValue("@replacement", If(replace = -1, DBNull.Value, replace))
-    '                cmd.Parameters.AddWithValue("@ads_amount", ads)
-    '                'cmd.Parameters.AddWithValue("@due_date", dueDate.Date)
-    '                cmd.Parameters.AddWithValue("@due_date", dtpicker1.Value)
-    '                cmd.Parameters.AddWithValue("@total_amount", totalAmount)
-    '                cmd.Parameters.AddWithValue("@balance", balance)
-    '                cmd.Parameters.AddWithValue("@username", user)
-    '                cmd.Parameters.AddWithValue("@sub_amount", subamount)
-    '                cmd.Parameters.AddWithValue("@replace_type", replace_type)
-    '                cmd.Parameters.AddWithValue("@type", type2)
-    '                cmd.Parameters.AddWithValue("@date_modified", DateTime.Now)
-    '                cmd.Parameters.AddWithValue("@modified_by", modified_by)
-    '                cmd.Parameters.AddWithValue("@excess", excess)
-
-    '                cmd.ExecuteNonQuery()
-
-    '                cmd.CommandText = lastInsertedIdQuery
-    '                Dim lastInsertedId As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-
-    '                ' Update replacement total in accounting table
-    '                Dim query1 As String = "SELECT COALESCE(SUM(quantity), 0) FROM replacement_type WHERE soa_number = ?"
-    '                Dim totalQuantity As Integer
-
-    '                Using cmd2 As New OdbcCommand(query1, conn, transaction)
-    '                    cmd2.Parameters.AddWithValue("soa_number", newSoaNumber)
-    '                    totalQuantity = Convert.ToInt32(cmd2.ExecuteScalar())
-    '                End Using
-
-    '                Dim query2 As String = "UPDATE acccounting SET replacement = ? WHERE soa_number = ?"
-    '                Using cmd3 As New OdbcCommand(query2, conn, transaction)
-    '                    cmd3.Parameters.AddWithValue("replacement", totalQuantity)
-    '                    cmd3.Parameters.AddWithValue("soa_number", newSoaNumber)
-    '                    cmd3.ExecuteNonQuery()
-    '                End Using
-
-    '                'this is for when a replacement_type has a price and need to add to the balance
-    '                ' First, calculate the total price from the replacement_type table
-    '                Dim query3 As String = "SELECT COALESCE(SUM(total_price), 0) FROM replacement_type WHERE soa_number = ?"
-    '                Dim totalPrice As Double
-
-    '                Using cmd4 As New OdbcCommand(query3, conn, transaction)
-    '                    cmd4.Parameters.AddWithValue("soa_number", newSoaNumber)
-    '                    totalPrice = Convert.ToDouble(cmd4.ExecuteScalar())
-    '                End Using
-
-    '                ' Add the total price to the current balance
-    '                Dim newBalance As Double = balance + totalPrice
-
-    '                ' Update the balance in the acccounting table
-    '                Dim updateBalanceQuery As String = "UPDATE acccounting SET balance = ? WHERE soa_number = ?"
-    '                Using cmd5 As New OdbcCommand(updateBalanceQuery, conn, transaction)
-    '                    cmd5.Parameters.AddWithValue("balance", newBalance)
-    '                    cmd5.Parameters.AddWithValue("soa_number", newSoaNumber)
-    '                    cmd5.ExecuteNonQuery()
-    '                End Using
-
-    '                Dim updateExcessQuery As String = "UPDATE payments SET excess = ? WHERE fac_code = ? AND excess <> ''"
-
-    '                Using cmd6 As New OdbcCommand(updateExcessQuery, conn, transaction)
-    '                    cmd6.Parameters.AddWithValue("excess", excessTxt.Text)
-    '                    cmd6.Parameters.AddWithValue("fac_code", codeTxt.Text)
-    '                    cmd6.ExecuteNonQuery()
-    '                End Using
-
-    '                Dim updateExcess As String = "UPDATE acccounting SET excess = ? WHERE fac_code = ? AND excess <> ''"
-
-    '                Using cmd7 As New OdbcCommand(updateExcess, conn, transaction)
-    '                    cmd7.Parameters.AddWithValue("excess", excessTxt.Text)
-    '                    cmd7.Parameters.AddWithValue("fac_code", codeTxt.Text)
-    '                    cmd7.ExecuteNonQuery()
-    '                End Using
-
-    '                transaction.Commit()
-    '                Return lastInsertedId
-    '            End Using
-    '        Catch ex As Exception
-    '            transaction.Rollback()
-    '            Throw New Exception("Error during record insertion: " & ex.Message)
-    '        Finally
-    '            conn.Close()
-    '        End Try
-    '    End Using
-    'End Function
-
     Private Function InsertRecord(ByRef soatxt As String, soaDate As DateTime, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As DateTime, quantity As Integer, subtotal As Double, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As DateTime, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String, type2 As String, date_modified As DateTime, modified_by As String, excess As Double) As Double
-        Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type, type, date_modified, modified_by, excess) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type, type, date_modified, modified_by, excess) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        Dim lastSoaQuery As String = "SELECT soa_number FROM acccounting WHERE LEFT(soa_number, 4) = ? ORDER BY soa_number DESC LIMIT 1"
         Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
 
-        ' We will let the database auto-increment the soa_number field as it's a primary key
-        ' The soatxt parameter will still be used for the soa_txt field
+        Dim year As String = purchaseDate.Year.ToString()
+        Dim newSoaNumber As String = ""
 
         Using conn As New OdbcConnection("DSN=dashboard")
             conn.Open()
             Dim transaction As OdbcTransaction = conn.BeginTransaction()
 
             Try
+                ' Generate new SOA number
+                Using cmd As New OdbcCommand(lastSoaQuery, conn, transaction)
+                    cmd.Parameters.AddWithValue("@year", year)
+                    Dim lastSoa As Object = cmd.ExecuteScalar()
+
+                    If lastSoa IsNot Nothing Then
+                        Dim lastIncrement As Integer = Convert.ToInt32(lastSoa.ToString().Substring(4)) + 1
+                        newSoaNumber = year & lastIncrement.ToString("D5")
+                    Else
+                        newSoaNumber = year & "00001"
+                    End If
+                End Using
+
+                soatxt = newSoaNumber
+
                 ' Insert record
                 Using cmd As New OdbcCommand(insertQuery, conn, transaction)
-                    ' Don't set soa_number parameter as it's now auto-incremented by MySQL
+                    cmd.Parameters.AddWithValue("@soa_number", newSoaNumber)
                     cmd.Parameters.AddWithValue("@soa_txt", soatxt)
                     'cmd.Parameters.AddWithValue("@soa_date", soaDate.Date)
                     cmd.Parameters.AddWithValue("@soa_date", DateTime.Now)
@@ -1740,22 +1626,19 @@ Public Class Pos
                     cmd.CommandText = lastInsertedIdQuery
                     Dim lastInsertedId As Integer = Convert.ToInt32(cmd.ExecuteScalar())
 
-                    ' Also update soatxt reference parameter so calling code knows the new SOA number
-                    soatxt = lastInsertedId.ToString()
-
                     ' Update replacement total in accounting table
                     Dim query1 As String = "SELECT COALESCE(SUM(quantity), 0) FROM replacement_type WHERE soa_number = ?"
                     Dim totalQuantity As Integer
 
                     Using cmd2 As New OdbcCommand(query1, conn, transaction)
-                        cmd2.Parameters.AddWithValue("soa_number", lastInsertedId.ToString())
+                        cmd2.Parameters.AddWithValue("soa_number", newSoaNumber)
                         totalQuantity = Convert.ToInt32(cmd2.ExecuteScalar())
                     End Using
 
                     Dim query2 As String = "UPDATE acccounting SET replacement = ? WHERE soa_number = ?"
                     Using cmd3 As New OdbcCommand(query2, conn, transaction)
                         cmd3.Parameters.AddWithValue("replacement", totalQuantity)
-                        cmd3.Parameters.AddWithValue("soa_number", lastInsertedId.ToString())
+                        cmd3.Parameters.AddWithValue("soa_number", newSoaNumber)
                         cmd3.ExecuteNonQuery()
                     End Using
 
@@ -1765,7 +1648,7 @@ Public Class Pos
                     Dim totalPrice As Double
 
                     Using cmd4 As New OdbcCommand(query3, conn, transaction)
-                        cmd4.Parameters.AddWithValue("soa_number", lastInsertedId.ToString())
+                        cmd4.Parameters.AddWithValue("soa_number", newSoaNumber)
                         totalPrice = Convert.ToDouble(cmd4.ExecuteScalar())
                     End Using
 
@@ -1776,7 +1659,7 @@ Public Class Pos
                     Dim updateBalanceQuery As String = "UPDATE acccounting SET balance = ? WHERE soa_number = ?"
                     Using cmd5 As New OdbcCommand(updateBalanceQuery, conn, transaction)
                         cmd5.Parameters.AddWithValue("balance", newBalance)
-                        cmd5.Parameters.AddWithValue("soa_number", lastInsertedId.ToString())
+                        cmd5.Parameters.AddWithValue("soa_number", newSoaNumber)
                         cmd5.ExecuteNonQuery()
                     End Using
 
@@ -1807,6 +1690,123 @@ Public Class Pos
             End Try
         End Using
     End Function
+
+    'Private Function InsertRecord(ByRef soatxt As String, soaDate As DateTime, ordertype As String, code As String, name As String, term As String, purchaseNumber As String, purchaseDate As DateTime, quantity As Integer, subtotal As Double, brochure As Integer, poster As Integer, drying As Integer, replace As Integer, ads As Double, dueDate As DateTime, totalAmount As Double, balance As Double, user As String, subamount As Double, replace_type As String, type2 As String, date_modified As DateTime, modified_by As String, excess As Double) As Double
+    '    Dim insertQuery As String = "INSERT INTO acccounting (soa_number, soa_txt, soa_date, order_type, fac_code, facility_name, term, purchase_number, purchase_date, quantity, sub_total, brochure, poster, drying_rack, replacement, ads_amount, due_date, total_amount, balance, username, sub_amount, replace_type, type, date_modified, modified_by, excess) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    '    Dim lastInsertedIdQuery As String = "SELECT LAST_INSERT_ID()"
+
+    '    ' We will let the database auto-increment the soa_number field as it's a primary key
+    '    ' The soatxt parameter will still be used for the soa_txt field
+
+    '    Using conn As New OdbcConnection("DSN=dashboard")
+    '        conn.Open()
+    '        Dim transaction As OdbcTransaction = conn.BeginTransaction()
+
+    '        Try
+    '            ' Insert record
+    '            Using cmd As New OdbcCommand(insertQuery, conn, transaction)
+    '                ' Don't set soa_number parameter as it's now auto-incremented by MySQL
+    '                cmd.Parameters.AddWithValue("@soa_txt", soatxt)
+    '                'cmd.Parameters.AddWithValue("@soa_date", soaDate.Date)
+    '                cmd.Parameters.AddWithValue("@soa_date", DateTime.Now)
+    '                cmd.Parameters.AddWithValue("@order_type", ordertype)
+    '                cmd.Parameters.AddWithValue("@fac_code", code)
+    '                cmd.Parameters.AddWithValue("@facility_name", name)
+    '                cmd.Parameters.AddWithValue("@term", term)
+    '                cmd.Parameters.AddWithValue("@purchase_number", purchaseNumber)
+    '                'cmd.Parameters.AddWithValue("@purchase_date", purchaseDate.Date)
+    '                cmd.Parameters.AddWithValue("@purchase_date", dtpicker2.Value)
+    '                cmd.Parameters.AddWithValue("@quantity", quantity)
+    '                cmd.Parameters.AddWithValue("@sub_total", subtotal)
+    '                cmd.Parameters.AddWithValue("@brochure", brochure)
+    '                cmd.Parameters.AddWithValue("@poster", poster)
+    '                cmd.Parameters.AddWithValue("@drying_rack", drying)
+    '                cmd.Parameters.AddWithValue("@replacement", If(replace = -1, DBNull.Value, replace))
+    '                cmd.Parameters.AddWithValue("@ads_amount", ads)
+    '                'cmd.Parameters.AddWithValue("@due_date", dueDate.Date)
+    '                cmd.Parameters.AddWithValue("@due_date", dtpicker1.Value)
+    '                cmd.Parameters.AddWithValue("@total_amount", totalAmount)
+    '                cmd.Parameters.AddWithValue("@balance", balance)
+    '                cmd.Parameters.AddWithValue("@username", user)
+    '                cmd.Parameters.AddWithValue("@sub_amount", subamount)
+    '                cmd.Parameters.AddWithValue("@replace_type", replace_type)
+    '                cmd.Parameters.AddWithValue("@type", type2)
+    '                cmd.Parameters.AddWithValue("@date_modified", DateTime.Now)
+    '                cmd.Parameters.AddWithValue("@modified_by", modified_by)
+    '                cmd.Parameters.AddWithValue("@excess", excess)
+
+    '                cmd.ExecuteNonQuery()
+
+    '                cmd.CommandText = lastInsertedIdQuery
+    '                Dim lastInsertedId As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+    '                ' Also update soatxt reference parameter so calling code knows the new SOA number
+    '                soatxt = lastInsertedId.ToString()
+
+    '                ' Update replacement total in accounting table
+    '                Dim query1 As String = "SELECT COALESCE(SUM(quantity), 0) FROM replacement_type WHERE soa_number = ?"
+    '                Dim totalQuantity As Integer
+
+    '                Using cmd2 As New OdbcCommand(query1, conn, transaction)
+    '                    cmd2.Parameters.AddWithValue("soa_number", lastInsertedId.ToString())
+    '                    totalQuantity = Convert.ToInt32(cmd2.ExecuteScalar())
+    '                End Using
+
+    '                Dim query2 As String = "UPDATE acccounting SET replacement = ? WHERE soa_number = ?"
+    '                Using cmd3 As New OdbcCommand(query2, conn, transaction)
+    '                    cmd3.Parameters.AddWithValue("replacement", totalQuantity)
+    '                    cmd3.Parameters.AddWithValue("soa_number", lastInsertedId.ToString())
+    '                    cmd3.ExecuteNonQuery()
+    '                End Using
+
+    '                'this is for when a replacement_type has a price and need to add to the balance
+    '                ' First, calculate the total price from the replacement_type table
+    '                Dim query3 As String = "SELECT COALESCE(SUM(total_price), 0) FROM replacement_type WHERE soa_number = ?"
+    '                Dim totalPrice As Double
+
+    '                Using cmd4 As New OdbcCommand(query3, conn, transaction)
+    '                    cmd4.Parameters.AddWithValue("soa_number", lastInsertedId.ToString())
+    '                    totalPrice = Convert.ToDouble(cmd4.ExecuteScalar())
+    '                End Using
+
+    '                ' Add the total price to the current balance
+    '                Dim newBalance As Double = balance + totalPrice
+
+    '                ' Update the balance in the acccounting table
+    '                Dim updateBalanceQuery As String = "UPDATE acccounting SET balance = ? WHERE soa_number = ?"
+    '                Using cmd5 As New OdbcCommand(updateBalanceQuery, conn, transaction)
+    '                    cmd5.Parameters.AddWithValue("balance", newBalance)
+    '                    cmd5.Parameters.AddWithValue("soa_number", lastInsertedId.ToString())
+    '                    cmd5.ExecuteNonQuery()
+    '                End Using
+
+    '                Dim updateExcessQuery As String = "UPDATE payments SET excess = ? WHERE fac_code = ? AND excess <> ''"
+
+    '                Using cmd6 As New OdbcCommand(updateExcessQuery, conn, transaction)
+    '                    cmd6.Parameters.AddWithValue("excess", excessTxt.Text)
+    '                    cmd6.Parameters.AddWithValue("fac_code", codeTxt.Text)
+    '                    cmd6.ExecuteNonQuery()
+    '                End Using
+
+    '                Dim updateExcess As String = "UPDATE acccounting SET excess = ? WHERE fac_code = ? AND excess <> ''"
+
+    '                Using cmd7 As New OdbcCommand(updateExcess, conn, transaction)
+    '                    cmd7.Parameters.AddWithValue("excess", excessTxt.Text)
+    '                    cmd7.Parameters.AddWithValue("fac_code", codeTxt.Text)
+    '                    cmd7.ExecuteNonQuery()
+    '                End Using
+
+    '                transaction.Commit()
+    '                Return lastInsertedId
+    '            End Using
+    '        Catch ex As Exception
+    '            transaction.Rollback()
+    '            Throw New Exception("Error during record insertion: " & ex.Message)
+    '        Finally
+    '            conn.Close()
+    '        End Try
+    '    End Using
+    'End Function
     Private Sub addButton_Click(sender As Object, e As EventArgs) Handles addButton.Click
         ' Check if any row is marked for cancellation
         Dim isAnyChecked As Boolean = dgv1.Rows.Cast(Of DataGridViewRow)().
@@ -2292,7 +2292,6 @@ Public Class Pos
             purchaseBox.Focus()
         Else
             loaddgv()
-            cleartxt()
         End If
     End Sub
 
@@ -2301,6 +2300,13 @@ Public Class Pos
             e.SuppressKeyPress = True
             qtyTxt.Focus()
         End If
+    End Sub
+
+    Private Sub codeTxt_TextChanged(sender As Object, e As EventArgs) Handles codeTxt.TextChanged
+    End Sub
+
+    Private Sub salesReportBtn_Click(sender As Object, e As EventArgs) Handles salesReportBtn.Click
+        SalesReport.Show()
     End Sub
 
     'Public Sub loaddgv2()
