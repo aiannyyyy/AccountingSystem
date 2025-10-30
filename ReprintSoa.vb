@@ -22,6 +22,22 @@
             reportForm.Controls.Add(crystalReportViewer)
             reportForm.WindowState = FormWindowState.Maximized
             reportForm.Show()
+        ElseIf cellValue = "COURIER" Then
+            ' Generate the Crystal Report
+            Dim report2 As New StatementOfAccountCourier
+            Dim selformula2 As String = "{acccounting1.soa_txt} = '" & soaTxt.Text & "'"
+            report2.RecordSelectionFormula = selformula2
+
+            ' Refresh the report to load data
+            report2.Refresh()
+
+            Dim reportForm2 As New Form
+            Dim crystalReportViewer2 As New CrystalDecisions.Windows.Forms.CrystalReportViewer
+            crystalReportViewer2.ReportSource = report2 ' Corrected this line
+            crystalReportViewer2.Dock = DockStyle.Fill
+            reportForm2.Controls.Add(crystalReportViewer2) ' Corrected this line
+            reportForm2.WindowState = FormWindowState.Maximized
+            reportForm2.Show()
         Else
             ' Generate the Crystal Report
             Dim report1 As New StatementOfAccountWithServiceFee()

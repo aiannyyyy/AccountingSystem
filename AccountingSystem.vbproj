@@ -15,7 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\jmticatic\Desktop\</PublishUrl>
+    <PublishUrl>C:\Users\jmticatic.NSCSL\Desktop\</PublishUrl>
     <Install>false</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
-    <ApplicationRevision>92</ApplicationRevision>
+    <ApplicationRevision>111</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -180,6 +180,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Installment.Designer.vb">
+      <DependentUpon>Installment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Installment.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -233,6 +239,12 @@
     <Compile Include="PrintReceipt.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="QuantityForm.Designer.vb">
+      <DependentUpon>QuantityForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="QuantityForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ReceiptNoLines.vb">
       <DependentUpon>ReceiptNoLines.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -269,6 +281,24 @@
     <Compile Include="SalesReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="StatementOfAccountCourier.vb">
+      <DependentUpon>StatementOfAccountCourier.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="StatementOfAccountWithServiceFee1.vb">
+      <DependentUpon>StatementOfAccountWithServiceFee1.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="StatementOfAccount1.vb">
+      <DependentUpon>StatementOfAccount1.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="StatementOfAccount.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -301,6 +331,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Installment.resx">
+      <DependentUpon>Installment.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
     </EmbeddedResource>
@@ -326,6 +359,9 @@
     <EmbeddedResource Include="PrintReceipt.resx">
       <DependentUpon>PrintReceipt.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="QuantityForm.resx">
+      <DependentUpon>QuantityForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReceiptNoLines.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReceiptNoLines.vb</LastGenOutput>
@@ -345,6 +381,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SalesReport.resx">
       <DependentUpon>SalesReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatementOfAccountCourier.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StatementOfAccountCourier.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatementOfAccountWithServiceFee1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StatementOfAccountWithServiceFee1.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatementOfAccount1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StatementOfAccount1.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="StatementOfAccount.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

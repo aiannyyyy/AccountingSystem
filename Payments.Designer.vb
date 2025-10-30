@@ -35,11 +35,14 @@ Partial Class Payments
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Payments))
         Me.GunaElipse1 = New Guna.UI.WinForms.GunaElipse(Me.components)
         Me.GunaPanel1 = New Guna.UI.WinForms.GunaPanel()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GunaControlBox3 = New Guna.UI.WinForms.GunaControlBox()
         Me.GunaControlBox2 = New Guna.UI.WinForms.GunaControlBox()
         Me.GunaControlBox1 = New Guna.UI.WinForms.GunaControlBox()
         Me.GunaDragControl1 = New Guna.UI.WinForms.GunaDragControl(Me.components)
         Me.mainPanel = New System.Windows.Forms.Panel()
+        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -77,6 +80,9 @@ Partial Class Payments
         Me.paid_ads = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bank_name = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cheque_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.promissory = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.extension_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.reason = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgv1 = New Guna.UI.WinForms.GunaDataGridView()
         Me.soa_number = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.soa_txt = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -106,6 +112,11 @@ Partial Class Payments
         Me.date_modified = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.modified_by = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.groupDetails = New Guna.UI.WinForms.GunaGroupBox()
+        Me.reasonTxt = New Guna.UI.WinForms.GunaTextBox()
+        Me.extensionDate = New Guna.UI.WinForms.GunaDateTimePicker()
+        Me.GunaLabel26 = New Guna.UI.WinForms.GunaLabel()
+        Me.installmentCheck = New Guna.UI.WinForms.GunaCheckBox()
+        Me.promisorryCheck = New Guna.UI.WinForms.GunaCheckBox()
         Me.GunaLabel25 = New Guna.UI.WinForms.GunaLabel()
         Me.chequeDate = New Guna.UI.WinForms.GunaDateTimePicker()
         Me.bankTxt = New Guna.UI.WinForms.GunaTextBox()
@@ -126,7 +137,6 @@ Partial Class Payments
         Me.GunaPictureBox4 = New Guna.UI.WinForms.GunaPictureBox()
         Me.GunaPictureBox3 = New Guna.UI.WinForms.GunaPictureBox()
         Me.GunaPictureBox2 = New Guna.UI.WinForms.GunaPictureBox()
-        Me.GunaPictureBox1 = New Guna.UI.WinForms.GunaPictureBox()
         Me.stopInterestCheck = New Guna.UI.WinForms.GunaCheckBox()
         Me.remTxt = New Guna.UI.WinForms.GunaTextBox()
         Me.GunaLabel24 = New Guna.UI.WinForms.GunaLabel()
@@ -173,15 +183,13 @@ Partial Class Payments
         Me.codeTxt = New Guna.UI.WinForms.GunaLineTextBox()
         Me.GunaLabel1 = New Guna.UI.WinForms.GunaLabel()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.lblshow = New Guna.UI.WinForms.GunaLabel()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.dtLabel = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.lblshow = New Guna.UI.WinForms.GunaLabel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.GunaDragControl2 = New Guna.UI.WinForms.GunaDragControl(Me.components)
-        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.GunaPanel1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mainPanel.SuspendLayout()
         CType(Me.dgv2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -192,10 +200,8 @@ Partial Class Payments
         CType(Me.GunaPictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GunaPictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GunaPictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GunaPictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GunaElipse1
@@ -215,6 +221,27 @@ Partial Class Payments
         Me.GunaPanel1.Name = "GunaPanel1"
         Me.GunaPanel1.Size = New System.Drawing.Size(1046, 34)
         Me.GunaPanel1.TabIndex = 1
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.White
+        Me.Label3.Location = New System.Drawing.Point(455, 1)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(123, 30)
+        Me.Label3.TabIndex = 7
+        Me.Label3.Text = "PAYMENTS"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(10, 3)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(31, 26)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 6
+        Me.PictureBox1.TabStop = False
         '
         'GunaControlBox3
         '
@@ -289,8 +316,16 @@ Partial Class Payments
         Me.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.mainPanel.Location = New System.Drawing.Point(0, 34)
         Me.mainPanel.Name = "mainPanel"
-        Me.mainPanel.Size = New System.Drawing.Size(1046, 887)
+        Me.mainPanel.Size = New System.Drawing.Size(1046, 930)
         Me.mainPanel.TabIndex = 2
+        '
+        'Panel6
+        '
+        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.Panel6.Location = New System.Drawing.Point(6, 43)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(1031, 10)
+        Me.Panel6.TabIndex = 66
         '
         'Label2
         '
@@ -306,7 +341,7 @@ Partial Class Payments
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 585)
+        Me.Label1.Location = New System.Drawing.Point(12, 673)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(150, 20)
         Me.Label1.TabIndex = 63
@@ -315,7 +350,7 @@ Partial Class Payments
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.Panel4.Location = New System.Drawing.Point(-5, 875)
+        Me.Panel4.Location = New System.Drawing.Point(-5, 920)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1054, 43)
         Me.Panel4.TabIndex = 62
@@ -325,7 +360,7 @@ Partial Class Payments
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.Panel3.Location = New System.Drawing.Point(-31, 0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(39, 875)
+        Me.Panel3.Size = New System.Drawing.Size(39, 1018)
         Me.Panel3.TabIndex = 62
         '
         'Panel2
@@ -333,7 +368,7 @@ Partial Class Payments
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.Panel2.Location = New System.Drawing.Point(1037, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(38, 875)
+        Me.Panel2.Size = New System.Drawing.Size(38, 1018)
         Me.Panel2.TabIndex = 61
         '
         'dgv2
@@ -358,7 +393,7 @@ Partial Class Payments
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv2.ColumnHeadersHeight = 21
-        Me.dgv2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.soanumber, Me.enbs, Me.fac_code, Me.ads, Me.due, Me.soa, Me.interest, Me.int, Me.paid_interest, Me.ordate, Me.ornumber, Me.baddebts, Me.btax, Me.wtax, Me.others, Me.mop, Me.fop, Me.cheque, Me.bank, Me.datepayment, Me.dateposted, Me.grandtotal, Me.amountpaid, Me.bal, Me.remark, Me.username, Me.excess_balance, Me.paid_ads, Me.bank_name, Me.cheque_date})
+        Me.dgv2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.soanumber, Me.enbs, Me.fac_code, Me.ads, Me.due, Me.soa, Me.interest, Me.int, Me.paid_interest, Me.ordate, Me.ornumber, Me.baddebts, Me.btax, Me.wtax, Me.others, Me.mop, Me.fop, Me.cheque, Me.bank, Me.datepayment, Me.dateposted, Me.grandtotal, Me.amountpaid, Me.bal, Me.remark, Me.username, Me.excess_balance, Me.paid_ads, Me.bank_name, Me.cheque_date, Me.promissory, Me.extension_date, Me.reason})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -369,7 +404,7 @@ Partial Class Payments
         Me.dgv2.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgv2.EnableHeadersVisualStyles = False
         Me.dgv2.GridColor = System.Drawing.Color.FromArgb(CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(243, Byte), Integer))
-        Me.dgv2.Location = New System.Drawing.Point(14, 612)
+        Me.dgv2.Location = New System.Drawing.Point(14, 703)
         Me.dgv2.Name = "dgv2"
         Me.dgv2.ReadOnly = True
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
@@ -384,7 +419,7 @@ Partial Class Payments
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.dgv2.RowsDefaultCellStyle = DataGridViewCellStyle5
         Me.dgv2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgv2.Size = New System.Drawing.Size(1016, 252)
+        Me.dgv2.Size = New System.Drawing.Size(1016, 205)
         Me.dgv2.TabIndex = 60
         Me.dgv2.Theme = Guna.UI.WinForms.GunaDataGridViewPresetThemes.WhiteGrid
         Me.dgv2.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
@@ -683,6 +718,33 @@ Partial Class Payments
         Me.cheque_date.HeaderText = "CHEQUE DATE"
         Me.cheque_date.Name = "cheque_date"
         Me.cheque_date.ReadOnly = True
+        '
+        'promissory
+        '
+        Me.promissory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.promissory.DataPropertyName = "promissory"
+        Me.promissory.HeaderText = "PROMISSORY NOTE"
+        Me.promissory.Name = "promissory"
+        Me.promissory.ReadOnly = True
+        Me.promissory.Width = 135
+        '
+        'extension_date
+        '
+        Me.extension_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.extension_date.DataPropertyName = "extension_date"
+        Me.extension_date.HeaderText = "EXTENSION DATE"
+        Me.extension_date.Name = "extension_date"
+        Me.extension_date.ReadOnly = True
+        Me.extension_date.Width = 124
+        '
+        'reason
+        '
+        Me.reason.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.reason.DataPropertyName = "reason"
+        Me.reason.HeaderText = "REASON"
+        Me.reason.Name = "reason"
+        Me.reason.ReadOnly = True
+        Me.reason.Width = 75
         '
         'dgv1
         '
@@ -1014,6 +1076,11 @@ Partial Class Payments
         Me.groupDetails.BackColor = System.Drawing.Color.Transparent
         Me.groupDetails.BaseColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.groupDetails.BorderColor = System.Drawing.Color.White
+        Me.groupDetails.Controls.Add(Me.reasonTxt)
+        Me.groupDetails.Controls.Add(Me.extensionDate)
+        Me.groupDetails.Controls.Add(Me.GunaLabel26)
+        Me.groupDetails.Controls.Add(Me.installmentCheck)
+        Me.groupDetails.Controls.Add(Me.promisorryCheck)
         Me.groupDetails.Controls.Add(Me.GunaLabel25)
         Me.groupDetails.Controls.Add(Me.chequeDate)
         Me.groupDetails.Controls.Add(Me.bankTxt)
@@ -1030,7 +1097,6 @@ Partial Class Payments
         Me.groupDetails.Controls.Add(Me.GunaPictureBox4)
         Me.groupDetails.Controls.Add(Me.GunaPictureBox3)
         Me.groupDetails.Controls.Add(Me.GunaPictureBox2)
-        Me.groupDetails.Controls.Add(Me.GunaPictureBox1)
         Me.groupDetails.Controls.Add(Me.stopInterestCheck)
         Me.groupDetails.Controls.Add(Me.remTxt)
         Me.groupDetails.Controls.Add(Me.GunaLabel24)
@@ -1075,10 +1141,91 @@ Partial Class Payments
         Me.groupDetails.LineColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.groupDetails.Location = New System.Drawing.Point(14, 314)
         Me.groupDetails.Name = "groupDetails"
-        Me.groupDetails.Size = New System.Drawing.Size(1016, 266)
+        Me.groupDetails.Size = New System.Drawing.Size(1016, 352)
         Me.groupDetails.TabIndex = 8
         Me.groupDetails.Text = "DETAILS"
         Me.groupDetails.TextLocation = New System.Drawing.Point(10, 8)
+        '
+        'reasonTxt
+        '
+        Me.reasonTxt.BackColor = System.Drawing.Color.Transparent
+        Me.reasonTxt.BaseColor = System.Drawing.Color.White
+        Me.reasonTxt.BorderColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.reasonTxt.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.reasonTxt.FocusedBaseColor = System.Drawing.Color.White
+        Me.reasonTxt.FocusedBorderColor = System.Drawing.Color.Black
+        Me.reasonTxt.FocusedForeColor = System.Drawing.SystemColors.ControlText
+        Me.reasonTxt.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.reasonTxt.ForeColor = System.Drawing.Color.Black
+        Me.reasonTxt.Location = New System.Drawing.Point(249, 283)
+        Me.reasonTxt.Multiline = True
+        Me.reasonTxt.Name = "reasonTxt"
+        Me.reasonTxt.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.reasonTxt.Radius = 3
+        Me.reasonTxt.SelectedText = ""
+        Me.reasonTxt.Size = New System.Drawing.Size(756, 30)
+        Me.reasonTxt.TabIndex = 74
+        '
+        'extensionDate
+        '
+        Me.extensionDate.BackColor = System.Drawing.Color.Transparent
+        Me.extensionDate.BaseColor = System.Drawing.Color.White
+        Me.extensionDate.BorderColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.extensionDate.CustomFormat = Nothing
+        Me.extensionDate.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
+        Me.extensionDate.FocusedColor = System.Drawing.Color.Black
+        Me.extensionDate.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.extensionDate.ForeColor = System.Drawing.Color.Black
+        Me.extensionDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.extensionDate.Location = New System.Drawing.Point(128, 283)
+        Me.extensionDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.extensionDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.extensionDate.Name = "extensionDate"
+        Me.extensionDate.OnHoverBaseColor = System.Drawing.Color.White
+        Me.extensionDate.OnHoverBorderColor = System.Drawing.Color.Black
+        Me.extensionDate.OnHoverForeColor = System.Drawing.Color.Black
+        Me.extensionDate.OnPressedColor = System.Drawing.Color.Black
+        Me.extensionDate.Radius = 3
+        Me.extensionDate.Size = New System.Drawing.Size(113, 30)
+        Me.extensionDate.TabIndex = 73
+        Me.extensionDate.Text = "6/27/2024"
+        Me.extensionDate.Value = New Date(2024, 6, 27, 12, 12, 26, 572)
+        '
+        'GunaLabel26
+        '
+        Me.GunaLabel26.AutoSize = True
+        Me.GunaLabel26.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GunaLabel26.Location = New System.Drawing.Point(9, 288)
+        Me.GunaLabel26.Name = "GunaLabel26"
+        Me.GunaLabel26.Size = New System.Drawing.Size(114, 17)
+        Me.GunaLabel26.TabIndex = 72
+        Me.GunaLabel26.Text = "DATE EXTENSION:"
+        '
+        'installmentCheck
+        '
+        Me.installmentCheck.BaseColor = System.Drawing.Color.White
+        Me.installmentCheck.CheckedOffColor = System.Drawing.Color.Gray
+        Me.installmentCheck.CheckedOnColor = System.Drawing.Color.Black
+        Me.installmentCheck.FillColor = System.Drawing.Color.White
+        Me.installmentCheck.ForeColor = System.Drawing.Color.White
+        Me.installmentCheck.Location = New System.Drawing.Point(12, 322)
+        Me.installmentCheck.Name = "installmentCheck"
+        Me.installmentCheck.Size = New System.Drawing.Size(108, 20)
+        Me.installmentCheck.TabIndex = 71
+        Me.installmentCheck.Text = "INSTALLMENT"
+        '
+        'promisorryCheck
+        '
+        Me.promisorryCheck.BaseColor = System.Drawing.Color.White
+        Me.promisorryCheck.CheckedOffColor = System.Drawing.Color.Gray
+        Me.promisorryCheck.CheckedOnColor = System.Drawing.Color.Black
+        Me.promisorryCheck.FillColor = System.Drawing.Color.White
+        Me.promisorryCheck.ForeColor = System.Drawing.Color.White
+        Me.promisorryCheck.Location = New System.Drawing.Point(12, 261)
+        Me.promisorryCheck.Name = "promisorryCheck"
+        Me.promisorryCheck.Size = New System.Drawing.Size(142, 20)
+        Me.promisorryCheck.TabIndex = 70
+        Me.promisorryCheck.Text = "PROMISORRY NOTE"
         '
         'GunaLabel25
         '
@@ -1439,16 +1586,6 @@ Partial Class Payments
         Me.GunaPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.GunaPictureBox2.TabIndex = 53
         Me.GunaPictureBox2.TabStop = False
-        '
-        'GunaPictureBox1
-        '
-        Me.GunaPictureBox1.BaseColor = System.Drawing.Color.White
-        Me.GunaPictureBox1.Image = CType(resources.GetObject("GunaPictureBox1.Image"), System.Drawing.Image)
-        Me.GunaPictureBox1.Location = New System.Drawing.Point(342, 354)
-        Me.GunaPictureBox1.Name = "GunaPictureBox1"
-        Me.GunaPictureBox1.Size = New System.Drawing.Size(22, 22)
-        Me.GunaPictureBox1.TabIndex = 9
-        Me.GunaPictureBox1.TabStop = False
         '
         'stopInterestCheck
         '
@@ -2167,6 +2304,27 @@ Partial Class Payments
         Me.Panel5.Size = New System.Drawing.Size(1046, 40)
         Me.Panel5.TabIndex = 65
         '
+        'lblshow
+        '
+        Me.lblshow.AutoSize = True
+        Me.lblshow.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblshow.ForeColor = System.Drawing.Color.Black
+        Me.lblshow.Location = New System.Drawing.Point(936, 12)
+        Me.lblshow.Name = "lblshow"
+        Me.lblshow.Size = New System.Drawing.Size(83, 17)
+        Me.lblshow.TabIndex = 8
+        Me.lblshow.Text = "GunaLabel10"
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(874, 3)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(46, 34)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.TabIndex = 6
+        Me.PictureBox2.TabStop = False
+        '
         'dtLabel
         '
         Me.dtLabel.AutoSize = True
@@ -2180,66 +2338,16 @@ Partial Class Payments
         'Timer1
         '
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(874, 3)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(46, 34)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox2.TabIndex = 6
-        Me.PictureBox2.TabStop = False
-        '
-        'lblshow
-        '
-        Me.lblshow.AutoSize = True
-        Me.lblshow.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblshow.ForeColor = System.Drawing.Color.Black
-        Me.lblshow.Location = New System.Drawing.Point(936, 12)
-        Me.lblshow.Name = "lblshow"
-        Me.lblshow.Size = New System.Drawing.Size(83, 17)
-        Me.lblshow.TabIndex = 8
-        Me.lblshow.Text = "GunaLabel10"
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(10, 3)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(31, 26)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 6
-        Me.PictureBox1.TabStop = False
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.White
-        Me.Label3.Location = New System.Drawing.Point(455, 1)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(123, 30)
-        Me.Label3.TabIndex = 7
-        Me.Label3.Text = "PAYMENTS"
-        '
         'GunaDragControl2
         '
         Me.GunaDragControl2.TargetControl = Me.Label3
-        '
-        'Panel6
-        '
-        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.Panel6.Location = New System.Drawing.Point(6, 43)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(1031, 10)
-        Me.Panel6.TabIndex = 66
         '
         'Payments
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1046, 921)
+        Me.ClientSize = New System.Drawing.Size(1046, 964)
         Me.Controls.Add(Me.mainPanel)
         Me.Controls.Add(Me.GunaPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -2249,6 +2357,7 @@ Partial Class Payments
         Me.Text = "Payments"
         Me.GunaPanel1.ResumeLayout(False)
         Me.GunaPanel1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.mainPanel.ResumeLayout(False)
         Me.mainPanel.PerformLayout()
         CType(Me.dgv2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2261,11 +2370,9 @@ Partial Class Payments
         CType(Me.GunaPictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GunaPictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GunaPictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GunaPictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2284,7 +2391,6 @@ Partial Class Payments
     Friend WithEvents GunaPictureBox4 As Guna.UI.WinForms.GunaPictureBox
     Friend WithEvents GunaPictureBox3 As Guna.UI.WinForms.GunaPictureBox
     Friend WithEvents GunaPictureBox2 As Guna.UI.WinForms.GunaPictureBox
-    Friend WithEvents GunaPictureBox1 As Guna.UI.WinForms.GunaPictureBox
     Friend WithEvents stopInterestCheck As Guna.UI.WinForms.GunaCheckBox
     Friend WithEvents remTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel24 As Guna.UI.WinForms.GunaLabel
@@ -2378,6 +2484,20 @@ Partial Class Payments
     Friend WithEvents chequeDate As Guna.UI.WinForms.GunaDateTimePicker
     Friend WithEvents bankTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents GunaLabel16 As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents dtLabel As Label
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents lblshow As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents GunaDragControl2 As Guna.UI.WinForms.GunaDragControl
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents installmentCheck As Guna.UI.WinForms.GunaCheckBox
+    Friend WithEvents promisorryCheck As Guna.UI.WinForms.GunaCheckBox
+    Friend WithEvents extensionDate As Guna.UI.WinForms.GunaDateTimePicker
+    Friend WithEvents GunaLabel26 As Guna.UI.WinForms.GunaLabel
+    Friend WithEvents reasonTxt As Guna.UI.WinForms.GunaTextBox
     Friend WithEvents id As DataGridViewTextBoxColumn
     Friend WithEvents soanumber As DataGridViewTextBoxColumn
     Friend WithEvents enbs As DataGridViewTextBoxColumn
@@ -2409,13 +2529,7 @@ Partial Class Payments
     Friend WithEvents paid_ads As DataGridViewTextBoxColumn
     Friend WithEvents bank_name As DataGridViewTextBoxColumn
     Friend WithEvents cheque_date As DataGridViewTextBoxColumn
-    Friend WithEvents Panel5 As Panel
-    Friend WithEvents dtLabel As Label
-    Friend WithEvents Timer1 As Timer
-    Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents lblshow As Guna.UI.WinForms.GunaLabel
-    Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents GunaDragControl2 As Guna.UI.WinForms.GunaDragControl
-    Friend WithEvents Panel6 As Panel
+    Friend WithEvents promissory As DataGridViewTextBoxColumn
+    Friend WithEvents extension_date As DataGridViewTextBoxColumn
+    Friend WithEvents reason As DataGridViewTextBoxColumn
 End Class
